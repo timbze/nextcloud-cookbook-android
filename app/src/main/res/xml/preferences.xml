@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:title="Functionality">
+
+        <Preference
+            android:key="@string/prefkey_recipeDir"
+            android:summary="%s"
+            android:title="@string/preftitle_recipeDir" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/prefkey_descSort"
+            android:title="@string/preftitle_descSort" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Design">
+        <de.micmun.android.nextcloudcookbook.ui.preferences.IntListPreference
+            android:defaultValue="0"
+            android:entries="@array/theme_names"
+            android:entryValues="@array/theme_values"
+            android:key="@string/prefkey_theme"
+            android:summary="%s"
+            android:title="@string/preftitle_theme" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="About">
+        <Preference
+            android:key="aboutKey"
+            android:summary="App for Nextcloud cookbook."
+            android:title="(c) 2020 by MicMun" />
+    </PreferenceCategory>
+</PreferenceScreen>
