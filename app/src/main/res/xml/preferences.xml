@@ -24,10 +24,10 @@
             android:title="@string/preftitle_theme" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="About">
+    <PreferenceCategory android:title="@string/about_title">
         <Preference
             android:key="aboutKey"
-            android:summary="App for Nextcloud cookbook."
-            android:title="(c) 2020 by MicMun" />
+            android:summary="@string/about_summary"
+            android:title="@string/about_rights" />
     </PreferenceCategory>
 </PreferenceScreen>

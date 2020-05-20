@@ -1,20 +1,17 @@
 <resources>
     <string name="app_name">Nextcloud Cookbook</string>
-    <string name="nav_title">Recipe List</string>
 
-    <string name="klick_mich">Klick mich</string>
-    <string name="default_number">1</string>
-
+    <!-- recipe list -->
     <string name="empty_list">No recipes.</string>
-
-    <string name="about_text">Nextcloud Cookbook is an app for cookbook on nextcloud to manage recipes.\n© 2020 by MicMun\n\nLicense under GPLv3.</string>
-    <string name="about">About</string>
-    <string name="setting_title">Settings for Nextcloud Cookbook</string>
-    <string name="settings_title_bar">Settings</string>
-    <string name="recipe_title_bar">%1$s</string>
-    <string name="nav_image_desc">nav header image shows cook utility</string>
-
     <string name="recipe_list_image_desc">Image thumbnail of recipe</string>
+
+    <!-- recipe detail -->
+    <string name="recipe_title_bar">%1$s</string>
+
+    <!-- menu -->
+    <string name="menu_settings_title">Settings</string>
+    <string name="menu_refresh_tooltip">Refresh recipes</string>
+    <string name="menu_search_tooltip">Search recipe</string>
 
     <!-- preferences -->
     <string name="preftitle_recipeDir">Recipe Directory</string>
@@ -24,6 +21,10 @@
     <string name="title_dir_chooser">Choose a directory…</string>
     <string name="prefkey_descSort" translatable="false">desc_sorting</string>
     <string name="prefkey_theme" translatable="false">theme_setting</string>
+
+    <string name="about_title">About</string>
+    <string name="about_rights">© 2020 by MicMun\n\nLicense under GPLv3.</string>
+    <string name="about_summary">Nextcloud Cookbook is an app for cookbook on nextcloud to manage recipes.</string>
 
     <string-array name="theme_names">
         <item>Light</item>

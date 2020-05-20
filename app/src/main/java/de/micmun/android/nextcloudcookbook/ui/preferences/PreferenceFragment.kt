@@ -36,7 +36,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
 
    override fun onActivityCreated(savedInstanceState: Bundle?) {
       super.onActivityCreated(savedInstanceState)
-      (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.settings_title_bar)
+      (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.menu_settings_title)
    }
 
    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

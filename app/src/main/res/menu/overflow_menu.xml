@@ -3,12 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/refreshAction"
+        android:icon="@drawable/ic_refresh"
+        android:title="@string/menu_refresh_tooltip"
+        app:showAsAction="ifRoom"/>
+    <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_search"
-        android:title=""
-        app:showAsAction="ifRoom" />
+        android:title="@string/menu_search_tooltip"
+        app:showAsAction="ifRoom"
+        />
     <item
         android:id="@+id/preferenceFragment"
-        android:title="@string/settings_title_bar"
+        android:title="@string/menu_settings_title"
         app:showAsAction="never" />
 </menu>
