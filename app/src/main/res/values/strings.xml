@@ -15,11 +15,9 @@
 
     <!-- preferences -->
     <string name="preftitle_recipeDir">Recipe Directory</string>
-    <string name="preftitle_descSort">Sort descending?</string>
     <string name="preftitle_theme">Select Theme</string>
     <string name="prefkey_recipeDir" translatable="false">recipe_directory</string>
     <string name="title_dir_chooser">Choose a directory…</string>
-    <string name="prefkey_descSort" translatable="false">desc_sorting</string>
     <string name="prefkey_theme" translatable="false">theme_setting</string>
 
     <string name="about_title">About</string>

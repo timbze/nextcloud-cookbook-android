@@ -7,9 +7,9 @@ package de.micmun.android.nextcloudcookbook.ui.recipelist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SortedList
+import androidx.recyclerview.widget.SortedListAdapterCallback
 import de.micmun.android.nextcloudcookbook.data.model.Recipe
 import de.micmun.android.nextcloudcookbook.databinding.RecipeListRowBinding
 
@@ -17,17 +17,28 @@ import de.micmun.android.nextcloudcookbook.databinding.RecipeListRowBinding
  * RecyclerViewAdapter for the list of recipes.
  *
  * @author MicMun
- * @version 1.0, 22.03.20
+ * @version 1.1, 26.05.20
  */
 class RecipeAdapter(private val clickListener: RecipeListener) :
-   ListAdapter<Recipe, RecipeAdapter.RecipeViewHolder>(RecipeDiffCallback()) {
+   RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
+
+   private val recipeSortedList: SortedList<Recipe> = SortedList(Recipe::class.java, RecipeDiffCallback(this))
+
    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
       return RecipeViewHolder.from(parent)
    }
 
    override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-      val recipe = getItem(position)
+      val recipe = recipeSortedList[position]
       holder.bind(clickListener, recipe)
+   }
+
+   override fun getItemCount(): Int {
+      return recipeSortedList.size()
+   }
+
+   fun setRecipes(recipes: List<Recipe>) {
+      recipeSortedList.replaceAll(recipes)
    }
 
    class RecipeViewHolder private constructor(private val binding: RecipeListRowBinding) :
@@ -48,13 +59,14 @@ class RecipeAdapter(private val clickListener: RecipeListener) :
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = RecipeListRowBinding.inflate(layoutInflater, parent, false)
             return RecipeViewHolder(
-                  binding)
+               binding)
          }
       }
    }
 }
 
-class RecipeDiffCallback : DiffUtil.ItemCallback<Recipe>() {
+class RecipeDiffCallback(adapter: RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>) :
+   SortedListAdapterCallback<Recipe>(adapter) {
    override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
       return oldItem.recipeId == newItem.recipeId
    }
@@ -63,6 +75,7 @@ class RecipeDiffCallback : DiffUtil.ItemCallback<Recipe>() {
       return oldItem == newItem
    }
 
+   override fun compare(o1: Recipe?, o2: Recipe?) = o1!!.name.compareTo(o2!!.name)
 }
 
 class RecipeListener(val clickListener: (recipeId: Long) -> Unit) {

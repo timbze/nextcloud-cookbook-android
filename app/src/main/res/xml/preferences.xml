@@ -9,10 +9,6 @@
             android:key="@string/prefkey_recipeDir"
             android:summary="%s"
             android:title="@string/preftitle_recipeDir" />
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="@string/prefkey_descSort"
-            android:title="@string/preftitle_descSort" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Design">
         <de.micmun.android.nextcloudcookbook.ui.preferences.IntListPreference

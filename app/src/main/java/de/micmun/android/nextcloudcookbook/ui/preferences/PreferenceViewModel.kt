@@ -14,27 +14,21 @@ import de.micmun.android.nextcloudcookbook.data.SharedPreferenceLiveData
  * ViewModel for preferences.
  *
  * @author MicMun
- * @version 1.0, 26.04.20
+ * @version 1.1, 26.05.20
  */
 class PreferenceViewModel(application: Application) : AndroidViewModel(application) {
    private val prefDao = PreferenceDao.getInstance(application)
 
    internal val recipeDirectory: SharedPreferenceLiveData<String>
-   internal val descSorting: SharedPreferenceLiveData<Boolean>
    internal val theme: SharedPreferenceLiveData<Int>
 
    init {
       recipeDirectory = prefDao.getRecipeDirectory()
-      descSorting = prefDao.getDescSorting()
       theme = prefDao.getTheme()
    }
 
    fun setRecipeDirectory(recipeDirectory: String) {
       prefDao.setRecipeDirectory(recipeDirectory)
-   }
-
-   fun setDescSorting(sort: Boolean) {
-      prefDao.setDescSorting(sort)
    }
 
    fun setTheme(theme: Int) {

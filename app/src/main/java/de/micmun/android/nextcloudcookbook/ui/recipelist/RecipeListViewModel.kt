@@ -20,7 +20,7 @@ import kotlinx.coroutines.*
  * ViewModel for list of recipes.
  *
  * @author MicMun
- * @version 1.0, 07.03.20
+ * @version 1.1, 26.05.20
  */
 class RecipeListViewModel(application: Application) : AndroidViewModel(application) {
    private val _recipeList = MutableLiveData<List<Recipe>>()
@@ -31,13 +31,13 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
    val recipeDirectory: SharedPreferenceLiveData<String>
-   val descSorting: SharedPreferenceLiveData<Boolean>
+
+   var desc: Boolean? = null
 
    init {
       Log.i("RecipeViewModel", "RecipeViewModel created")
       val prefDao = PreferenceDao.getInstance(application)
       recipeDirectory = prefDao.getRecipeDirectory()
-      descSorting = prefDao.getDescSorting()
    }
 
    override fun onCleared() {
@@ -61,14 +61,6 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
    fun initRecipes(path: String) {
       uiScope.launch {
          _recipeList.value = getRecipesFromRepo(path)
-      }
-   }
-
-   fun sortRecipes(desc: Boolean) {
-      if (desc) {
-         _recipeList.value?.sortedByDescending { recipe -> recipe.name }
-      } else {
-         _recipeList.value?.sortedBy { recipe -> recipe.name }
       }
    }
 

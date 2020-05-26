@@ -16,7 +16,10 @@ import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.databinding.FragmentRecipelistBinding
 
 /**
- * A simple [Fragment] subclass.
+ * Fragment for list of recipes.
+ *
+ * @author MicMun
+ * @version 1.1, 26.05.20
  */
 class RecipeListFragment : Fragment() {
    private lateinit var binding: FragmentRecipelistBinding
@@ -62,7 +65,7 @@ class RecipeListFragment : Fragment() {
 
       viewModel.recipeList.observe(viewLifecycleOwner, Observer {
          it?.let {
-            adapter.submitList(it)
+            adapter.setRecipes(it)
 
             if (it.isNotEmpty()) {
                if (R.id.titleConstraint == binding.switcher.nextView.id) {
@@ -81,6 +84,5 @@ class RecipeListFragment : Fragment() {
          }
       })
       viewModel.recipeDirectory.observe(viewLifecycleOwner, Observer { path -> viewModel.initRecipes(path) })
-      viewModel.descSorting.observe(viewLifecycleOwner, Observer { desc -> viewModel.sortRecipes(desc) })
    }
 }

@@ -15,7 +15,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreference
 import com.obsez.android.lib.filechooser.ChooserDialog
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.ui.MainActivity
@@ -24,14 +23,13 @@ import de.micmun.android.nextcloudcookbook.ui.MainActivity
  * Fragment for settings.
  *
  * @author MicMun
- * @version 1.0, 06.03.20
+ * @version 1.1, 26.05.20
  */
 class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener,
                            Preference.OnPreferenceClickListener {
    private lateinit var viewModel: PreferenceViewModel
 
    private lateinit var dirPreference: Preference
-   private lateinit var sortPreference: SwitchPreference
    private lateinit var themePreference: IntListPreference
 
    override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -45,12 +43,10 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
 
       // find prefs
       dirPreference = findPreference(getString(R.string.prefkey_recipeDir))!!
-      sortPreference = findPreference(getString(R.string.prefkey_descSort))!!
       themePreference = findPreference(getString(R.string.prefkey_theme))!!
 
       // change listener
       dirPreference.onPreferenceChangeListener = this
-      sortPreference.onPreferenceChangeListener = this
       themePreference.onPreferenceChangeListener = this
 
       // click listener
@@ -60,7 +56,6 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
       viewModel.recipeDirectory.observe(this, Observer {
          dirPreference.summary = it.toString()
       })
-      viewModel.descSorting.observe(this, Observer { sortPreference.isChecked = it })
       viewModel.theme.observe(this, Observer {
          themePreference.value = it.toString()
          themePreference.summary = themePreference.entry
@@ -70,7 +65,6 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
    override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
       when (preference) {
          dirPreference -> viewModel.setRecipeDirectory(newValue.toString())
-         sortPreference -> viewModel.setDescSorting(newValue.toString().toBoolean())
          themePreference -> {
             viewModel.setTheme(newValue.toString().toInt())
             // recreate activity
@@ -89,7 +83,6 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
          dirPreference -> {
             chooseFolder()
          }
-         sortPreference -> viewModel.setDescSorting((preference as SwitchPreference).isChecked)
          else -> return false
       }
       return true

@@ -13,7 +13,10 @@ import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.databinding.FragmentDetailBinding
 
 /**
- * A simple [Fragment] subclass.
+ * Fragment for detail of a recipe.
+ *
+ * @author MicMun
+ * @version 1.1, 26.05.20
  */
 class RecipeDetailFragment : Fragment() {
    private lateinit var binding: FragmentDetailBinding

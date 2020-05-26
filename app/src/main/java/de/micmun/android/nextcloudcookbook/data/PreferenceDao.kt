@@ -13,7 +13,7 @@ import androidx.preference.PreferenceManager
  * Manages the reading of the preferences.
  *
  * @author MicMun
- * @version 1.0, 26.04.20
+ * @version 1.1, 26.05.20
  */
 class PreferenceDao private constructor(application: Application) {
    private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(application)
@@ -44,11 +44,6 @@ class PreferenceDao private constructor(application: Application) {
 
    fun setRecipeDirectory(recipeDirectory: String) {
       sharedPreferences.edit().putString(Pref.RECIPE_DIR, recipeDirectory).apply()
-   }
-
-   fun getDescSorting() = sharedPreferences.booleanLiveData(Pref.DESC_SORT, false)
-   fun setDescSorting(sort: Boolean) {
-      sharedPreferences.edit().putBoolean(Pref.DESC_SORT, sort).apply()
    }
 
    fun getTheme() = sharedPreferences.intLiveData(Pref.THEME, 0)

@@ -6,12 +6,16 @@
 package de.micmun.android.nextcloudcookbook.ui
 
 import android.Manifest
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
@@ -45,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
       // navigation
       val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
-      val navController = navHostFragment.navController
+      val navController = navHostFragment.findNavController()
       NavigationUI.setupActionBarWithNavController(this, navController)
 
       // permissions
@@ -57,17 +61,15 @@ class MainActivity : AppCompatActivity() {
          .withListener(object : MultiplePermissionsListener {
             override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
                if (!report!!.areAllPermissionsGranted()) {
-                  Snackbar.make(
-                     binding.root,
-                     "Access denied! App need storage access, please activate in the settings.",
-                     Snackbar.LENGTH_LONG
+                  Snackbar.make(binding.root,
+                                "Access denied! App need storage access, please activate in the settings.",
+                                Snackbar.LENGTH_LONG
                   ).show()
                }
             }
 
-            override fun onPermissionRationaleShouldBeShown(
-               p0: MutableList<PermissionRequest>?,
-               p1: PermissionToken?
+            override fun onPermissionRationaleShouldBeShown(p0: MutableList<PermissionRequest>?,
+                                                            p1: PermissionToken?
             ) {
             }
          })
