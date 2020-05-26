@@ -7,7 +7,6 @@ package de.micmun.android.nextcloudcookbook.data
 
 import android.net.Uri
 import android.os.Build
-import android.util.Log
 import androidx.core.net.toFile
 import de.micmun.android.nextcloudcookbook.data.model.Recipe
 import de.micmun.android.nextcloudcookbook.util.JsonRecipeParser
@@ -20,7 +19,7 @@ import java.util.stream.Collectors
  * Repository with the recipe data.
  *
  * @author MicMun
- * @version 1.0, 20.04.20
+ * @version 1.1, 26.05.20
  */
 class RecipeRepository {
    private val _recipeList = mutableListOf<Recipe>()
@@ -54,8 +53,6 @@ class RecipeRepository {
 
       if (dir.exists()) {
          val subdirs = dir.listFiles()
-         Log.d("RecipeRepository", "Anzahl subdirs: ${subdirs?.size}")
-
          var id: Long = 1
 
          subdirs?.forEach { sd ->

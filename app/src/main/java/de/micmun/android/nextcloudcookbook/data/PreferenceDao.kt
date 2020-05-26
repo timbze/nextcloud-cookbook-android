@@ -6,7 +6,6 @@
 package de.micmun.android.nextcloudcookbook.data
 
 import android.app.Application
-import android.util.Log
 import androidx.preference.PreferenceManager
 
 /**
@@ -31,14 +30,12 @@ class PreferenceDao private constructor(application: Application) {
                instance = PreferenceDao(application)
                INSTANCE = instance
             }
-            Log.d("PreferenceDao", "getInstance()")
             return instance
          }
       }
    }
 
    fun getRecipeDirectory(): SharedPreferenceLiveData<String> {
-      Log.d("PreferenceDao", "Recipe directory = ${sharedPreferences.stringLiveData(Pref.RECIPE_DIR, "").value}")
       return sharedPreferences.stringLiveData(Pref.RECIPE_DIR, "")
    }
 
