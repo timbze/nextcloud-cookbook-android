@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.databinding.FragmentRecipelistBinding
 
@@ -19,15 +20,20 @@ import de.micmun.android.nextcloudcookbook.databinding.FragmentRecipelistBinding
  * Fragment for list of recipes.
  *
  * @author MicMun
- * @version 1.1, 26.05.20
+ * @version 1.2, 26.05.20
  */
-class RecipeListFragment : Fragment() {
+class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
    private lateinit var binding: FragmentRecipelistBinding
    private lateinit var viewModel: RecipeListViewModel
+
+   private var recipePath: String? = null
+   private var refreshItem: MenuItem? = null
 
    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipelist, container, false)
       setHasOptionsMenu(true)
+
+      binding.swipeContainer.setOnRefreshListener(this)
 
       initializeRecipeList()
 
@@ -45,9 +51,17 @@ class RecipeListFragment : Fragment() {
    }
 
    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-      return NavigationUI
-                .onNavDestinationSelected(item,
-                                          requireView().findNavController()) || super.onOptionsItemSelected(item)
+      return when (item.itemId) {
+         R.id.refreshAction -> {
+            refreshItem = item
+            onRefresh()
+            refreshItem = null
+            true
+         }
+         else -> NavigationUI
+                    .onNavDestinationSelected(item,
+                                              requireView().findNavController()) || super.onOptionsItemSelected(item)
+      }
    }
 
    private fun initializeRecipeList() {
@@ -83,6 +97,20 @@ class RecipeListFragment : Fragment() {
             viewModel.onRecipeNavigated()
          }
       })
-      viewModel.recipeDirectory.observe(viewLifecycleOwner, Observer { path -> viewModel.initRecipes(path) })
+      viewModel.recipeDirectory.observe(viewLifecycleOwner, Observer { path ->
+         recipePath = path
+         onRefresh()
+      })
+   }
+
+   override fun onRefresh() {
+      binding.swipeContainer.isRefreshing = true
+      refreshItem?.let { it.isEnabled = false }
+
+      // load recipes
+      recipePath?.let { viewModel.initRecipes(it) }
+
+      binding.swipeContainer.isRefreshing = false
+      refreshItem?.let { it.isEnabled = true }
    }
 }

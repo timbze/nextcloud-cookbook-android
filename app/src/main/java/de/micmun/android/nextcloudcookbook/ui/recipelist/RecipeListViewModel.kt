@@ -6,7 +6,6 @@
 package de.micmun.android.nextcloudcookbook.ui.recipelist
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,7 +19,7 @@ import kotlinx.coroutines.*
  * ViewModel for list of recipes.
  *
  * @author MicMun
- * @version 1.1, 26.05.20
+ * @version 1.2, 26.05.20
  */
 class RecipeListViewModel(application: Application) : AndroidViewModel(application) {
    private val _recipeList = MutableLiveData<List<Recipe>>()
@@ -32,10 +31,7 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
 
    val recipeDirectory: SharedPreferenceLiveData<String>
 
-   var desc: Boolean? = null
-
    init {
-      Log.i("RecipeViewModel", "RecipeViewModel created")
       val prefDao = PreferenceDao.getInstance(application)
       recipeDirectory = prefDao.getRecipeDirectory()
    }
@@ -43,7 +39,6 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
    override fun onCleared() {
       super.onCleared()
       viewModelJob.cancel()
-      Log.i("RecipeViewModel", "RecipeViewModel cleared")
    }
 
    private val _navigateToRecipe = MutableLiveData<Long>()
