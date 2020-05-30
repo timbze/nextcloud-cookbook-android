@@ -20,7 +20,7 @@ import de.micmun.android.nextcloudcookbook.databinding.FragmentRecipelistBinding
  * Fragment for list of recipes.
  *
  * @author MicMun
- * @version 1.2, 26.05.20
+ * @version 1.3, 30.05.20
  */
 class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
    private lateinit var binding: FragmentRecipelistBinding
@@ -74,7 +74,7 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
       binding.recipeList.addItemDecoration(dividerDecoration)
 
       // data adapter
-      val adapter = RecipeAdapter(RecipeListener { recipeId -> viewModel.onRecipeClicked(recipeId) })
+      val adapter = RecipeListAdapter(RecipeListListener { recipeId -> viewModel.onRecipeClicked(recipeId) })
       binding.recipeList.adapter = adapter
 
       viewModel.recipeList.observe(viewLifecycleOwner, Observer {

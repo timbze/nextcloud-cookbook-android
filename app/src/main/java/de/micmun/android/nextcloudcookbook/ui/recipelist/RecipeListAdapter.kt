@@ -1,5 +1,5 @@
 /*
- * RecipeAdapter.kt
+ * RecipeListAdapter.kt
  *
  * Copyright 2020 by MicMun
  */
@@ -17,10 +17,10 @@ import de.micmun.android.nextcloudcookbook.databinding.RecipeListRowBinding
  * RecyclerViewAdapter for the list of recipes.
  *
  * @author MicMun
- * @version 1.1, 26.05.20
+ * @version 1.2, 30.05.20
  */
-class RecipeAdapter(private val clickListener: RecipeListener) :
-   RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
+class RecipeListAdapter(private val clickListener: RecipeListListener) :
+   RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder>() {
 
    private val recipeSortedList: SortedList<Recipe> = SortedList(Recipe::class.java, RecipeDiffCallback(this))
 
@@ -48,7 +48,7 @@ class RecipeAdapter(private val clickListener: RecipeListener) :
        *
        * @param recipe DbRecipeOverview data.
        */
-      fun bind(clickListener: RecipeListener, recipe: Recipe) {
+      fun bind(clickListener: RecipeListListener, recipe: Recipe) {
          binding.recipe = recipe
          binding.clickListener = clickListener
          binding.executePendingBindings()
@@ -58,14 +58,13 @@ class RecipeAdapter(private val clickListener: RecipeListener) :
          fun from(parent: ViewGroup): RecipeViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = RecipeListRowBinding.inflate(layoutInflater, parent, false)
-            return RecipeViewHolder(
-               binding)
+            return RecipeViewHolder(binding)
          }
       }
    }
 }
 
-class RecipeDiffCallback(adapter: RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>) :
+class RecipeDiffCallback(adapter: RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder>) :
    SortedListAdapterCallback<Recipe>(adapter) {
    override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
       return oldItem.recipeId == newItem.recipeId
@@ -78,6 +77,6 @@ class RecipeDiffCallback(adapter: RecyclerView.Adapter<RecipeAdapter.RecipeViewH
    override fun compare(o1: Recipe?, o2: Recipe?) = o1!!.name.compareTo(o2!!.name)
 }
 
-class RecipeListener(val clickListener: (recipeId: Long) -> Unit) {
+class RecipeListListener(val clickListener: (recipeId: Long) -> Unit) {
    fun onClick(recipe: Recipe) = clickListener(recipe.recipeId)
 }

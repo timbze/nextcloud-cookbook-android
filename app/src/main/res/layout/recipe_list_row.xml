@@ -10,7 +10,7 @@
 
         <variable
             name="clickListener"
-            type="de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListener" />
+            type="de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
