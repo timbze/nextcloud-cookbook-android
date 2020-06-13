@@ -19,12 +19,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ingredients_list_symbol"
-            android:textSize="18sp"
             android:textAlignment="center"
+            android:textSize="@dimen/tab_instructions_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@id/ingredientsItemText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBaseline_toBaselineOf="@id/ingredientsItemText"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
       <TextView
             android:id="@+id/ingredientsItemText"
@@ -33,7 +34,7 @@
             android:layout_gravity="start"
             android:layout_marginStart="16dp"
             android:text="@{ingredient}"
-            android:textSize="16sp"
+            android:textSize="@dimen/tab_instructions_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ingredientsListSymbol"

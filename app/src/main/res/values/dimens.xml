@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <dimen name="tab_info_text_size">16sp</dimen>
+   <dimen name="tab_ingredients_text_size">18sp</dimen>
+   <dimen name="tab_instructions_text_size">18sp</dimen>
+</resources>

@@ -22,6 +22,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:textSize="@dimen/tab_info_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +52,7 @@
                android:layout_weight="1"
                android:text="@string/tooltip_prep_time"
                android:textAlignment="center"
+               android:textSize="@dimen/tab_info_text_size"
                android:textStyle="bold" />
 
          <TextView
@@ -62,6 +64,7 @@
                android:layout_weight="1"
                android:text="@string/tooltip_cook_time"
                android:textAlignment="center"
+               android:textSize="@dimen/tab_info_text_size"
                android:textStyle="bold" />
 
          <TextView
@@ -72,6 +75,7 @@
                android:layout_weight="1"
                android:text="@string/tooltip_total_time"
                android:textAlignment="center"
+               android:textSize="@dimen/tab_info_text_size"
                android:textStyle="bold" />
       </LinearLayout>
 
@@ -96,6 +100,7 @@
                android:layout_marginEnd="8dp"
                android:layout_weight="1"
                android:textAlignment="center"
+               android:textSize="@dimen/tab_info_text_size"
                app:recipePrepTime="@{recipe}" />
 
          <TextView
@@ -106,6 +111,7 @@
                android:layout_marginEnd="8dp"
                android:layout_weight="1"
                android:textAlignment="center"
+               android:textSize="@dimen/tab_info_text_size"
                app:recipeCookTime="@{recipe}" />
 
          <TextView
@@ -115,6 +121,7 @@
                android:layout_marginEnd="1dp"
                android:layout_weight="1"
                android:textAlignment="center"
+               android:textSize="@dimen/tab_info_text_size"
                app:recipeTotalTime="@{recipe}" />
       </LinearLayout>
    </androidx.constraintlayout.widget.ConstraintLayout>
