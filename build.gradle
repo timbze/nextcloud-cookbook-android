@@ -3,13 +3,17 @@
 buildscript {
    ext {
       kotlin_version = '1.3.72'
-      version_navigation = '2.3.0-beta01'
+      version_navigation = '2.3.0-rc01'
       version_lifecycle_extensions = '2.2.0'
       version_coroutine = '1.1.0'
       version_preference = '1.1.1'
       version_gson = '2.8.6'
-      version_recyclerview = '1.1.0'
+      version_recyclerview = '1.2.0-alpha03'
+      version_cardview = '1.0.0'
       version_constraintlayout = '1.1.3'
+      version_appcompat = '1.1.0'
+      version_material = '1.3.0-alpha01'
+      version_viewpager2 = '1.1.0-alpha01'
    }
 
    repositories {
@@ -17,7 +21,7 @@ buildscript {
       jcenter()
    }
    dependencies {
-      classpath 'com.android.tools.build:gradle:3.6.3'
+      classpath 'com.android.tools.build:gradle:4.0.0'
       classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
       classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$version_navigation"
    }

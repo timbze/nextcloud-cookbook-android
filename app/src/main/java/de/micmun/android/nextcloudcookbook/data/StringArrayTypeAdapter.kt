@@ -24,7 +24,7 @@ class StringArrayTypeAdapter : TypeAdapter<Array<String>>() {
 
    @Throws(IOException::class)
    override fun read(reader: JsonReader): Array<String>? {
-      var array: Array<String>? = null
+      var array: Array<String> = emptyArray()
 
       try {
          when (reader.peek()) {
@@ -41,6 +41,11 @@ class StringArrayTypeAdapter : TypeAdapter<Array<String>>() {
          }
       } catch (e: IOException) {
          e.printStackTrace()
+      }
+
+      if (array.size == 1 && array[0].contains("\r\n")) {
+         val str = array[0].trim()
+         array = str.split("\r\n").filter { s -> s.trim().isNotEmpty() }.toTypedArray()
       }
 
       return array

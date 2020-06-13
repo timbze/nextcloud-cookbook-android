@@ -17,7 +17,7 @@ import de.micmun.android.nextcloudcookbook.databinding.RecipeListRowBinding
  * RecyclerViewAdapter for the list of recipes.
  *
  * @author MicMun
- * @version 1.2, 30.05.20
+ * @version 1.3, 02.06.20
  */
 class RecipeListAdapter(private val clickListener: RecipeListListener) :
    RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder>() {
@@ -46,7 +46,7 @@ class RecipeListAdapter(private val clickListener: RecipeListListener) :
       /**
        * Binds the data to the views.
        *
-       * @param recipe DbRecipeOverview data.
+       * @param recipe Recipe data.
        */
       fun bind(clickListener: RecipeListListener, recipe: Recipe) {
          binding.recipe = recipe

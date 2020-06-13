@@ -7,6 +7,7 @@ package de.micmun.android.nextcloudcookbook.data
 
 import android.net.Uri
 import android.os.Build
+import android.util.Log
 import androidx.core.net.toFile
 import de.micmun.android.nextcloudcookbook.data.model.Recipe
 import de.micmun.android.nextcloudcookbook.util.JsonRecipeParser
@@ -19,7 +20,7 @@ import java.util.stream.Collectors
  * Repository with the recipe data.
  *
  * @author MicMun
- * @version 1.1, 26.05.20
+ * @version 1.2, 30.05.20
  */
 class RecipeRepository {
    private val _recipeList = mutableListOf<Recipe>()
@@ -56,15 +57,23 @@ class RecipeRepository {
          var id: Long = 1
 
          subdirs?.forEach { sd ->
+            Log.d("RecipeDirectory", "sd = ${sd.absolutePath}")
             if (sd.exists() && sd.isDirectory) {
-               val jsonFile = File(sd, sd.name.trim() + ".json")
+               val jsonFiles = sd.listFiles()?.filter { f -> f.name.endsWith(".json") }
+               var jsonFile: File? = null
+
+               if (jsonFiles != null && jsonFiles.isNotEmpty()) {
+                  jsonFile = jsonFiles[0]
+               }
+
                val thumbFile = File(sd, "thumb.jpg")
                val fullFile = File(sd, "full.jpg")
 
-               if (jsonFile.exists()) {
+               if (jsonFile != null && jsonFile.exists()) {
                   val recipe = readRecipe(Uri.fromFile(jsonFile))
+                  Log.d("RecipeDirectory", "recipe.name = ${recipe.name}")
                   recipe.thumbImage = if (thumbFile.exists()) Uri.fromFile(thumbFile) else null
-                  recipe.imageUrl = if (fullFile.exists()) fullFile.absolutePath else ""
+                  recipe.imageUrl = if (fullFile.exists()) Uri.fromFile(fullFile).toString() else ""
                   recipe.recipeId = id++
                   _recipeList.add(recipe)
                   _recipeMap[recipe.recipeId] = recipe

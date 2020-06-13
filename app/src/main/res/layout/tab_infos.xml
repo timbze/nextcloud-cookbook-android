@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="de.micmun.android.nextcloudcookbook.ui.recipedetail.RecipeDetailFragment">
+
+   <data>
+
+      <variable
+            name="recipe"
+            type="de.micmun.android.nextcloudcookbook.data.model.Recipe" />
+   </data>
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+
+      <TextView
+            android:id="@+id/headerText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:recipeDescription="@{recipe}"
+            app:recipeHeaderImage="@{recipe}" />
+
+      <LinearLayout
+            android:id="@+id/timeInfosTitleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerText">
+
+         <TextView
+               android:id="@+id/prepTimeTitle"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="1dp"
+               android:layout_marginEnd="8dp"
+               android:layout_weight="1"
+               android:text="@string/tooltip_prep_time"
+               android:textAlignment="center"
+               android:textStyle="bold" />
+
+         <TextView
+               android:id="@+id/cookTimeTitle"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="1dp"
+               android:layout_marginEnd="8dp"
+               android:layout_weight="1"
+               android:text="@string/tooltip_cook_time"
+               android:textAlignment="center"
+               android:textStyle="bold" />
+
+         <TextView
+               android:id="@+id/totalTimeTitle"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginEnd="1dp"
+               android:layout_weight="1"
+               android:text="@string/tooltip_total_time"
+               android:textAlignment="center"
+               android:textStyle="bold" />
+      </LinearLayout>
+
+      <LinearLayout
+            android:id="@+id/timeInfosLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timeInfosTitleLayout">
+
+         <TextView
+               android:id="@+id/prepTimeTxt"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="1dp"
+               android:layout_marginEnd="8dp"
+               android:layout_weight="1"
+               android:textAlignment="center"
+               app:recipePrepTime="@{recipe}" />
+
+         <TextView
+               android:id="@+id/cookTimeTxt"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="1dp"
+               android:layout_marginEnd="8dp"
+               android:layout_weight="1"
+               android:textAlignment="center"
+               app:recipeCookTime="@{recipe}" />
+
+         <TextView
+               android:id="@+id/totalTimeTxt"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginEnd="1dp"
+               android:layout_weight="1"
+               android:textAlignment="center"
+               app:recipeTotalTime="@{recipe}" />
+      </LinearLayout>
+   </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

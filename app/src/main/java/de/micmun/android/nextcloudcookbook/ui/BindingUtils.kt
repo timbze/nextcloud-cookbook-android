@@ -5,6 +5,7 @@
  */
 package de.micmun.android.nextcloudcookbook.ui
 
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,7 +16,7 @@ import de.micmun.android.nextcloudcookbook.data.model.Recipe
  * Utilities for binding data to view.
  *
  * @author MicMun
- * @version 1.0, 31.03.20
+ * @version 1.1, 02.06.20
  */
 
 // Overview list
@@ -38,18 +39,27 @@ fun TextView.setRecipeDesc(item: Recipe?) {
    item?.let { text = it.description }
 }
 
-@BindingAdapter("recipeIncredients")
-fun TextView.setRecipeIncredients(item: Recipe?) {
+@BindingAdapter("recipeHeaderImage")
+fun TextView.setRecipeHeaderImage(item: Recipe?) {
    item?.let {
-      text = it.recipeIngredient.joinToString("\n- ", "- ")
+      if (it.imageUrl.isNotEmpty()) {
+         val image = Drawable.createFromPath(Uri.parse(it.imageUrl).path)
+         setCompoundDrawablesRelativeWithIntrinsicBounds(null, image, null, null)
+      }
    }
 }
 
-@BindingAdapter("recipeHeaderImage")
-fun ImageView.setRecipeHeaderImage(item: Recipe?) {
-   item?.let {
-      if (it.imageUrl.isNotEmpty()) {
-         setImageURI(Uri.parse(it.imageUrl))
-      }
-   }
+@BindingAdapter("recipePrepTime")
+fun TextView.setPrepTime(item: Recipe?) {
+   item?.let { text = it.prepTime }
+}
+
+@BindingAdapter("recipeCookTime")
+fun TextView.setCookTime(item: Recipe?) {
+   item?.let { text = it.cookTime }
+}
+
+@BindingAdapter("recipeTotalTime")
+fun TextView.setTotalTime(item: Recipe?) {
+   item?.let { text = it.totalTime }
 }

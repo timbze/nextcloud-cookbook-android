@@ -13,42 +13,41 @@ import java.util.*
  * Data class for a recipe.
  *
  * @author MicMun
- * @version 1.0, 24.02.20
+ * @version 1.1, 13.06.20
  */
 data class Recipe(
-      @Transient
-      var recipeId: Long,
-      // name of the recipe (obligatory)
-      var name: String,
-      // description of the recipe
-      var description: String = "",
-      // url to the recipe on a website
-      var url: String = "",
-      @SerializedName("@context")
-      var context: String = "http://schema.org",
-      @SerializedName("@type")
-      var type: String = "Recipe",
-      var author: Author = Author(
-            ""),
-      var cookTime: String = "",
-      var datePublished: Date? = null,
-      @SerializedName("image")
-      var imageUrl: String = "",
-      var recipeIngredient: Array<String> = emptyArray(),
-      var interactionStatistic: InteractionStatistic = InteractionStatistic(),
-      var nutrition: Nutrition = Nutrition(),
-      var prepTime: String = "",
-      var performTime: String = "",
-      var recipeInstructions: Array<String> = emptyArray(),
-      var recipeYield: String = "",
-      var suitableForDiet: String = "",
-      var cookingMethod: String = "",
-      var recipeCategory: Array<String> = emptyArray(),
-      var recipeCuisine: String = "",
-      var tool: Array<String> = emptyArray(),
-      var yield: String = "",
-      var estimatedCost: String = "",
-      @Transient var thumbImage: Uri? = null
+   @Transient
+   var recipeId: Long,
+   // name of the recipe (obligatory)
+   var name: String,
+   // description of the recipe
+   var description: String = "",
+   // url to the recipe on a website
+   var url: String = "",
+   @SerializedName("@context")
+   var context: String = "http://schema.org",
+   @SerializedName("@type")
+   var type: String = "Recipe",
+   var author: Author = Author(""),
+   var cookTime: String = "",
+   var datePublished: Date? = null,
+   @SerializedName("image")
+   var imageUrl: String = "",
+   var recipeIngredient: Array<String> = emptyArray(),
+   var interactionStatistic: InteractionStatistic = InteractionStatistic(),
+   var nutrition: Nutrition = Nutrition(),
+   var prepTime: String = "",
+   var totalTime: String = "",
+   var recipeInstructions: Array<String> = emptyArray(),
+   var recipeYield: String = "",
+   var suitableForDiet: String = "",
+   var cookingMethod: String = "",
+   var recipeCategory: Array<String> = emptyArray(),
+   var recipeCuisine: String = "",
+   var tool: Array<String> = emptyArray(),
+   var yield: String = "",
+   var estimatedCost: String = "",
+   @Transient var thumbImage: Uri? = null
 ) {
    override fun equals(other: Any?): Boolean {
       if (this === other) return true
@@ -84,27 +83,27 @@ data class Recipe(
 }
 
 data class InteractionStatistic(
-      @SerializedName("@type")
-      var type: String = "InteractionCounter",
-      var interactionType: String = "http://schema.org/Comment",
-      var userInteractionCount: Int = 0
+   @SerializedName("@type")
+   var type: String = "InteractionCounter",
+   var interactionType: String = "http://schema.org/Comment",
+   var userInteractionCount: Int = 0
 )
 
 data class Nutrition(
-      @SerializedName("@type")
-      var type: String = "NutritionInformation",
-      var calories: String = "",
-      var carbohydrateContent: String = "",
-      var cholesterolContent: String = "",
-      var fatContent: String = "",
-      var fiberContent: String = "",
-      var proteinContent: String = "",
-      var saturatedFatContent: String = "",
-      var servingSize: String = "",
-      var sodiumContent: String = "",
-      var sugarContent: String = "",
-      var transFatContent: String = "",
-      var unsaturatedFatContent: String = ""
+   @SerializedName("@type")
+   var type: String = "NutritionInformation",
+   var calories: String = "",
+   var carbohydrateContent: String = "",
+   var cholesterolContent: String = "",
+   var fatContent: String = "",
+   var fiberContent: String = "",
+   var proteinContent: String = "",
+   var saturatedFatContent: String = "",
+   var servingSize: String = "",
+   var sodiumContent: String = "",
+   var sugarContent: String = "",
+   var transFatContent: String = "",
+   var unsaturatedFatContent: String = ""
 )
 
 data class Author(var name: String = "")

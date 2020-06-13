@@ -6,7 +6,6 @@
 package de.micmun.android.nextcloudcookbook.ui.recipedetail
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -25,7 +24,6 @@ class RecipeViewModel(recipeId: Long, application: Application) : AndroidViewMod
       get() = _recipe
 
    init {
-      Log.d("RecipeViewModel", "Recipe ID: $recipeId")
       val repository = RecipeRepository.getInstance()
       _recipe.value = repository.getRecipeWithId(recipeId)
    }

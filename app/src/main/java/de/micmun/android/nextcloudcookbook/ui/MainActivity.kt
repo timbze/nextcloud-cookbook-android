@@ -6,11 +6,8 @@
 package de.micmun.android.nextcloudcookbook.ui
 
 import android.Manifest
-import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -46,6 +43,9 @@ class MainActivity : AppCompatActivity() {
 
       super.onCreate(savedInstanceState)
       binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+      // toolbar
+      setSupportActionBar(binding.toolbar.myToolbar)
 
       // navigation
       val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
