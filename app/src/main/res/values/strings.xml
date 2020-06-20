@@ -18,6 +18,26 @@
    <string name="tab_ingredients_title">Ingredients</string>
    <string name="tab_instructions_title">Instructions</string>
 
+   <!-- tab infos -->
+   <string name="text_uncategorized">Uncategorized</string>
+   <string name="text_categories"><![CDATA[<strong>Categories:</strong><br/> ]]> %1$s</string>
+   <string name="text_nutritions"><![CDATA[<strong>Nutritions:</strong><br/> ]]> %1$s</string>
+   <string name="text_author">( Author: %1$s )</string>
+
+   <!-- Nutritions -->
+   <string name="nutrition_calories">Calories: %1$s</string>
+   <string name="nutrition_carbohydrate_content">Carbohydrate Content: %1$s</string>
+   <string name="nutrition_cholesterol_content">Cholesterol Content: %1$s</string>
+   <string name="nutrition_fat_content">Fat Content: %1$s</string>
+   <string name="nutrition_fiberContent">Fiber Content: %1$s</string>
+   <string name="nutrition_protein_content">Protein Content: %1$s</string>
+   <string name="nutrition_saturated_fat_content">Saturated Fat Content: %1$s</string>
+   <string name="nutrition_serving_size">Serving Size: %1$s</string>
+   <string name="nutrition_sodium_content">Sodium Content: %1$s</string>
+   <string name="nutrition_sugar_content">Sugar Content: %1$s</string>
+   <string name="nutrition_trans_fat_content">Trans Fat Content: %1$s</string>
+   <string name="nutrition_unsaturated_fat_content">Unsaturated Fat Content: %1$s</string>
+
    <!-- menu -->
    <string name="menu_settings_title">Settings</string>
    <string name="menu_refresh_tooltip">Refresh recipes</string>

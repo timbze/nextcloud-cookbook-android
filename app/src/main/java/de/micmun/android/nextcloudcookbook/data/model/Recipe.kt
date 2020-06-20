@@ -7,13 +7,14 @@ package de.micmun.android.nextcloudcookbook.data.model
 
 import android.net.Uri
 import com.google.gson.annotations.SerializedName
+import de.micmun.android.nextcloudcookbook.R
 import java.util.*
 
 /**
  * Data class for a recipe.
  *
  * @author MicMun
- * @version 1.1, 13.06.20
+ * @version 1.2, 20.06.20
  */
 data class Recipe(
    @Transient
@@ -28,21 +29,21 @@ data class Recipe(
    var context: String = "http://schema.org",
    @SerializedName("@type")
    var type: String = "Recipe",
-   var author: Author = Author(""),
+   var author: Author? = Author(""),
    var cookTime: String = "",
    var datePublished: Date? = null,
    @SerializedName("image")
    var imageUrl: String = "",
    var recipeIngredient: Array<String> = emptyArray(),
    var interactionStatistic: InteractionStatistic = InteractionStatistic(),
-   var nutrition: Nutrition = Nutrition(),
+   var nutrition: Nutrition? = Nutrition(),
    var prepTime: String = "",
    var totalTime: String = "",
    var recipeInstructions: Array<String> = emptyArray(),
    var recipeYield: String = "",
    var suitableForDiet: String = "",
    var cookingMethod: String = "",
-   var recipeCategory: Array<String> = emptyArray(),
+   var recipeCategory: Array<String>? = emptyArray(),
    var recipeCuisine: String = "",
    var tool: Array<String> = emptyArray(),
    var yield: String = "",
@@ -104,6 +105,42 @@ data class Nutrition(
    var sugarContent: String = "",
    var transFatContent: String = "",
    var unsaturatedFatContent: String = ""
-)
+) {
+   /**
+    * Returns a map with the nutritions which are set.
+    *
+    * @return Map with nutritions which are set.
+    */
+   fun toMap(): Map<Int, String> {
+      val map = mutableMapOf<Int, String>()
+
+      if (calories.isNotEmpty())
+         map[R.string.nutrition_calories] = calories
+      if (carbohydrateContent.isNotEmpty())
+         map[R.string.nutrition_carbohydrate_content] = carbohydrateContent
+      if (cholesterolContent.isNotEmpty())
+         map[R.string.nutrition_cholesterol_content] = cholesterolContent
+      if (fatContent.isNotEmpty())
+         map[R.string.nutrition_fat_content] = fatContent
+      if (fiberContent.isNotEmpty())
+         map[R.string.nutrition_fiberContent] = fiberContent
+      if (proteinContent.isNotEmpty())
+         map[R.string.nutrition_protein_content] = proteinContent
+      if (saturatedFatContent.isNotEmpty())
+         map[R.string.nutrition_saturated_fat_content] = saturatedFatContent
+      if (servingSize.isNotEmpty())
+         map[R.string.nutrition_serving_size] = servingSize
+      if (sodiumContent.isNotEmpty())
+         map[R.string.nutrition_sodium_content] = sodiumContent
+      if (sugarContent.isNotEmpty())
+         map[R.string.nutrition_sugar_content] = sugarContent
+      if (transFatContent.isNotEmpty())
+         map[R.string.nutrition_trans_fat_content] = transFatContent
+      if (unsaturatedFatContent.isNotEmpty())
+         map[R.string.nutrition_unsaturated_fat_content] = unsaturatedFatContent
+
+      return map
+   }
+}
 
 data class Author(var name: String = "")

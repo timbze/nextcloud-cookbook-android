@@ -20,11 +20,12 @@ import java.util.stream.Collectors
  * Repository with the recipe data.
  *
  * @author MicMun
- * @version 1.2, 30.05.20
+ * @version 1.3, 20.06.20
  */
 class RecipeRepository {
    private val _recipeList = mutableListOf<Recipe>()
    private val _recipeMap = mutableMapOf<Long, Recipe>()
+   private val _recipeCategories = mutableSetOf<String>()
 
    companion object {
       @Volatile
@@ -46,6 +47,8 @@ class RecipeRepository {
 
    fun getRecipeWithId(id: Long) = _recipeMap[id]
 
+   fun getCategories(): Set<String> = _recipeCategories
+
    /**
     * Reads all recipes from directory.
     */
@@ -55,6 +58,12 @@ class RecipeRepository {
       if (dir.exists()) {
          val subdirs = dir.listFiles()
          var id: Long = 1
+
+         if (subdirs != null && subdirs.isNotEmpty()) {
+            _recipeCategories.clear()
+            _recipeMap.clear()
+            _recipeList.clear()
+         }
 
          subdirs?.forEach { sd ->
             Log.d("RecipeDirectory", "sd = ${sd.absolutePath}")
@@ -72,11 +81,17 @@ class RecipeRepository {
                if (jsonFile != null && jsonFile.exists()) {
                   val recipe = readRecipe(Uri.fromFile(jsonFile))
                   Log.d("RecipeDirectory", "recipe.name = ${recipe.name}")
+                  if (recipe.recipeCategory == null)
+                     recipe.recipeCategory = emptyArray()
+
                   recipe.thumbImage = if (thumbFile.exists()) Uri.fromFile(thumbFile) else null
                   recipe.imageUrl = if (fullFile.exists()) Uri.fromFile(fullFile).toString() else ""
                   recipe.recipeId = id++
                   _recipeList.add(recipe)
                   _recipeMap[recipe.recipeId] = recipe
+
+                  val categories = recipe.recipeCategory
+                  categories?.forEach { c -> _recipeCategories.add(c) }
                }
             }
          }
