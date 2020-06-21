@@ -8,12 +8,17 @@ package de.micmun.android.nextcloudcookbook.ui
 import android.Manifest
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -28,10 +33,12 @@ import de.micmun.android.nextcloudcookbook.databinding.ActivityMainBinding
  * Main Activity of the app.
  *
  * @author MicMun
- * @version 1.0, 10.05.20
+ * @version 1.1, 21.06.20
  */
 class MainActivity : AppCompatActivity() {
    private lateinit var binding: ActivityMainBinding
+   private lateinit var drawerLayout: DrawerLayout
+   var categorySelectedListener: CategorySelectedListener? = null
 
    override fun onCreate(savedInstanceState: Bundle?) {
       // apply theme
@@ -47,10 +54,28 @@ class MainActivity : AppCompatActivity() {
       // toolbar
       setSupportActionBar(binding.toolbar.myToolbar)
 
+      // drawer layout
+      drawerLayout = binding.drawerLayout
+
       // navigation
       val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
       val navController = navHostFragment.findNavController()
-      NavigationUI.setupActionBarWithNavController(this, navController)
+      NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
+      NavigationUI.setupWithNavController(binding.navView, navController)
+
+      // prevent nav gesture if not on start destination
+      navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, args: Bundle? ->
+         if (nd.id == nc.graph.startDestination) {
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+         } else {
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+         }
+      }
+      binding.navView.setNavigationItemSelectedListener { item ->
+         categorySelectedListener?.onCategorySelected(item.itemId)
+         drawerLayout.closeDrawers()
+         true
+      }
 
       // permissions
       Dexter.withContext(this)
@@ -75,9 +100,13 @@ class MainActivity : AppCompatActivity() {
          })
    }
 
+   fun getMenu(): Menu {
+      return binding.navView.menu
+   }
+
    override fun onSupportNavigateUp(): Boolean {
       val navControler = this.findNavController(R.id.navHostFragment)
-      return navControler.navigateUp()
+      return NavigationUI.navigateUp(navControler, drawerLayout)
    }
 
    private fun systemTheme(): Int {
@@ -86,4 +115,14 @@ class MainActivity : AppCompatActivity() {
          else -> R.style.AppTheme_Light
       }
    }
+}
+
+/**
+ * Listener for category selection.
+ *
+ * @author MicMun
+ * @version 1.0, 21.06.20
+ */
+interface CategorySelectedListener {
+   fun onCategorySelected(id: Int)
 }

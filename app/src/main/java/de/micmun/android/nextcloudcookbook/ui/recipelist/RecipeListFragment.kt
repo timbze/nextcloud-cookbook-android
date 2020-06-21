@@ -14,15 +14,18 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import de.micmun.android.nextcloudcookbook.R
+import de.micmun.android.nextcloudcookbook.data.RecipeRepository
 import de.micmun.android.nextcloudcookbook.databinding.FragmentRecipelistBinding
+import de.micmun.android.nextcloudcookbook.ui.CategorySelectedListener
+import de.micmun.android.nextcloudcookbook.ui.MainActivity
 
 /**
  * Fragment for list of recipes.
  *
  * @author MicMun
- * @version 1.3, 30.05.20
+ * @version 1.4, 21.06.20
  */
-class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, CategorySelectedListener {
    private lateinit var binding: FragmentRecipelistBinding
    private lateinit var viewModel: RecipeListViewModel
 
@@ -35,14 +38,18 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
       binding.swipeContainer.setOnRefreshListener(this)
 
-      initializeRecipeList()
-
       return binding.root
    }
 
-   override fun onActivityCreated(savedInstanceState: Bundle?) {
-      super.onActivityCreated(savedInstanceState)
-      (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
+   override fun onResume() {
+      super.onResume()
+      (activity as MainActivity).categorySelectedListener = this
+      initializeRecipeList()
+   }
+
+   override fun onPause() {
+      (activity as MainActivity).categorySelectedListener = null
+      super.onPause()
    }
 
    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -101,16 +108,46 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
          recipePath = path
          onRefresh()
       })
+      viewModel.filterCategory.observe(viewLifecycleOwner, Observer { id ->
+         var option = RecipeListViewModel.CategoryFilterOption.CATEGORY
+
+         when (id) {
+            R.id.menu_all_categories -> {
+               option = RecipeListViewModel.CategoryFilterOption.ALL_CATEGORIES
+               // set title in Actionbar
+               (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
+            }
+            R.id.menu_uncategorized -> {
+               option = RecipeListViewModel.CategoryFilterOption.UNCATEGORIZED
+               // set title in Actionbar
+               (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.text_uncategorized)
+            }
+            else -> {
+               (activity as AppCompatActivity).supportActionBar?.title =
+                  RecipeRepository.getInstance().getCategoryTitle(id)
+            }
+         }
+         // filter recipes to set categorie
+         viewModel.filterRecipes(option)
+      })
    }
 
    override fun onRefresh() {
+      // preparation for loading
       binding.swipeContainer.isRefreshing = true
       refreshItem?.let { it.isEnabled = false }
 
-      // load recipes
-      recipePath?.let { viewModel.initRecipes(it) }
+      // load recipes and set categories in menu
+      val activity = requireActivity() as MainActivity
+      val menu = activity.getMenu()
+      recipePath?.let { viewModel.initRecipes(it, menu, refreshItem != null) }
 
+      // end of loading
       binding.swipeContainer.isRefreshing = false
       refreshItem?.let { it.isEnabled = true }
+   }
+
+   override fun onCategorySelected(id: Int) {
+      viewModel.onCategoryClicked(id)
    }
 }

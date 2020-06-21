@@ -20,12 +20,16 @@ import java.util.stream.Collectors
  * Repository with the recipe data.
  *
  * @author MicMun
- * @version 1.3, 20.06.20
+ * @version 1.4, 21.06.20
  */
 class RecipeRepository {
    private val _recipeList = mutableListOf<Recipe>()
+   val recipeList: List<Recipe>
+      get() = _recipeList
    private val _recipeMap = mutableMapOf<Long, Recipe>()
    private val _recipeCategories = mutableSetOf<String>()
+   val recipeCategories: Set<String>
+      get() = _recipeCategories
 
    companion object {
       @Volatile
@@ -47,7 +51,30 @@ class RecipeRepository {
 
    fun getRecipeWithId(id: Long) = _recipeMap[id]
 
-   fun getCategories(): Set<String> = _recipeCategories
+   fun getCategoryTitle(id: Int): String {
+      return _recipeCategories.first { c -> c.hashCode() == id }
+   }
+
+   fun filterRecipesWithCategory(id: Int): List<Recipe> {
+      return _recipeList.filter { recipe ->
+         if (recipe.recipeCategory == null) {
+            false
+         } else {
+            try {
+               val ctitle = recipe.recipeCategory?.first { c -> c.hashCode() == id }
+               true
+            } catch (e: NoSuchElementException) {
+               false
+            }
+         }
+      }
+   }
+
+   fun filterRecipesUncategorized(): List<Recipe> {
+      return _recipeList.filter { recipe ->
+         recipe.recipeCategory.isNullOrEmpty()
+      }
+   }
 
    /**
     * Reads all recipes from directory.
