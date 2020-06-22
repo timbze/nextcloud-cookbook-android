@@ -20,7 +20,7 @@ import java.util.stream.Collectors
  * Repository with the recipe data.
  *
  * @author MicMun
- * @version 1.4, 21.06.20
+ * @version 1.5, 22.06.20
  */
 class RecipeRepository {
    private val _recipeList = mutableListOf<Recipe>()
@@ -61,7 +61,7 @@ class RecipeRepository {
             false
          } else {
             try {
-               val ctitle = recipe.recipeCategory?.first { c -> c.hashCode() == id }
+               recipe.recipeCategory?.first { c -> c.hashCode() == id }
                true
             } catch (e: NoSuchElementException) {
                false
@@ -92,6 +92,8 @@ class RecipeRepository {
             _recipeList.clear()
          }
 
+         val tmpCategories = mutableSetOf<String>()
+
          subdirs?.forEach { sd ->
             Log.d("RecipeDirectory", "sd = ${sd.absolutePath}")
             if (sd.exists() && sd.isDirectory) {
@@ -118,10 +120,11 @@ class RecipeRepository {
                   _recipeMap[recipe.recipeId] = recipe
 
                   val categories = recipe.recipeCategory
-                  categories?.forEach { c -> _recipeCategories.add(c) }
+                  categories?.forEach { c -> tmpCategories.add(c) }
                }
             }
          }
+         _recipeCategories.addAll(tmpCategories.toSortedSet())
       }
       return _recipeList
    }

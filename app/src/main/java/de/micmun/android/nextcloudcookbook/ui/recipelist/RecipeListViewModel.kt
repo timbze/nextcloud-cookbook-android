@@ -23,7 +23,7 @@ import kotlinx.coroutines.*
  * ViewModel for list of recipes.
  *
  * @author MicMun
- * @version 1.3, 21.06.20
+ * @version 1.4, 22.06.20
  */
 class RecipeListViewModel(application: Application) : AndroidViewModel(application) {
    private val _recipeList = MutableLiveData<List<Recipe>>()
@@ -65,7 +65,7 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
       _filterCategory.value = id
    }
 
-   fun filterRecipes(option: CategoryFilterOption) {
+   fun filterRecipesByCategory(option: CategoryFilterOption) {
       val repo = RecipeRepository.getInstance()
 
       when (option) {
@@ -79,7 +79,6 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
       uiScope.launch {
          if (_recipeList.value.isNullOrEmpty() || force) {
             _recipeList.value = getRecipesFromRepo(path)
-
             _filterCategory.value = R.id.menu_all_categories
          }
          val categories = getCategoriesFromRepo()

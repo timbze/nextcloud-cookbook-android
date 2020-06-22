@@ -1,28 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigation.xml"
-    app:startDestination="@id/recipeListFragment">
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      android:id="@+id/navigation.xml"
+      app:startDestination="@id/recipeListFragment">
 
-    <fragment
-        android:id="@+id/recipeListFragment"
-        android:name="de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListFragment"
-        android:label="fragment_recipelist" >
-        <action
+   <fragment
+         android:id="@+id/recipeListFragment"
+         android:name="de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListFragment"
+         android:label="fragment_recipelist">
+      <action
             android:id="@+id/action_recipeListFragment_to_recipeDetailFragment"
             app:destination="@id/recipeDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/preferenceFragment"
-        android:name="de.micmun.android.nextcloudcookbook.ui.preferences.PreferenceFragment"
-        android:label="PreferenceFragment" />
-    <fragment
-        android:id="@+id/recipeDetailFragment"
-        android:name="de.micmun.android.nextcloudcookbook.ui.recipedetail.RecipeDetailFragment"
-        android:label="fragment_detail">
-        <argument
+      <action
+            android:id="@+id/action_recipeListFragment_to_recipeSearchFragment"
+            app:destination="@id/recipeSearchFragment" />
+   </fragment>
+   <fragment
+         android:id="@+id/preferenceFragment"
+         android:name="de.micmun.android.nextcloudcookbook.ui.preferences.PreferenceFragment"
+         android:label="PreferenceFragment" />
+   <fragment
+         android:id="@+id/recipeDetailFragment"
+         android:name="de.micmun.android.nextcloudcookbook.ui.recipedetail.RecipeDetailFragment"
+         android:label="fragment_detail">
+      <argument
             android:name="recipeId"
             android:defaultValue="-1L"
             app:argType="long" />
-    </fragment>
+   </fragment>
+   <fragment
+         android:id="@+id/recipeSearchFragment"
+         android:name="de.micmun.android.nextcloudcookbook.ui.recipesearch.RecipeSearchFragment"
+         android:label="fragment_recipesearch"
+         tools:layout="@layout/fragment_recipesearch">
+      <action
+            android:id="@+id/action_recipeSearchFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
+      <argument
+            android:name="queryString"
+            app:argType="string" />
+      <argument
+            android:name="categoryCode"
+            android:defaultValue="-1"
+            app:argType="integer" />
+
+   </fragment>
 </navigation>

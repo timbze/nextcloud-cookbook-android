@@ -1,8 +1,11 @@
 package de.micmun.android.nextcloudcookbook.ui.recipelist
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -23,7 +26,7 @@ import de.micmun.android.nextcloudcookbook.ui.MainActivity
  * Fragment for list of recipes.
  *
  * @author MicMun
- * @version 1.4, 21.06.20
+ * @version 1.5, 22.06.20
  */
 class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, CategorySelectedListener {
    private lateinit var binding: FragmentRecipelistBinding
@@ -37,6 +40,7 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Cat
       setHasOptionsMenu(true)
 
       binding.swipeContainer.setOnRefreshListener(this)
+      initializeRecipeList()
 
       return binding.root
    }
@@ -44,7 +48,6 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Cat
    override fun onResume() {
       super.onResume()
       (activity as MainActivity).categorySelectedListener = this
-      initializeRecipeList()
    }
 
    override fun onPause() {
@@ -55,6 +58,13 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Cat
    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
       super.onCreateOptionsMenu(menu, inflater)
       inflater.inflate(R.menu.overflow_menu, menu)
+
+      // Associate searchable configuration with the SearchView
+      val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+      val searchView = menu.findItem(R.id.search).actionView as SearchView
+      searchView.apply {
+         setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+      }
    }
 
    override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -128,7 +138,7 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Cat
             }
          }
          // filter recipes to set categorie
-         viewModel.filterRecipes(option)
+         viewModel.filterRecipesByCategory(option)
       })
    }
 

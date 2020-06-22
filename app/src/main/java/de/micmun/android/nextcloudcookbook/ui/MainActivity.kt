@@ -6,6 +6,8 @@
 package de.micmun.android.nextcloudcookbook.ui
 
 import android.Manifest
+import android.app.SearchManager
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
@@ -18,7 +20,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -28,17 +29,19 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.PreferenceDao
 import de.micmun.android.nextcloudcookbook.databinding.ActivityMainBinding
+import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListFragmentDirections
 
 /**
  * Main Activity of the app.
  *
  * @author MicMun
- * @version 1.1, 21.06.20
+ * @version 1.2, 22.06.20
  */
 class MainActivity : AppCompatActivity() {
    private lateinit var binding: ActivityMainBinding
    private lateinit var drawerLayout: DrawerLayout
    var categorySelectedListener: CategorySelectedListener? = null
+   var currentCatId: Int = -1
 
    override fun onCreate(savedInstanceState: Bundle?) {
       // apply theme
@@ -64,7 +67,7 @@ class MainActivity : AppCompatActivity() {
       NavigationUI.setupWithNavController(binding.navView, navController)
 
       // prevent nav gesture if not on start destination
-      navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, args: Bundle? ->
+      navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, _: Bundle? ->
          if (nd.id == nc.graph.startDestination) {
             drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
          } else {
@@ -72,6 +75,10 @@ class MainActivity : AppCompatActivity() {
          }
       }
       binding.navView.setNavigationItemSelectedListener { item ->
+         currentCatId = when (item.itemId) {
+            R.id.menu_all_categories -> -1
+            else -> item.itemId
+         }
          categorySelectedListener?.onCategorySelected(item.itemId)
          drawerLayout.closeDrawers()
          true
@@ -98,6 +105,13 @@ class MainActivity : AppCompatActivity() {
             ) {
             }
          })
+
+      handleIntent(intent)
+   }
+
+   override fun onNewIntent(intent: Intent?) {
+      super.onNewIntent(intent)
+      handleIntent(intent)
    }
 
    fun getMenu(): Menu {
@@ -113,6 +127,17 @@ class MainActivity : AppCompatActivity() {
       return when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
          Configuration.UI_MODE_NIGHT_YES -> R.style.AppTheme_Dark
          else -> R.style.AppTheme_Light
+      }
+   }
+
+   private fun handleIntent(intent: Intent?) {
+      if (Intent.ACTION_SEARCH == intent?.action) {
+         val query = intent.getStringExtra(SearchManager.QUERY)
+         if (query != null) {
+            val navControler = this.findNavController(R.id.navHostFragment)
+            navControler.navigate(
+               RecipeListFragmentDirections.actionRecipeListFragmentToRecipeSearchFragment(query, currentCatId))
+         }
       }
    }
 }

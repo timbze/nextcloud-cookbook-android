@@ -20,6 +20,7 @@ class RecipeViewModelFactory(private val id: Long, private val application: Appl
    : ViewModelProvider.Factory {
    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
       if (modelClass.isAssignableFrom(RecipeViewModel::class.java)) {
+         @Suppress("UNCHECKED_CAST")
          return RecipeViewModel(id, application) as T
       }
       throw IllegalArgumentException("Unknown ViewModel class")

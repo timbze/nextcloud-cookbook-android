@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+      xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/refreshAction"
-        android:icon="@drawable/ic_refresh"
-        android:title="@string/menu_refresh_tooltip"
-        app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/searchFragment"
-        android:icon="@drawable/ic_search"
-        android:title="@string/menu_search_tooltip"
-        app:showAsAction="ifRoom"
-        />
-    <item
-        android:id="@+id/preferenceFragment"
-        android:title="@string/menu_settings_title"
-        app:showAsAction="never" />
+   <item
+         android:id="@+id/refreshAction"
+         android:icon="@drawable/ic_refresh"
+         android:title="@string/menu_refresh_tooltip"
+         app:showAsAction="ifRoom" />
+   <item
+         android:id="@+id/search"
+         android:icon="@drawable/ic_search"
+         android:title="@string/menu_search_tooltip"
+         app:actionViewClass="androidx.appcompat.widget.SearchView"
+         app:showAsAction="collapseActionView|ifRoom" />
+   <item
+         android:id="@+id/preferenceFragment"
+         android:title="@string/menu_settings_title"
+         app:showAsAction="never" />
 </menu>
