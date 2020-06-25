@@ -17,8 +17,8 @@ After that, the start view has a list of recipes and you select a recipe to view
 ## Screenshots
 
 ![Screenshot start with list](fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_start.png)
-
 ![Screenshot detail view with info tab](fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_detail_info.png)
+![Screenshot detail view with ingredients tab](fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_detail_ingredients.png)
 
 ## Compatibility
 
