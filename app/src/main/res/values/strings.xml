@@ -8,8 +8,7 @@
 
    <!-- recipe detail -->
    <string name="img_desc_logo">Logo of the recipe</string>
-   <string name="ingredients_list_symbol">*</string>
-   <string name="instructions_list_symbol">*</string>
+   <string name="list_symbol">*</string>
    <string name="tooltip_prep_time">Preparation time</string>
    <string name="tooltip_cook_time">Cooking time</string>
    <string name="tooltip_total_time">Total time</string>
@@ -22,10 +21,11 @@
    <!-- tab infos -->
    <string name="text_uncategorized">Uncategorized</string>
    <string name="text_categories"><![CDATA[<strong>Categories:</strong><br/> ]]> %1$s</string>
-   <string name="text_nutritions"><![CDATA[<strong>Nutritions:</strong><br/> ]]> %1$s</string>
+   <string name="text_nutritions">Nutritions:</string>
    <string name="text_author">( Author: %1$s )</string>
 
    <!-- Nutritions -->
+   <string name="empty_nutritions">No Information.</string>
    <string name="nutrition_calories">Calories: %1$s</string>
    <string name="nutrition_carbohydrate_content">Carbohydrate Content: %1$s</string>
    <string name="nutrition_cholesterol_content">Cholesterol Content: %1$s</string>

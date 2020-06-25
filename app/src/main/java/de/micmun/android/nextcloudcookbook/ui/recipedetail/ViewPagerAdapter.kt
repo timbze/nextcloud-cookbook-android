@@ -5,9 +5,12 @@
  */
 package de.micmun.android.nextcloudcookbook.ui.recipedetail
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import de.micmun.android.nextcloudcookbook.R
+import de.micmun.android.nextcloudcookbook.data.model.Nutrition
 import de.micmun.android.nextcloudcookbook.data.model.Recipe
 import de.micmun.android.nextcloudcookbook.databinding.TabInfosBinding
 import de.micmun.android.nextcloudcookbook.databinding.TabIngredientsBinding
@@ -17,7 +20,7 @@ import de.micmun.android.nextcloudcookbook.databinding.TabInstructionsBinding
  * Adapter for the ViewPager2 to present tabs.
  *
  * @author MicMun
- * @version 1.1, 20.06.20
+ * @version 1.2, 25.06.20
  */
 class ViewPagerAdapter(private val recipe: Recipe) :
    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -61,7 +64,7 @@ class ViewPagerAdapter(private val recipe: Recipe) :
       return position
    }
 
-   class InfoViewHolder private constructor(private val binding: TabInfosBinding) :
+   class InfoViewHolder private constructor(private val binding: TabInfosBinding, private val resources: Resources) :
       RecyclerView.ViewHolder(binding.root) {
       /**
        * Binds the data to the views.
@@ -70,14 +73,40 @@ class ViewPagerAdapter(private val recipe: Recipe) :
        */
       fun bind(recipe: Recipe) {
          binding.recipe = recipe
-         binding.executePendingBindings()
+         val switcher = binding.nutritionSwitcher
+
+         val nutritions = getNutritionList(recipe.nutrition)
+
+         if (nutritions.isEmpty() && R.id.nutritionEmptyLayout == switcher.nextView.id) {
+            switcher.showNext()
+         } else {
+            binding.nutritionList.adapter = RecipeNutritionAdapter(nutritions)
+            binding.executePendingBindings()
+
+            if (R.id.nutritionListLayout == switcher.nextView.id) {
+               switcher.showNext()
+            }
+         }
+      }
+
+      /**
+       * Returns the list of nutritions or an empty list.
+       *
+       * @return list of nutritions or an empty list.
+       */
+      private fun getNutritionList(nutrition: Nutrition?): List<String> {
+         val nutritions = nutrition?.toMap()?.toList()?.map { p -> resources.getString(p.first, p.second) }
+         if (nutritions.isNullOrEmpty()) {
+            return emptyList()
+         }
+         return nutritions
       }
 
       companion object {
          fun from(parent: ViewGroup): InfoViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = TabInfosBinding.inflate(layoutInflater, parent, false)
-            return InfoViewHolder(binding)
+            return InfoViewHolder(binding, parent.resources)
          }
       }
    }

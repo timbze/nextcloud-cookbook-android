@@ -20,7 +20,7 @@ import de.micmun.android.nextcloudcookbook.data.model.Recipe
  * Utilities for binding data to view.
  *
  * @author MicMun
- * @version 1.2, 20.06.20
+ * @version 1.3, 25.06.20
  */
 
 // Overview list
@@ -80,27 +80,6 @@ fun TextView.setRecipeCategories(item: Recipe?) {
          Html.fromHtml(resources.getString(R.string.text_categories, categories), Html.FROM_HTML_MODE_LEGACY)
       else
          Html.fromHtml(resources.getString(R.string.text_categories, categories))
-   }
-}
-
-@BindingAdapter("recipeNutritions")
-fun TextView.setRecipeNutritions(item: Recipe?) {
-   item?.let { r ->
-      var input = ""
-
-      r.nutrition?.let { nutrition ->
-         val nmap = nutrition.toMap()
-         input = ""
-
-         nmap.entries.forEach { entry ->
-            input += " - ${resources.getString(entry.key, entry.value)}<br/>"
-         }
-      }
-
-      text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-         Html.fromHtml(resources.getString(R.string.text_nutritions, input), Html.FROM_HTML_MODE_LEGACY)
-      else
-         Html.fromHtml(resources.getString(R.string.text_nutritions, input))
    }
 }
 
