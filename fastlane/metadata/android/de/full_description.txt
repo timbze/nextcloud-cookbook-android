@@ -1,0 +1,6 @@
+Diese App ist ein Betrachter für die Rezepte der Nextcloud app. Für die Synchronisation der Rezepte wird eine andere App (z. B. der Nextcloud Client für Android) benötigt.
+
+<b>Erste Schritte</b>
+Nach der Installation muss man zunächst in die Einstellungen gehen und das Verzeichnis auswählen, in welchem sich die von der Nextcloud synchronisierten Rezepte befinden. Bei Nutzung der Nextcloud App für Android, ist dies üblicherweise <code>Android/media/com.nextcloud.client/nextcloud/&lt;Account-Name&gt;/&lt;Verzeichnis&gt;</code>.
+In den Einstellungen lässt sich auch das Theme wählen.
+Anschließend findet sich auf der Hauptseite (die auch nach dem Start der App direkt angezeigt wird) die Liste der verfügbaren Rezepte. Zur Anzeige der Details tippt man einfach das gewünschte Rezept an.
