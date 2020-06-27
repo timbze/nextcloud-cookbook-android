@@ -12,8 +12,8 @@ android {
       applicationId "de.micmun.android.nextcloudcookbook"
       minSdkVersion 23
       targetSdkVersion 29
-      versionCode 20
-      versionName "0.20.0"
+      versionCode 30
+      versionName "0.30.0"
 
       testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
       vectorDrawables.useSupportLibrary = true
@@ -34,6 +34,9 @@ android {
       sourceCompatibility = 1.8
       targetCompatibility = 1.8
    }
+   kotlinOptions {
+      jvmTarget = JavaVersion.VERSION_1_8.toString()
+   }
    buildFeatures {
       dataBinding = true
    }
@@ -49,7 +52,6 @@ dependencies {
    implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
    implementation "android.arch.navigation:navigation-fragment-ktx:$version_navigation"
    implementation "android.arch.navigation:navigation-ui-ktx:$version_navigation"
-   implementation "androidx.navigation:navigation-dynamic-features-fragment:$version_navigation"
    implementation "com.google.code.gson:gson:$version_gson"
    implementation "androidx.preference:preference:$version_preference"
    implementation "androidx.legacy:legacy-preference-v14:1.0.0"
@@ -63,7 +65,7 @@ dependencies {
    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_coroutine"
 
    // grant
-   implementation "com.karumi:dexter:6.1.2"
+   implementation "com.github.fondesa:kpermissions:3.1.2"
 
    // file and folder picker
    implementation 'com.obsez.android.lib.filechooser:filechooser:1.2.0'
