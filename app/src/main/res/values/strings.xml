@@ -2,6 +2,8 @@
    <string name="app_name" translatable="false">Nextcloud Cookbook</string>
    <string name="app_logo_desc">Launcher icon of the app showing a cookbook symbol</string>
 
+   <string name="permissions_error_message">Access denied! App need storage access, please activate in the settings.</string>
+
    <!-- recipe list -->
    <string name="empty_list">No recipes.</string>
    <string name="recipe_list_image_desc">Image thumbnail of recipe</string>

@@ -9,7 +9,9 @@ import android.Manifest
 import android.app.SearchManager
 import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -20,12 +22,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.fondesa.kpermissions.allGranted
+import com.fondesa.kpermissions.extension.permissionsBuilder
+import com.fondesa.kpermissions.extension.send
 import com.google.android.material.snackbar.Snackbar
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.PreferenceDao
 import de.micmun.android.nextcloudcookbook.databinding.ActivityMainBinding
@@ -85,26 +85,25 @@ class MainActivity : AppCompatActivity() {
       }
 
       // permissions
-      Dexter.withContext(this)
-         .withPermissions(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-         )
-         .withListener(object : MultiplePermissionsListener {
-            override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-               if (!report!!.areAllPermissionsGranted()) {
-                  Snackbar.make(binding.root,
-                                "Access denied! App need storage access, please activate in the settings.",
-                                Snackbar.LENGTH_LONG
-                  ).show()
+      permissionsBuilder(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+         .build()
+         .send { result ->
+            // Handle the result
+            if (!result.allGranted()) {
+               val message = Snackbar.make(binding.root,
+                                           resources.getString(R.string.permissions_error_message),
+                                           Snackbar.LENGTH_LONG
+               )
+               message.setAction(R.string.menu_settings_title) {
+                  // create link to app settings
+                  val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                  val uri = Uri.fromParts("package", this.packageName, null)
+                  intent.data = uri
+                  startActivity(intent)
                }
+               message.show()
             }
-
-            override fun onPermissionRationaleShouldBeShown(p0: MutableList<PermissionRequest>?,
-                                                            p1: PermissionToken?
-            ) {
-            }
-         })
+         }
 
       handleIntent(intent)
    }
