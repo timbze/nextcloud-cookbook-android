@@ -35,13 +35,13 @@ import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListFragmentDirec
  * Main Activity of the app.
  *
  * @author MicMun
- * @version 1.2, 22.06.20
+ * @version 1.3, 27.06.20
  */
 class MainActivity : AppCompatActivity() {
    private lateinit var binding: ActivityMainBinding
    private lateinit var drawerLayout: DrawerLayout
    var categorySelectedListener: CategorySelectedListener? = null
-   var currentCatId: Int = -1
+   private var currentCatId: Int = -1
 
    override fun onCreate(savedInstanceState: Bundle?) {
       // apply theme
