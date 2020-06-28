@@ -1,6 +1,7 @@
 This app is a viewer for recipes in Nextcloud App. You need another app (e.g. the Nextcloud Android client) to sync the recipes to your Android device.
 
 <b>First steps</b>
-After installation you must go into the settings view and select the recipe directory with the recipes inside. When using the Nextcloud Android client, you find it on your storage under <code>Android/media/com.nextcloud.client/nextcloud/&lt;your account&gt;/&lt;folder&gt;</code>.
+After installation you must go into the settings view and select the recipe directory with the recipes inside. 
+When using the Nextcloud Android client, you find it on your storage under <code>Android/media/com.nextcloud.client/nextcloud/&lt;your account&gt;/&lt;folder&gt;</code>.
 You also can choose the theme in the settings.
 After that, the start view has a list of recipes and you select a recipe to view the details.

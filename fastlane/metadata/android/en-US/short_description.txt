@@ -1,1 +1,1 @@
-view the recipes from your Nextcloud Cookbook
+View the recipes from your Nextcloud Cookbook
