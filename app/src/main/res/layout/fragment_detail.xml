@@ -4,26 +4,30 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="de.micmun.android.nextcloudcookbook.ui.recipedetail.RecipeDetailFragment">
 
-   <LinearLayout
+   <ScrollView
          android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:orientation="vertical">
+         android:layout_height="match_parent">
 
-      <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
-            style="@style/Widget.MaterialComponents.TabLayout"
+      <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            app:tabGravity="fill"
-            app:tabTextAppearance="@style/TextAppearance.AppCompat.Small"/>
+            android:orientation="vertical">
 
-      <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+         <com.google.android.material.tabs.TabLayout
+               android:id="@+id/tab_layout"
+               style="@style/Widget.MaterialComponents.TabLayout"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_gravity="top"
+               app:tabGravity="fill" />
 
-   </LinearLayout>
+         <androidx.viewpager2.widget.ViewPager2
+               android:id="@+id/pager"
+               android:layout_width="match_parent"
+               android:layout_height="0dp"
+               android:layout_weight="1"
+               android:nestedScrollingEnabled="true" />
 
+      </LinearLayout>
+   </ScrollView>
 </layout>
