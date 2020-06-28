@@ -3,6 +3,7 @@
    <string name="app_logo_desc">Launcher icon of the app showing a cookbook symbol</string>
 
    <string name="permissions_error_message">Access denied! App need storage access, please activate in the settings.</string>
+   <string name="no_information">No Information.</string>
 
    <!-- recipe list -->
    <string name="empty_list">No recipes.</string>
@@ -10,10 +11,11 @@
 
    <!-- recipe detail -->
    <string name="img_desc_logo">Logo of the recipe</string>
-   <string name="list_symbol">*</string>
-   <string name="tooltip_prep_time">Preparation time</string>
-   <string name="tooltip_cook_time">Cooking time</string>
-   <string name="tooltip_total_time">Total time</string>
+   <string name="list_symbol" translatable="false">*</string>
+   <string name="title_duration">Durations in HH:MM</string>
+   <string name="tooltip_prep_time">Preparation</string>
+   <string name="tooltip_cook_time">Cooking</string>
+   <string name="tooltip_total_time">Total</string>
 
    <!-- tab titles -->
    <string name="tab_info_title">Info</string>
@@ -23,11 +25,10 @@
    <!-- tab infos -->
    <string name="text_uncategorized">Uncategorized</string>
    <string name="text_categories"><![CDATA[<strong>Categories:</strong><br/> ]]> %1$s</string>
-   <string name="text_nutritions">Nutritions:</string>
+   <string name="text_nutritions">Nutrition facts:</string>
    <string name="text_author">( Author: %1$s )</string>
 
    <!-- Nutritions -->
-   <string name="empty_nutritions">No Information.</string>
    <string name="nutrition_calories">Calories: %1$s</string>
    <string name="nutrition_carbohydrate_content">Carbohydrate Content: %1$s</string>
    <string name="nutrition_cholesterol_content">Cholesterol Content: %1$s</string>
@@ -58,9 +59,10 @@
    <string name="title_dir_chooser">Choose a directory…</string>
    <string name="prefkey_theme" translatable="false">theme_setting</string>
 
+   <string name="prefkey_about" translatable="false">app_about</string>
    <string name="about_title">About</string>
-   <string name="about_rights">© 2020 by MicMun\n\nLicense under GPLv3.</string>
-   <string name="about_summary">Nextcloud Cookbook is an app for cookbook on nextcloud to manage recipes.</string>
+   <string name="about_version">App version: %1$s</string>
+   <string name="about_summary">© 2020 by MicMun\nLicense under GPLv3.\n\nNextcloud Cookbook is an app for cookbook on nextcloud to manage recipes.</string>
 
    <string-array name="theme_names">
       <item>Light</item>

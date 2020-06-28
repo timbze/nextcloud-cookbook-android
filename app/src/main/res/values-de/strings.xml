@@ -1,0 +1,67 @@
+<resources>
+   <string name="permissions_error_message">Zugriff verweigert! Die App braucht Zugriff auf den Speicher, bitte in den Einstellungen aktivieren.</string>
+   <string name="no_information">Keine Angabe.</string>
+
+   <!-- recipe list -->
+   <string name="empty_list">Keine Rezepte.</string>
+   <string name="recipe_list_image_desc">Image thumbnail des Rezepts</string>
+
+   <!-- recipe detail -->
+   <string name="img_desc_logo">Logo des Rezepts</string>
+   <string name="list_symbol">*</string>
+   <string name="title_duration">Dauer in HH:MM</string>
+   <string name="tooltip_prep_time">Vorbereitung</string>
+   <string name="tooltip_cook_time">Kochen</string>
+   <string name="tooltip_total_time">Gesamt</string>
+
+   <!-- tab titles -->
+   <string name="tab_info_title">Info</string>
+   <string name="tab_ingredients_title">Zutaten</string>
+   <string name="tab_instructions_title">Ablauf</string>
+
+   <!-- tab infos -->
+   <string name="text_uncategorized">Unkategorisiert</string>
+   <string name="text_categories"><![CDATA[<strong>Kategorien:</strong><br/> ]]> %1$s</string>
+   <string name="text_nutritions">Nährwertangaben:</string>
+   <string name="text_author">( Autor: %1$s )</string>
+
+   <!-- Nutritions -->
+   <string name="nutrition_calories">Kalorien: %1$s</string>
+   <string name="nutrition_carbohydrate_content">Kohlenhydratgehalt: %1$s</string>
+   <string name="nutrition_cholesterol_content">Cholesteringehalt: %1$s</string>
+   <string name="nutrition_fat_content">Fettgehalt: %1$s</string>
+   <string name="nutrition_fiberContent">Ballaststoffgehalt: %1$s</string>
+   <string name="nutrition_protein_content">Eiweißgehalt: %1$s</string>
+   <string name="nutrition_saturated_fat_content">Gesättigter Fettgehalt: %1$s</string>
+   <string name="nutrition_serving_size">Serviergröße: %1$s</string>
+   <string name="nutrition_sodium_content">Natriumgehalt: %1$s</string>
+   <string name="nutrition_sugar_content">Zuckergehalt: %1$s</string>
+   <string name="nutrition_trans_fat_content">Transfettgehalt: %1$s</string>
+   <string name="nutrition_unsaturated_fat_content">Ungesättigter Fettgehalt: %1$s</string>
+
+   <!-- menu -->
+   <string name="menu_settings_title">Einstellungen</string>
+   <string name="menu_refresh_tooltip">Rezepte neu laden</string>
+   <string name="menu_search_tooltip">Suche Rezept</string>
+   <string name="search_hint">Suche nach Name</string>
+
+   <!-- navdrawer_menu -->
+   <string name="menu_all_categories">Alle Kategorien</string>
+   <string name="menu_uncategorized">Unkategorisiert</string>
+
+   <!-- preferences -->
+   <string name="preftitle_recipeDir">Rezept-Verzeichnis</string>
+   <string name="preftitle_theme">Wähle ein Theme</string>
+   <string name="title_dir_chooser">Wähle ein Verzeichnis…</string>
+
+   <string name="about_title">Über</string>
+   <string name="about_version">App-Version: %1$s</string>
+   <string name="about_summary">© 2020 by MicMun\nLizenziert unter GPLv3.\n\nNextcloud Cookbook ist eine App für das Nextcloud Cookbook (ein Kochbuch für Nextcloud), um Rezepte zu verwalten.</string>
+
+   <string-array name="theme_names">
+      <item>Hell</item>
+      <item>Dunkel</item>
+      <item>System</item>
+   </string-array>
+   <string name="app_logo_desc">Launcher-Icon der App zeigt ein Kochbuch-Symbol</string>
+</resources>
