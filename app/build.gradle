@@ -52,6 +52,9 @@ dependencies {
    implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
    implementation "android.arch.navigation:navigation-fragment-ktx:$version_navigation"
    implementation "android.arch.navigation:navigation-ui-ktx:$version_navigation"
+   implementation("androidx.navigation:navigation-dynamic-features-fragment:$version_navigation") {
+      exclude group: 'com.google.android.play', module: 'core'
+   }
    implementation "com.google.code.gson:gson:$version_gson"
    implementation "androidx.preference:preference:$version_preference"
    implementation "androidx.legacy:legacy-preference-v14:1.0.0"
