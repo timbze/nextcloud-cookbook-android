@@ -15,12 +15,13 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.model.Recipe
+import de.micmun.android.nextcloudcookbook.util.DurationUtils
 
 /**
  * Utilities for binding data to view.
  *
  * @author MicMun
- * @version 1.3, 25.06.20
+ * @version 1.4, 27.06.20
  */
 
 // Overview list
@@ -55,17 +56,17 @@ fun TextView.setRecipeHeaderImage(item: Recipe?) {
 
 @BindingAdapter("recipePrepTime")
 fun TextView.setPrepTime(item: Recipe?) {
-   item?.let { text = it.prepTime }
+   item?.let { text = if (it.prepTime.isNullOrEmpty()) "" else DurationUtils.formatStringToDuration(it.prepTime!!) }
 }
 
 @BindingAdapter("recipeCookTime")
 fun TextView.setCookTime(item: Recipe?) {
-   item?.let { text = it.cookTime }
+   item?.let { text = if (it.cookTime.isNullOrEmpty()) "" else DurationUtils.formatStringToDuration(it.cookTime!!) }
 }
 
 @BindingAdapter("recipeTotalTime")
 fun TextView.setTotalTime(item: Recipe?) {
-   item?.let { text = it.totalTime }
+   item?.let { text = if (it.totalTime.isNullOrEmpty()) "" else DurationUtils.formatStringToDuration(it.totalTime!!) }
 }
 
 @BindingAdapter("recipeCategories")

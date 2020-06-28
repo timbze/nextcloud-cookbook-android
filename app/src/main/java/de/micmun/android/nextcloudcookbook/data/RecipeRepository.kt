@@ -7,7 +7,6 @@ package de.micmun.android.nextcloudcookbook.data
 
 import android.net.Uri
 import android.os.Build
-import android.util.Log
 import androidx.core.net.toFile
 import de.micmun.android.nextcloudcookbook.data.model.Recipe
 import de.micmun.android.nextcloudcookbook.util.JsonRecipeParser
@@ -20,7 +19,7 @@ import java.util.stream.Collectors
  * Repository with the recipe data.
  *
  * @author MicMun
- * @version 1.5, 22.06.20
+ * @version 1.6, 27.06.20
  */
 class RecipeRepository {
    private val _recipeList = mutableListOf<Recipe>()
@@ -95,7 +94,6 @@ class RecipeRepository {
          val tmpCategories = mutableSetOf<String>()
 
          subdirs?.forEach { sd ->
-            Log.d("RecipeDirectory", "sd = ${sd.absolutePath}")
             if (sd.exists() && sd.isDirectory) {
                val jsonFiles = sd.listFiles()?.filter { f -> f.name.endsWith(".json") }
                var jsonFile: File? = null
@@ -109,7 +107,7 @@ class RecipeRepository {
 
                if (jsonFile != null && jsonFile.exists()) {
                   val recipe = readRecipe(Uri.fromFile(jsonFile))
-                  Log.d("RecipeDirectory", "recipe.name = ${recipe.name}")
+
                   if (recipe.recipeCategory == null)
                      recipe.recipeCategory = emptyArray()
 

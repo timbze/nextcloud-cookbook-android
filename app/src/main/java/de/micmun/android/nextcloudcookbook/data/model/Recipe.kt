@@ -14,7 +14,7 @@ import java.util.*
  * Data class for a recipe.
  *
  * @author MicMun
- * @version 1.2, 20.06.20
+ * @version 1.3, 27.06.20
  */
 data class Recipe(
    @Transient
@@ -30,15 +30,15 @@ data class Recipe(
    @SerializedName("@type")
    var type: String = "Recipe",
    var author: Author? = Author(""),
-   var cookTime: String = "",
+   var cookTime: String? = "",
    var datePublished: Date? = null,
    @SerializedName("image")
    var imageUrl: String = "",
    var recipeIngredient: Array<String> = emptyArray(),
    var interactionStatistic: InteractionStatistic = InteractionStatistic(),
    var nutrition: Nutrition? = Nutrition(),
-   var prepTime: String = "",
-   var totalTime: String = "",
+   var prepTime: String? = "",
+   var totalTime: String? = "",
    var recipeInstructions: Array<String> = emptyArray(),
    var recipeYield: String = "",
    var suitableForDiet: String = "",
