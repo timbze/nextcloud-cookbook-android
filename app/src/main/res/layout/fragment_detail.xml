@@ -15,7 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            app:tabGravity="fill" />
+            app:tabGravity="fill"
+            app:tabTextAppearance="@style/TextAppearance.AppCompat.Small"/>
 
       <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/pager"

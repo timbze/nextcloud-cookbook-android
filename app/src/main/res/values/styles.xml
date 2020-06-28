@@ -14,9 +14,9 @@
       <item name="colorAccent">@color/colorAccent</item>
       <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
       <item name="android:windowBackground">@color/colorBackground</item>
-      <item name="tab_info_icon">@drawable/ic_info_light</item>
-      <item name="tab_ingredients_icon">@drawable/ic_ingredients_light</item>
-      <item name="tab_instructions_icon">@drawable/ic_instructions_light</item>
+      <item name="tab_info_icon">@drawable/ic_info</item>
+      <item name="tab_ingredients_icon">@drawable/ic_ingredients</item>
+      <item name="tab_instructions_icon">@drawable/ic_instructions</item>
    </style>
 
    <!-- Dark application theme. -->
