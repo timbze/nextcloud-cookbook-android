@@ -22,8 +22,7 @@
 
     <PreferenceCategory android:title="@string/about_title">
         <Preference
-            android:key="aboutKey"
-            android:summary="@string/about_summary"
-            android:title="@string/about_rights" />
+            android:key="@string/prefkey_about"
+            android:summary="@string/about_summary" />
     </PreferenceCategory>
 </PreferenceScreen>

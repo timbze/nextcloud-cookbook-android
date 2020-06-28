@@ -23,7 +23,7 @@ import de.micmun.android.nextcloudcookbook.ui.MainActivity
  * Fragment for settings.
  *
  * @author MicMun
- * @version 1.1, 26.05.20
+ * @version 1.2, 28.06.20
  */
 class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener,
                            Preference.OnPreferenceClickListener {
@@ -44,6 +44,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
       // find prefs
       dirPreference = findPreference(getString(R.string.prefkey_recipeDir))!!
       themePreference = findPreference(getString(R.string.prefkey_theme))!!
+      val aboutPreference: Preference = findPreference(getString(R.string.prefkey_about))!!
 
       // change listener
       dirPreference.onPreferenceChangeListener = this
@@ -60,6 +61,10 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
          themePreference.value = it.toString()
          themePreference.summary = themePreference.entry
       })
+
+      // about version
+      val version = requireContext().packageManager.getPackageInfo(requireActivity().packageName, 0).versionName ?: ""
+      aboutPreference.title = getString(R.string.about_version, version)
    }
 
    override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
