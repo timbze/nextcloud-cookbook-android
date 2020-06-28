@@ -62,7 +62,7 @@
    <string name="prefkey_about" translatable="false">app_about</string>
    <string name="about_title">About</string>
    <string name="about_version">App version: %1$s</string>
-   <string name="about_summary">© 2020 by MicMun\nLicense under GPLv3.\n\nNextcloud Cookbook is an app for cookbook on nextcloud to manage recipes.</string>
+   <string name="about_summary">© 2020 by MicMun. License under GPLv3.\n\nNextcloud Cookbook is an app for cookbook on nextcloud to manage recipes.</string>
 
    <string-array name="theme_names">
       <item>Light</item>
