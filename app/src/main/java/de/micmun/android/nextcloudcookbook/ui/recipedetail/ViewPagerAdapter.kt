@@ -20,7 +20,7 @@ import de.micmun.android.nextcloudcookbook.databinding.TabInstructionsBinding
  * Adapter for the ViewPager2 to present tabs.
  *
  * @author MicMun
- * @version 1.2, 25.06.20
+ * @version 1.3, 29.06.20
  */
 class ViewPagerAdapter(private val recipe: Recipe) :
    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -87,6 +87,7 @@ class ViewPagerAdapter(private val recipe: Recipe) :
                switcher.showNext()
             }
          }
+         binding.executePendingBindings()
       }
 
       /**

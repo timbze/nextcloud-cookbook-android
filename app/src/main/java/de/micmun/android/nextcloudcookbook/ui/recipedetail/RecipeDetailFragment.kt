@@ -19,7 +19,7 @@ import de.micmun.android.nextcloudcookbook.databinding.FragmentDetailBinding
  * Fragment for detail of a recipe.
  *
  * @author MicMun
- * @version 1.1, 26.05.20
+ * @version 1.2, 29.06.20
  */
 class RecipeDetailFragment : Fragment() {
    private lateinit var binding: FragmentDetailBinding
@@ -57,6 +57,7 @@ class RecipeDetailFragment : Fragment() {
     */
    private fun initPager(recipe: Recipe) {
       binding.pager.adapter = ViewPagerAdapter(recipe)
+      binding.pager.offscreenPageLimit = 3
       val tabLayout = binding.tabLayout
       TabLayoutMediator(tabLayout, binding.pager) { tab, position ->
          when (position) {
