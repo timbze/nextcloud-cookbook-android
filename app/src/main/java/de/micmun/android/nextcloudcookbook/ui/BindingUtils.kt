@@ -21,7 +21,7 @@ import de.micmun.android.nextcloudcookbook.util.DurationUtils
  * Utilities for binding data to view.
  *
  * @author MicMun
- * @version 1.4, 27.06.20
+ * @version 1.5, 30.06.20
  */
 
 // Overview list
@@ -30,6 +30,8 @@ fun ImageView.setRecipeImage(item: Recipe?) {
    item?.let {
       if (it.thumbImage != null) {
          setImageURI(it.thumbImage)
+      } else {
+         setImageURI(null)
       }
    }
 }
@@ -91,6 +93,7 @@ fun TextView.setAuthor(item: Recipe?) {
          visibility = View.GONE
       } else {
          text = resources.getString(R.string.text_author, it.author!!.name)
+         visibility = View.VISIBLE
       }
    }
 }
