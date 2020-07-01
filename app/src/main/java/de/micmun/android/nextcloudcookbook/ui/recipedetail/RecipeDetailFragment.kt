@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.model.Recipe
@@ -19,7 +21,7 @@ import de.micmun.android.nextcloudcookbook.databinding.FragmentDetailBinding
  * Fragment for detail of a recipe.
  *
  * @author MicMun
- * @version 1.2, 29.06.20
+ * @version 1.3, 01.07.20
  */
 class RecipeDetailFragment : Fragment() {
    private lateinit var binding: FragmentDetailBinding
@@ -28,6 +30,12 @@ class RecipeDetailFragment : Fragment() {
    private lateinit var infoIcons: TypedArray
    private lateinit var ingredientsIcons: TypedArray
    private lateinit var instructionsIcons: TypedArray
+
+   private var currentPage = 0
+
+   companion object {
+      private val KEY_CURRENT_PAGE = "current_page"
+   }
 
    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
@@ -46,6 +54,10 @@ class RecipeDetailFragment : Fragment() {
             initPager(recipe)
          }
       })
+
+      if (savedInstanceState != null) {
+         currentPage = savedInstanceState[KEY_CURRENT_PAGE] as Int
+      }
 
       return binding.root
    }
@@ -75,6 +87,36 @@ class RecipeDetailFragment : Fragment() {
             }
          }
       }.attach()
+
+      binding.pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+         override fun onPageSelected(position: Int) {
+            super.onPageSelected(position)
+            currentPage = position
+
+            if (position == 2) {
+               activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            } else {
+               activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            }
+         }
+      })
+   }
+
+   override fun onSaveInstanceState(outState: Bundle) {
+      outState.putInt(KEY_CURRENT_PAGE, currentPage)
+      super.onSaveInstanceState(outState)
+   }
+
+   override fun onPause() {
+      activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+      super.onPause()
+   }
+
+   override fun onResume() {
+      super.onResume()
+      if (currentPage == 2) {
+         activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+      }
    }
 
    override fun onActivityCreated(savedInstanceState: Bundle?) {
