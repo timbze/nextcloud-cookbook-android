@@ -18,13 +18,13 @@ After that, the start view has a list of recipes and you select a recipe to view
 
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_start.png" width="270" height="540" alt="Screenshot start with list"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_detail_info.png" width="270" height="540" alt="Screenshot detail view with info tab"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_detail_ingredients.png" width="270" height="540" alt="Screenshot detail view with ingredients tab"/>
 
-## Compatibility
+## Dependencies
 
 This app needs Android &gt;= 6.0 (API &gt;= 23) and uses the libraries:
 
 * androidx dependencies
 * kotlinx coroutines
-* [Dexter by Karumi](https://github.com/Karumi/Dexter) (permission handling)
+* [KPermissions by Fondesa](https://github.com/fondesa/kpermissions) (permission handling)
 * [android-file-chooser by Hedzr](https://github.com/hedzr/android-file-chooser) (for choosing a directory)
 
 ## License
