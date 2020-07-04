@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+      xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
+   <data>
 
-        <variable
+      <variable
             name="recipe"
             type="de.micmun.android.nextcloudcookbook.data.model.Recipe" />
 
-        <variable
+      <variable
             name="clickListener"
             type="de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListListener" />
-    </data>
+   </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:onClick="@{() -> clickListener.onClick(recipe)}">
+   <androidx.constraintlayout.widget.ConstraintLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_margin="8dp"
+         android:onClick="@{() -> clickListener.onClick(recipe)}">
 
-        <ImageView
+      <ImageView
             android:id="@+id/recipeOverviewImage"
             android:layout_width="72dp"
             android:layout_height="72dp"
@@ -32,7 +32,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:recipeImage="@{recipe}" />
 
-        <TextView
+      <TextView
             android:id="@+id/recipeOverviewName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -40,14 +40,15 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:textAlignment="viewStart"
-            android:textSize="14sp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textSize="@dimen/text_normal"
             app:layout_constraintBottom_toTopOf="@+id/recipeOverviewDescription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/recipeOverviewImage"
             app:layout_constraintTop_toTopOf="parent"
             app:recipeName="@{recipe}" />
 
-        <TextView
+      <TextView
             android:id="@+id/recipeOverviewDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -58,12 +59,13 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:textAlignment="viewStart"
-            android:textSize="12sp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textSize="@dimen/text_small"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/recipeOverviewImage"
             app:layout_constraintTop_toBottomOf="@+id/recipeOverviewName"
             app:recipeDescription="@{recipe}" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

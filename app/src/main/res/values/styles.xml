@@ -10,19 +10,20 @@
    <style name="AppTheme.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
       <item name="colorPrimary">@color/colorPrimary</item>
       <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+      <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
       <item name="android:statusBarColor">@color/colorPrimaryDark</item>
       <item name="colorAccent">@color/colorAccent</item>
       <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-      <item name="android:windowBackground">@color/colorBackground</item>
       <item name="tab_info_icon">@drawable/ic_info</item>
       <item name="tab_ingredients_icon">@drawable/ic_ingredients</item>
       <item name="tab_instructions_icon">@drawable/ic_instructions</item>
    </style>
 
    <!-- Dark application theme. -->
-   <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
+   <style name="AppTheme.Dark" parent="Theme.MaterialComponents.NoActionBar">
       <item name="colorPrimary">@color/colorPrimary</item>
       <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+      <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
       <item name="android:statusBarColor">@color/colorPrimaryDark</item>
       <item name="colorAccent">@color/colorAccent</item>
       <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>

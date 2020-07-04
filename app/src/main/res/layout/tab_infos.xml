@@ -26,6 +26,7 @@
                android:layout_marginStart="16dp"
                android:layout_marginTop="16dp"
                android:layout_marginEnd="16dp"
+               android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                android:textSize="@dimen/tab_info_text_size"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintHorizontal_bias="0.0"
@@ -41,6 +42,7 @@
                android:layout_marginStart="16dp"
                android:layout_marginTop="8dp"
                android:layout_marginEnd="16dp"
+               android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                android:textSize="@dimen/tab_info_text_size"
                android:textStyle="italic"
                app:layout_constraintEnd_toEndOf="parent"
@@ -70,6 +72,7 @@
                   android:layout_weight="1"
                   android:text="@string/tooltip_prep_time"
                   android:textAlignment="center"
+                  android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                   android:textSize="@dimen/tab_info_text_size"
                   android:textStyle="bold" />
 
@@ -82,6 +85,7 @@
                   android:layout_weight="1"
                   android:text="@string/tooltip_cook_time"
                   android:textAlignment="center"
+                  android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                   android:textSize="@dimen/tab_info_text_size"
                   android:textStyle="bold" />
 
@@ -93,6 +97,7 @@
                   android:layout_weight="1"
                   android:text="@string/tooltip_total_time"
                   android:textAlignment="center"
+                  android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                   android:textSize="@dimen/tab_info_text_size"
                   android:textStyle="bold" />
          </LinearLayout>
@@ -118,6 +123,7 @@
                   android:layout_marginEnd="8dp"
                   android:layout_weight="1"
                   android:textAlignment="center"
+                  android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                   android:textSize="@dimen/tab_info_text_size"
                   app:recipePrepTime="@{recipe}" />
 
@@ -129,6 +135,7 @@
                   android:layout_marginEnd="8dp"
                   android:layout_weight="1"
                   android:textAlignment="center"
+                  android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                   android:textSize="@dimen/tab_info_text_size"
                   app:recipeCookTime="@{recipe}" />
 
@@ -139,6 +146,7 @@
                   android:layout_marginEnd="1dp"
                   android:layout_weight="1"
                   android:textAlignment="center"
+                  android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                   android:textSize="@dimen/tab_info_text_size"
                   app:recipeTotalTime="@{recipe}" />
          </LinearLayout>
@@ -150,6 +158,7 @@
                android:layout_marginStart="16dp"
                android:layout_marginTop="8dp"
                android:layout_marginEnd="16dp"
+               android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                android:textSize="@dimen/tab_info_text_size"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
@@ -165,6 +174,7 @@
                android:layout_marginEnd="16dp"
                android:layout_marginBottom="16dp"
                android:text="@string/text_nutritions"
+               android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                android:textSize="@dimen/tab_info_text_size"
                android:textStyle="bold"
                app:layout_constraintEnd_toEndOf="parent"
@@ -206,7 +216,9 @@
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
                      android:layout_gravity="center"
-                     android:text="@string/no_information" />
+                     android:text="@string/no_information"
+                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                     android:textSize="@dimen/tab_info_text_size" />
             </LinearLayout>
          </ViewSwitcher>
       </androidx.constraintlayout.widget.ConstraintLayout>

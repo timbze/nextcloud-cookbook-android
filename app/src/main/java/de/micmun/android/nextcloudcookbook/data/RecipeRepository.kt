@@ -118,7 +118,14 @@ class RecipeRepository {
                      _recipeMap[recipe.recipeId] = recipe
 
                      val categories = recipe.recipeCategory
-                     categories?.forEach { c -> tmpCategories.add(c) }
+                     val cats = mutableListOf<String>()
+                     categories?.forEach { c ->
+                        if (c.trim().isNotEmpty()) {
+                           tmpCategories.add(c.trim())
+                           cats.add(c.trim())
+                        }
+                     }
+                     recipe.recipeCategory = cats.toTypedArray()
                   }
                }
             }
