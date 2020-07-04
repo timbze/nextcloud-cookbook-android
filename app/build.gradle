@@ -55,7 +55,6 @@ dependencies {
    implementation("androidx.navigation:navigation-dynamic-features-fragment:$version_navigation") {
       exclude group: 'com.google.android.play', module: 'core'
    }
-   implementation "com.google.code.gson:gson:$version_gson"
    implementation "androidx.preference:preference:$version_preference"
    implementation "androidx.legacy:legacy-preference-v14:1.0.0"
    // material design and viewpager2
@@ -66,6 +65,10 @@ dependencies {
    // Coroutines
    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_coroutine"
    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_coroutine"
+
+   // Json parser
+   implementation "com.fasterxml.jackson.core:jackson-databind:$version_jackson"
+   implementation "com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson"
 
    // grant
    implementation "com.github.fondesa:kpermissions:3.1.2"

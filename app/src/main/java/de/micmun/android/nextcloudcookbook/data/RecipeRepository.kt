@@ -107,18 +107,19 @@ class RecipeRepository {
 
                if (jsonFile != null && jsonFile.exists()) {
                   val recipe = readRecipe(Uri.fromFile(jsonFile))
+                  if (recipe != null) {
+                     if (recipe.recipeCategory == null)
+                        recipe.recipeCategory = emptyArray()
 
-                  if (recipe.recipeCategory == null)
-                     recipe.recipeCategory = emptyArray()
+                     recipe.thumbImage = if (thumbFile.exists()) Uri.fromFile(thumbFile) else null
+                     recipe.imageUrl = if (fullFile.exists()) Uri.fromFile(fullFile).toString() else ""
+                     recipe.recipeId = id++
+                     _recipeList.add(recipe)
+                     _recipeMap[recipe.recipeId] = recipe
 
-                  recipe.thumbImage = if (thumbFile.exists()) Uri.fromFile(thumbFile) else null
-                  recipe.imageUrl = if (fullFile.exists()) Uri.fromFile(fullFile).toString() else ""
-                  recipe.recipeId = id++
-                  _recipeList.add(recipe)
-                  _recipeMap[recipe.recipeId] = recipe
-
-                  val categories = recipe.recipeCategory
-                  categories?.forEach { c -> tmpCategories.add(c) }
+                     val categories = recipe.recipeCategory
+                     categories?.forEach { c -> tmpCategories.add(c) }
+                  }
                }
             }
          }
@@ -133,7 +134,7 @@ class RecipeRepository {
     * @param path Path of the file.
     * @return Recipe.
     */
-   private fun readRecipe(path: Uri): Recipe {
+   private fun readRecipe(path: Uri): Recipe? {
       val reader = BufferedReader(FileReader(path.toFile()))
 
       val json: String

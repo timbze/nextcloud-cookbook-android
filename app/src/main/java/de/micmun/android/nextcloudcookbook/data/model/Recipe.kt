@@ -6,18 +6,24 @@
 package de.micmun.android.nextcloudcookbook.data.model
 
 import android.net.Uri
-import com.google.gson.annotations.SerializedName
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.annotation.JsonTypeInfo
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import de.micmun.android.nextcloudcookbook.R
+import de.micmun.android.nextcloudcookbook.data.RecipeDateDeserializer
+import de.micmun.android.nextcloudcookbook.data.RecipeStringArrayDeserializer
 import java.util.*
 
 /**
  * Data class for a recipe.
  *
  * @author MicMun
- * @version 1.3, 27.06.20
+ * @version 1.4, 02.07.20
  */
 data class Recipe(
-   @Transient
+   @JsonIgnore
    var recipeId: Long,
    // name of the recipe (obligatory)
    var name: String,
@@ -25,20 +31,24 @@ data class Recipe(
    var description: String = "",
    // url to the recipe on a website
    var url: String = "",
-   @SerializedName("@context")
+   @JsonProperty("@context")
    var context: String = "http://schema.org",
-   @SerializedName("@type")
+   @JsonProperty("@type")
    var type: String = "Recipe",
    var author: Author? = Author(""),
    var cookTime: String? = "",
+   @JsonDeserialize(using = RecipeDateDeserializer::class)
+   @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
    var datePublished: Date? = null,
-   @SerializedName("image")
+   @JsonProperty("image")
    var imageUrl: String = "",
+   @JsonDeserialize(using = RecipeStringArrayDeserializer::class)
    var recipeIngredient: Array<String> = emptyArray(),
    var interactionStatistic: InteractionStatistic = InteractionStatistic(),
    var nutrition: Nutrition? = Nutrition(),
    var prepTime: String? = "",
    var totalTime: String? = "",
+   @JsonDeserialize(using = RecipeStringArrayDeserializer::class)
    var recipeInstructions: Array<String> = emptyArray(),
    var recipeYield: String = "",
    var suitableForDiet: String = "",
@@ -48,7 +58,7 @@ data class Recipe(
    var tool: Array<String> = emptyArray(),
    var yield: String = "",
    var estimatedCost: String = "",
-   @Transient var thumbImage: Uri? = null
+   @JsonIgnore var thumbImage: Uri? = null
 ) {
    override fun equals(other: Any?): Boolean {
       if (this === other) return true
@@ -84,14 +94,14 @@ data class Recipe(
 }
 
 data class InteractionStatistic(
-   @SerializedName("@type")
+   @JsonProperty("@type")
    var type: String = "InteractionCounter",
    var interactionType: String = "http://schema.org/Comment",
    var userInteractionCount: Int = 0
 )
 
 data class Nutrition(
-   @SerializedName("@type")
+   @JsonProperty("@type")
    var type: String = "NutritionInformation",
    var calories: String = "",
    var carbohydrateContent: String = "",
@@ -143,4 +153,4 @@ data class Nutrition(
    }
 }
 
-data class Author(var name: String = "")
+data class Author @JsonCreator(mode = JsonCreator.Mode.DELEGATING) constructor(var name: String = "")
