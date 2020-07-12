@@ -15,19 +15,21 @@ import de.micmun.android.nextcloudcookbook.data.model.Recipe
 import de.micmun.android.nextcloudcookbook.databinding.TabInfosBinding
 import de.micmun.android.nextcloudcookbook.databinding.TabIngredientsBinding
 import de.micmun.android.nextcloudcookbook.databinding.TabInstructionsBinding
+import de.micmun.android.nextcloudcookbook.databinding.TabNutritionsBinding
 
 /**
  * Adapter for the ViewPager2 to present tabs.
  *
  * @author MicMun
- * @version 1.3, 29.06.20
+ * @version 1.4, 12.07.20
  */
 class ViewPagerAdapter(private val recipe: Recipe) :
    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
    companion object {
       const val TYPE_INFO = 0
-      const val TYPE_INGREDIENTS = 1
-      const val TYPE_INSTRUCTIONS = 2
+      const val TYPE_NUTRITIONS = 1
+      const val TYPE_INGREDIENTS = 2
+      const val TYPE_INSTRUCTIONS = 3
    }
 
    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -35,18 +37,23 @@ class ViewPagerAdapter(private val recipe: Recipe) :
          TYPE_INFO -> InfoViewHolder.from(parent)
          TYPE_INGREDIENTS -> IngredientsViewHolder.from(parent)
          TYPE_INSTRUCTIONS -> InstructionsViewHolder.from(parent)
+         TYPE_NUTRITIONS -> NutritionsViewHolder.from(parent)
          else -> InfoViewHolder.from(parent)
       }
    }
 
    override fun getItemCount(): Int {
-      return 3
+      return 4
    }
 
    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
       when (getItemViewType(position)) {
          TYPE_INFO -> {
             val viewHolder = holder as InfoViewHolder
+            viewHolder.bind(recipe)
+         }
+         TYPE_NUTRITIONS -> {
+            val viewHolder = holder as NutritionsViewHolder
             viewHolder.bind(recipe)
          }
          TYPE_INGREDIENTS -> {
@@ -64,7 +71,7 @@ class ViewPagerAdapter(private val recipe: Recipe) :
       return position
    }
 
-   class InfoViewHolder private constructor(private val binding: TabInfosBinding, private val resources: Resources) :
+   class InfoViewHolder private constructor(private val binding: TabInfosBinding) :
       RecyclerView.ViewHolder(binding.root) {
       /**
        * Binds the data to the views.
@@ -73,41 +80,14 @@ class ViewPagerAdapter(private val recipe: Recipe) :
        */
       fun bind(recipe: Recipe) {
          binding.recipe = recipe
-         val switcher = binding.nutritionSwitcher
-
-         val nutritions = getNutritionList(recipe.nutrition)
-
-         if (nutritions.isEmpty() && R.id.nutritionEmptyLayout == switcher.nextView.id) {
-            switcher.showNext()
-         } else {
-            binding.nutritionList.adapter = RecipeNutritionAdapter(nutritions)
-            binding.executePendingBindings()
-
-            if (R.id.nutritionListLayout == switcher.nextView.id) {
-               switcher.showNext()
-            }
-         }
          binding.executePendingBindings()
-      }
-
-      /**
-       * Returns the list of nutritions or an empty list.
-       *
-       * @return list of nutritions or an empty list.
-       */
-      private fun getNutritionList(nutrition: Nutrition?): List<String> {
-         val nutritions = nutrition?.toMap()?.toList()?.map { p -> resources.getString(p.first, p.second) }
-         if (nutritions.isNullOrEmpty()) {
-            return emptyList()
-         }
-         return nutritions
       }
 
       companion object {
          fun from(parent: ViewGroup): InfoViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = TabInfosBinding.inflate(layoutInflater, parent, false)
-            return InfoViewHolder(binding, parent.resources)
+            return InfoViewHolder(binding)
          }
       }
    }
@@ -151,6 +131,55 @@ class ViewPagerAdapter(private val recipe: Recipe) :
             val binding = TabInstructionsBinding.inflate(layoutInflater, parent, false)
             return InstructionsViewHolder(binding)
          }
+      }
+   }
+
+   class NutritionsViewHolder private constructor(private val binding: TabNutritionsBinding,
+                                                  private val resources: Resources) :
+      RecyclerView.ViewHolder(binding.root) {
+      /**
+       * Binds the data to the views.
+       *
+       * @param recipe Recipe data.
+       */
+      fun bind(recipe: Recipe) {
+         val switcher = binding.nutritionSwitcher
+
+         val nutritions = getNutritionList(recipe.nutrition)
+
+         if (nutritions.isEmpty() && R.id.nutritionEmptyLayout == switcher.nextView.id) {
+            switcher.showNext()
+         } else {
+            binding.nutritionList.adapter = RecipeNutritionAdapter(nutritions)
+            binding.executePendingBindings()
+
+            if (R.id.nutritionListLayout == switcher.nextView.id) {
+               switcher.showNext()
+            }
+         }
+
+         binding.executePendingBindings()
+      }
+
+      companion object {
+         fun from(parent: ViewGroup): NutritionsViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val binding = TabNutritionsBinding.inflate(layoutInflater, parent, false)
+            return NutritionsViewHolder(binding, parent.resources)
+         }
+      }
+
+      /**
+       * Returns the list of nutritions or an empty list.
+       *
+       * @return list of nutritions or an empty list.
+       */
+      private fun getNutritionList(nutrition: Nutrition?): List<String> {
+         val nutritions = nutrition?.toMap()?.toList()?.map { p -> resources.getString(p.first, p.second) }
+         if (nutritions.isNullOrEmpty()) {
+            return emptyList()
+         }
+         return nutritions
       }
    }
 }

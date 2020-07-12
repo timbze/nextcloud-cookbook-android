@@ -18,12 +18,16 @@
    <string name="tab_info_title">Info</string>
    <string name="tab_ingredients_title">Zutaten</string>
    <string name="tab_instructions_title">Ablauf</string>
+   <string name="tab_nutritions_title">Nährwerte</string>
 
    <!-- tab infos -->
    <string name="text_uncategorized">Unkategorisiert</string>
    <string name="text_categories"><![CDATA[<strong>Kategorien:</strong><br/> ]]> %1$s</string>
-   <string name="text_nutritions">Nährwertangaben:</string>
-   <string name="text_author">( Autor: %1$s )</string>
+   <string name="text_yield"><![CDATA[<strong>Portionen:</strong>]]> %1$s</string>
+   <string name="text_author">Autor: %1$s</string>
+   <string name="text_url">URL: %1$s</string>
+   <string name="text_no_keywords">Keine Schlüsselwörter.</string>
+   <string name="text_keywords"><![CDATA[<strong>Schlüsselwörter:</strong><br/> ]]> %1$s</string>
 
    <!-- Nutritions -->
    <string name="nutrition_calories">Kalorien: %1$s</string>

@@ -35,21 +35,6 @@
                app:recipeDescription="@{recipe}"
                app:recipeHeaderImage="@{recipe}" />
 
-         <TextView
-               android:id="@+id/authorTxt"
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:layout_marginStart="16dp"
-               android:layout_marginTop="8dp"
-               android:layout_marginEnd="16dp"
-               android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-               android:textSize="@dimen/tab_info_text_size"
-               android:textStyle="italic"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@+id/headerText"
-               app:recipeAuthor="@{recipe}" />
-
          <LinearLayout
                android:id="@+id/timeInfosTitleLayout"
                android:layout_width="0dp"
@@ -61,7 +46,7 @@
                android:orientation="horizontal"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@id/authorTxt">
+               app:layout_constraintTop_toBottomOf="@id/headerText">
 
             <TextView
                   android:id="@+id/prepTimeTitle"
@@ -152,7 +137,7 @@
          </LinearLayout>
 
          <TextView
-               android:id="@+id/categoriesTxt"
+               android:id="@+id/yieldTxt"
                android:layout_width="0dp"
                android:layout_height="wrap_content"
                android:layout_marginStart="16dp"
@@ -163,64 +148,67 @@
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintTop_toBottomOf="@+id/timeInfosLayout"
+               app:recipeYield="@{recipe}" />
+
+         <TextView
+               android:id="@+id/authorTxt"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="16dp"
+               android:layout_marginTop="8dp"
+               android:layout_marginEnd="16dp"
+               android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+               android:textSize="@dimen/tab_info_text_size"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/yieldTxt"
+               app:recipeAuthor="@{recipe}" />
+
+         <TextView
+               android:id="@+id/urlTxt"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="16dp"
+               android:layout_marginTop="8dp"
+               android:layout_marginEnd="16dp"
+               android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+               android:textSize="@dimen/tab_info_text_size"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/authorTxt"
+               android:autoLink="web"
+               app:url="@{recipe}" />
+
+         <TextView
+               android:id="@+id/categoriesTxt"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="16dp"
+               android:layout_marginTop="8dp"
+               android:layout_marginEnd="16dp"
+               android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+               android:textSize="@dimen/tab_info_text_size"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/urlTxt"
                app:recipeCategories="@{recipe}" />
 
          <TextView
-               android:id="@+id/nutritionInfosTxt"
+               android:id="@+id/keywordsTxt"
                android:layout_width="0dp"
                android:layout_height="wrap_content"
                android:layout_marginStart="16dp"
                android:layout_marginTop="8dp"
                android:layout_marginEnd="16dp"
-               android:layout_marginBottom="16dp"
-               android:text="@string/text_nutritions"
+               android:layout_marginBottom="8dp"
                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                android:textSize="@dimen/tab_info_text_size"
-               android:textStyle="bold"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@id/categoriesTxt" />
-
-         <ViewSwitcher
-               android:id="@+id/nutritionSwitcher"
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:layout_marginStart="16dp"
-               android:layout_marginTop="8dp"
-               android:layout_marginEnd="16dp"
-               android:layout_marginBottom="16dp"
+               app:keywords="@{recipe}"
                app:layout_constraintBottom_toBottomOf="parent"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@id/nutritionInfosTxt">
+               app:layout_constraintTop_toBottomOf="@+id/categoriesTxt" />
 
-            <LinearLayout
-                  android:id="@+id/nutritionListLayout"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content">
-
-               <androidx.recyclerview.widget.RecyclerView
-                     android:id="@+id/nutritionList"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical"
-                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-            </LinearLayout>
-
-            <LinearLayout
-                  android:id="@+id/nutritionEmptyLayout"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content">
-
-               <TextView
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_gravity="center"
-                     android:text="@string/no_information"
-                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                     android:textSize="@dimen/tab_info_text_size" />
-            </LinearLayout>
-         </ViewSwitcher>
       </androidx.constraintlayout.widget.ConstraintLayout>
    </ScrollView>
 </layout>

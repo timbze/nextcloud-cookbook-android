@@ -21,7 +21,7 @@ import de.micmun.android.nextcloudcookbook.util.DurationUtils
  * Utilities for binding data to view.
  *
  * @author MicMun
- * @version 1.5, 30.06.20
+ * @version 1.6, 12.07.20
  */
 
 // Overview list
@@ -86,6 +86,20 @@ fun TextView.setRecipeCategories(item: Recipe?) {
    }
 }
 
+@BindingAdapter("keywords")
+fun TextView.setKeywords(item: Recipe?) {
+   item?.let { recipe ->
+      val keywords = if (recipe.keywords.isEmpty())
+         resources.getString(R.string.text_no_keywords)
+      else
+         recipe.keywords
+      text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+         Html.fromHtml(resources.getString(R.string.text_keywords, keywords), Html.FROM_HTML_MODE_LEGACY)
+      else
+         Html.fromHtml(resources.getString(R.string.text_keywords, keywords))
+   }
+}
+
 @BindingAdapter("recipeAuthor")
 fun TextView.setAuthor(item: Recipe?) {
    item?.let {
@@ -93,6 +107,34 @@ fun TextView.setAuthor(item: Recipe?) {
          visibility = View.GONE
       } else {
          text = resources.getString(R.string.text_author, it.author!!.name)
+         visibility = View.VISIBLE
+      }
+   }
+}
+
+@BindingAdapter("url")
+fun TextView.setUrl(item: Recipe?) {
+   item?.let {
+      if (it.url.isEmpty()) {
+         visibility = View.GONE
+      } else {
+         text = resources.getString(R.string.text_url, it.url)
+         visibility = View.VISIBLE
+      }
+   }
+}
+
+@BindingAdapter("recipeYield")
+fun TextView.setRecipeYield(item: Recipe?) {
+   item?.let {
+      if (it.recipeYield.isEmpty()) {
+         visibility = View.GONE
+      } else {
+         text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            Html.fromHtml(resources.getString(R.string.text_yield, it.recipeYield), Html.FROM_HTML_MODE_LEGACY)
+         else
+            Html.fromHtml(resources.getString(R.string.text_yield, it.recipeYield))
+
          visibility = View.VISIBLE
       }
    }

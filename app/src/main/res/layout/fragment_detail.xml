@@ -21,7 +21,7 @@
             app:tabIconTint="@color/lightTextColor"
             app:tabMaxWidth="0dp"
             app:tabGravity="fill"
-            app:tabMode="fixed"/>
+            app:tabMode="auto"/>
 
       <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/pager"

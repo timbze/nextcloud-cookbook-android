@@ -21,12 +21,16 @@
    <string name="tab_info_title">Info</string>
    <string name="tab_ingredients_title">Ingredients</string>
    <string name="tab_instructions_title">Instructions</string>
+   <string name="tab_nutritions_title">Nutritions</string>
 
    <!-- tab infos -->
    <string name="text_uncategorized">Uncategorized</string>
    <string name="text_categories"><![CDATA[<strong>Categories:</strong><br/> ]]> %1$s</string>
-   <string name="text_nutritions">Nutrition facts:</string>
-   <string name="text_author">( Author: %1$s )</string>
+   <string name="text_yield"><![CDATA[<strong>Servings:</strong>]]> %1$s</string>
+   <string name="text_author">Author: %1$s</string>
+   <string name="text_url">URL: %1$s</string>
+   <string name="text_no_keywords">No keywords.</string>
+   <string name="text_keywords"><![CDATA[<strong>Keywords:</strong><br/> ]]> %1$s</string>
 
    <!-- Nutritions -->
    <string name="nutrition_calories">Calories: %1$s</string>

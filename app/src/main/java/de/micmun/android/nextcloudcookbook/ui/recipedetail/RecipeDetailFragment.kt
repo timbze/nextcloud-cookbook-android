@@ -21,7 +21,7 @@ import de.micmun.android.nextcloudcookbook.databinding.FragmentDetailBinding
  * Fragment for detail of a recipe.
  *
  * @author MicMun
- * @version 1.3, 01.07.20
+ * @version 1.4, 12.07.20
  */
 class RecipeDetailFragment : Fragment() {
    private lateinit var binding: FragmentDetailBinding
@@ -30,11 +30,12 @@ class RecipeDetailFragment : Fragment() {
    private lateinit var infoIcons: TypedArray
    private lateinit var ingredientsIcons: TypedArray
    private lateinit var instructionsIcons: TypedArray
+   private lateinit var nutritionsIcons: TypedArray
 
    private var currentPage = 0
 
    companion object {
-      private val KEY_CURRENT_PAGE = "current_page"
+      private const val KEY_CURRENT_PAGE = "current_page"
    }
 
    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -48,6 +49,7 @@ class RecipeDetailFragment : Fragment() {
       infoIcons = requireActivity().obtainStyledAttributes(intArrayOf(R.attr.tab_info_icon))
       ingredientsIcons = requireActivity().obtainStyledAttributes(intArrayOf(R.attr.tab_ingredients_icon))
       instructionsIcons = requireActivity().obtainStyledAttributes(intArrayOf(R.attr.tab_instructions_icon))
+      nutritionsIcons = requireActivity().obtainStyledAttributes(intArrayOf(R.attr.tab_nutritions_icon))
 
       viewModel.recipe.observe(viewLifecycleOwner, Observer { recipe ->
          recipe?.let {
@@ -69,21 +71,25 @@ class RecipeDetailFragment : Fragment() {
     */
    private fun initPager(recipe: Recipe) {
       binding.pager.adapter = ViewPagerAdapter(recipe)
-      binding.pager.offscreenPageLimit = 3
+      binding.pager.offscreenPageLimit = 4
       val tabLayout = binding.tabLayout
       TabLayoutMediator(tabLayout, binding.pager) { tab, position ->
          when (position) {
-            0 -> {
+            ViewPagerAdapter.TYPE_INFO -> {
                tab.text = resources.getString(R.string.tab_info_title)
                tab.icon = resources.getDrawable(infoIcons.getResourceId(0, 1), requireActivity().theme)
             }
-            1 -> {
+            ViewPagerAdapter.TYPE_INGREDIENTS -> {
                tab.text = resources.getString(R.string.tab_ingredients_title)
                tab.icon = resources.getDrawable(ingredientsIcons.getResourceId(0, 1), requireActivity().theme)
             }
-            2 -> {
+            ViewPagerAdapter.TYPE_INSTRUCTIONS -> {
                tab.text = resources.getString(R.string.tab_instructions_title)
                tab.icon = resources.getDrawable(instructionsIcons.getResourceId(0, 1), requireActivity().theme)
+            }
+            ViewPagerAdapter.TYPE_NUTRITIONS -> {
+               tab.text = resources.getString(R.string.tab_nutritions_title)
+               tab.icon = resources.getDrawable(nutritionsIcons.getResourceId(0, 1), requireActivity().theme)
             }
          }
       }.attach()
@@ -93,7 +99,7 @@ class RecipeDetailFragment : Fragment() {
             super.onPageSelected(position)
             currentPage = position
 
-            if (position == 2) {
+            if (position == ViewPagerAdapter.TYPE_INSTRUCTIONS) {
                activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
             } else {
                activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
