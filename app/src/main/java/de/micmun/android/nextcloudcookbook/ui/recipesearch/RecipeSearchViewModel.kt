@@ -17,7 +17,7 @@ import de.micmun.android.nextcloudcookbook.data.model.Recipe
  * ViewModel for recipe search result.
  *
  * @author MicMun
- * @version 1.0, 22.06.20
+ * @version 1.1, 12.07.20
  */
 class RecipeSearchViewModel(categoryId: Int, private val query: String, application: Application) :
    AndroidViewModel(application) {
@@ -37,7 +37,7 @@ class RecipeSearchViewModel(categoryId: Int, private val query: String, applicat
       }
 
       _recipeList.value = list.filter {
-         it.name.startsWith(query, true)
+         it.name.contains(query, true)
       }
    }
 
