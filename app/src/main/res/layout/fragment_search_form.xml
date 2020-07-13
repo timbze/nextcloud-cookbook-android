@@ -71,6 +71,11 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:text="@string/form_type_ingredients" />
+            <RadioButton
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/typeYield"
+                  android:text="@string/form_type_yield"/>
 
          </RadioGroup>
 

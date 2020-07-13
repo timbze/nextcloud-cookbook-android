@@ -43,6 +43,14 @@ class SearchFormFragment : Fragment(), SearchClickListener {
          categoryId = it
       })
 
+      binding.searchTypes.setOnCheckedChangeListener { _, checkedId ->
+         if (checkedId == R.id.typeYield) {
+            binding.searchTxt.inputType = EditorInfo.TYPE_CLASS_NUMBER or EditorInfo.TYPE_NUMBER_VARIATION_NORMAL
+         } else {
+            binding.searchTxt.inputType = EditorInfo.TYPE_CLASS_TEXT or EditorInfo.TYPE_TEXT_VARIATION_NORMAL
+         }
+      }
+
       return binding.root
    }
 
@@ -63,6 +71,7 @@ class SearchFormFragment : Fragment(), SearchClickListener {
       val type = when (binding.searchTypes.checkedRadioButtonId) {
          R.id.typeKeyword -> RecipeFilter.QueryType.QUERY_KEYWORD
          R.id.typeIngredient -> RecipeFilter.QueryType.QUERY_INGREDIENTS
+         R.id.typeYield -> RecipeFilter.QueryType.QUERY_YIELD
          else -> RecipeFilter.QueryType.QUERY_KEYWORD
       }
       val ignoreCase = binding.ignoreCaseChkBox.isChecked

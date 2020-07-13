@@ -26,7 +26,7 @@
    <!-- tab infos -->
    <string name="text_uncategorized">Uncategorized</string>
    <string name="text_categories"><![CDATA[<strong>Categories:</strong><br/> ]]> %1$s</string>
-   <string name="text_yield"><![CDATA[<strong>Servings:</strong>]]> %1$s</string>
+   <string name="text_yield"><![CDATA[<strong>Yield:</strong>]]> %1$s</string>
    <string name="text_author">Author: %1$s</string>
    <string name="text_url">Source: %1$s</string>
    <string name="text_no_keywords">No keywords.</string>
@@ -61,6 +61,7 @@
    <string name="form_types">Type to search</string>
    <string name="form_type_keyword">Search by keyword</string>
    <string name="form_type_ingredients">Search by ingredient</string>
+   <string name="form_type_yield">Search by Yield</string>
    <string name="form_search_options">Search options</string>
    <string name="form_search_commit">Search</string>
 

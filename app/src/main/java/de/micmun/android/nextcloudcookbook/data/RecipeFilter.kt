@@ -7,7 +7,6 @@ package de.micmun.android.nextcloudcookbook.data
 
 import android.os.Parcel
 import android.os.Parcelable
-import android.util.Log
 import de.micmun.android.nextcloudcookbook.data.model.Recipe
 
 /**
@@ -22,6 +21,7 @@ class RecipeFilter(private val type: QueryType, val query: String, private val i
    constructor(parcel: Parcel) : this(
       QueryType.valueOf(parcel.readString()!!),
       parcel.readString()!!,
+      parcel.readByte() != 0.toByte(),
       parcel.readByte() != 0.toByte())
 
    /**
@@ -61,6 +61,13 @@ class RecipeFilter(private val type: QueryType, val query: String, private val i
             }
             result.isNotEmpty()
          }
+         QueryType.QUERY_YIELD -> list.filter {
+            if (exact) {
+               it.recipeYield.equals(query, ignoreCase)
+            } else {
+               it.recipeYield.startsWith(query, ignoreCase)
+            }
+         }
       }
    }
 
@@ -70,13 +77,15 @@ class RecipeFilter(private val type: QueryType, val query: String, private val i
    enum class QueryType {
       QUERY_NAME,
       QUERY_KEYWORD,
-      QUERY_INGREDIENTS
+      QUERY_INGREDIENTS,
+      QUERY_YIELD
    }
 
    override fun writeToParcel(dest: Parcel?, flags: Int) {
       dest?.writeString(type.name)
       dest?.writeString(query)
       dest?.writeByte(if (ignoreCase) 1 else 0)
+      dest?.writeByte(if (exact) 1 else 0)
    }
 
    override fun describeContents(): Int {

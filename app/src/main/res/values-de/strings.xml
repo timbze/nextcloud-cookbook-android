@@ -58,6 +58,7 @@
    <string name="form_types">Suchtyp</string>
    <string name="form_type_keyword">Suche nach Schlüsselwort</string>
    <string name="form_type_ingredients">Suche nach Zutat</string>
+   <string name="form_type_yield">Suche nach Portionen</string>
    <string name="form_search_options">Suchoptionen</string>
    <string name="form_search_commit">Suchen</string>
 
