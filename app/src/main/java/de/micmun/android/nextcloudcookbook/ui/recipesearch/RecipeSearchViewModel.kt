@@ -10,6 +10,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import de.micmun.android.nextcloudcookbook.R
+import de.micmun.android.nextcloudcookbook.data.RecipeFilter
 import de.micmun.android.nextcloudcookbook.data.RecipeRepository
 import de.micmun.android.nextcloudcookbook.data.model.Recipe
 
@@ -19,7 +20,7 @@ import de.micmun.android.nextcloudcookbook.data.model.Recipe
  * @author MicMun
  * @version 1.1, 12.07.20
  */
-class RecipeSearchViewModel(categoryId: Int, private val query: String, application: Application) :
+class RecipeSearchViewModel(categoryId: Int, filter: RecipeFilter, application: Application) :
    AndroidViewModel(application) {
    private val _recipeList = MutableLiveData<List<Recipe>>()
    val recipeList: LiveData<List<Recipe>>
@@ -36,9 +37,7 @@ class RecipeSearchViewModel(categoryId: Int, private val query: String, applicat
          list = recipeRepository.filterRecipesWithCategory(categoryId)
       }
 
-      _recipeList.value = list.filter {
-         it.name.contains(query, true)
-      }
+      _recipeList.value = filter.filter(list)
    }
 
    private val _navigateToRecipe = MutableLiveData<Long>()

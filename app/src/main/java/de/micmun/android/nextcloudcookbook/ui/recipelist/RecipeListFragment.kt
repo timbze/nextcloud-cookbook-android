@@ -3,6 +3,7 @@ package de.micmun.android.nextcloudcookbook.ui.recipelist
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -19,40 +20,37 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.RecipeRepository
 import de.micmun.android.nextcloudcookbook.databinding.FragmentRecipelistBinding
-import de.micmun.android.nextcloudcookbook.ui.CategorySelectedListener
+import de.micmun.android.nextcloudcookbook.ui.CurrentCategoryViewModel
 import de.micmun.android.nextcloudcookbook.ui.MainActivity
 
 /**
  * Fragment for list of recipes.
  *
  * @author MicMun
- * @version 1.5, 22.06.20
+ * @version 1.6, 13.07.20
  */
-class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, CategorySelectedListener {
+class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
    private lateinit var binding: FragmentRecipelistBinding
-   private lateinit var viewModel: RecipeListViewModel
+   private lateinit var recipesViewModel: RecipeListViewModel
+   private lateinit var catViewModel: CurrentCategoryViewModel
 
    private var recipePath: String? = null
    private var refreshItem: MenuItem? = null
+
+   private var forceRefresh = true
+   private var currentCatId: Int? = null
 
    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipelist, container, false)
       setHasOptionsMenu(true)
 
       binding.swipeContainer.setOnRefreshListener(this)
+      recipesViewModel = ViewModelProvider(this).get(RecipeListViewModel::class.java)
+      catViewModel = ViewModelProvider(MainActivity.mainApplication).get(CurrentCategoryViewModel::class.java)
+
       initializeRecipeList()
 
       return binding.root
-   }
-
-   override fun onResume() {
-      super.onResume()
-      (activity as MainActivity).categorySelectedListener = this
-   }
-
-   override fun onPause() {
-      (activity as MainActivity).categorySelectedListener = null
-      super.onPause()
    }
 
    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -72,7 +70,6 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Cat
          R.id.refreshAction -> {
             refreshItem = item
             onRefresh()
-            refreshItem = null
             true
          }
          else -> NavigationUI
@@ -82,8 +79,7 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Cat
    }
 
    private fun initializeRecipeList() {
-      viewModel = ViewModelProvider(this).get(RecipeListViewModel::class.java)
-      binding.recipeListViewModel = viewModel
+      binding.recipeListViewModel = recipesViewModel
       binding.lifecycleOwner = this
 
       // divider for recyclerview
@@ -91,10 +87,10 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Cat
       binding.recipeList.addItemDecoration(dividerDecoration)
 
       // data adapter
-      val adapter = RecipeListAdapter(RecipeListListener { recipeId -> viewModel.onRecipeClicked(recipeId) })
+      val adapter = RecipeListAdapter(RecipeListListener { recipeId -> recipesViewModel.onRecipeClicked(recipeId) })
       binding.recipeList.adapter = adapter
 
-      viewModel.recipeList.observe(viewLifecycleOwner, Observer {
+      recipesViewModel.recipeList.observe(viewLifecycleOwner, Observer {
          it?.let {
             adapter.setRecipes(it)
 
@@ -107,39 +103,55 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Cat
             }
          }
       })
-      viewModel.navigateToRecipe.observe(viewLifecycleOwner, Observer { recipe ->
+      recipesViewModel.navigateToRecipe.observe(viewLifecycleOwner, Observer { recipe ->
          recipe?.let {
             this.findNavController()
                .navigate(RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailFragment(recipe))
-            viewModel.onRecipeNavigated()
+            recipesViewModel.onRecipeNavigated()
          }
       })
-      viewModel.recipeDirectory.observe(viewLifecycleOwner, Observer { path ->
+      recipesViewModel.recipeDirectory.observe(viewLifecycleOwner, Observer { path ->
          recipePath = path
+         forceRefresh = false
          onRefresh()
+         forceRefresh = true
       })
-      viewModel.filterCategory.observe(viewLifecycleOwner, Observer { id ->
-         var option = RecipeListViewModel.CategoryFilterOption.CATEGORY
 
-         when (id) {
-            R.id.menu_all_categories -> {
-               option = RecipeListViewModel.CategoryFilterOption.ALL_CATEGORIES
-               // set title in Actionbar
-               (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
-            }
-            R.id.menu_uncategorized -> {
-               option = RecipeListViewModel.CategoryFilterOption.UNCATEGORIZED
-               // set title in Actionbar
-               (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.text_uncategorized)
-            }
-            else -> {
-               (activity as AppCompatActivity).supportActionBar?.title =
-                  RecipeRepository.getInstance().getCategoryTitle(id)
-            }
+      recipesViewModel.category.observe(viewLifecycleOwner, Observer { id ->
+         id?.let {
+            setCategoryFilter(id)
+            recipesViewModel.onCategoryFiltered()
          }
-         // filter recipes to set categorie
-         viewModel.filterRecipesByCategory(option)
+
       })
+
+      catViewModel.category.observe(viewLifecycleOwner, Observer { id ->
+         currentCatId = id
+         recipesViewModel.setFilterCategory(id)
+      })
+   }
+
+   private fun setCategoryFilter(catId: Int) {
+      var option = RecipeListViewModel.CategoryFilterOption.CATEGORY
+
+      when (catId) {
+         -1 -> {
+            option = RecipeListViewModel.CategoryFilterOption.ALL_CATEGORIES
+            // set title in Actionbar
+            (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
+         }
+         R.id.menu_uncategorized -> {
+            option = RecipeListViewModel.CategoryFilterOption.UNCATEGORIZED
+            // set title in Actionbar
+            (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.text_uncategorized)
+         }
+         else -> {
+            (activity as AppCompatActivity).supportActionBar?.title =
+               RecipeRepository.getInstance().getCategoryTitle(catId)
+         }
+      }
+      // filter recipes to set categorie
+      recipesViewModel.filterRecipesByCategory(option, catId)
    }
 
    override fun onRefresh() {
@@ -150,14 +162,13 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Cat
       // load recipes and set categories in menu
       val activity = requireActivity() as MainActivity
       val menu = activity.getMenu()
-      recipePath?.let { viewModel.initRecipes(it, menu, refreshItem != null) }
+      recipePath?.let {
+         recipesViewModel.initRecipes(it, menu, forceRefresh)
+         currentCatId?.let { id -> recipesViewModel.setFilterCategory(id) }
+      }
 
       // end of loading
       binding.swipeContainer.isRefreshing = false
       refreshItem?.let { it.isEnabled = true }
-   }
-
-   override fun onCategorySelected(id: Int) {
-      viewModel.onCategoryClicked(id)
    }
 }

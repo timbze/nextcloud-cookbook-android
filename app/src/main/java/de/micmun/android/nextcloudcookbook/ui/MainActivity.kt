@@ -16,6 +16,7 @@ import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
@@ -26,8 +27,10 @@ import com.fondesa.kpermissions.allGranted
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import com.fondesa.kpermissions.extension.send
 import com.google.android.material.snackbar.Snackbar
+import de.micmun.android.nextcloudcookbook.MainApplication
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.PreferenceDao
+import de.micmun.android.nextcloudcookbook.data.RecipeFilter
 import de.micmun.android.nextcloudcookbook.databinding.ActivityMainBinding
 import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListFragmentDirections
 
@@ -35,13 +38,16 @@ import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListFragmentDirec
  * Main Activity of the app.
  *
  * @author MicMun
- * @version 1.3, 27.06.20
+ * @version 1.4, 12.07.20
  */
 class MainActivity : AppCompatActivity() {
    private lateinit var binding: ActivityMainBinding
    private lateinit var drawerLayout: DrawerLayout
-   var categorySelectedListener: CategorySelectedListener? = null
-   private var currentCatId: Int = -1
+   private lateinit var currentCategoryViewModel: CurrentCategoryViewModel
+
+   companion object {
+      val mainApplication = MainApplication()
+   }
 
    override fun onCreate(savedInstanceState: Bundle?) {
       // apply theme
@@ -74,12 +80,15 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
          }
       }
+
+      // category
+      currentCategoryViewModel = ViewModelProvider(mainApplication).get(CurrentCategoryViewModel::class.java)
       binding.navView.setNavigationItemSelectedListener { item ->
-         currentCatId = when (item.itemId) {
+         val currentCatId = when (item.itemId) {
             R.id.menu_all_categories -> -1
             else -> item.itemId
          }
-         categorySelectedListener?.onCategorySelected(item.itemId)
+         currentCategoryViewModel.setCategory(currentCatId)
          drawerLayout.closeDrawers()
          true
       }
@@ -133,20 +142,11 @@ class MainActivity : AppCompatActivity() {
       if (Intent.ACTION_SEARCH == intent?.action) {
          val query = intent.getStringExtra(SearchManager.QUERY)
          if (query != null) {
+            val filter = RecipeFilter(RecipeFilter.QueryType.QUERY_NAME, query)
             val navControler = this.findNavController(R.id.navHostFragment)
             navControler.navigate(
-               RecipeListFragmentDirections.actionRecipeListFragmentToRecipeSearchFragment(query, currentCatId))
+               RecipeListFragmentDirections.actionRecipeListFragmentToRecipeSearchFragment(filter))
          }
       }
    }
-}
-
-/**
- * Listener for category selection.
- *
- * @author MicMun
- * @version 1.0, 21.06.20
- */
-interface CategorySelectedListener {
-   fun onCategorySelected(id: Int)
 }

@@ -5,10 +5,12 @@
  */
 package de.micmun.android.nextcloudcookbook.ui.recipesearch
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -18,7 +20,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.micmun.android.nextcloudcookbook.R
+import de.micmun.android.nextcloudcookbook.data.RecipeFilter
 import de.micmun.android.nextcloudcookbook.databinding.FragmentRecipesearchBinding
+import de.micmun.android.nextcloudcookbook.ui.CurrentCategoryViewModel
+import de.micmun.android.nextcloudcookbook.ui.MainActivity
 import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListAdapter
 import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListListener
 
@@ -26,33 +31,38 @@ import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListListener
  * Fragment for search result.
  *
  * @author MicMun
- * @version 1.0, 22.06.20
+ * @version 1.1, 12.07.20
  */
 class RecipeSearchFragment : Fragment() {
    private lateinit var binding: FragmentRecipesearchBinding
-   private lateinit var viewModel: RecipeSearchViewModel
-   private lateinit var query: String
+   private lateinit var recipeSearchViewModel: RecipeSearchViewModel
+   private lateinit var filter: RecipeFilter
+   private lateinit var catViewModel: CurrentCategoryViewModel
 
    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipesearch, container, false)
-      setHasOptionsMenu(true)
 
       val args = RecipeSearchFragmentArgs.fromBundle(requireArguments())
-      query = args.queryString
-      initializeRecipeList(query, args.categoryCode)
+      filter = args.filter
+
+      catViewModel = ViewModelProvider(MainActivity.mainApplication).get(CurrentCategoryViewModel::class.java)
+
+      catViewModel.category.observe(viewLifecycleOwner, Observer {
+         initializeRecipeList(filter, it)
+      })
 
       return binding.root
    }
 
    override fun onActivityCreated(savedInstanceState: Bundle?) {
       super.onActivityCreated(savedInstanceState)
-      (requireActivity() as AppCompatActivity).supportActionBar?.title = query
+      (requireActivity() as AppCompatActivity).supportActionBar?.title = filter.query
    }
 
-   private fun initializeRecipeList(q: String, catId: Int) {
-      val viewModelFactory = RecipeSearchViewModelFactory(catId, q, requireActivity().application)
-      viewModel = ViewModelProvider(this, viewModelFactory).get(RecipeSearchViewModel::class.java)
-      binding.recipeSearchViewModel = viewModel
+   private fun initializeRecipeList(filter: RecipeFilter, catId: Int) {
+      val viewModelFactory = RecipeSearchViewModelFactory(catId, filter, requireActivity().application)
+      recipeSearchViewModel = ViewModelProvider(this, viewModelFactory).get(RecipeSearchViewModel::class.java)
+      binding.recipeSearchViewModel = recipeSearchViewModel
       binding.lifecycleOwner = this
 
       // divider for recyclerview
@@ -60,11 +70,12 @@ class RecipeSearchFragment : Fragment() {
       binding.recipeResultList.addItemDecoration(dividerDecoration)
 
       // data adapter
-      val adapter = RecipeListAdapter(RecipeListListener { recipeId -> viewModel.onRecipeClicked(recipeId) })
+      val adapter =
+         RecipeListAdapter(RecipeListListener { recipeId -> recipeSearchViewModel.onRecipeClicked(recipeId) })
       binding.recipeResultList.adapter = adapter
 
       // observe live data
-      viewModel.recipeList.observe(viewLifecycleOwner, Observer {
+      recipeSearchViewModel.recipeList.observe(viewLifecycleOwner, Observer {
          it?.let {
             adapter.setRecipes(it)
 
@@ -77,11 +88,11 @@ class RecipeSearchFragment : Fragment() {
             }
          }
       })
-      viewModel.navigateToRecipe.observe(viewLifecycleOwner, Observer { recipe ->
+      recipeSearchViewModel.navigateToRecipe.observe(viewLifecycleOwner, Observer { recipe ->
          recipe?.let {
             this.findNavController()
                .navigate(RecipeSearchFragmentDirections.actionRecipeSearchFragmentToRecipeDetailFragment(recipe))
-            viewModel.onRecipeNavigated()
+            recipeSearchViewModel.onRecipeNavigated()
          }
       })
    }

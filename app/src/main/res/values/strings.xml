@@ -28,7 +28,7 @@
    <string name="text_categories"><![CDATA[<strong>Categories:</strong><br/> ]]> %1$s</string>
    <string name="text_yield"><![CDATA[<strong>Servings:</strong>]]> %1$s</string>
    <string name="text_author">Author: %1$s</string>
-   <string name="text_url">URL: %1$s</string>
+   <string name="text_url">Source: %1$s</string>
    <string name="text_no_keywords">No keywords.</string>
    <string name="text_keywords"><![CDATA[<strong>Keywords:</strong><br/> ]]> %1$s</string>
 
@@ -47,10 +47,22 @@
    <string name="nutrition_unsaturated_fat_content">Unsaturated Fat Content: %1$s</string>
 
    <!-- menu -->
+   <string name="menu_search_title">Advanced Search</string>
    <string name="menu_settings_title">Settings</string>
    <string name="menu_refresh_tooltip">Refresh recipes</string>
    <string name="menu_search_tooltip">Search recipe</string>
    <string name="search_hint">Search by name</string>
+
+   <!-- search formular -->
+   <string name="form_search_title">Advanced Search</string>
+   <string name="form_search_hint">Search query</string>
+   <string name="form_ignore_case">Ignore case?</string>
+   <string name="form_exact_search">Do an exact search?</string>
+   <string name="form_types">Type to search</string>
+   <string name="form_type_keyword">Search by keyword</string>
+   <string name="form_type_ingredients">Search by ingredient</string>
+   <string name="form_search_options">Search options</string>
+   <string name="form_search_commit">Search</string>
 
    <!-- navdrawer_menu -->
    <string name="menu_all_categories">Show all categories</string>

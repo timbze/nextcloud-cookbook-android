@@ -25,7 +25,7 @@
    <string name="text_categories"><![CDATA[<strong>Kategorien:</strong><br/> ]]> %1$s</string>
    <string name="text_yield"><![CDATA[<strong>Portionen:</strong>]]> %1$s</string>
    <string name="text_author">Autor: %1$s</string>
-   <string name="text_url">URL: %1$s</string>
+   <string name="text_url">Quelle: %1$s</string>
    <string name="text_no_keywords">Keine Schlüsselwörter.</string>
    <string name="text_keywords"><![CDATA[<strong>Schlüsselwörter:</strong><br/> ]]> %1$s</string>
 
@@ -44,10 +44,22 @@
    <string name="nutrition_unsaturated_fat_content">Ungesättigter Fettgehalt: %1$s</string>
 
    <!-- menu -->
+   <string name="menu_search_title">Erweiterte Suche</string>
    <string name="menu_settings_title">Einstellungen</string>
    <string name="menu_refresh_tooltip">Rezepte neu laden</string>
    <string name="menu_search_tooltip">Suche Rezept</string>
    <string name="search_hint">Suche nach Name</string>
+
+   <!-- search formular -->
+   <string name="form_search_title">Erweiterte Suche</string>
+   <string name="form_search_hint">Suchbegriff</string>
+   <string name="form_ignore_case">Groß-/Kleinschreibung ignorieren?</string>
+   <string name="form_exact_search">Suche mit exakter Übereinstimmung?</string>
+   <string name="form_types">Suchtyp</string>
+   <string name="form_type_keyword">Suche nach Schlüsselwort</string>
+   <string name="form_type_ingredients">Suche nach Zutat</string>
+   <string name="form_search_options">Suchoptionen</string>
+   <string name="form_search_commit">Suchen</string>
 
    <!-- navdrawer_menu -->
    <string name="menu_all_categories">Alle Kategorien</string>

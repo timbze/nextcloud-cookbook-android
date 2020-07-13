@@ -23,7 +23,7 @@ import kotlinx.coroutines.*
  * ViewModel for list of recipes.
  *
  * @author MicMun
- * @version 1.4, 22.06.20
+ * @version 1.5, 13.07.20
  */
 class RecipeListViewModel(application: Application) : AndroidViewModel(application) {
    private val _recipeList = MutableLiveData<List<Recipe>>()
@@ -34,6 +34,8 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
    val recipeDirectory: SharedPreferenceLiveData<String>
+   var option: CategoryFilterOption? = null
+   var catId: Int? = null
 
    init {
       val prefDao = PreferenceDao.getInstance(application)
@@ -57,29 +59,35 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
       _navigateToRecipe.value = null
    }
 
-   private val _filterCategory = MutableLiveData<Int>()
-   val filterCategory
-      get() = _filterCategory
+   private val _category = MutableLiveData<Int>()
+   val category
+      get() = _category
 
-   fun onCategoryClicked(id: Int) {
-      _filterCategory.value = id
+   fun setFilterCategory(id: Int) {
+      _category.value = id
    }
 
-   fun filterRecipesByCategory(option: CategoryFilterOption) {
+   fun onCategoryFiltered() {
+      _category.value = null
+   }
+
+   fun filterRecipesByCategory(option: CategoryFilterOption, catId: Int) {
       val repo = RecipeRepository.getInstance()
 
       when (option) {
          CategoryFilterOption.ALL_CATEGORIES -> _recipeList.value = repo.recipeList
          CategoryFilterOption.UNCATEGORIZED -> _recipeList.value = repo.filterRecipesUncategorized()
-         else -> _recipeList.value = repo.filterRecipesWithCategory(_filterCategory.value!!)
+         else -> _recipeList.value = repo.filterRecipesWithCategory(catId)
       }
+      this.option = option
+      this.catId = catId
    }
 
-   fun initRecipes(path: String, menu: Menu, force: Boolean) {
+   @Suppress("DEPRECATION")
+   fun initRecipes(path: String, menu: Menu, force: Boolean = true) {
       uiScope.launch {
          if (_recipeList.value.isNullOrEmpty() || force) {
             _recipeList.value = getRecipesFromRepo(path)
-            _filterCategory.value = R.id.menu_all_categories
          }
          val categories = getCategoriesFromRepo()
          var order = 1
@@ -93,6 +101,7 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
                Html.fromHtml(category)
             menu.add(R.id.menu_categories_group, category.hashCode(), order++, title)
          }
+         option?.let { filterRecipesByCategory(it, catId!!) }
       }
    }
 

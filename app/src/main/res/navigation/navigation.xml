@@ -38,12 +38,16 @@
             android:id="@+id/action_recipeSearchFragment_to_recipeDetailFragment"
             app:destination="@id/recipeDetailFragment" />
       <argument
-            android:name="queryString"
-            app:argType="string" />
-      <argument
-            android:name="categoryCode"
-            android:defaultValue="-1"
-            app:argType="integer" />
+            android:name="filter"
+            app:argType="de.micmun.android.nextcloudcookbook.data.RecipeFilter" />
 
+   </fragment>
+   <fragment
+         android:id="@+id/searchFormFragment"
+         android:name="de.micmun.android.nextcloudcookbook.ui.searchform.SearchFormFragment"
+         android:label="SearchFormFragment">
+      <action
+            android:id="@+id/action_searchFormFragment_to_recipeSearchFragment"
+            app:destination="@id/recipeSearchFragment" />
    </fragment>
 </navigation>
