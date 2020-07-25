@@ -20,7 +20,7 @@ import java.util.*
  * Data class for a recipe.
  *
  * @author MicMun
- * @version 1.5, 12.07.20
+ * @version 1.6, 25.07.20
  */
 data class Recipe(
    @JsonIgnore
@@ -52,10 +52,10 @@ data class Recipe(
    var recipeInstructions: Array<String> = emptyArray(),
    var recipeYield: String = "",
    var suitableForDiet: String = "",
-   var cookingMethod: String = "",
+   var cookingMethod: Array<String>? = emptyArray(),
    var recipeCategory: Array<String>? = emptyArray(),
    var keywords: String = "",
-   var recipeCuisine: String = "",
+   var recipeCuisine: Array<String> = emptyArray(),
    var tool: Array<String> = emptyArray(),
    var yield: String = "",
    var estimatedCost: String = "",
