@@ -31,6 +31,7 @@
    <string name="text_url">Source: %1$s</string>
    <string name="text_no_keywords">No keywords.</string>
    <string name="text_keywords"><![CDATA[<strong>Keywords:</strong><br/> ]]> %1$s</string>
+   <string name="text_date_published">Date published: %1$s</string>
 
    <!-- Nutritions -->
    <string name="nutrition_calories">Calories: %1$s</string>

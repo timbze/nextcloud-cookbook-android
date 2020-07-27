@@ -5,8 +5,9 @@
  */
 package de.micmun.android.nextcloudcookbook.util
 
+import android.content.Context
 import android.os.Build
-import android.util.Log
+import android.text.format.DateFormat
 import androidx.annotation.RequiresApi
 import java.time.Duration
 import java.util.*
@@ -15,7 +16,7 @@ import java.util.*
  * Utilities for the duration format.
  *
  * @author MicMun
- * @version 1.1, 27.07.20
+ * @version 1.2, 27.07.20
  */
 class DurationUtils {
    companion object {
@@ -50,6 +51,10 @@ class DurationUtils {
          val minutes = formatedDuration.substring(3, 5).toInt()
 
          return hours * 60 + minutes
+      }
+
+      fun formatDate(context: Context, publishedDate: Date): String {
+         return DateFormat.getDateFormat(context).format(publishedDate)
       }
 
       /**

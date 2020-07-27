@@ -35,6 +35,18 @@
                app:recipeDescription="@{recipe}"
                app:recipeHeaderImage="@{recipe}" />
 
+         <TextView
+               android:id="@+id/datePublishedText"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="16dp"
+               android:layout_marginTop="8dp"
+               android:layout_marginEnd="16dp"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@id/headerText"
+               app:recipePublishedDate="@{recipe}" />
+
          <LinearLayout
                android:id="@+id/timeInfosTitleLayout"
                android:layout_width="0dp"
@@ -46,7 +58,7 @@
                android:orientation="horizontal"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@id/headerText">
+               app:layout_constraintTop_toBottomOf="@id/datePublishedText">
 
             <TextView
                   android:id="@+id/prepTimeTitle"
@@ -171,12 +183,12 @@
                android:layout_marginStart="16dp"
                android:layout_marginTop="8dp"
                android:layout_marginEnd="16dp"
+               android:autoLink="web"
                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                android:textSize="@dimen/tab_info_text_size"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintTop_toBottomOf="@+id/authorTxt"
-               android:autoLink="web"
                app:url="@{recipe}" />
 
          <TextView

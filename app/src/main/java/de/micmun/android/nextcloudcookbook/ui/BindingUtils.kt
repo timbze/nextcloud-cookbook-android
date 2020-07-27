@@ -21,7 +21,7 @@ import de.micmun.android.nextcloudcookbook.util.DurationUtils
  * Utilities for binding data to view.
  *
  * @author MicMun
- * @version 1.6, 12.07.20
+ * @version 1.7, 27.07.20
  */
 
 // Overview list
@@ -53,6 +53,16 @@ fun TextView.setRecipeHeaderImage(item: Recipe?) {
          val image = Drawable.createFromPath(Uri.parse(it.imageUrl).path)
          setCompoundDrawablesRelativeWithIntrinsicBounds(null, image, null, null)
       }
+   }
+}
+
+@BindingAdapter("recipePublishedDate")
+fun TextView.setPublishedDate(item: Recipe?) {
+   item?.let {
+      text = if (it.datePublished == null)
+         resources.getString(R.string.text_date_published, "-")
+      else
+         resources.getString(R.string.text_date_published, DurationUtils.formatDate(context, it.datePublished!!))
    }
 }
 
