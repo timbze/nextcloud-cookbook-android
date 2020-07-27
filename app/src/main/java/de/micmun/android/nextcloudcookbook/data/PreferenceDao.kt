@@ -12,7 +12,7 @@ import androidx.preference.PreferenceManager
  * Manages the reading of the preferences.
  *
  * @author MicMun
- * @version 1.1, 26.05.20
+ * @version 1.2, 25.07.20
  */
 class PreferenceDao private constructor(application: Application) {
    private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(application)
@@ -47,5 +47,11 @@ class PreferenceDao private constructor(application: Application) {
    fun getThemeSync() = sharedPreferences.getInt(Pref.THEME, 0)
    fun setTheme(theme: Int) {
       sharedPreferences.edit().putInt(Pref.THEME, theme).apply()
+   }
+
+   fun getSort() = sharedPreferences.intLiveData(Pref.SORT, 0)
+   fun getSortSync() = sharedPreferences.getInt(Pref.SORT, 0)
+   fun setSort(sort: Int) {
+      sharedPreferences.edit().putInt(Pref.SORT, sort).apply()
    }
 }

@@ -46,6 +46,7 @@
    <!-- menu -->
    <string name="menu_search_title">Erweiterte Suche</string>
    <string name="menu_settings_title">Einstellungen</string>
+   <string name="menu_sort_title">Sortieren</string>
    <string name="menu_refresh_tooltip">Rezepte neu laden</string>
    <string name="menu_search_tooltip">Suche Rezept</string>
    <string name="search_hint">Suche nach Name</string>
@@ -81,4 +82,13 @@
       <item>System</item>
    </string-array>
    <string name="app_logo_desc">Launcher-Icon der App zeigt ein Kochbuch-Symbol</string>
+
+   <string-array name="sort_names">
+      <item>Name A-Z</item>
+      <item>Name Z-A</item>
+      <item>Veröffentlichungsdatum aufsteigend</item>
+      <item>Veröffentlichungsdatum absteigend</item>
+      <item>Gesamtzeit aufsteigend</item>
+      <item>Gesamtzeit absteigend</item>
+   </string-array>
 </resources>

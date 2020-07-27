@@ -49,6 +49,7 @@
    <!-- menu -->
    <string name="menu_search_title">Advanced Search</string>
    <string name="menu_settings_title">Settings</string>
+   <string name="menu_sort_title">Sort</string>
    <string name="menu_refresh_tooltip">Refresh recipes</string>
    <string name="menu_search_tooltip">Search recipe</string>
    <string name="search_hint">Search by name</string>
@@ -90,5 +91,23 @@
       <item>0</item>
       <item>1</item>
       <item>2</item>
+   </string-array>
+
+   <string-array name="sort_names">
+      <item>Name A-Z</item>
+      <item>Name Z-A</item>
+      <item>Date published ascending</item>
+      <item>Date published descending</item>
+      <item>Total time ascending</item>
+      <item>Total time descending</item>
+   </string-array>
+
+   <string-array name="sort_values" translatable="false">
+      <item>0</item>
+      <item>1</item>
+      <item>2</item>
+      <item>3</item>
+      <item>4</item>
+      <item>5</item>
    </string-array>
 </resources>

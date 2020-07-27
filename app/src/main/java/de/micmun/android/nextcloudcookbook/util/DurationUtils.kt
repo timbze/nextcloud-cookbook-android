@@ -6,6 +6,7 @@
 package de.micmun.android.nextcloudcookbook.util
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import java.time.Duration
 import java.util.*
@@ -14,7 +15,7 @@ import java.util.*
  * Utilities for the duration format.
  *
  * @author MicMun
- * @version 1.0, 27.06.20
+ * @version 1.1, 27.07.20
  */
 class DurationUtils {
    companion object {
@@ -33,6 +34,22 @@ class DurationUtils {
          }
 
          return displayString
+      }
+
+      /**
+       * Returns the minutes from duration.
+       *
+       * @param isoString Duration in iso 8601 format.
+       * @return Duration in minutes.
+       */
+      fun durationInMinutes(isoString: String?): Int {
+         if (isoString.isNullOrEmpty())
+            return 0
+         val formatedDuration = formatStringToDuration(isoString)
+         val hours = formatedDuration.substring(0, 2).toInt()
+         val minutes = formatedDuration.substring(3, 5).toInt()
+
+         return hours * 60 + minutes
       }
 
       /**

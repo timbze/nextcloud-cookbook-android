@@ -16,14 +16,18 @@ import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.PreferenceDao
 import de.micmun.android.nextcloudcookbook.data.RecipeRepository
 import de.micmun.android.nextcloudcookbook.data.SharedPreferenceLiveData
+import de.micmun.android.nextcloudcookbook.data.SortValue
 import de.micmun.android.nextcloudcookbook.data.model.Recipe
+import de.micmun.android.nextcloudcookbook.util.DateComparator
+import de.micmun.android.nextcloudcookbook.util.NameComparator
+import de.micmun.android.nextcloudcookbook.util.TotalTimeComparator
 import kotlinx.coroutines.*
 
 /**
  * ViewModel for list of recipes.
  *
  * @author MicMun
- * @version 1.5, 13.07.20
+ * @version 1.6, 25.07.20
  */
 class RecipeListViewModel(application: Application) : AndroidViewModel(application) {
    private val _recipeList = MutableLiveData<List<Recipe>>()
@@ -33,13 +37,15 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
    private var viewModelJob = Job()
    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+   private val prefDao: PreferenceDao = PreferenceDao.getInstance(application)
    val recipeDirectory: SharedPreferenceLiveData<String>
-   var option: CategoryFilterOption? = null
-   var catId: Int? = null
+   val sorting: SharedPreferenceLiveData<Int>
+   private var option: CategoryFilterOption? = null
+   private var catId: Int? = null
 
    init {
-      val prefDao = PreferenceDao.getInstance(application)
       recipeDirectory = prefDao.getRecipeDirectory()
+      sorting = prefDao.getSort()
    }
 
    override fun onCleared() {
@@ -81,9 +87,11 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
       }
       this.option = option
       this.catId = catId
+
+      val sort = SortValue.getByValue(PreferenceDao.getInstance(getApplication()).getSortSync())
+      sort?.let { sortRecipeList(it) }
    }
 
-   @Suppress("DEPRECATION")
    fun initRecipes(path: String, menu: Menu, force: Boolean = true) {
       uiScope.launch {
          if (_recipeList.value.isNullOrEmpty() || force) {
@@ -95,7 +103,7 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
          menu.removeGroup(R.id.menu_categories_group)
 
          categories.forEach { category ->
-            val title = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            @Suppress("DEPRECATION") val title = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
                Html.fromHtml(category, Html.FROM_HTML_MODE_LEGACY)
             else
                Html.fromHtml(category)
@@ -103,6 +111,26 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
          }
          option?.let { filterRecipesByCategory(it, catId!!) }
       }
+   }
+
+   fun setListSorting(sort: SortValue) {
+      prefDao.setSort(sort.sort)
+   }
+
+   fun sortList(sort: SortValue) {
+      sortRecipeList(sort)
+   }
+
+   private fun sortRecipeList(sort: SortValue) {
+      val comparator = when (sort) {
+         SortValue.NAME_A_Z -> NameComparator(true)
+         SortValue.NAME_Z_A -> NameComparator(false)
+         SortValue.DATE_ASC -> DateComparator(true)
+         SortValue.DATE_DESC -> DateComparator(false)
+         SortValue.TOTAL_TIME_ASC -> TotalTimeComparator(true)
+         SortValue.TOTAL_TIME_DESC -> TotalTimeComparator(false)
+      }
+      _recipeList.value = _recipeList.value?.sortedWith(comparator)
    }
 
    private suspend fun getRecipesFromRepo(path: String): List<Recipe> {

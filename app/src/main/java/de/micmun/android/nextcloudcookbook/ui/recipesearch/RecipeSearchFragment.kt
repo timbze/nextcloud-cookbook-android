@@ -5,12 +5,10 @@
  */
 package de.micmun.android.nextcloudcookbook.ui.recipesearch
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -31,7 +29,7 @@ import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListListener
  * Fragment for search result.
  *
  * @author MicMun
- * @version 1.1, 12.07.20
+ * @version 1.2, 26.07.20
  */
 class RecipeSearchFragment : Fragment() {
    private lateinit var binding: FragmentRecipesearchBinding
@@ -77,7 +75,7 @@ class RecipeSearchFragment : Fragment() {
       // observe live data
       recipeSearchViewModel.recipeList.observe(viewLifecycleOwner, Observer {
          it?.let {
-            adapter.setRecipes(it)
+            adapter.submitList(it)
 
             if (it.isNotEmpty()) {
                if (R.id.titleConstraint == binding.switcher2.nextView.id) {
@@ -88,6 +86,7 @@ class RecipeSearchFragment : Fragment() {
             }
          }
       })
+
       recipeSearchViewModel.navigateToRecipe.observe(viewLifecycleOwner, Observer { recipe ->
          recipe?.let {
             this.findNavController()

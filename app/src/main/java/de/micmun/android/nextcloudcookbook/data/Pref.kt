@@ -15,5 +15,6 @@ class Pref {
    companion object {
       const val RECIPE_DIR = "recipe_directory"
       const val THEME = "theme_setting"
+      const val SORT = "recipe_list_sorting"
    }
 }
