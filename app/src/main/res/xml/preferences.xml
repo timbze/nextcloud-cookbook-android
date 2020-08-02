@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:title="Functionality">
+   <PreferenceCategory
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:title="@string/pref_category_function">
 
-        <Preference
+      <Preference
             android:key="@string/prefkey_recipeDir"
             android:summary="%s"
             android:title="@string/preftitle_recipeDir" />
-    </PreferenceCategory>
-    <PreferenceCategory android:title="Design">
-        <de.micmun.android.nextcloudcookbook.ui.preferences.IntListPreference
+      <CheckBoxPreference
+            android:key="@string/prefkey_allow_hidden"
+            android:summary="%s"
+            android:title="@string/preftitle_allow_hidden" />
+   </PreferenceCategory>
+   <PreferenceCategory android:title="@string/pref_category_design">
+      <de.micmun.android.nextcloudcookbook.ui.preferences.IntListPreference
             android:defaultValue="0"
             android:entries="@array/theme_names"
             android:entryValues="@array/theme_values"
             android:key="@string/prefkey_theme"
             android:summary="%s"
             android:title="@string/preftitle_theme" />
-    </PreferenceCategory>
+   </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/about_title">
-        <Preference
+   <PreferenceCategory android:title="@string/about_title">
+      <Preference
             android:key="@string/prefkey_about"
             android:summary="@string/about_summary" />
-    </PreferenceCategory>
+   </PreferenceCategory>
 </PreferenceScreen>

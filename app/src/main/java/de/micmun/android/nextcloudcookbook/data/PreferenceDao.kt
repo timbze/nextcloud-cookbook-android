@@ -12,7 +12,7 @@ import androidx.preference.PreferenceManager
  * Manages the reading of the preferences.
  *
  * @author MicMun
- * @version 1.2, 25.07.20
+ * @version 1.3, 02.08.20
  */
 class PreferenceDao private constructor(application: Application) {
    private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(application)
@@ -41,6 +41,14 @@ class PreferenceDao private constructor(application: Application) {
 
    fun setRecipeDirectory(recipeDirectory: String) {
       sharedPreferences.edit().putString(Pref.RECIPE_DIR, recipeDirectory).apply()
+   }
+
+   fun getHiddenFolder(): SharedPreferenceLiveData<Boolean> {
+      return sharedPreferences.booleanLiveData(Pref.HIDDEN_FOLDER, false)
+   }
+
+   fun setHiddenFolder(hiddenFolder: Boolean) {
+      sharedPreferences.edit().putBoolean(Pref.HIDDEN_FOLDER, hiddenFolder).apply()
    }
 
    fun getTheme() = sharedPreferences.intLiveData(Pref.THEME, 0)

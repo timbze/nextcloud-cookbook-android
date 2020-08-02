@@ -75,10 +75,14 @@
    <string name="pref_category_function">Functionality</string>
    <string name="pref_category_design">Design</string>
    <string name="preftitle_recipeDir">Recipe Directory</string>
-   <string name="preftitle_theme">Select Theme</string>
    <string name="prefkey_recipeDir" translatable="false">recipe_directory</string>
    <string name="title_dir_chooser">Choose a directory…</string>
+   <string name="prefkey_allow_hidden" translatable="false">hidden_folder</string>
+   <string name="preftitle_allow_hidden">Show hidden folder</string>
+   <string name="pref_hidden_folder_true">The chooser for recipe directory shows hidden folder</string>
+   <string name="pref_hidden_folder_false">The chooser for recipe directory does not show hidden folder</string>
    <string name="prefkey_theme" translatable="false">theme_setting</string>
+   <string name="preftitle_theme">Select Theme</string>
 
    <string name="prefkey_about" translatable="false">app_about</string>
    <string name="about_title">About</string>

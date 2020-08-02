@@ -12,7 +12,7 @@ import androidx.lifecycle.LiveData
  * LiveData for preferences.
  *
  * @author MicMun
- * @version 1.1, 26.05.20
+ * @version 1.2, 02.08.20
  */
 
 abstract class SharedPreferenceLiveData<T>(val sharedPrefs: SharedPreferences,
@@ -41,6 +41,13 @@ abstract class SharedPreferenceLiveData<T>(val sharedPrefs: SharedPreferences,
 
 // Implementations
 
+// Boolean
+class SharedPreferenceBooleanLiveData(sharedPrefs: SharedPreferences, key: String, defValue: Boolean) :
+   SharedPreferenceLiveData<Boolean>(sharedPrefs, key, defValue) {
+   override fun getValueFromPreferences(key: String, defValue: Boolean): Boolean =
+      sharedPrefs.getBoolean(key, defValue)
+}
+
 // String
 class SharedPreferenceStringLiveData(sharedPrefs: SharedPreferences, key: String, defValue: String) :
    SharedPreferenceLiveData<String>(sharedPrefs, key, defValue) {
@@ -52,6 +59,10 @@ class SharedPreferenceStringLiveData(sharedPrefs: SharedPreferences, key: String
 class SharedPreferenceIntLiveData(sharedPrefs: SharedPreferences, key: String, defValue: Int) :
    SharedPreferenceLiveData<Int>(sharedPrefs, key, defValue) {
    override fun getValueFromPreferences(key: String, defValue: Int): Int = sharedPrefs.getInt(key, defValue)
+}
+
+fun SharedPreferences.booleanLiveData(key: String, defValue: Boolean): SharedPreferenceLiveData<Boolean> {
+   return SharedPreferenceBooleanLiveData(this, key, defValue)
 }
 
 fun SharedPreferences.stringLiveData(key: String, defValue: String): SharedPreferenceLiveData<String> {

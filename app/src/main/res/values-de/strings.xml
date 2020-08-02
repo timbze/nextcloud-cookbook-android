@@ -72,9 +72,11 @@
    <string name="pref_category_function">Funktionalität</string>
    <string name="pref_category_design">Aussehen</string>
    <string name="preftitle_recipeDir">Rezept-Verzeichnis</string>
-   <string name="preftitle_theme">Wähle ein Theme</string>
    <string name="title_dir_chooser">Wähle ein Verzeichnis…</string>
-
+   <string name="preftitle_allow_hidden">Zeige versteckte Verzeichnisse</string>
+   <string name="pref_hidden_folder_true">Der Auswahldialog des Rezept-Verzeichnisses zeigt versteckte Verzeichnisse an</string>
+   <string name="pref_hidden_folder_false">Der Auswahldialog des Rezept-Verzeichnisses zeigt keine versteckte Verzeichnisse an</string>
+   <string name="preftitle_theme">Wähle ein Theme</string>
    <string name="about_title">Über</string>
    <string name="about_version">App-Version: %1$s</string>
    <string name="about_summary">© 2020 by MicMun. Lizenziert unter GPLv3.\n\nNextcloud Cookbook ist eine App für Cookbook auf Nextcloud (ein Kochbuch für Nextcloud), um Rezepte zu verwalten.</string>

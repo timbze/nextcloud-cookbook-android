@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.CheckBoxPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.obsez.android.lib.filechooser.ChooserDialog
@@ -23,7 +24,7 @@ import de.micmun.android.nextcloudcookbook.ui.MainActivity
  * Fragment for settings.
  *
  * @author MicMun
- * @version 1.2, 28.06.20
+ * @version 1.3, 02.08.20
  */
 class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener,
                            Preference.OnPreferenceClickListener {
@@ -31,6 +32,9 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
 
    private lateinit var dirPreference: Preference
    private lateinit var themePreference: IntListPreference
+   private lateinit var hiddenFolderPreference: CheckBoxPreference
+
+   private var currentHiddenValue: Boolean = false
 
    override fun onActivityCreated(savedInstanceState: Bundle?) {
       super.onActivityCreated(savedInstanceState)
@@ -43,11 +47,13 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
 
       // find prefs
       dirPreference = findPreference(getString(R.string.prefkey_recipeDir))!!
+      hiddenFolderPreference = findPreference(getString(R.string.prefkey_allow_hidden))!!
       themePreference = findPreference(getString(R.string.prefkey_theme))!!
       val aboutPreference: Preference = findPreference(getString(R.string.prefkey_about))!!
 
       // change listener
       dirPreference.onPreferenceChangeListener = this
+      hiddenFolderPreference.onPreferenceChangeListener = this
       themePreference.onPreferenceChangeListener = this
 
       // click listener
@@ -56,6 +62,12 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
       // observe values
       viewModel.recipeDirectory.observe(this, Observer {
          dirPreference.summary = it.toString()
+      })
+      viewModel.hiddenFolder.observe(this, Observer {
+         currentHiddenValue = it
+
+         hiddenFolderPreference.summary =
+            getString(if (currentHiddenValue) R.string.pref_hidden_folder_true else R.string.pref_hidden_folder_false)
       })
       viewModel.theme.observe(this, Observer {
          themePreference.value = it.toString()
@@ -70,6 +82,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
    override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
       when (preference) {
          dirPreference -> viewModel.setRecipeDirectory(newValue.toString())
+         hiddenFolderPreference -> viewModel.setHiddenFolder(newValue as Boolean)
          themePreference -> {
             viewModel.setTheme(newValue.toString().toInt())
             // recreate activity
@@ -98,7 +111,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
     */
    private fun chooseFolder() {
       ChooserDialog(requireActivity())
-         .withFilter(true, false)
+         .withFilter(true, currentHiddenValue)
          .withStartFile(Environment.getExternalStorageDirectory().absolutePath)
          .withChosenListener { path, _ ->
             Toast.makeText(requireActivity(), "FOLDER: $path", Toast.LENGTH_SHORT).show()
