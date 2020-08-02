@@ -72,6 +72,8 @@
    <string name="menu_uncategorized">Uncategorized</string>
 
    <!-- preferences -->
+   <string name="pref_category_function">Functionality</string>
+   <string name="pref_category_design">Design</string>
    <string name="preftitle_recipeDir">Recipe Directory</string>
    <string name="preftitle_theme">Select Theme</string>
    <string name="prefkey_recipeDir" translatable="false">recipe_directory</string>
