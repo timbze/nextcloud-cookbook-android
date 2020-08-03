@@ -6,6 +6,7 @@
 package de.micmun.android.nextcloudcookbook.ui.recipesearch
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.RecipeFilter
 import de.micmun.android.nextcloudcookbook.databinding.FragmentRecipesearchBinding
@@ -29,13 +31,19 @@ import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListListener
  * Fragment for search result.
  *
  * @author MicMun
- * @version 1.2, 26.07.20
+ * @version 1.3, 03.08.20
  */
 class RecipeSearchFragment : Fragment() {
    private lateinit var binding: FragmentRecipesearchBinding
    private lateinit var recipeSearchViewModel: RecipeSearchViewModel
    private lateinit var filter: RecipeFilter
    private lateinit var catViewModel: CurrentCategoryViewModel
+
+   private var listState: Parcelable? = null
+
+   companion object {
+      private const val LIST_STATE = "listState"
+   }
 
    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipesearch, container, false)
@@ -71,6 +79,7 @@ class RecipeSearchFragment : Fragment() {
       val adapter =
          RecipeListAdapter(RecipeListListener { recipeId -> recipeSearchViewModel.onRecipeClicked(recipeId) })
       binding.recipeResultList.adapter = adapter
+      adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
       // observe live data
       recipeSearchViewModel.recipeList.observe(viewLifecycleOwner, Observer {
@@ -94,5 +103,27 @@ class RecipeSearchFragment : Fragment() {
             recipeSearchViewModel.onRecipeNavigated()
          }
       })
+   }
+
+   override fun onSaveInstanceState(outState: Bundle) {
+      super.onSaveInstanceState(outState)
+      listState = binding.recipeResultList.layoutManager?.onSaveInstanceState()
+      outState.putParcelable(LIST_STATE, listState)
+   }
+
+   override fun onViewStateRestored(savedInstanceState: Bundle?) {
+      super.onViewStateRestored(savedInstanceState)
+
+      if (savedInstanceState != null) {
+         listState = savedInstanceState[LIST_STATE] as Parcelable?
+      }
+   }
+
+   override fun onResume() {
+      super.onResume()
+
+      if (listState != null) {
+         binding.recipeResultList.layoutManager?.onRestoreInstanceState(listState)
+      }
    }
 }

@@ -4,11 +4,11 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.postDelayed
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -31,7 +31,7 @@ import de.micmun.android.nextcloudcookbook.ui.MainActivity
  * Fragment for list of recipes.
  *
  * @author MicMun
- * @version 1.7, 25.07.20
+ * @version 1.8, 03.08.20
  */
 class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
    private lateinit var binding: FragmentRecipelistBinding
@@ -46,6 +46,12 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
    private var sortDialog: AlertDialog? = null
    private var sort: SortValue? = null
+
+   private var listState: Parcelable? = null
+
+   companion object {
+      private const val LIST_STATE = "listState"
+   }
 
    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipelist, container, false)
@@ -109,16 +115,12 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
          it?.let {
             adapter.submitList(it)
 
-            if (it.isNotEmpty()) {
+            if (it.isEmpty() && R.id.emptyConstraint == binding.switcher.nextView.id) {
+               binding.switcher.showNext()
+            } else {
                if (R.id.titleConstraint == binding.switcher.nextView.id) {
                   binding.switcher.showNext()
                }
-               binding.recipeList.postDelayed(200) {
-                  binding.recipeList.layoutManager?.scrollToPosition(0)
-               }
-               adapter.notifyDataSetChanged()
-            } else if (R.id.emptyConstraint == binding.switcher.nextView.id) {
-               binding.switcher.showNext()
             }
          }
       })
@@ -216,5 +218,27 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
    override fun onPause() {
       sortDialog?.dismiss()
       super.onPause()
+   }
+
+   override fun onSaveInstanceState(outState: Bundle) {
+      super.onSaveInstanceState(outState)
+      listState = binding.recipeList.layoutManager?.onSaveInstanceState()
+      outState.putParcelable(LIST_STATE, listState)
+   }
+
+   override fun onViewStateRestored(savedInstanceState: Bundle?) {
+      super.onViewStateRestored(savedInstanceState)
+
+      if (savedInstanceState != null) {
+         listState = savedInstanceState[LIST_STATE] as Parcelable?
+      }
+   }
+
+   override fun onResume() {
+      super.onResume()
+
+      if (listState != null) {
+         binding.recipeList.layoutManager?.onRestoreInstanceState(listState)
+      }
    }
 }
