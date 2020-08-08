@@ -9,7 +9,7 @@ package de.micmun.android.nextcloudcookbook.data
  * Enumeration of sort values.
  *
  * @author MicMun
- * @version 1.0, 25.07.20
+ * @version 1.1, 08.08.20
  */
 enum class SortValue(val sort: Int) {
    NAME_A_Z(0),
@@ -21,6 +21,6 @@ enum class SortValue(val sort: Int) {
 
    companion object {
       private val values = values()
-      fun getByValue(sort: Int) = values.firstOrNull { it.sort == sort }
+      fun getByValue(sort: Int) = values.firstOrNull { it.sort == sort } ?: NAME_A_Z
    }
 }
