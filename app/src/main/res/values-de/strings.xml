@@ -8,7 +8,7 @@
 
    <!-- recipe detail -->
    <string name="img_desc_logo">Logo des Rezepts</string>
-   <string name="list_symbol">*</string>
+   <string name="list_symbol">•</string>
    <string name="title_duration">Dauer in HH:MM</string>
    <string name="tooltip_prep_time">Vorbereitung</string>
    <string name="tooltip_cook_time">Kochen</string>
