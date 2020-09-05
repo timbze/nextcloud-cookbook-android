@@ -16,9 +16,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             app:tabTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-            android:background="@color/colorBackground"
-            app:tabTextColor="@color/colorAccent"
-            app:tabIconTint="@color/lightTextColor"
             app:tabMaxWidth="0dp"
             app:tabGravity="fill"
             app:tabMode="auto"/>
