@@ -13,7 +13,6 @@ import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import de.micmun.android.nextcloudcookbook.R
@@ -26,7 +25,7 @@ import de.micmun.android.nextcloudcookbook.ui.MainActivity
  * Fragment for advanced search formular.
  *
  * @author MicMun
- * @version 1.0, 12.07.20
+ * @version 1.1, 20.09.20
  */
 class SearchFormFragment : Fragment(), SearchClickListener {
    private lateinit var binding: FragmentSearchFormBinding
@@ -39,7 +38,7 @@ class SearchFormFragment : Fragment(), SearchClickListener {
 
       catViewModel = ViewModelProvider(MainActivity.mainApplication).get(CurrentCategoryViewModel::class.java)
 
-      catViewModel.category.observe(viewLifecycleOwner, Observer {
+      catViewModel.category.observe(viewLifecycleOwner, {
          categoryId = it
       })
 

@@ -11,7 +11,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.postDelayed
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -33,7 +32,7 @@ import kotlinx.android.synthetic.main.fragment_recipelist.*
  * Fragment for list of recipes.
  *
  * @author MicMun
- * @version 1.9, 08.08.20
+ * @version 2.0, 20.09.20
  */
 class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
    private lateinit var binding: FragmentRecipelistBinding
@@ -104,43 +103,43 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
       // settings
       adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
-      recipesViewModel.navigateToRecipe.observe(viewLifecycleOwner, Observer { recipe ->
+      recipesViewModel.navigateToRecipe.observe(viewLifecycleOwner, { recipe ->
          recipe?.let {
             this.findNavController()
                .navigate(RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailFragment(recipe))
             recipesViewModel.onRecipeNavigated()
          }
       })
-      recipesViewModel.recipeDirectory.observe(viewLifecycleOwner, Observer { path ->
+      recipesViewModel.recipeDirectory.observe(viewLifecycleOwner, { path ->
          recipesViewModel.setPath(path)
       })
 
-      recipesViewModel.category.observe(viewLifecycleOwner, Observer { id ->
+      recipesViewModel.category.observe(viewLifecycleOwner, { id ->
          id?.let {
             setCategoryFilter(id)
             recipesViewModel.onCategoryFiltered()
          }
       })
 
-      recipesViewModel.sorting.observe(viewLifecycleOwner, Observer { s ->
+      recipesViewModel.sorting.observe(viewLifecycleOwner, { s ->
          s?.let { sorting ->
             currentSort = SortValue.getByValue(sorting)
             recipesViewModel.sortList(currentSort!!)
          }
       })
 
-      catViewModel.category.observe(viewLifecycleOwner, Observer { id ->
+      catViewModel.category.observe(viewLifecycleOwner, { id ->
          currentCatId = id
          recipesViewModel.setFilterCategory(id)
       })
 
-      recipesViewModel.path.observe(viewLifecycleOwner, Observer {
+      recipesViewModel.path.observe(viewLifecycleOwner, {
          it?.let {
             onRefresh()
          }
       })
 
-      recipesViewModel.recipes.observe(viewLifecycleOwner, Observer {
+      recipesViewModel.recipes.observe(viewLifecycleOwner, {
          it?.let {
             adapter.submitList(it)
          }
@@ -153,7 +152,7 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
          }
       })
 
-      recipesViewModel.categoryFilter.observe(viewLifecycleOwner, Observer { catFilter ->
+      recipesViewModel.categoryFilter.observe(viewLifecycleOwner, { catFilter ->
          catFilter?.let {
             // filter recipes to set categorie
             recipesViewModel.filterRecipesByCategory()

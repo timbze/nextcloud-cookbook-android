@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -21,7 +21,7 @@ import de.micmun.android.nextcloudcookbook.databinding.FragmentDetailBinding
  * Fragment for detail of a recipe.
  *
  * @author MicMun
- * @version 1.4, 12.07.20
+ * @version 1.5, 20.09.20
  */
 class RecipeDetailFragment : Fragment() {
    private lateinit var binding: FragmentDetailBinding
@@ -51,7 +51,7 @@ class RecipeDetailFragment : Fragment() {
       instructionsIcons = requireActivity().obtainStyledAttributes(intArrayOf(R.attr.tab_instructions_icon))
       nutritionsIcons = requireActivity().obtainStyledAttributes(intArrayOf(R.attr.tab_nutritions_icon))
 
-      viewModel.recipe.observe(viewLifecycleOwner, Observer { recipe ->
+      viewModel.recipe.observe(viewLifecycleOwner, { recipe ->
          recipe?.let {
             initPager(recipe)
          }
@@ -77,19 +77,22 @@ class RecipeDetailFragment : Fragment() {
          when (position) {
             ViewPagerAdapter.TYPE_INFO -> {
                tab.text = resources.getString(R.string.tab_info_title)
-               tab.icon = resources.getDrawable(infoIcons.getResourceId(0, 1), requireActivity().theme)
+               tab.icon = ResourcesCompat.getDrawable(resources, infoIcons.getResourceId(0, 1), requireActivity().theme)
             }
             ViewPagerAdapter.TYPE_INGREDIENTS -> {
                tab.text = resources.getString(R.string.tab_ingredients_title)
-               tab.icon = resources.getDrawable(ingredientsIcons.getResourceId(0, 1), requireActivity().theme)
+               tab.icon =
+                  ResourcesCompat.getDrawable(resources, ingredientsIcons.getResourceId(0, 1), requireActivity().theme)
             }
             ViewPagerAdapter.TYPE_INSTRUCTIONS -> {
                tab.text = resources.getString(R.string.tab_instructions_title)
-               tab.icon = resources.getDrawable(instructionsIcons.getResourceId(0, 1), requireActivity().theme)
+               tab.icon =
+                  ResourcesCompat.getDrawable(resources, instructionsIcons.getResourceId(0, 1), requireActivity().theme)
             }
             ViewPagerAdapter.TYPE_NUTRITIONS -> {
                tab.text = resources.getString(R.string.tab_nutritions_title)
-               tab.icon = resources.getDrawable(nutritionsIcons.getResourceId(0, 1), requireActivity().theme)
+               tab.icon =
+                  ResourcesCompat.getDrawable(resources, nutritionsIcons.getResourceId(0, 1), requireActivity().theme)
             }
          }
       }.attach()

@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.CheckBoxPreference
 import androidx.preference.Preference
@@ -24,7 +23,7 @@ import de.micmun.android.nextcloudcookbook.ui.MainActivity
  * Fragment for settings.
  *
  * @author MicMun
- * @version 1.3, 02.08.20
+ * @version 1.4, 20.09.20
  */
 class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener,
                            Preference.OnPreferenceClickListener {
@@ -60,16 +59,16 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
       dirPreference.onPreferenceClickListener = this
 
       // observe values
-      viewModel.recipeDirectory.observe(this, Observer {
+      viewModel.recipeDirectory.observe(this, {
          dirPreference.summary = it.toString()
       })
-      viewModel.hiddenFolder.observe(this, Observer {
+      viewModel.hiddenFolder.observe(this, {
          currentHiddenValue = it
 
          hiddenFolderPreference.summary =
             getString(if (currentHiddenValue) R.string.pref_hidden_folder_true else R.string.pref_hidden_folder_false)
       })
-      viewModel.theme.observe(this, Observer {
+      viewModel.theme.observe(this, {
          themePreference.value = it.toString()
          themePreference.summary = themePreference.entry
       })
@@ -109,6 +108,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
    /**
     * Choose dialog for picking a folder.
     */
+   @Suppress("DEPRECATION")
    private fun chooseFolder() {
       ChooserDialog(requireActivity())
          .withFilter(true, currentHiddenValue)

@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -31,7 +30,7 @@ import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListListener
  * Fragment for search result.
  *
  * @author MicMun
- * @version 1.3, 03.08.20
+ * @version 1.4, 20.09.20
  */
 class RecipeSearchFragment : Fragment() {
    private lateinit var binding: FragmentRecipesearchBinding
@@ -53,7 +52,7 @@ class RecipeSearchFragment : Fragment() {
 
       catViewModel = ViewModelProvider(MainActivity.mainApplication).get(CurrentCategoryViewModel::class.java)
 
-      catViewModel.category.observe(viewLifecycleOwner, Observer {
+      catViewModel.category.observe(viewLifecycleOwner, {
          initializeRecipeList(filter, it)
       })
 
@@ -82,7 +81,7 @@ class RecipeSearchFragment : Fragment() {
       adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
       // observe live data
-      recipeSearchViewModel.recipeList.observe(viewLifecycleOwner, Observer {
+      recipeSearchViewModel.recipeList.observe(viewLifecycleOwner, {
          it?.let {
             adapter.submitList(it)
 
@@ -96,7 +95,7 @@ class RecipeSearchFragment : Fragment() {
          }
       })
 
-      recipeSearchViewModel.navigateToRecipe.observe(viewLifecycleOwner, Observer { recipe ->
+      recipeSearchViewModel.navigateToRecipe.observe(viewLifecycleOwner, { recipe ->
          recipe?.let {
             this.findNavController()
                .navigate(RecipeSearchFragmentDirections.actionRecipeSearchFragmentToRecipeDetailFragment(recipe))
