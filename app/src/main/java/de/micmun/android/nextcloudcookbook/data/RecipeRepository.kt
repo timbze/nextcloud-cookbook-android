@@ -86,12 +86,11 @@ class RecipeRepository {
          var id: Long = 1
 
          if (subdirs != null && subdirs.isNotEmpty()) {
-            _recipeCategories.clear()
-            _recipeMap.clear()
             _recipeList.clear()
          }
 
          val tmpCategories = mutableSetOf<String>()
+         val tmpRecipeMap = mutableMapOf<Long, Recipe>()
 
          subdirs?.forEach { sd ->
             if (sd.exists() && sd.isDirectory) {
@@ -115,7 +114,7 @@ class RecipeRepository {
                      recipe.imageUrl = if (fullFile.exists()) Uri.fromFile(fullFile).toString() else ""
                      recipe.recipeId = id++
                      _recipeList.add(recipe)
-                     _recipeMap[recipe.recipeId] = recipe
+                     tmpRecipeMap[recipe.recipeId] = recipe
 
                      val categories = recipe.recipeCategory
                      val cats = mutableListOf<String>()
@@ -130,7 +129,12 @@ class RecipeRepository {
                }
             }
          }
+         if (tmpCategories.isNotEmpty())
+            _recipeCategories.clear()
          _recipeCategories.addAll(tmpCategories.toSortedSet())
+         if (tmpRecipeMap.isNotEmpty())
+            _recipeMap.clear()
+         _recipeMap.putAll(tmpRecipeMap)
       }
       return _recipeList
    }
