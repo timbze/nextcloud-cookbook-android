@@ -5,6 +5,13 @@
 This app is a viewer for recipes in Nextcloud App.
 You need the Nextcloud Android client to sync the recipes.
 
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
+      alt="Get it on Google Play"
+      height="60">](https://play.google.com/store/apps/details?id=de.micmun.android.nextcloudcookbook)
+[<img src="https://f-droid.org/badge/get-it-on.png"
+      alt="Get it on F-Droid"
+      height="60">](https://f-droid.org/en/packages/de.micmun.android.nextcloudcookbook/)
+
 **First steps**
 
 After installation you must go into the settings view and select the recipe directory with the recipes inside.
