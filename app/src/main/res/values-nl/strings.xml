@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Nextcloud Cookbook</string>
+    <string name="app_logo_desc"></string>
+    <string name="permissions_error_message"></string>
+    <string name="no_information"></string>
+    <!-- recipe list -->
+    <string name="empty_list"></string>
+    <string name="recipe_list_image_desc"></string>
+    <!-- recipe detail -->
+    <string name="img_desc_logo"></string>
+    <string name="list_symbol" translatable="false">•</string>
+    <string name="title_duration"></string>
+    <string name="tooltip_prep_time"></string>
+    <string name="tooltip_cook_time"></string>
+    <string name="tooltip_total_time"></string>
+    <!-- tab titles -->
+    <string name="tab_info_title"></string>
+    <string name="tab_ingredients_title"></string>
+    <string name="tab_instructions_title"></string>
+    <string name="tab_nutritions_title"></string>
+    <!-- tab infos -->
+    <string name="text_uncategorized"></string>
+    <string name="text_categories"></string>
+    <string name="text_yield"></string>
+    <string name="text_author"></string>
+    <string name="text_url"></string>
+    <string name="text_no_keywords"></string>
+    <string name="text_keywords"></string>
+    <string name="text_date_published"></string>
+    <!-- Nutritions -->
+    <string name="nutrition_calories"></string>
+    <string name="nutrition_carbohydrate_content"></string>
+    <string name="nutrition_cholesterol_content"></string>
+    <string name="nutrition_fat_content"></string>
+    <string name="nutrition_fiberContent"></string>
+    <string name="nutrition_protein_content"></string>
+    <string name="nutrition_saturated_fat_content"></string>
+    <string name="nutrition_serving_size"></string>
+    <string name="nutrition_sodium_content"></string>
+    <string name="nutrition_sugar_content"></string>
+    <string name="nutrition_trans_fat_content"></string>
+    <string name="nutrition_unsaturated_fat_content"></string>
+    <!-- menu -->
+    <string name="menu_search_title"></string>
+    <string name="menu_settings_title"></string>
+    <string name="menu_sort_title"></string>
+    <string name="menu_refresh_tooltip"></string>
+    <string name="menu_search_tooltip"></string>
+    <string name="search_hint"></string>
+    <!-- search formular -->
+    <string name="form_search_title"></string>
+    <string name="form_search_hint"></string>
+    <string name="form_ignore_case"></string>
+    <string name="form_exact_search"></string>
+    <string name="form_types"></string>
+    <string name="form_type_keyword"></string>
+    <string name="form_type_ingredients"></string>
+    <string name="form_type_yield"></string>
+    <string name="form_search_options"></string>
+    <string name="form_search_commit"></string>
+    <!-- navdrawer_menu -->
+    <string name="menu_all_categories"></string>
+    <string name="menu_uncategorized"></string>
+    <!-- preferences -->
+    <string name="pref_category_function"></string>
+    <string name="pref_category_design"></string>
+    <string name="preftitle_recipeDir"></string>
+    <string name="prefkey_recipeDir" translatable="false">recipe_directory</string>
+    <string name="title_dir_chooser"></string>
+    <string name="prefkey_allow_hidden" translatable="false">hidden_folder</string>
+    <string name="preftitle_allow_hidden"></string>
+    <string name="pref_hidden_folder_true"></string>
+    <string name="pref_hidden_folder_false"></string>
+    <string name="prefkey_theme" translatable="false">theme_setting</string>
+    <string name="preftitle_theme"></string>
+    <string name="prefkey_about" translatable="false">app_about</string>
+    <string name="about_title"></string>
+    <string name="about_version"></string>
+    <string name="about_summary"></string>
+    <string-array name="theme_names">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>System</item>
+    </string-array>
+    <string-array name="theme_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="sort_names">
+        <item>Name A-Z</item>
+        <item>Name Z-A</item>
+        <item>Date published ascending</item>
+        <item>Date published descending</item>
+        <item>Total time ascending</item>
+        <item>Total time descending</item>
+    </string-array>
+    <string-array name="sort_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+</resources>
