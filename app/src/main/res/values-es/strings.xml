@@ -75,9 +75,11 @@
     <string name="prefkey_theme" translatable="false">theme_setting</string>
     <string name="preftitle_theme">Seleccione el tema</string>
     <string name="prefkey_about" translatable="false">app_about</string>
-    <string name="about_title"/>
+    <string name="about_title">Sobre</string>
     <string name="about_version">Versión de la aplicación: %1$s</string>
-    <string name="about_summary"/>
+    <string name="about_summary">© 2020 por MicMun. Licencia bajo GPLv3.
+\n
+\nNextcloud Cookbook es una aplicación para el libro de cocina en nextcloud para gestionar las recetas.</string>
     <string-array name="theme_names">
         <item>Light</item>
         <item>Dark</item>
