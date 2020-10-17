@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">Nextcloud Cookbook</string>
-    <string name="app_logo_desc">Icône de lancement de l\'application montrant un symbole de livre de cuisine</string>
+    <string name="app_logo_desc">Icône du lanceur de l\'application affichant un symbole de livre de cuisine</string>
     <string name="permissions_error_message">Accès refusé ! L\'application a besoin d\'un accès au stockage, veuillez l\'activer dans les paramètres.</string>
     <string name="no_information">Pas d\'information.</string>
     <!-- recipe list -->
@@ -22,7 +22,7 @@
     <!-- tab infos -->
     <string name="text_uncategorized">Non classé</string>
     <string name="text_categories"><strong>Catégories:</strong><br/> %1$s</string>
-    <string name="text_yield"><strong>Rendement:</strong> \u0020%1$s</string>
+    <string name="text_yield"><strong>Rendement:</strong> %1$s</string>
     <string name="text_author">Auteur : %1$s</string>
     <string name="text_url">Source : %1$s</string>
     <string name="text_no_keywords">Aucun mot clé.</string>
