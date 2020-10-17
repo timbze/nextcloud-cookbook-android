@@ -15,18 +15,18 @@
     <string name="tooltip_cook_time">Gotowanie</string>
     <string name="tooltip_total_time">Razem</string>
     <!-- tab titles -->
-    <string name="tab_info_title"/>
+    <string name="tab_info_title">Informacja</string>
     <string name="tab_ingredients_title">Składniki</string>
     <string name="tab_instructions_title">Instrukcje</string>
     <string name="tab_nutritions_title">Pisma</string>
     <!-- tab infos -->
     <string name="text_uncategorized">Niekategoryzowane</string>
-    <string name="text_categories"/>
-    <string name="text_yield"/>
-    <string name="text_author"/>
-    <string name="text_url"/>
+    <string name="text_categories"><strong>Kategorie:</strong><br/> %1$s</string>
+    <string name="text_yield"><strong>Porcje:</strong> %1$s</string>
+    <string name="text_author">Autor: %1$s</string>
+    <string name="text_url">Źródło: %1$s</string>
     <string name="text_no_keywords">Żadnych słów kluczowych.</string>
-    <string name="text_keywords"/>
+    <string name="text_keywords"><strong>Słowa Kluczowe:</strong><br/> %1$s</string>
     <string name="text_date_published">Data publikacji: %1$s</string>
     <!-- Nutritions -->
     <string name="nutrition_calories">Kalorie: %1$s</string>
@@ -64,7 +64,7 @@
     <string name="menu_uncategorized">Niekategoryzowane</string>
     <!-- preferences -->
     <string name="pref_category_function">Funkcjonalność</string>
-    <string name="pref_category_design"/>
+    <string name="pref_category_design">Wzór</string>
     <string name="preftitle_recipeDir">Katalog Przepisów</string>
     <string name="prefkey_recipeDir" translatable="false">recipe_directory</string>
     <string name="title_dir_chooser">Wybierz katalog…</string>
@@ -75,9 +75,11 @@
     <string name="prefkey_theme" translatable="false">theme_setting</string>
     <string name="preftitle_theme">Wybierz temat</string>
     <string name="prefkey_about" translatable="false">app_about</string>
-    <string name="about_title"/>
+    <string name="about_title">Około</string>
     <string name="about_version">Wersja App: %1$s</string>
-    <string name="about_summary"/>
+    <string name="about_summary">© 2020 przez MicMun. Licencja na GPLv3.
+\n
+\nNextcloud Cookbook to aplikacja do zarządzania przepisami na chmurze nextcloud.</string>
     <string-array name="theme_names">
         <item>Light</item>
         <item>Dark</item>
