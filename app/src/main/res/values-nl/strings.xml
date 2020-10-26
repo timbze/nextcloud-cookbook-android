@@ -93,13 +93,13 @@
         <item>4</item>
         <item>5</item>
     </string-array>
-    <string name="theme_name_light"></string>
-    <string name="theme_name_dark"></string>
-    <string name="theme_name_system"></string>
-    <string name="sort_value_alpha_asc"></string>
-    <string name="sort_value_alpha_desc"></string>
-    <string name="sort_value_date_asc"></string>
-    <string name="sort_value_date_desc"></string>
-    <string name="sort_value_time_asc"></string>
-    <string name="sort_value_time_desc"></string>
+    <string name="theme_name_light">Licht</string>
+    <string name="theme_name_dark">Donker</string>
+    <string name="theme_name_system">Systeem</string>
+    <string name="sort_value_alpha_asc">Naam A-Z</string>
+    <string name="sort_value_alpha_desc">Naam Z-A</string>
+    <string name="sort_value_date_asc">Datum publicatie oplopend</string>
+    <string name="sort_value_date_desc">Uitgegeven datum in aflopende volgorde</string>
+    <string name="sort_value_time_asc">Totale tijd oplopend</string>
+    <string name="sort_value_time_desc">Totale tijd aflopend</string>
 </resources>
