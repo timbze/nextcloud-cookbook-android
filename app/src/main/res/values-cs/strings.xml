@@ -93,13 +93,13 @@
         <item>4</item>
         <item>5</item>
     </string-array>
-    <string name="theme_name_light"></string>
-    <string name="theme_name_dark"></string>
-    <string name="theme_name_system"></string>
-    <string name="sort_value_alpha_asc"></string>
-    <string name="sort_value_alpha_desc"></string>
-    <string name="sort_value_date_asc"></string>
-    <string name="sort_value_date_desc"></string>
-    <string name="sort_value_time_asc"></string>
-    <string name="sort_value_time_desc"></string>
+    <string name="theme_name_light">Světlo</string>
+    <string name="theme_name_dark">Tma</string>
+    <string name="theme_name_system">Systém</string>
+    <string name="sort_value_alpha_asc">Název A-Z</string>
+    <string name="sort_value_alpha_desc">Název Z-A</string>
+    <string name="sort_value_date_asc">Datum zveřejněno vzestupně</string>
+    <string name="sort_value_date_desc">Datum zveřejnění sestupně</string>
+    <string name="sort_value_time_asc">Celkový čas vzestupně</string>
+    <string name="sort_value_time_desc">Celkový čas sestupně</string>
 </resources>
