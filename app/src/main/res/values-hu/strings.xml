@@ -93,13 +93,13 @@
         <item>4</item>
         <item>5</item>
     </string-array>
-    <string name="theme_name_light"></string>
-    <string name="theme_name_dark"></string>
-    <string name="theme_name_system"></string>
-    <string name="sort_value_alpha_asc"></string>
-    <string name="sort_value_alpha_desc"></string>
-    <string name="sort_value_date_asc"></string>
-    <string name="sort_value_date_desc"></string>
-    <string name="sort_value_time_asc"></string>
-    <string name="sort_value_time_desc"></string>
+    <string name="theme_name_light">Fény</string>
+    <string name="theme_name_dark">Sötét</string>
+    <string name="theme_name_system">Rendszer</string>
+    <string name="sort_value_alpha_asc">Név A-Z</string>
+    <string name="sort_value_alpha_desc">Név Z-A</string>
+    <string name="sort_value_date_asc">Közzétett dátum növekvő</string>
+    <string name="sort_value_date_desc">Megjelent dátum csökkenő</string>
+    <string name="sort_value_time_asc">Teljes idő növekvő</string>
+    <string name="sort_value_time_desc">Teljes idő csökkenő</string>
 </resources>
