@@ -93,13 +93,13 @@
         <item>4</item>
         <item>5</item>
     </string-array>
-    <string name="theme_name_light"></string>
-    <string name="theme_name_dark"></string>
-    <string name="theme_name_system"></string>
-    <string name="sort_value_alpha_asc"></string>
-    <string name="sort_value_alpha_desc"></string>
-    <string name="sort_value_date_asc"></string>
-    <string name="sort_value_date_desc"></string>
-    <string name="sort_value_time_asc"></string>
-    <string name="sort_value_time_desc"></string>
+    <string name="theme_name_light">Lumineux</string>
+    <string name="theme_name_dark">Sombre</string>
+    <string name="theme_name_system">Système</string>
+    <string name="sort_value_alpha_asc">Nom A-Z</string>
+    <string name="sort_value_alpha_desc">Nom Z-A</string>
+    <string name="sort_value_date_asc">Date de publication ascendante</string>
+    <string name="sort_value_date_desc">Date de publication Décroissante</string>
+    <string name="sort_value_time_asc">Temps total croissant</string>
+    <string name="sort_value_time_desc">Temps total descendant</string>
 </resources>
