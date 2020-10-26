@@ -80,13 +80,11 @@
     <string name="about_summary">© 2020 by Micmunn. Licenc alatt GPLv3.
 \n
 \nNextcloud Cookbook egy app szakácskönyv nextcloud kezelésére recepteket.</string>
-
     <string-array name="theme_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
     </string-array>
-
     <string-array name="sort_values" translatable="false">
         <item>0</item>
         <item>1</item>
@@ -95,14 +93,13 @@
         <item>4</item>
         <item>5</item>
     </string-array>
-
-    <string name="theme_name_light">-</string>
-    <string name="theme_name_dark">-</string>
-    <string name="theme_name_system">-</string>
-    <string name="sort_value_alpha_asc">-</string>
-    <string name="sort_value_alpha_desc">-</string>
-    <string name="sort_value_date_asc">-</string>
-    <string name="sort_value_date_desc">-</string>
-    <string name="sort_value_time_asc">-</string>
-    <string name="sort_value_time_desc">-</string>
+    <string name="theme_name_light"></string>
+    <string name="theme_name_dark"></string>
+    <string name="theme_name_system"></string>
+    <string name="sort_value_alpha_asc"></string>
+    <string name="sort_value_alpha_desc"></string>
+    <string name="sort_value_date_asc"></string>
+    <string name="sort_value_date_desc"></string>
+    <string name="sort_value_time_asc"></string>
+    <string name="sort_value_time_desc"></string>
 </resources>
