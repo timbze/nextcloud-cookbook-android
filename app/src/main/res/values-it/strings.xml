@@ -80,23 +80,11 @@
     <string name="about_summary">© 2020 di MicMun. Licenza sotto GPLv3.
 \n
 \nNextcloud Cookbook è un\'applicazione per ricettari su nextcloud per gestire le ricette.</string>
-    <string-array name="theme_names">
-        <item>Light</item>
-        <item>Dark</item>
-        <item>System</item>
-    </string-array>
+
     <string-array name="theme_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
-    </string-array>
-    <string-array name="sort_names">
-        <item>Name A-Z</item>
-        <item>Name Z-A</item>
-        <item>Date published ascending</item>
-        <item>Date published descending</item>
-        <item>Total time ascending</item>
-        <item>Total time descending</item>
     </string-array>
     <string-array name="sort_values" translatable="false">
         <item>0</item>
@@ -106,4 +94,14 @@
         <item>4</item>
         <item>5</item>
     </string-array>
+
+    <string name="theme_name_light">-</string>
+    <string name="theme_name_dark">-</string>
+    <string name="theme_name_system">-</string>
+    <string name="sort_value_alpha_asc">-</string>
+    <string name="sort_value_alpha_desc">-</string>
+    <string name="sort_value_date_asc">-</string>
+    <string name="sort_value_date_desc">-</string>
+    <string name="sort_value_time_asc">-</string>
+    <string name="sort_value_time_desc">-</string>
 </resources>

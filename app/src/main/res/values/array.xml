@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <string-array name="theme_names">
+      <item>@string/theme_name_light</item>
+      <item>@string/theme_name_dark</item>
+      <item>@string/theme_name_system</item>
+   </string-array>
+
+   <string-array name="sort_names">
+      <item>@string/sort_value_alpha_asc</item>
+      <item>@string/sort_value_alpha_desc</item>
+      <item>@string/sort_value_date_asc</item>
+      <item>@string/sort_value_date_desc</item>
+      <item>@string/sort_value_time_asc</item>
+      <item>@string/sort_value_time_desc</item>
+   </string-array>
+</resources>

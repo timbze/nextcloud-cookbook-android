@@ -89,25 +89,15 @@
    <string name="about_version">App version: %1$s</string>
    <string name="about_summary">© 2020 by MicMun. License under GPLv3.\n\nNextcloud Cookbook is an app for cookbook on nextcloud to manage recipes.</string>
 
-   <string-array name="theme_names">
-      <item>Light</item>
-      <item>Dark</item>
-      <item>System</item>
-   </string-array>
    <string-array name="theme_values" translatable="false">
       <item>0</item>
       <item>1</item>
       <item>2</item>
    </string-array>
 
-   <string-array name="sort_names">
-      <item>Name A-Z</item>
-      <item>Name Z-A</item>
-      <item>Date published ascending</item>
-      <item>Date published descending</item>
-      <item>Total time ascending</item>
-      <item>Total time descending</item>
-   </string-array>
+   <string name="theme_name_light">Light</string>
+   <string name="theme_name_dark">Dark</string>
+   <string name="theme_name_system">System</string>
 
    <string-array name="sort_values" translatable="false">
       <item>0</item>
@@ -117,4 +107,11 @@
       <item>4</item>
       <item>5</item>
    </string-array>
+
+   <string name="sort_value_alpha_asc">Name A-Z</string>
+   <string name="sort_value_alpha_desc">Name Z-A</string>
+   <string name="sort_value_date_asc">Date published ascending</string>
+   <string name="sort_value_date_desc">Date published descending</string>
+   <string name="sort_value_time_asc">Total time ascending</string>
+   <string name="sort_value_time_desc">Total time descending</string>
 </resources>

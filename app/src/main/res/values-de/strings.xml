@@ -2,6 +2,8 @@
    <string name="permissions_error_message">Zugriff verweigert! Die App braucht Zugriff auf den Speicher, bitte in den Einstellungen aktivieren.</string>
    <string name="no_information">Keine Angabe.</string>
 
+   <string name="app_logo_desc">Launcher-Icon der App zeigt ein Kochbuch-Symbol</string>
+
    <!-- recipe list -->
    <string name="empty_list">Keine Rezepte.</string>
    <string name="recipe_list_image_desc">Image thumbnail des Rezepts</string>
@@ -80,20 +82,15 @@
    <string name="about_title">Über</string>
    <string name="about_version">App-Version: %1$s</string>
    <string name="about_summary">© 2020 by MicMun. Lizenziert unter GPLv3.\n\nNextcloud Cookbook ist eine App für Cookbook auf Nextcloud (ein Kochbuch für Nextcloud), um Rezepte zu verwalten.</string>
+   
+   <string name="theme_name_light">Hell</string>
+   <string name="theme_name_dark">Dunkel</string>
+   <string name="theme_name_system">System</string>
 
-   <string-array name="theme_names">
-      <item>Hell</item>
-      <item>Dunkel</item>
-      <item>System</item>
-   </string-array>
-   <string name="app_logo_desc">Launcher-Icon der App zeigt ein Kochbuch-Symbol</string>
-
-   <string-array name="sort_names">
-      <item>Name A-Z</item>
-      <item>Name Z-A</item>
-      <item>Veröffentlichungsdatum aufsteigend</item>
-      <item>Veröffentlichungsdatum absteigend</item>
-      <item>Gesamtzeit aufsteigend</item>
-      <item>Gesamtzeit absteigend</item>
-   </string-array>
+   <string name="sort_value_alpha_asc">Name A-Z</string>
+   <string name="sort_value_alpha_desc">Name Z-A</string>
+   <string name="sort_value_date_asc">Veröffentlichungsdatum aufsteigend</string>
+   <string name="sort_value_date_desc">Veröffentlichungsdatum absteigend</string>
+   <string name="sort_value_time_asc">Gesamtzeit aufsteigend</string>
+   <string name="sort_value_time_desc">Gesamtzeit absteigend</string>
 </resources>
