@@ -6,7 +6,6 @@
 package de.micmun.android.nextcloudcookbook.ui
 
 import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Build
 import android.text.Html
 import android.view.View
@@ -21,18 +20,14 @@ import de.micmun.android.nextcloudcookbook.util.DurationUtils
  * Utilities for binding data to view.
  *
  * @author MicMun
- * @version 1.7, 27.07.20
+ * @version 1.8, 10.01.21
  */
 
 // Overview list
 @BindingAdapter("recipeImage")
 fun ImageView.setRecipeImage(item: Recipe?) {
    item?.let {
-      if (it.thumbImage != null) {
-         setImageURI(it.thumbImage)
-      } else {
-         setImageURI(null)
-      }
+      setImageURI(it.thumbImage?.uri)
    }
 }
 
@@ -50,7 +45,7 @@ fun TextView.setRecipeDesc(item: Recipe?) {
 fun TextView.setRecipeHeaderImage(item: Recipe?) {
    item?.let {
       if (it.imageUrl.isNotEmpty()) {
-         val image = Drawable.createFromPath(Uri.parse(it.imageUrl).path)
+         val image = Drawable.createFromPath(it.imageUrl)
          setCompoundDrawablesRelativeWithIntrinsicBounds(null, image, null, null)
       }
    }

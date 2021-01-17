@@ -5,7 +5,7 @@
  */
 package de.micmun.android.nextcloudcookbook.data.model
 
-import android.net.Uri
+import androidx.documentfile.provider.DocumentFile
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -59,7 +59,7 @@ data class Recipe(
    var tool: Array<String> = emptyArray(),
    var yield: String = "",
    var estimatedCost: String = "",
-   @JsonIgnore var thumbImage: Uri? = null
+   @JsonIgnore var thumbImage: DocumentFile? = null
 ) {
    override fun equals(other: Any?): Boolean {
       if (this === other) return true

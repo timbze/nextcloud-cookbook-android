@@ -98,7 +98,7 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
 
    private suspend fun getRecipesFromRepo(path: String): List<Recipe> {
       return withContext(Dispatchers.IO) {
-         RecipeRepository.getInstance().getAllRecipes(path)
+         RecipeRepository.getInstance().getAllRecipes(getApplication(), path)
       }
    }
 

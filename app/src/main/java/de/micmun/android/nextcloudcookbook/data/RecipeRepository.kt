@@ -5,14 +5,19 @@
  */
 package de.micmun.android.nextcloudcookbook.data
 
-import android.net.Uri
+import android.content.Context
 import android.os.Build
-import androidx.core.net.toFile
+import android.util.Log
+import androidx.documentfile.provider.DocumentFile
+import com.anggrayudi.storage.file.DocumentFileType
+import com.anggrayudi.storage.file.absolutePath
+import com.anggrayudi.storage.file.findFiles
+import com.anggrayudi.storage.file.openInputStream
 import de.micmun.android.nextcloudcookbook.data.model.Recipe
 import de.micmun.android.nextcloudcookbook.util.JsonRecipeParser
+import de.micmun.android.nextcloudcookbook.util.StorageManager
 import java.io.BufferedReader
-import java.io.File
-import java.io.FileReader
+import java.io.InputStreamReader
 import java.util.stream.Collectors
 
 /**
@@ -78,40 +83,40 @@ class RecipeRepository {
    /**
     * Reads all recipes from directory.
     */
-   fun getAllRecipes(path: String): List<Recipe> {
-      val dir = File(path)
+   fun getAllRecipes(context: Context, path: String): List<Recipe> {
+      val recipeDir = StorageManager.getDocumentFromString(context, path) ?: return emptyList()
 
-      if (dir.exists()) {
-         val subdirs = dir.listFiles()
+      Log.d("RecipeRepository", "recipeDir = ${recipeDir.absolutePath}")
+      if (recipeDir.exists()) {
+         val subDirs = recipeDir.listFiles()
          var id: Long = 1
 
-         if (subdirs != null && subdirs.isNotEmpty()) {
+         if (subDirs.isNotEmpty()) {
             _recipeList.clear()
          }
 
          val tmpCategories = mutableSetOf<String>()
          val tmpRecipeMap = mutableMapOf<Long, Recipe>()
 
-         subdirs?.forEach { sd ->
+         subDirs.forEach { sd ->
             if (sd.exists() && sd.isDirectory) {
-               val jsonFiles = sd.listFiles()?.filter { f -> f.name.endsWith(".json") }
-               var jsonFile: File? = null
+               val jsonFiles = sd.listFiles().filter { f -> f.name?.endsWith(".json") ?: false }
+               val thumbFiles = sd.findFiles(arrayOf("thumb.jpg"), DocumentFileType.FILE)
+               val fullFiles = sd.findFiles(arrayOf("full.jpg"), DocumentFileType.FILE)
+               val jsonFile = if (jsonFiles.isNotEmpty()) jsonFiles.first() else null
 
-               if (jsonFiles != null && jsonFiles.isNotEmpty()) {
-                  jsonFile = jsonFiles[0]
-               }
+               val thumbFile = if (thumbFiles.isNotEmpty()) thumbFiles.first() else null
+               val fullFile = if (fullFiles.isNotEmpty()) fullFiles.first() else null
 
-               val thumbFile = File(sd, "thumb.jpg")
-               val fullFile = File(sd, "full.jpg")
+               if (jsonFile != null && jsonFile.exists() && jsonFile.canRead()) {
+                  val recipe = readRecipe(context, jsonFile)
 
-               if (jsonFile != null && jsonFile.exists()) {
-                  val recipe = readRecipe(Uri.fromFile(jsonFile))
                   if (recipe != null) {
                      if (recipe.recipeCategory == null)
                         recipe.recipeCategory = emptyArray()
+                     recipe.thumbImage = thumbFile
+                     recipe.imageUrl = fullFile?.absolutePath ?: ""
 
-                     recipe.thumbImage = if (thumbFile.exists()) Uri.fromFile(thumbFile) else null
-                     recipe.imageUrl = if (fullFile.exists()) Uri.fromFile(fullFile).toString() else ""
                      recipe.recipeId = id++
                      _recipeList.add(recipe)
                      tmpRecipeMap[recipe.recipeId] = recipe
@@ -136,17 +141,19 @@ class RecipeRepository {
             _recipeMap.clear()
          _recipeMap.putAll(tmpRecipeMap)
       }
+
       return _recipeList
    }
 
    /**
     * Reads a recipe and parse it to the Recipe data model.
     *
-    * @param path Path of the file.
+    * @param file recipe file to read.
     * @return Recipe.
     */
-   private fun readRecipe(path: Uri): Recipe? {
-      val reader = BufferedReader(FileReader(path.toFile()))
+   private fun readRecipe(context: Context, file: DocumentFile): Recipe? {
+      val inputStream = file.openInputStream(context)
+      val reader = BufferedReader(InputStreamReader(inputStream))
 
       val json: String
 

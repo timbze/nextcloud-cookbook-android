@@ -11,11 +11,13 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import android.view.Menu
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.documentfile.provider.DocumentFile
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -23,30 +25,37 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.fondesa.kpermissions.allGranted
-import com.fondesa.kpermissions.extension.permissionsBuilder
-import com.fondesa.kpermissions.extension.send
-import com.google.android.material.snackbar.Snackbar
+import com.afollestad.materialdialogs.MaterialDialog
+import com.anggrayudi.storage.SimpleStorage
+import com.anggrayudi.storage.callback.StorageAccessCallback
+import com.anggrayudi.storage.file.StorageType
+import com.anggrayudi.storage.file.absolutePath
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener
 import de.micmun.android.nextcloudcookbook.MainApplication
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.PreferenceDao
 import de.micmun.android.nextcloudcookbook.data.RecipeFilter
 import de.micmun.android.nextcloudcookbook.databinding.ActivityMainBinding
 import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListFragmentDirections
+import de.micmun.android.nextcloudcookbook.util.StorageManager
 
 /**
  * Main Activity of the app.
  *
  * @author MicMun
- * @version 1.4, 12.07.20
+ * @version 1.5, 10.01.21
  */
 class MainActivity : AppCompatActivity() {
    private lateinit var binding: ActivityMainBinding
    private lateinit var drawerLayout: DrawerLayout
    private lateinit var currentCategoryViewModel: CurrentCategoryViewModel
+   private lateinit var storageManager: StorageManager
 
    companion object {
       val mainApplication = MainApplication()
+      const val REQUEST_CODE_STORAGE_ACCESS = 1
    }
 
    override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,28 +102,85 @@ class MainActivity : AppCompatActivity() {
          true
       }
 
-      // permissions
-      permissionsBuilder(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-         .build()
-         .send { result ->
-            // Handle the result
-            if (!result.allGranted()) {
-               val message = Snackbar.make(binding.root,
-                                           resources.getString(R.string.permissions_error_message),
-                                           Snackbar.LENGTH_LONG
-               )
-               message.setAction(R.string.menu_settings_title) {
-                  // create link to app settings
-                  val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                  val uri = Uri.fromParts("package", this.packageName, null)
-                  intent.data = uri
-                  startActivity(intent)
-               }
-               message.show()
-            }
+      setupSimpleStorage(savedInstanceState)
+      val preferences = PreferenceDao.getInstance(application)
+      preferences.isStorageAccessed().observe(this, Observer { isAccess ->
+         if (!isAccess) {
+            Dexter.withContext(this)
+               .withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+               .withListener(object : BaseMultiplePermissionsListener() {
+                  override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                     val grantStatus = if (report.areAllPermissionsGranted()) "granted" else "denied"
+
+                     if (grantStatus == "granted") {
+                        preferences.setStorageAccess(true)
+                     } else {
+                        preferences.setStorageAccess(false)
+                     }
+                  }
+               }).check()
          }
+      })
 
       handleIntent(intent)
+   }
+
+   private fun setupSimpleStorage(savedInstanceState: Bundle?) {
+      storageManager = StorageManager.getInstance()
+      storageManager.storage = SimpleStorage(this, savedInstanceState)
+
+      storageManager.storage?.storageAccessCallback = object : StorageAccessCallback {
+         override fun onRootPathNotSelected(
+            requestCode: Int,
+            rootPath: String,
+            rootStorageType: StorageType,
+            uri: Uri
+         ) {
+            MaterialDialog(this@MainActivity)
+               .message(text = "Please select $rootPath")
+               .negativeButton(android.R.string.cancel)
+               .positiveButton {
+                  storageManager.storage?.requestStorageAccess(REQUEST_CODE_STORAGE_ACCESS, rootStorageType)
+               }.show()
+         }
+
+         override fun onCancelledByUser(requestCode: Int) {
+            Toast.makeText(baseContext, "Cancelled by user", Toast.LENGTH_SHORT).show()
+         }
+
+         override fun onStoragePermissionDenied(requestCode: Int) {
+            requestStoragePermission()
+         }
+
+         override fun onRootPathPermissionGranted(requestCode: Int, root: DocumentFile) {
+            Toast.makeText(
+               baseContext,
+               "Storage access has been granted for ${root.absolutePath}",
+               Toast.LENGTH_SHORT
+            ).show()
+         }
+      }
+   }
+
+   private fun requestStoragePermission() {
+      Dexter.withContext(this)
+         .withPermissions(
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+         )
+         .withListener(object : BaseMultiplePermissionsListener() {
+            override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+               if (report.areAllPermissionsGranted()) {
+                  storageManager.storage?.requestStorageAccess(REQUEST_CODE_STORAGE_ACCESS)
+               } else {
+                  Toast.makeText(
+                     baseContext,
+                     "Please grant storage permissions",
+                     Toast.LENGTH_SHORT
+                  ).show()
+               }
+            }
+         }).check()
    }
 
    override fun onNewIntent(intent: Intent?) {
@@ -148,5 +214,20 @@ class MainActivity : AppCompatActivity() {
                RecipeListFragmentDirections.actionRecipeListFragmentToRecipeSearchFragment(filter))
          }
       }
+   }
+
+   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+      super.onActivityResult(requestCode, resultCode, data)
+      storageManager.storage?.onActivityResult(requestCode, resultCode, data)
+   }
+
+   override fun onSaveInstanceState(outState: Bundle) {
+      storageManager.storage?.onSaveInstanceState(outState)
+      super.onSaveInstanceState(outState)
+   }
+
+   override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+      super.onRestoreInstanceState(savedInstanceState)
+      storageManager.storage?.onRestoreInstanceState(savedInstanceState)
    }
 }

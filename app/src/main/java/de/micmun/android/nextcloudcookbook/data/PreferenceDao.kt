@@ -62,4 +62,14 @@ class PreferenceDao private constructor(application: Application) {
    fun setSort(sort: Int) {
       sharedPreferences.edit().putInt(Pref.SORT, sort).apply()
    }
+
+   fun isStorageAccessed(): SharedPreferenceLiveData<Boolean> {
+      return sharedPreferences.booleanLiveData(Pref.STORAGE_ACCESS, false)
+   }
+
+   fun isStorageAccessedSync() = sharedPreferences.getBoolean(Pref.STORAGE_ACCESS, false)
+
+   fun setStorageAccess(storageAccess: Boolean) {
+      sharedPreferences.edit().putBoolean(Pref.STORAGE_ACCESS, storageAccess).apply()
+   }
 }

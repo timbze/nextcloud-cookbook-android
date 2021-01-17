@@ -5,19 +5,27 @@
  */
 package de.micmun.android.nextcloudcookbook.ui.preferences
 
+import android.Manifest.permission
 import android.app.TaskStackBuilder
 import android.content.Intent
 import android.os.Bundle
-import android.os.Environment
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.CheckBoxPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import com.obsez.android.lib.filechooser.ChooserDialog
+import com.afollestad.materialdialogs.MaterialDialog
+import com.anggrayudi.storage.callback.FolderPickerCallback
+import com.anggrayudi.storage.file.StorageType
+import com.anggrayudi.storage.file.absolutePath
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.ui.MainActivity
+import de.micmun.android.nextcloudcookbook.util.StorageManager
 
 /**
  * Fragment for settings.
@@ -34,6 +42,12 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
    private lateinit var hiddenFolderPreference: CheckBoxPreference
 
    private var currentHiddenValue: Boolean = false
+   private val storageManager = StorageManager.getInstance()
+
+   companion object {
+      const val REQUEST_CODE_STORAGE_ACCESS = 1
+      const val REQUEST_CODE_PICK_FOLDER = 2
+   }
 
    override fun onActivityCreated(savedInstanceState: Bundle?) {
       super.onActivityCreated(savedInstanceState)
@@ -60,7 +74,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
 
       // observe values
       viewModel.recipeDirectory.observe(this, {
-         dirPreference.summary = it.toString()
+         dirPreference.summary = StorageManager.getDocumentFromString(requireContext(), it)?.absolutePath ?: ""
       })
       viewModel.hiddenFolder.observe(this, {
          currentHiddenValue = it
@@ -108,16 +122,67 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
    /**
     * Choose dialog for picking a folder.
     */
-   @Suppress("DEPRECATION")
    private fun chooseFolder() {
-      ChooserDialog(requireActivity())
-         .withFilter(true, currentHiddenValue)
-         .withStartFile(Environment.getExternalStorageDirectory().absolutePath)
-         .withChosenListener { path, _ ->
-            Toast.makeText(requireActivity(), "FOLDER: $path", Toast.LENGTH_SHORT).show()
-            viewModel.setRecipeDirectory(path)
+      setupFolderPickerCallback()
+      storageManager.storage?.openFolderPicker(REQUEST_CODE_PICK_FOLDER)
+   }
+
+   private fun requestStoragePermission() {
+      Dexter.withContext(context)
+         .withPermissions(
+            permission.WRITE_EXTERNAL_STORAGE,
+            permission.READ_EXTERNAL_STORAGE
+         )
+         .withListener(object : BaseMultiplePermissionsListener() {
+            override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+               if (report.areAllPermissionsGranted()) {
+                  storageManager.storage?.requestStorageAccess(REQUEST_CODE_STORAGE_ACCESS)
+               } else {
+                  Toast.makeText(
+                     context,
+                     "Please grant storage permissions",
+                     Toast.LENGTH_SHORT
+                  ).show()
+               }
+            }
+         }).check()
+   }
+
+   private fun setupFolderPickerCallback() {
+      storageManager.storage?.folderPickerCallback = object : FolderPickerCallback {
+         override fun onStoragePermissionDenied(requestCode: Int) {
+            requestStoragePermission()
          }
-         .build()
-         .show()
+
+         override fun onStorageAccessDenied(
+            requestCode: Int,
+            folder: DocumentFile?,
+            storageType: StorageType?
+         ) {
+            if (storageType == null) {
+               requestStoragePermission()
+               return
+            }
+
+            MaterialDialog(requireActivity())
+               .message(
+                  text = "You have no write access to this storage, thus selecting this folder is useless." +
+                         "\nWould you like to grant access to this folder?"
+               )
+               .negativeButton(android.R.string.cancel)
+               .positiveButton {
+                  storageManager.storage?.requestStorageAccess(REQUEST_CODE_STORAGE_ACCESS, storageType)
+               }.show()
+         }
+
+         override fun onFolderSelected(requestCode: Int, folder: DocumentFile) {
+            Toast.makeText(requireActivity(), "FOLDER: ${folder.absolutePath}", Toast.LENGTH_SHORT).show()
+            viewModel.setRecipeDirectory(folder.uri.toString())
+         }
+
+         override fun onCancelledByUser(requestCode: Int) {
+            Toast.makeText(context, "Folder picker cancelled by user", Toast.LENGTH_SHORT).show()
+         }
+      }
    }
 }

@@ -9,7 +9,7 @@ package de.micmun.android.nextcloudcookbook.data
  * Constants for pref name.
  *
  * @author MicMun
- * @version 1.2, 02.08.20
+ * @version 1.3, 10.01.21
  */
 class Pref {
    companion object {
@@ -17,5 +17,6 @@ class Pref {
       const val HIDDEN_FOLDER = "hidden_folder"
       const val THEME = "theme_setting"
       const val SORT = "recipe_list_sorting"
+      const val STORAGE_ACCESS = "storage_access"
    }
 }
