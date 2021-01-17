@@ -1,105 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Nextcloud Cookbook</string>
-    <string name="app_logo_desc">Icône du lanceur de l\'application affichant un symbole de livre de cuisine</string>
-    <string name="permissions_error_message">Accès refusé ! L\'application a besoin d\'un accès au stockage, veuillez l\'activer dans les paramètres.</string>
-    <string name="no_information">Pas d\'information.</string>
-    <!-- recipe list -->
-    <string name="empty_list">Pas de recettes.</string>
-    <string name="recipe_list_image_desc">Image miniature de la recette</string>
-    <!-- recipe detail -->
-    <string name="img_desc_logo">Logo de la recette</string>
-    <string name="list_symbol" translatable="false">•</string>
-    <string name="title_duration">Durées en HH:MM</string>
-    <string name="tooltip_prep_time">Préparation</string>
-    <string name="tooltip_cook_time">Cuisine</string>
-    <string name="tooltip_total_time">Total</string>
-    <!-- tab titles -->
-    <string name="tab_info_title">Informations</string>
-    <string name="tab_ingredients_title">Ingrédients</string>
-    <string name="tab_instructions_title">Instructions</string>
-    <string name="tab_nutritions_title">Nourriture</string>
-    <!-- tab infos -->
-    <string name="text_uncategorized">Non classé</string>
-    <string name="text_categories"><strong>Catégories:</strong><br/> %1$s</string>
-    <string name="text_yield"><strong>Rendement:</strong> %1$s</string>
-    <string name="text_author">Auteur : %1$s</string>
-    <string name="text_url">Source : %1$s</string>
-    <string name="text_no_keywords">Aucun mot clé.</string>
-    <string name="text_keywords"><strong>Mots clés:</strong><br/> %1$s</string>
-    <string name="text_date_published">Date de publication : %1$s</string>
-    <!-- Nutritions -->
-    <string name="nutrition_calories">Calories : %1$s</string>
-    <string name="nutrition_carbohydrate_content">Contenu en glucides : %1$s</string>
-    <string name="nutrition_cholesterol_content">Taux de cholestérol : %1$s</string>
-    <string name="nutrition_fat_content">Teneur en graisse : %1$s</string>
-    <string name="nutrition_fiberContent">Teneur en fibres : %1$s</string>
-    <string name="nutrition_protein_content">Teneur en protéines : %1$s</string>
-    <string name="nutrition_saturated_fat_content">Teneur en graisses saturées : %1$s</string>
-    <string name="nutrition_serving_size">Taille de la portion : %1$s</string>
-    <string name="nutrition_sodium_content">Teneur en sodium : %1$s</string>
-    <string name="nutrition_sugar_content">Teneur en sucre : %1$s</string>
-    <string name="nutrition_trans_fat_content">Teneur en graisses trans : %1$s</string>
-    <string name="nutrition_unsaturated_fat_content">Teneur en graisses insaturées : %1$s</string>
-    <!-- menu -->
-    <string name="menu_search_title">Recherche avancée</string>
-    <string name="menu_settings_title">Paramètres</string>
-    <string name="menu_sort_title">Trier</string>
-    <string name="menu_refresh_tooltip">Rafraîchir les recettes</string>
-    <string name="menu_search_tooltip">Rechercher une recette</string>
-    <string name="search_hint">Recherche par nom</string>
-    <!-- search formular -->
-    <string name="form_search_title">Recherche avancée</string>
-    <string name="form_search_hint">Requête de recherche</string>
-    <string name="form_ignore_case">Ignorer l\'affaire \?</string>
-    <string name="form_exact_search">Faire une recherche précise \?</string>
-    <string name="form_types">Type de recherche</string>
-    <string name="form_type_keyword">Recherche par mot clé</string>
-    <string name="form_type_ingredients">Recherche par ingrédient</string>
-    <string name="form_type_yield">Recherche par rendement</string>
-    <string name="form_search_options">Options de recherche</string>
-    <string name="form_search_commit">Recherchez</string>
-    <!-- navdrawer_menu -->
-    <string name="menu_all_categories">Toutes les catégories</string>
-    <string name="menu_uncategorized">Non classé</string>
-    <!-- preferences -->
-    <string name="pref_category_function">Fonctionnalité</string>
-    <string name="pref_category_design">Conception</string>
-    <string name="preftitle_recipeDir">Répertoire des recettes</string>
-    <string name="prefkey_recipeDir" translatable="false">recipe_directory</string>
-    <string name="title_dir_chooser">Choisissez un répertoire…</string>
-    <string name="prefkey_allow_hidden" translatable="false">hidden_folder</string>
-    <string name="preftitle_allow_hidden">Afficher le dossier caché</string>
-    <string name="pref_hidden_folder_true">Le sélecteur du répertoire des recettes affiche un dossier caché</string>
-    <string name="pref_hidden_folder_false">Le sélecteur du répertoire des recettes n\'affiche pas le dossier caché</string>
-    <string name="prefkey_theme" translatable="false">theme_setting</string>
-    <string name="preftitle_theme">Sélectionnez un thème</string>
-    <string name="prefkey_about" translatable="false">app_about</string>
-    <string name="about_title">A propos de</string>
-    <string name="about_version">Version de l\'application : %1$s</string>
-    <string name="about_summary">2020 par MicMun. Licence sous GPLv3.
+   <string name="app_logo_desc">Icône du lanceur de l\'application affichant un symbole de livre de cuisine</string>
+   <string name="permissions_error_message">Accès refusé ! L\'application a besoin d\'un accès au stockage, veuillez l\'activer dans les paramètres.</string>
+   <string name="no_information">Pas d\'information.</string>
+   <!-- recipe list -->
+   <string name="empty_list">Pas de recettes.</string>
+   <string name="recipe_list_image_desc">Image miniature de la recette</string>
+   <!-- recipe detail -->
+   <string name="img_desc_logo">Logo de la recette</string>
+   <string name="title_duration">Durées en HH:MM</string>
+   <string name="tooltip_prep_time">Préparation</string>
+   <string name="tooltip_cook_time">Cuisine</string>
+   <string name="tooltip_total_time">Total</string>
+   <!-- tab titles -->
+   <string name="tab_info_title">Informations</string>
+   <string name="tab_ingredients_title">Ingrédients</string>
+   <string name="tab_instructions_title">Instructions</string>
+   <string name="tab_nutritions_title">Nourriture</string>
+   <!-- tab infos -->
+   <string name="text_uncategorized">Non classé</string>
+   <string name="text_categories"><strong>Catégories:</strong><br /> %1$s</string>
+   <string name="text_yield"><strong>Rendement:</strong> %1$s</string>
+   <string name="text_author">Auteur : %1$s</string>
+   <string name="text_url">Source : %1$s</string>
+   <string name="text_no_keywords">Aucun mot clé.</string>
+   <string name="text_keywords"><strong>Mots clés:</strong><br /> %1$s</string>
+   <string name="text_date_published">Date de publication : %1$s</string>
+   <!-- Nutritions -->
+   <string name="nutrition_calories">Calories : %1$s</string>
+   <string name="nutrition_carbohydrate_content">Contenu en glucides : %1$s</string>
+   <string name="nutrition_cholesterol_content">Taux de cholestérol : %1$s</string>
+   <string name="nutrition_fat_content">Teneur en graisse : %1$s</string>
+   <string name="nutrition_fiberContent">Teneur en fibres : %1$s</string>
+   <string name="nutrition_protein_content">Teneur en protéines : %1$s</string>
+   <string name="nutrition_saturated_fat_content">Teneur en graisses saturées : %1$s</string>
+   <string name="nutrition_serving_size">Taille de la portion : %1$s</string>
+   <string name="nutrition_sodium_content">Teneur en sodium : %1$s</string>
+   <string name="nutrition_sugar_content">Teneur en sucre : %1$s</string>
+   <string name="nutrition_trans_fat_content">Teneur en graisses trans : %1$s</string>
+   <string name="nutrition_unsaturated_fat_content">Teneur en graisses insaturées : %1$s</string>
+   <!-- menu -->
+   <string name="menu_search_title">Recherche avancée</string>
+   <string name="menu_settings_title">Paramètres</string>
+   <string name="menu_sort_title">Trier</string>
+   <string name="menu_refresh_tooltip">Rafraîchir les recettes</string>
+   <string name="menu_search_tooltip">Rechercher une recette</string>
+   <string name="search_hint">Recherche par nom</string>
+   <!-- search formular -->
+   <string name="form_search_title">Recherche avancée</string>
+   <string name="form_search_hint">Requête de recherche</string>
+   <string name="form_ignore_case">Ignorer l\'affaire \?</string>
+   <string name="form_exact_search">Faire une recherche précise \?</string>
+   <string name="form_types">Type de recherche</string>
+   <string name="form_type_keyword">Recherche par mot clé</string>
+   <string name="form_type_ingredients">Recherche par ingrédient</string>
+   <string name="form_type_yield">Recherche par rendement</string>
+   <string name="form_search_options">Options de recherche</string>
+   <string name="form_search_commit">Recherchez</string>
+   <!-- navdrawer_menu -->
+   <string name="menu_all_categories">Toutes les catégories</string>
+   <string name="menu_uncategorized">Non classé</string>
+   <!-- preferences -->
+   <string name="pref_category_function">Fonctionnalité</string>
+   <string name="pref_category_design">Conception</string>
+   <string name="preftitle_recipeDir">Répertoire des recettes</string>
+   <string name="title_dir_chooser">Choisissez un répertoire…</string>
+   <string name="preftitle_allow_hidden">Afficher le dossier caché</string>
+   <string name="pref_hidden_folder_true">Le sélecteur du répertoire des recettes affiche un dossier caché</string>
+   <string name="pref_hidden_folder_false">Le sélecteur du répertoire des recettes n\'affiche pas le dossier caché</string>
+   <string name="preftitle_theme">Sélectionnez un thème</string>
+   <string name="about_title">A propos de</string>
+   <string name="about_version">Version de l\'application : %1$s</string>
+   <string name="about_summary">2020-2021 par MicMun. Licence sous GPLv3.
 \n
 \nNextcloud Cookbook est une application de livre de cuisine sur nextcloud pour gérer les recettes.</string>
-    <string-array name="theme_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-    <string-array name="sort_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-    <string name="theme_name_light">Lumineux</string>
-    <string name="theme_name_dark">Sombre</string>
-    <string name="theme_name_system">Système</string>
-    <string name="sort_value_alpha_asc">Nom A-Z</string>
-    <string name="sort_value_alpha_desc">Nom Z-A</string>
-    <string name="sort_value_date_asc">Date de publication ascendante</string>
-    <string name="sort_value_date_desc">Date de publication Décroissante</string>
-    <string name="sort_value_time_asc">Temps total croissant</string>
-    <string name="sort_value_time_desc">Temps total descendant</string>
+   <string name="theme_name_light">Lumineux</string>
+   <string name="theme_name_dark">Sombre</string>
+   <string name="theme_name_system">Système</string>
+   <string name="sort_value_alpha_asc">Nom A-Z</string>
+   <string name="sort_value_alpha_desc">Nom Z-A</string>
+   <string name="sort_value_date_asc">Date de publication ascendante</string>
+   <string name="sort_value_date_desc">Date de publication Décroissante</string>
+   <string name="sort_value_time_asc">Temps total croissant</string>
+   <string name="sort_value_time_desc">Temps total descendant</string>
 </resources>
