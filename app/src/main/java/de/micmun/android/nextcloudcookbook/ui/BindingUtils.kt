@@ -17,12 +17,13 @@ import androidx.documentfile.provider.DocumentFile
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 import de.micmun.android.nextcloudcookbook.util.DurationUtils
+import java.util.stream.Collectors
 
 /**
  * Utilities for binding data to view.
  *
  * @author MicMun
- * @version 1.8, 07.04.21
+ * @version 1.9, 09.04.21
  */
 
 // Overview list
@@ -158,6 +159,23 @@ fun TextView.setRecipeYield(item: DbRecipe?) {
             Html.fromHtml(resources.getString(R.string.text_yield, it.recipeCore.recipeYield))
 
          visibility = View.VISIBLE
+      }
+   }
+}
+
+@BindingAdapter("recipeTools")
+fun TextView.setTools(item: DbRecipe?) {
+   item?.let {
+      if (it.tool.isNullOrEmpty()) {
+         visibility = View.GONE
+      } else {
+         val tools = it.tool.stream().map { it.tool }.collect(Collectors.toList()).joinToString(", ")
+ 
+         @Suppress("DEPRECATION")
+         text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            Html.fromHtml(resources.getString(R.string.text_tools, tools), Html.FROM_HTML_MODE_LEGACY)
+         else
+            Html.fromHtml(resources.getString(R.string.text_tools, tools))
       }
    }
 }

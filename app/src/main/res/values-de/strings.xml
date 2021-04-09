@@ -30,6 +30,7 @@
    <string name="text_no_keywords">Keine Schlüsselwörter.</string>
    <string name="text_keywords"><![CDATA[<strong>Schlüsselwörter:</strong><br/> ]]> %1$s</string>
    <string name="text_date_published">Veröffentlichungsdatum: %1$s</string>
+   <string name="text_tools"><![CDATA[<strong>Benötigte Werkzeuge:</strong><br/> ]]> %1$s</string>
 
    <!-- Nutritions -->
    <string name="nutrition_calories">Kalorien: %1$s</string>
