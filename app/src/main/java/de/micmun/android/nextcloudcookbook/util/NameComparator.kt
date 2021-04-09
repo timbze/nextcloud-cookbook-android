@@ -5,16 +5,17 @@
  */
 package de.micmun.android.nextcloudcookbook.util
 
-import de.micmun.android.nextcloudcookbook.data.model.Recipe
+import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 
 /**
  * Comparator with name.
  *
  * @author MicMun
- * @version 1.0, 26.07.20
+ * @version 1.1, 21.03.21
  */
-class NameComparator(private val asc: Boolean) : Comparator<Recipe> {
-   override fun compare(o1: Recipe, o2: Recipe): Int {
-      return if (asc) o1.name.compareTo(o2.name) else o2.name.compareTo(o1.name)
+class NameComparator(private val asc: Boolean) : Comparator<DbRecipe> {
+   override fun compare(o1: DbRecipe, o2: DbRecipe): Int {
+      return if (asc) o1.recipeCore.name.compareTo(o2.recipeCore.name) else o2.recipeCore.name.compareTo(
+         o1.recipeCore.name)
    }
 }

@@ -9,10 +9,6 @@
             android:key="@string/prefkey_recipeDir"
             android:summary="%s"
             android:title="@string/preftitle_recipeDir" />
-      <CheckBoxPreference
-            android:key="@string/prefkey_allow_hidden"
-            android:summary="%s"
-            android:title="@string/preftitle_allow_hidden" />
    </PreferenceCategory>
    <PreferenceCategory android:title="@string/pref_category_design">
       <de.micmun.android.nextcloudcookbook.ui.preferences.IntListPreference

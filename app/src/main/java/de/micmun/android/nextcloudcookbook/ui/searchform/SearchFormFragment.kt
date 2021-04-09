@@ -18,28 +18,32 @@ import androidx.navigation.fragment.findNavController
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.RecipeFilter
 import de.micmun.android.nextcloudcookbook.databinding.FragmentSearchFormBinding
-import de.micmun.android.nextcloudcookbook.ui.CurrentCategoryViewModel
+import de.micmun.android.nextcloudcookbook.data.CategoryFilter
+import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModel
+import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModelFactory
 import de.micmun.android.nextcloudcookbook.ui.MainActivity
 
 /**
  * Fragment for advanced search formular.
  *
  * @author MicMun
- * @version 1.1, 20.09.20
+ * @version 1.2, 07.04.21
  */
 class SearchFormFragment : Fragment(), SearchClickListener {
    private lateinit var binding: FragmentSearchFormBinding
-   private lateinit var catViewModel: CurrentCategoryViewModel
-   private var categoryId = -1
+   private lateinit var settingViewModel: CurrentSettingViewModel
+   private lateinit var category: CategoryFilter
 
-   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_form, container, false)
       binding.clickListener = this
 
-      catViewModel = ViewModelProvider(MainActivity.mainApplication).get(CurrentCategoryViewModel::class.java)
+      val factory = CurrentSettingViewModelFactory(MainActivity.mainApplication)
+      settingViewModel =
+         ViewModelProvider(MainActivity.mainApplication, factory).get(CurrentSettingViewModel::class.java)
 
-      catViewModel.category.observe(viewLifecycleOwner, {
-         categoryId = it
+      settingViewModel.category.observe(viewLifecycleOwner, {
+         category = it ?: CategoryFilter(CategoryFilter.CategoryFilterOption.ALL_CATEGORIES)
       })
 
       binding.searchTypes.setOnCheckedChangeListener { _, checkedId ->

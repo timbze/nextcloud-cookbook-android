@@ -20,8 +20,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.RecipeFilter
+import de.micmun.android.nextcloudcookbook.data.SortValue
 import de.micmun.android.nextcloudcookbook.databinding.FragmentRecipesearchBinding
-import de.micmun.android.nextcloudcookbook.ui.CurrentCategoryViewModel
+import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModel
+import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModelFactory
 import de.micmun.android.nextcloudcookbook.ui.MainActivity
 import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListAdapter
 import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListListener
@@ -30,13 +32,13 @@ import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListListener
  * Fragment for search result.
  *
  * @author MicMun
- * @version 1.4, 20.09.20
+ * @version 1.5, 07.04.21
  */
 class RecipeSearchFragment : Fragment() {
    private lateinit var binding: FragmentRecipesearchBinding
    private lateinit var recipeSearchViewModel: RecipeSearchViewModel
    private lateinit var filter: RecipeFilter
-   private lateinit var catViewModel: CurrentCategoryViewModel
+   private lateinit var settingViewModel: CurrentSettingViewModel
 
    private var listState: Parcelable? = null
 
@@ -44,17 +46,37 @@ class RecipeSearchFragment : Fragment() {
       private const val LIST_STATE = "listState"
    }
 
-   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipesearch, container, false)
 
       val args = RecipeSearchFragmentArgs.fromBundle(requireArguments())
       filter = args.filter
 
-      catViewModel = ViewModelProvider(MainActivity.mainApplication).get(CurrentCategoryViewModel::class.java)
+      // search view model
+      val viewModelFactory = RecipeSearchViewModelFactory(requireActivity().application)
+      recipeSearchViewModel = ViewModelProvider(this, viewModelFactory).get(RecipeSearchViewModel::class.java)
+      binding.recipeSearchViewModel = recipeSearchViewModel
+      binding.lifecycleOwner = this
 
-      catViewModel.category.observe(viewLifecycleOwner, {
-         initializeRecipeList(filter, it)
+      val factory = CurrentSettingViewModelFactory(MainActivity.mainApplication)
+      settingViewModel =
+         ViewModelProvider(MainActivity.mainApplication, factory).get(CurrentSettingViewModel::class.java)
+
+      settingViewModel.category.observe(viewLifecycleOwner, { category ->
+         category?.let {
+            recipeSearchViewModel.setCategory(it)
+         }
       })
+
+      settingViewModel.sorting.observe(viewLifecycleOwner, { sorting ->
+         sorting?.let {
+            recipeSearchViewModel.setSort(SortValue.getByValue(it))
+         }
+      })
+
+      recipeSearchViewModel.setFilter(filter)
+
+      initializeRecipeList()
 
       return binding.root
    }
@@ -64,34 +86,36 @@ class RecipeSearchFragment : Fragment() {
       (requireActivity() as AppCompatActivity).supportActionBar?.title = filter.query
    }
 
-   private fun initializeRecipeList(filter: RecipeFilter, catId: Int) {
-      val viewModelFactory = RecipeSearchViewModelFactory(catId, filter, requireActivity().application)
-      recipeSearchViewModel = ViewModelProvider(this, viewModelFactory).get(RecipeSearchViewModel::class.java)
-      binding.recipeSearchViewModel = recipeSearchViewModel
-      binding.lifecycleOwner = this
-
+   private fun initializeRecipeList() {
       // divider for recyclerview
       val dividerDecoration = DividerItemDecoration(binding.recipeResultList.context, LinearLayoutManager.VERTICAL)
       binding.recipeResultList.addItemDecoration(dividerDecoration)
 
       // data adapter
       val adapter =
-         RecipeListAdapter(RecipeListListener { recipeId -> recipeSearchViewModel.onRecipeClicked(recipeId) })
+         RecipeListAdapter(RecipeListListener { recipeName -> recipeSearchViewModel.onRecipeClicked(recipeName) })
       binding.recipeResultList.adapter = adapter
       adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
-      // observe live data
-      recipeSearchViewModel.recipeList.observe(viewLifecycleOwner, {
+      recipeSearchViewModel.filter.observe(viewLifecycleOwner, {
          it?.let {
-            adapter.submitList(it)
+            recipeSearchViewModel.setSearchResult(it)
+            filter = it
 
-            if (it.isNotEmpty()) {
-               if (R.id.titleConstraint == binding.switcher2.nextView.id) {
-                  binding.switcher2.showNext()
+            // observe live data
+            recipeSearchViewModel.getRecipes().observe(viewLifecycleOwner, {
+               it?.let {
+                  adapter.submitList(it)
+
+                  if (it.isNotEmpty()) {
+                     if (R.id.titleConstraint == binding.switcher2.nextView.id) {
+                        binding.switcher2.showNext()
+                     }
+                  } else if (R.id.emptyConstraint == binding.switcher2.nextView.id) {
+                     binding.switcher2.showNext()
+                  }
                }
-            } else if (R.id.emptyConstraint == binding.switcher2.nextView.id) {
-               binding.switcher2.showNext()
-            }
+            })
          }
       })
 

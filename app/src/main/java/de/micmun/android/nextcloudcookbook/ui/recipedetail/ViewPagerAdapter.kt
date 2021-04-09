@@ -10,20 +10,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import de.micmun.android.nextcloudcookbook.R
-import de.micmun.android.nextcloudcookbook.data.model.Nutrition
-import de.micmun.android.nextcloudcookbook.data.model.Recipe
 import de.micmun.android.nextcloudcookbook.databinding.TabInfosBinding
 import de.micmun.android.nextcloudcookbook.databinding.TabIngredientsBinding
 import de.micmun.android.nextcloudcookbook.databinding.TabInstructionsBinding
 import de.micmun.android.nextcloudcookbook.databinding.TabNutritionsBinding
+import de.micmun.android.nextcloudcookbook.db.model.DbNutrition
+import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 
 /**
  * Adapter for the ViewPager2 to present tabs.
  *
  * @author MicMun
- * @version 1.4, 12.07.20
+ * @version 1.5, 21.03.21
  */
-class ViewPagerAdapter(private val recipe: Recipe) :
+class ViewPagerAdapter(private val recipe: DbRecipe) :
    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
    companion object {
       const val TYPE_INFO = 0
@@ -78,7 +78,7 @@ class ViewPagerAdapter(private val recipe: Recipe) :
        *
        * @param recipe Recipe with its data.
        */
-      fun bind(recipe: Recipe) {
+      fun bind(recipe: DbRecipe) {
          binding.recipe = recipe
          binding.executePendingBindings()
       }
@@ -99,8 +99,8 @@ class ViewPagerAdapter(private val recipe: Recipe) :
        *
        * @param recipe Recipe data.
        */
-      fun bind(recipe: Recipe) {
-         binding.incredientsView.adapter = RecipeIngredientsAdapter(recipe.recipeIngredient)
+      fun bind(recipe: DbRecipe) {
+         binding.incredientsView.adapter = RecipeIngredientsAdapter(recipe.recipeIngredient ?: emptyList())
          binding.executePendingBindings()
       }
 
@@ -120,8 +120,8 @@ class ViewPagerAdapter(private val recipe: Recipe) :
        *
        * @param recipe Recipe data.
        */
-      fun bind(recipe: Recipe) {
-         binding.instructionsView.adapter = RecipeInstructionsAdapter(recipe.recipeInstructions)
+      fun bind(recipe: DbRecipe) {
+         binding.instructionsView.adapter = RecipeInstructionsAdapter(recipe.recipeInstructions ?: emptyList())
          binding.executePendingBindings()
       }
 
@@ -142,10 +142,10 @@ class ViewPagerAdapter(private val recipe: Recipe) :
        *
        * @param recipe Recipe data.
        */
-      fun bind(recipe: Recipe) {
+      fun bind(recipe: DbRecipe) {
          val switcher = binding.nutritionSwitcher
 
-         val nutritions = getNutritionList(recipe.nutrition)
+         val nutritions = getNutritionList(recipe.recipeCore.nutrition)
 
          if (nutritions.isEmpty() && R.id.nutritionEmptyLayout == switcher.nextView.id) {
             switcher.showNext()
@@ -174,7 +174,7 @@ class ViewPagerAdapter(private val recipe: Recipe) :
        *
        * @return list of nutritions or an empty list.
        */
-      private fun getNutritionList(nutrition: Nutrition?): List<String> {
+      private fun getNutritionList(nutrition: DbNutrition?): List<String> {
          val nutritions = nutrition?.toMap()?.toList()?.map { p -> resources.getString(p.first, p.second) }
          if (nutritions.isNullOrEmpty()) {
             return emptyList()

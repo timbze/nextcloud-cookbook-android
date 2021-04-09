@@ -23,7 +23,7 @@
 
    <!-- tab infos -->
    <string name="text_uncategorized">Unkategorisiert</string>
-   <string name="text_categories"><![CDATA[<strong>Kategorien:</strong><br/> ]]> %1$s</string>
+   <string name="text_categories"><![CDATA[<strong>Kategorie:</strong><br/> ]]> %1$s</string>
    <string name="text_yield"><![CDATA[<strong>Portionen:</strong>]]> %1$s</string>
    <string name="text_author">Autor: %1$s</string>
    <string name="text_url">Quelle: %1$s</string>

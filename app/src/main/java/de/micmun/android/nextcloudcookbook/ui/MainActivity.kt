@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.documentfile.provider.DocumentFile
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -35,9 +34,10 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener
 import de.micmun.android.nextcloudcookbook.MainApplication
 import de.micmun.android.nextcloudcookbook.R
-import de.micmun.android.nextcloudcookbook.data.PreferenceDao
 import de.micmun.android.nextcloudcookbook.data.RecipeFilter
 import de.micmun.android.nextcloudcookbook.databinding.ActivityMainBinding
+import de.micmun.android.nextcloudcookbook.settings.PreferenceDao
+import de.micmun.android.nextcloudcookbook.data.CategoryFilter
 import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListFragmentDirections
 import de.micmun.android.nextcloudcookbook.util.StorageManager
 
@@ -45,12 +45,12 @@ import de.micmun.android.nextcloudcookbook.util.StorageManager
  * Main Activity of the app.
  *
  * @author MicMun
- * @version 1.5, 10.01.21
+ * @version 1.5, 07.04.21
  */
 class MainActivity : AppCompatActivity() {
    private lateinit var binding: ActivityMainBinding
    private lateinit var drawerLayout: DrawerLayout
-   private lateinit var currentCategoryViewModel: CurrentCategoryViewModel
+   private lateinit var currentSettingViewModel: CurrentSettingViewModel
    private lateinit var storageManager: StorageManager
 
    companion object {
@@ -90,21 +90,23 @@ class MainActivity : AppCompatActivity() {
          }
       }
 
-      // category
-      currentCategoryViewModel = ViewModelProvider(mainApplication).get(CurrentCategoryViewModel::class.java)
+      // settings
+      val factory = CurrentSettingViewModelFactory(mainApplication)
+      currentSettingViewModel = ViewModelProvider(mainApplication, factory).get(CurrentSettingViewModel::class.java)
       binding.navView.setNavigationItemSelectedListener { item ->
-         val currentCatId = when (item.itemId) {
-            R.id.menu_all_categories -> -1
-            else -> item.itemId
+         val currentCat = when (item.itemId) {
+            R.id.menu_all_categories -> CategoryFilter(CategoryFilter.CategoryFilterOption.ALL_CATEGORIES)
+            R.id.menu_uncategorized -> CategoryFilter(CategoryFilter.CategoryFilterOption.UNCATEGORIZED)
+            else -> CategoryFilter(CategoryFilter.CategoryFilterOption.CATEGORY, item.title.toString())
          }
-         currentCategoryViewModel.setCategory(currentCatId)
+         currentSettingViewModel.setNewCategory(currentCat)
          drawerLayout.closeDrawers()
          true
       }
 
       setupSimpleStorage(savedInstanceState)
       val preferences = PreferenceDao.getInstance(application)
-      preferences.isStorageAccessed().observe(this, Observer { isAccess ->
+      preferences.isStorageAccessed().observe(this, { isAccess ->
          if (!isAccess) {
             Dexter.withContext(this)
                .withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)

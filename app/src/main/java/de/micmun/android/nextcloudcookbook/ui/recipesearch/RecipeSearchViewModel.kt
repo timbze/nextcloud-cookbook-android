@@ -9,66 +9,75 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import de.micmun.android.nextcloudcookbook.R
-import de.micmun.android.nextcloudcookbook.data.PreferenceDao
+import de.micmun.android.nextcloudcookbook.data.CategoryFilter
 import de.micmun.android.nextcloudcookbook.data.RecipeFilter
-import de.micmun.android.nextcloudcookbook.data.RecipeRepository
 import de.micmun.android.nextcloudcookbook.data.SortValue
-import de.micmun.android.nextcloudcookbook.data.model.Recipe
-import de.micmun.android.nextcloudcookbook.util.DateComparator
-import de.micmun.android.nextcloudcookbook.util.NameComparator
-import de.micmun.android.nextcloudcookbook.util.TotalTimeComparator
+import de.micmun.android.nextcloudcookbook.db.DbRecipeRepository
+import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 
 /**
  * ViewModel for recipe search result.
  *
  * @author MicMun
- * @version 1.2, 26.07.20
+ * @version 1.3, 07.04.21
  */
-class RecipeSearchViewModel(categoryId: Int, filter: RecipeFilter, application: Application) :
+class RecipeSearchViewModel(application: Application) :
    AndroidViewModel(application) {
-   private val _recipeList = MutableLiveData<List<Recipe>>()
-   val recipeList: LiveData<List<Recipe>>
-      get() = _recipeList
+   private val recipeRepository = DbRecipeRepository.getInstance(application)
 
-   private var recipeRepository: RecipeRepository = RecipeRepository.getInstance()
+   private var sorting = SortValue.NAME_A_Z
+   private var categoryFilter = CategoryFilter(CategoryFilter.CategoryFilterOption.ALL_CATEGORIES)
+   private var applyFilter: RecipeFilter? = null
+   private val _filter = MutableLiveData<RecipeFilter>()
+   val filter: LiveData<RecipeFilter>
+      get() = _filter
 
-   init {
-      var list = recipeRepository.recipeList
+   fun getRecipes(): LiveData<List<DbRecipe>> {
+      var recipes: LiveData<List<DbRecipe>> = MutableLiveData(emptyList())
 
-      if (categoryId == R.id.menu_uncategorized) {
-         list = recipeRepository.filterRecipesUncategorized()
-      } else if (categoryId != -1) {
-         list = recipeRepository.filterRecipesWithCategory(categoryId)
+      runBlocking(Dispatchers.IO) {
+         recipes =
+            if (categoryFilter.type == CategoryFilter.CategoryFilterOption.ALL_CATEGORIES && applyFilter != null) {
+               recipeRepository.filterAll(sorting, applyFilter!!)
+            } else if (categoryFilter.type == CategoryFilter.CategoryFilterOption.ALL_CATEGORIES) {
+               recipeRepository.sort(sorting)
+            } else if (categoryFilter.type == CategoryFilter.CategoryFilterOption.UNCATEGORIZED) {
+               recipeRepository.filterUncategorized(sorting, applyFilter)
+            } else {
+               recipeRepository.filterCategory(sorting, categoryFilter.name, applyFilter)
+            }
       }
 
-      _recipeList.value = sortList(filter.filter(list))
+      return recipes
    }
 
-   private val _navigateToRecipe = MutableLiveData<Long>()
+   fun setFilter(filter: RecipeFilter) {
+      _filter.value = filter
+   }
+
+   fun setCategory(category: CategoryFilter) {
+      this.categoryFilter = category
+   }
+
+   fun setSort(sortValue: SortValue) {
+      sorting = sortValue
+   }
+
+   fun setSearchResult(filter: RecipeFilter) {
+      applyFilter = filter
+   }
+
+   private val _navigateToRecipe = MutableLiveData<String>()
    val navigateToRecipe
       get() = _navigateToRecipe
 
-   fun onRecipeClicked(id: Long) {
-      _navigateToRecipe.value = id
+   fun onRecipeClicked(name: String) {
+      _navigateToRecipe.value = name
    }
 
    fun onRecipeNavigated() {
       _navigateToRecipe.value = null
-   }
-
-   private fun sortList(list: List<Recipe>): List<Recipe> {
-      val sorting = PreferenceDao.getInstance(getApplication()).getSortSync()
-
-      val comparator = when (SortValue.getByValue(sorting)) {
-         SortValue.NAME_A_Z -> NameComparator(true)
-         SortValue.NAME_Z_A -> NameComparator(false)
-         SortValue.DATE_ASC -> DateComparator(true)
-         SortValue.DATE_DESC -> DateComparator(false)
-         SortValue.TOTAL_TIME_ASC -> TotalTimeComparator(true)
-         SortValue.TOTAL_TIME_DESC -> TotalTimeComparator(false)
-         else -> NameComparator(true)
-      }
-      return list.sortedWith(comparator)
    }
 }

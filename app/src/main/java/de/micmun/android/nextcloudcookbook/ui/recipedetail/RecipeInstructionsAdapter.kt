@@ -9,14 +9,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import de.micmun.android.nextcloudcookbook.databinding.InstructionsItemBinding
+import de.micmun.android.nextcloudcookbook.db.model.DbInstruction
 
 /**
  * Adapter for recipe ingredients.
  *
  * @author MicMun
- * @version 1.0, 02.06.20
+ * @version 1.1, 28.02.21
  */
-class RecipeInstructionsAdapter(private val instructions: Array<String>) :
+class RecipeInstructionsAdapter(private val instructions: List<DbInstruction>) :
    RecyclerView.Adapter<RecipeInstructionsAdapter.InstructionsViewHolder>() {
 
    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InstructionsViewHolder {
@@ -26,7 +27,7 @@ class RecipeInstructionsAdapter(private val instructions: Array<String>) :
    override fun getItemCount() = instructions.size
 
    override fun onBindViewHolder(holder: InstructionsViewHolder, position: Int) {
-      val ingredient = instructions[position].trim()
+      val ingredient = instructions[position].instruction.trim()
       holder.bind(ingredient)
    }
 

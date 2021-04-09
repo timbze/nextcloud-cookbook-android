@@ -24,7 +24,7 @@
 
    <!-- tab infos -->
    <string name="text_uncategorized">Uncategorized</string>
-   <string name="text_categories"><![CDATA[<strong>Categories:</strong><br/> ]]> %1$s</string>
+   <string name="text_categories"><![CDATA[<strong>Category:</strong><br/> ]]> %1$s</string>
    <string name="text_yield"><![CDATA[<strong>Yield:</strong>]]> %1$s</string>
    <string name="text_author">Author: %1$s</string>
    <string name="text_url">Source: %1$s</string>

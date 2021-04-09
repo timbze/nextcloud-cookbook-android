@@ -14,14 +14,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import de.micmun.android.nextcloudcookbook.R
-import de.micmun.android.nextcloudcookbook.data.model.Recipe
 import de.micmun.android.nextcloudcookbook.databinding.FragmentDetailBinding
+import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 
 /**
  * Fragment for detail of a recipe.
  *
  * @author MicMun
- * @version 1.5, 20.09.20
+ * @version 1.6, 21.03.21
  */
 class RecipeDetailFragment : Fragment() {
    private lateinit var binding: FragmentDetailBinding
@@ -38,11 +38,11 @@ class RecipeDetailFragment : Fragment() {
       private const val KEY_CURRENT_PAGE = "current_page"
    }
 
-   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
 
       val args = RecipeDetailFragmentArgs.fromBundle(requireArguments())
-      val viewModelFactory = RecipeViewModelFactory(args.recipeId, requireActivity().application)
+      val viewModelFactory = RecipeViewModelFactory(args.recipeName, requireActivity().application)
       viewModel = ViewModelProvider(this, viewModelFactory).get(RecipeViewModel::class.java)
       binding.lifecycleOwner = this
 
@@ -53,7 +53,8 @@ class RecipeDetailFragment : Fragment() {
 
       viewModel.recipe.observe(viewLifecycleOwner, { recipe ->
          recipe?.let {
-            initPager(recipe)
+            initPager(it)
+            setTitle(it.recipeCore.name)
          }
       })
 
@@ -69,7 +70,7 @@ class RecipeDetailFragment : Fragment() {
     *
     * @param recipe current recipe data.
     */
-   private fun initPager(recipe: Recipe) {
+   private fun initPager(recipe: DbRecipe) {
       binding.pager.adapter = ViewPagerAdapter(recipe)
       binding.pager.offscreenPageLimit = 4
       val tabLayout = binding.tabLayout
@@ -130,7 +131,13 @@ class RecipeDetailFragment : Fragment() {
 
    override fun onActivityCreated(savedInstanceState: Bundle?) {
       super.onActivityCreated(savedInstanceState)
-      val title = viewModel.recipe.value!!.name
+      val title = viewModel.recipe.value?.recipeCore?.name
+      title?.let {
+         setTitle(it)
+      }
+   }
+
+   private fun setTitle(title: String) {
       (activity as AppCompatActivity).supportActionBar?.title = title
    }
 }
