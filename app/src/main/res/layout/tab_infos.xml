@@ -8,7 +8,7 @@
 
       <variable
             name="recipe"
-            type="de.micmun.android.nextcloudcookbook.data.model.Recipe" />
+            type="de.micmun.android.nextcloudcookbook.db.model.DbRecipe" />
    </data>
 
    <ScrollView
@@ -163,7 +163,7 @@
                app:recipeYield="@{recipe}" />
 
          <TextView
-               android:id="@+id/authorTxt"
+               android:id="@+id/toolsTxt"
                android:layout_width="0dp"
                android:layout_height="wrap_content"
                android:layout_marginStart="16dp"
@@ -174,22 +174,7 @@
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintTop_toBottomOf="@+id/yieldTxt"
-               app:recipeAuthor="@{recipe}" />
-
-         <TextView
-               android:id="@+id/urlTxt"
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:layout_marginStart="16dp"
-               android:layout_marginTop="8dp"
-               android:layout_marginEnd="16dp"
-               android:autoLink="web"
-               android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-               android:textSize="@dimen/tab_info_text_size"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@+id/authorTxt"
-               app:url="@{recipe}" />
+               app:recipeTools="@{recipe}" />
 
          <TextView
                android:id="@+id/categoriesTxt"
@@ -202,7 +187,7 @@
                android:textSize="@dimen/tab_info_text_size"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@+id/urlTxt"
+               app:layout_constraintTop_toBottomOf="@+id/toolsTxt"
                app:recipeCategories="@{recipe}" />
 
          <TextView
@@ -216,10 +201,39 @@
                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                android:textSize="@dimen/tab_info_text_size"
                app:keywords="@{recipe}"
-               app:layout_constraintBottom_toBottomOf="parent"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintTop_toBottomOf="@+id/categoriesTxt" />
+
+         <TextView
+               android:id="@+id/authorTxt"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="16dp"
+               android:layout_marginTop="8dp"
+               android:layout_marginEnd="16dp"
+               android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+               android:textSize="@dimen/tab_info_text_size"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/keywordsTxt"
+               app:recipeAuthor="@{recipe}" />
+
+         <TextView
+               android:id="@+id/urlTxt"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="16dp"
+               android:layout_marginTop="8dp"
+               android:layout_marginEnd="16dp"
+               android:autoLink="web"
+               android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+               android:textSize="@dimen/tab_info_text_size"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/authorTxt"
+               app:url="@{recipe}" />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
    </ScrollView>

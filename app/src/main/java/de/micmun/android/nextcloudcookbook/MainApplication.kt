@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelStoreOwner
  * Application of the app.
  *
  * @author MicMun
- * @version 1.0, 12.07.20
+ * @version 1.1, 28.02.21
  */
 class MainApplication : Application(), ViewModelStoreOwner {
    private val appViewModelStore: ViewModelStore by lazy {

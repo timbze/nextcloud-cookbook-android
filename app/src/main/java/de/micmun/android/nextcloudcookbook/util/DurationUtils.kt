@@ -16,7 +16,7 @@ import java.util.*
  * Utilities for the duration format.
  *
  * @author MicMun
- * @version 1.2, 27.07.20
+ * @version 1.3, 17.01.21
  */
 class DurationUtils {
    companion object {
@@ -27,14 +27,11 @@ class DurationUtils {
        * @return formatted String to display.
        */
       fun formatStringToDuration(isoString: String): String {
-         var displayString = ""
-         displayString = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             getDisplayString(isoString)
          } else {
             getLegacyDisplayString(isoString)
          }
-
-         return displayString
       }
 
       /**

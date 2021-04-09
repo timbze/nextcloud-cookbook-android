@@ -6,179 +6,124 @@
 package de.micmun.android.nextcloudcookbook.ui.recipelist
 
 import android.app.Application
-import android.os.Build
-import android.text.Html
-import android.view.Menu
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import de.micmun.android.nextcloudcookbook.R
-import de.micmun.android.nextcloudcookbook.data.*
-import de.micmun.android.nextcloudcookbook.data.model.Recipe
-import de.micmun.android.nextcloudcookbook.util.DateComparator
-import de.micmun.android.nextcloudcookbook.util.NameComparator
-import de.micmun.android.nextcloudcookbook.util.TotalTimeComparator
+import android.util.Log
+import androidx.lifecycle.*
+import de.micmun.android.nextcloudcookbook.json.JsonRecipeRepository
+import de.micmun.android.nextcloudcookbook.db.DbRecipeRepository
+import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
+import de.micmun.android.nextcloudcookbook.json.model.Recipe
+import de.micmun.android.nextcloudcookbook.data.CategoryFilter
+import de.micmun.android.nextcloudcookbook.data.SortValue
+import de.micmun.android.nextcloudcookbook.util.Recipe2DbRecipeConverter
 import kotlinx.coroutines.*
+import java.util.stream.Collectors
 
 /**
  * ViewModel for list of recipes.
  *
  * @author MicMun
- * @version 1.7, 08.08.20
+ * @version 1.8, 26.01.21
  */
-class RecipeListViewModel(application: Application) : AndroidViewModel(application) {
-   // read from storage
-   private val _recipeListUnsorted = MutableLiveData<List<Recipe>>()
-
+class RecipeListViewModel(private val app: Application) : AndroidViewModel(app) {
    // coroutines
    private var viewModelJob = Job()
+
    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-   // preferences
-   private val prefDao: PreferenceDao = PreferenceDao.getInstance(application)
-   val recipeDirectory: SharedPreferenceLiveData<String>
-   val sorting: SharedPreferenceLiveData<Int>
+   private val recipeRepository = DbRecipeRepository.getInstance(app)
+   val categories = recipeRepository.getCategories()
 
-   // live changed
-   private val _sortValue = MutableLiveData<SortValue>()
-   val sortValue: LiveData<SortValue>
-      get() = _sortValue
-   private val _path = MutableLiveData<String>()
-   val path: LiveData<String>
-      get() = _path
-   private val _categoryFilter = MutableLiveData<CategoryFilter?>()
-   val categoryFilter: LiveData<CategoryFilter?>
-      get() = _categoryFilter
+   // on updating
+   val isUpdating = MutableLiveData(false)
+   val isLoaded = MutableLiveData(false)
 
-   // calculated
-   internal val recipes: LiveData<List<Recipe>>
+   private var recipeDir: String = ""
 
-   init {
-      recipeDirectory = prefDao.getRecipeDirectory()
-      sorting = prefDao.getSort()
-      recipes = SortLiveData()
-   }
+   // sorting and category
+   private var sort: SortValue = SortValue.NAME_A_Z
+   private var catFilter: CategoryFilter = CategoryFilter(CategoryFilter.CategoryFilterOption.ALL_CATEGORIES)
 
-   // navigate to selected recipe
-   private val _navigateToRecipe = MutableLiveData<Long>()
+   // navigate to recipe
+   private val _navigateToRecipe = MutableLiveData<String>()
    val navigateToRecipe
       get() = _navigateToRecipe
 
-   fun onRecipeClicked(id: Long) {
-      _navigateToRecipe.value = id
+   fun onRecipeClicked(name: String) {
+      _navigateToRecipe.value = name
    }
 
    fun onRecipeNavigated() {
       _navigateToRecipe.value = null
    }
 
-   // read recipes
-   fun initRecipes(menu: Menu) {
-      uiScope.launch {
-         path.value?.let {
-            _recipeListUnsorted.value = getRecipesFromRepo(it)
+   fun getRecipes(): LiveData<List<DbRecipe>> {
+      var recipes: LiveData<List<DbRecipe>>
 
-            // categories in menu
-            val categories = getCategoriesFromRepo()
-            var order = 1
-
-            menu.removeGroup(R.id.menu_categories_group)
-
-            categories.forEach { category ->
-               @Suppress("DEPRECATION") val title = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                  Html.fromHtml(category, Html.FROM_HTML_MODE_LEGACY)
-               else
-                  Html.fromHtml(category)
-               menu.add(R.id.menu_categories_group, category.hashCode(), order++, title)
+      runBlocking(Dispatchers.IO) {
+         recipes =
+            if (catFilter.type == CategoryFilter.CategoryFilterOption.ALL_CATEGORIES && sort == SortValue.NAME_A_Z) {
+               recipeRepository.getAllRecipes()
+            } else if (catFilter.type == CategoryFilter.CategoryFilterOption.ALL_CATEGORIES) {
+               recipeRepository.sort(sort)
+            } else if (catFilter.type == CategoryFilter.CategoryFilterOption.UNCATEGORIZED) {
+               recipeRepository.filterUncategorized(sort)
+            } else {
+               recipeRepository.filterCategory(sort, catFilter.name)
             }
-         }
+      }
+      return recipes
+   }
+
+   // read recipes
+   fun initRecipes(path: String = "") {
+      if (path.isNotEmpty()) {
+         recipeDir = path
+      }
+      val dir = if (path.isEmpty()) recipeDir else path
+      if (dir.isEmpty())
+         return
+
+      isUpdating.postValue(true)
+
+      uiScope.launch {
+         val list = getRecipesFromRepo(dir)
+         val dbList = list.stream()
+            .map { Recipe2DbRecipeConverter(it).convert() }
+            .collect(Collectors.toList())
+         recipeRepository.insertAll(dbList)
+
+         isLoaded.postValue(true)
+         isUpdating.postValue(false)
       }
    }
 
    private suspend fun getRecipesFromRepo(path: String): List<Recipe> {
       return withContext(Dispatchers.IO) {
-         RecipeRepository.getInstance().getAllRecipes(path)
+         JsonRecipeRepository.getInstance().getAllRecipes(app, path)
       }
-   }
-
-   private suspend fun getCategoriesFromRepo(): Set<String> {
-      return withContext(Dispatchers.IO) {
-         RecipeRepository.getInstance().recipeCategories
-      }
-   }
-
-   // sets the path
-   fun setPath(path: String) {
-      _path.value = path
    }
 
    // category filter
-   private val _category = MutableLiveData<Int>()
-   val category
-      get() = _category
-
-   fun setFilterCategory(catId: Int) {
-      _category.value = catId
-   }
-
-   fun onCategoryFiltered() {
-      _category.value = null
-   }
-
-   fun setCategoryFilter(catFilter: CategoryFilter) {
-      _categoryFilter.value = catFilter
-   }
-
-   fun filterRecipesByCategory() {
-      val repo = RecipeRepository.getInstance()
-
-      when (categoryFilter.value!!.type) {
-         CategoryFilter.CategoryFilterOption.ALL_CATEGORIES -> _recipeListUnsorted.value = repo.recipeList
-         CategoryFilter.CategoryFilterOption.UNCATEGORIZED -> _recipeListUnsorted.value =
-            repo.filterRecipesUncategorized()
-         else -> _recipeListUnsorted.value = repo.filterRecipesWithCategory(categoryFilter.value!!.categoryId)
-      }
-   }
-
-   // sorting
-   internal inner class SortLiveData : MediatorLiveData<List<Recipe>>() {
-      init {
-         addSource(_recipeListUnsorted) {
-            getRecipes()
-         }
-         addSource(sortValue) {
-            getRecipes()
-         }
-      }
-
-      private fun getRecipes() {
-         value = _recipeListUnsorted.value?.sortedWith(getSortComparator(sortValue.value))
-      }
-   }
-
-   fun setListSorting(sort: SortValue) {
-      prefDao.setSort(sort.sort)
+   fun filterRecipesByCategory(catFilter: CategoryFilter) {
+      this.catFilter = catFilter
    }
 
    fun sortList(sort: SortValue) {
-      _sortValue.value = sort
-   }
-
-   private fun getSortComparator(sort: SortValue?): Comparator<Recipe> {
-      return when (sort) {
-         SortValue.NAME_A_Z -> NameComparator(true)
-         SortValue.NAME_Z_A -> NameComparator(false)
-         SortValue.DATE_ASC -> DateComparator(true)
-         SortValue.DATE_DESC -> DateComparator(false)
-         SortValue.TOTAL_TIME_ASC -> TotalTimeComparator(true)
-         SortValue.TOTAL_TIME_DESC -> TotalTimeComparator(false)
-         else -> NameComparator(true)
-      }
+      this.sort = sort
    }
 
    override fun onCleared() {
       super.onCleared()
       viewModelJob.cancel()
+   }
+}
+
+class RecipeListViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
+   @Suppress("UNCHECKED_CAST")
+   override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+      if (modelClass.isAssignableFrom(RecipeListViewModel::class.java)) {
+         return RecipeListViewModel(application) as T
+      }
+      throw IllegalArgumentException("Unknown ViewModel class")
    }
 }

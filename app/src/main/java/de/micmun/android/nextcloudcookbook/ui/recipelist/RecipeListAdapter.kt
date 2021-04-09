@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import de.micmun.android.nextcloudcookbook.data.model.Recipe
+import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 import de.micmun.android.nextcloudcookbook.databinding.RecipeListRowBinding
 
 /**
@@ -20,12 +20,15 @@ import de.micmun.android.nextcloudcookbook.databinding.RecipeListRowBinding
  * @version 1.4, 26.07.20
  */
 class RecipeListAdapter(private val clickListener: RecipeListListener) :
-   ListAdapter<Recipe, RecipeListAdapter.RecipeViewHolder>(RECIPE_ITEM_CALLBACK) {
+   ListAdapter<DbRecipe, RecipeListAdapter.RecipeViewHolder>(RECIPE_ITEM_CALLBACK) {
 
    companion object {
-      private val RECIPE_ITEM_CALLBACK = object : DiffUtil.ItemCallback<Recipe>() {
-         override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe): Boolean = oldItem.recipeId == newItem.recipeId
-         override fun areContentsTheSame(oldItem: Recipe, newItem: Recipe): Boolean = oldItem.name == newItem.name
+      private val RECIPE_ITEM_CALLBACK = object : DiffUtil.ItemCallback<DbRecipe>() {
+         override fun areItemsTheSame(oldItem: DbRecipe, newItem: DbRecipe): Boolean =
+            oldItem.recipeCore.id == newItem.recipeCore.id
+
+         override fun areContentsTheSame(oldItem: DbRecipe, newItem: DbRecipe): Boolean =
+            oldItem.recipeCore.name == newItem.recipeCore.name
       }
    }
 
@@ -49,7 +52,7 @@ class RecipeListAdapter(private val clickListener: RecipeListListener) :
        *
        * @param recipe Recipe data.
        */
-      fun bind(clickListener: RecipeListListener, recipe: Recipe) {
+      fun bind(clickListener: RecipeListListener, recipe: DbRecipe) {
          binding.recipe = recipe
          binding.clickListener = clickListener
          binding.executePendingBindings()
@@ -65,6 +68,6 @@ class RecipeListAdapter(private val clickListener: RecipeListListener) :
    }
 }
 
-class RecipeListListener(val clickListener: (recipeId: Long) -> Unit) {
-   fun onClick(recipe: Recipe) = clickListener(recipe.recipeId)
+class RecipeListListener(val clickListener: (recipeName: String) -> Unit) {
+   fun onClick(recipe: DbRecipe) = clickListener(recipe.recipeCore.name)
 }

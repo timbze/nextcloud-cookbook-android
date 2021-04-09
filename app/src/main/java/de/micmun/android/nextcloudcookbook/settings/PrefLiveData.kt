@@ -3,7 +3,7 @@
  *
  * Copyright 2020 by MicMun
  */
-package de.micmun.android.nextcloudcookbook.data
+package de.micmun.android.nextcloudcookbook.settings
 
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData

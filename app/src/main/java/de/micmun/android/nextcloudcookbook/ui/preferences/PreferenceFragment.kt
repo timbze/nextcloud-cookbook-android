@@ -5,25 +5,34 @@
  */
 package de.micmun.android.nextcloudcookbook.ui.preferences
 
+import android.Manifest.permission
 import android.app.TaskStackBuilder
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.ViewModelProvider
-import androidx.preference.CheckBoxPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import com.obsez.android.lib.filechooser.ChooserDialog
+import com.afollestad.materialdialogs.MaterialDialog
+import com.anggrayudi.storage.callback.FolderPickerCallback
+import com.anggrayudi.storage.callback.StorageAccessCallback
+import com.anggrayudi.storage.file.StorageType
+import com.anggrayudi.storage.file.absolutePath
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.ui.MainActivity
+import de.micmun.android.nextcloudcookbook.util.StorageManager
 
 /**
  * Fragment for settings.
  *
  * @author MicMun
- * @version 1.4, 20.09.20
+ * @version 1.5, 07.04.21
  */
 class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener,
                            Preference.OnPreferenceClickListener {
@@ -31,9 +40,13 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
 
    private lateinit var dirPreference: Preference
    private lateinit var themePreference: IntListPreference
-   private lateinit var hiddenFolderPreference: CheckBoxPreference
 
-   private var currentHiddenValue: Boolean = false
+   private val storageManager = StorageManager.getInstance()
+
+   companion object {
+      const val REQUEST_CODE_STORAGE_ACCESS = 1
+      const val REQUEST_CODE_PICK_FOLDER = 2
+   }
 
    override fun onActivityCreated(savedInstanceState: Bundle?) {
       super.onActivityCreated(savedInstanceState)
@@ -46,13 +59,11 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
 
       // find prefs
       dirPreference = findPreference(getString(R.string.prefkey_recipeDir))!!
-      hiddenFolderPreference = findPreference(getString(R.string.prefkey_allow_hidden))!!
       themePreference = findPreference(getString(R.string.prefkey_theme))!!
       val aboutPreference: Preference = findPreference(getString(R.string.prefkey_about))!!
 
       // change listener
       dirPreference.onPreferenceChangeListener = this
-      hiddenFolderPreference.onPreferenceChangeListener = this
       themePreference.onPreferenceChangeListener = this
 
       // click listener
@@ -60,17 +71,34 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
 
       // observe values
       viewModel.recipeDirectory.observe(this, {
-         dirPreference.summary = it.toString()
+         val summary =
+            if (it.isEmpty()) "" else StorageManager.getDocumentFromString(requireContext(), it)?.absolutePath ?: ""
+         dirPreference.summary = summary
       })
-      viewModel.hiddenFolder.observe(this, {
-         currentHiddenValue = it
 
-         hiddenFolderPreference.summary =
-            getString(if (currentHiddenValue) R.string.pref_hidden_folder_true else R.string.pref_hidden_folder_false)
-      })
       viewModel.theme.observe(this, {
          themePreference.value = it.toString()
          themePreference.summary = themePreference.entry
+      })
+
+      setupSimpleStorage()
+      viewModel.storageAccesssed.observe(this, { isAccess ->
+         if (!isAccess) {
+            Dexter.withContext(requireContext())
+               .withPermissions(permission.WRITE_EXTERNAL_STORAGE, permission.READ_EXTERNAL_STORAGE)
+               .withListener(object : BaseMultiplePermissionsListener() {
+                  override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                     val grantStatus = if (report.areAllPermissionsGranted()) getString(R.string.permission_granted)
+                     else getString(R.string.permission_denied)
+
+                     if (grantStatus == getString(R.string.permission_granted)) {
+                        viewModel.setStorageAccessed(true)
+                     } else {
+                        viewModel.setStorageAccessed(false)
+                     }
+                  }
+               }).check()
+         }
       })
 
       // about version
@@ -81,7 +109,6 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
    override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
       when (preference) {
          dirPreference -> viewModel.setRecipeDirectory(newValue.toString())
-         hiddenFolderPreference -> viewModel.setHiddenFolder(newValue as Boolean)
          themePreference -> {
             viewModel.setTheme(newValue.toString().toInt())
             // recreate activity
@@ -108,16 +135,86 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
    /**
     * Choose dialog for picking a folder.
     */
-   @Suppress("DEPRECATION")
    private fun chooseFolder() {
-      ChooserDialog(requireActivity())
-         .withFilter(true, currentHiddenValue)
-         .withStartFile(Environment.getExternalStorageDirectory().absolutePath)
-         .withChosenListener { path, _ ->
-            Toast.makeText(requireActivity(), "FOLDER: $path", Toast.LENGTH_SHORT).show()
-            viewModel.setRecipeDirectory(path)
+      setupFolderPickerCallback()
+      storageManager.storage?.openFolderPicker(REQUEST_CODE_PICK_FOLDER)
+   }
+
+   private fun requestStoragePermission() {
+      Dexter.withContext(context)
+         .withPermissions(
+            permission.WRITE_EXTERNAL_STORAGE,
+            permission.READ_EXTERNAL_STORAGE
+         )
+         .withListener(object : BaseMultiplePermissionsListener() {
+            override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+               if (report.areAllPermissionsGranted()) {
+                  storageManager.storage?.requestStorageAccess(REQUEST_CODE_STORAGE_ACCESS)
+               } else {
+                  Toast.makeText(
+                     context,
+                     getString(R.string.permission_please_grant),
+                     Toast.LENGTH_SHORT
+                  ).show()
+               }
+            }
+         }).check()
+   }
+
+   private fun setupSimpleStorage() {
+      storageManager.storage?.storageAccessCallback = object : StorageAccessCallback {
+         override fun onRootPathNotSelected(requestCode: Int, rootPath: String, rootStorageType: StorageType,
+                                            uri: Uri) = MaterialDialog(requireActivity())
+            .message(text = getString(R.string.permission_select_root, rootPath))
+            .negativeButton(android.R.string.cancel)
+            .positiveButton {
+               storageManager.storage?.requestStorageAccess(MainActivity.REQUEST_CODE_STORAGE_ACCESS, rootStorageType)
+            }.show()
+
+         override fun onCancelledByUser(requestCode: Int) {
+            Toast.makeText(requireContext(), getString(R.string.permission_canceled), Toast.LENGTH_SHORT).show()
          }
-         .build()
-         .show()
+
+         override fun onStoragePermissionDenied(requestCode: Int) {
+            requestStoragePermission()
+         }
+
+         override fun onRootPathPermissionGranted(requestCode: Int, root: DocumentFile) {
+            Toast.makeText(requireContext(), getString(R.string.permission_ok_message, root.absolutePath),
+                           Toast.LENGTH_SHORT).show()
+         }
+      }
+   }
+
+   private fun setupFolderPickerCallback() {
+      storageManager.storage?.folderPickerCallback = object : FolderPickerCallback {
+         override fun onStoragePermissionDenied(requestCode: Int) {
+            requestStoragePermission()
+         }
+
+         override fun onStorageAccessDenied(requestCode: Int, folder: DocumentFile?, storageType: StorageType?) {
+            if (storageType == null) {
+               requestStoragePermission()
+               return
+            }
+
+            MaterialDialog(requireActivity())
+               .message(text = getString(R.string.permission_warning_nowrite))
+               .negativeButton(android.R.string.cancel)
+               .positiveButton {
+                  storageManager.storage?.requestStorageAccess(REQUEST_CODE_STORAGE_ACCESS, storageType)
+               }.show()
+         }
+
+         override fun onFolderSelected(requestCode: Int, folder: DocumentFile) {
+            Toast.makeText(requireActivity(), getString(R.string.folder_pick_success, folder.absolutePath),
+                           Toast.LENGTH_SHORT).show()
+            viewModel.setRecipeDirectory(folder.uri.toString())
+         }
+
+         override fun onCancelledByUser(requestCode: Int) {
+            Toast.makeText(context, getString(R.string.folder_pick_cancel), Toast.LENGTH_SHORT).show()
+         }
+      }
    }
 }

@@ -1,8 +1,7 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
    <string name="app_name" translatable="false">Nextcloud Cookbook</string>
    <string name="app_logo_desc">Launcher icon of the app showing a cookbook symbol</string>
 
-   <string name="permissions_error_message">Access denied! App need storage access, please activate in the settings.</string>
    <string name="no_information">No Information.</string>
 
    <!-- recipe list -->
@@ -25,13 +24,14 @@
 
    <!-- tab infos -->
    <string name="text_uncategorized">Uncategorized</string>
-   <string name="text_categories"><![CDATA[<strong>Categories:</strong><br/> ]]> %1$s</string>
+   <string name="text_categories"><![CDATA[<strong>Category:</strong><br/> ]]> %1$s</string>
    <string name="text_yield"><![CDATA[<strong>Yield:</strong>]]> %1$s</string>
    <string name="text_author">Author: %1$s</string>
    <string name="text_url">Source: %1$s</string>
    <string name="text_no_keywords">No keywords.</string>
    <string name="text_keywords"><![CDATA[<strong>Keywords:</strong><br/> ]]> %1$s</string>
    <string name="text_date_published">Date published: %1$s</string>
+   <string name="text_tools"><![CDATA[<strong>Needed tools:</strong><br/> ]]> %1$s</string>
 
    <!-- Nutritions -->
    <string name="nutrition_calories">Calories: %1$s</string>
@@ -87,7 +87,7 @@
    <string name="prefkey_about" translatable="false">app_about</string>
    <string name="about_title">About</string>
    <string name="about_version">App version: %1$s</string>
-   <string name="about_summary">© 2020 by MicMun. License under GPLv3.\n\nNextcloud Cookbook is an app for cookbook on nextcloud to manage recipes.</string>
+   <string name="about_summary">© 2020-2021 by MicMun. License under GPLv3.\n\nNextcloud Cookbook is an app for cookbook on nextcloud to manage recipes.</string>
 
    <string-array name="theme_values" translatable="false">
       <item>0</item>
@@ -114,4 +114,16 @@
    <string name="sort_value_date_desc">Date published descending</string>
    <string name="sort_value_time_asc">Total time ascending</string>
    <string name="sort_value_time_desc">Total time descending</string>
+
+   <!-- permissions -->
+   <string name="permission_granted" translatable="false">granted</string>
+   <string name="permission_denied" translatable="false">denied</string>
+   <string name="permission_select_root" tools:ignore="MissingTranslation">Please select %1$s.</string>
+   <string name="permissions_error_message">Access denied! App need storage access, please activate in the settings.</string>
+   <string name="permission_canceled" tools:ignore="MissingTranslation">Cancelled by user</string>
+   <string name="permission_ok_message" tools:ignore="MissingTranslation">Storage access has been granted for %1$s.</string>
+   <string name="permission_please_grant" tools:ignore="MissingTranslation">Please grant storage permissions.</string>
+   <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">You have no write access to this storage, thus selecting this folder is useless.\nWould you like to grant access to this folder?.</string>
+   <string name="folder_pick_cancel" tools:ignore="MissingTranslation">Folder picker cancelled by user.</string>
+   <string name="folder_pick_success" tools:ignore="MissingTranslation">Folder %1$s selected.</string>
 </resources>
