@@ -33,7 +33,7 @@ import de.micmun.android.nextcloudcookbook.ui.MainActivity
  * Fragment for list of recipes.
  *
  * @author MicMun
- * @version 2.1, 26.01.21
+ * @version 2.2, 11.04.21
  */
 class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
    private lateinit var binding: FragmentRecipelistBinding
@@ -154,11 +154,16 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             recipesViewModel.filterRecipesByCategory(it)
             setCategoryTitle(it)
             loadData()
+         }
+      })
 
-            if (it.type == CategoryFilter.CategoryFilterOption.ALL_CATEGORIES) {
+      settingViewModel.categoryChanged.observe(viewLifecycleOwner, { changed ->
+         changed?.let {
+            if (it) {
                binding.recipeList.postDelayed(200) {
                   binding.recipeList.smoothScrollToPosition(0)
                }
+               settingViewModel.resetCategoryChanged()
             }
          }
       })

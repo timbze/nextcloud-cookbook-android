@@ -5,10 +5,6 @@
  */
 package de.micmun.android.nextcloudcookbook.util.json
 
-import android.util.Log
-import androidx.core.net.toFile
-import androidx.documentfile.provider.DocumentFile
-import com.anggrayudi.storage.file.absolutePath
 import com.beust.klaxon.Klaxon
 import de.micmun.android.nextcloudcookbook.json.*
 import de.micmun.android.nextcloudcookbook.json.model.Recipe
@@ -17,7 +13,7 @@ import de.micmun.android.nextcloudcookbook.json.model.Recipe
  * Parser for recipe json.
  *
  * @author MicMun
- * @version 1.0, 21.03.21
+ * @version 1.1, 11.04.21
  */
 class RecipeJsonParser {
    fun parse(json: String): Recipe? {
