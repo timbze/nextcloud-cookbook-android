@@ -23,20 +23,31 @@ After that, the start view has a list of recipes and you select a recipe to view
 
 ## Screenshots
 
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_start.png" width="270" height="540" alt="Screenshot start with list"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_detail_info.png" width="270" height="540" alt="Screenshot detail view with info tab"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_detail_ingredients.png" width="270" height="540" alt="Screenshot detail view with ingredients tab"/>
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_start.png" width="270" height="540" alt="Screenshot start with list"/>
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_detail_info.png" width="270" height="540" alt="Screenshot detail view with info tab"/>
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_detail_ingredients.png" width="270" height="540" alt="Screenshot detail view with ingredients tab"/>
 
 ## Dependencies
 
-This app needs Android &gt;= 6.0 (API &gt;= 23) and uses the libraries:
+This app needs Android &gt;= 6.0 (API &gt;= 23) and uses the libraries (see also app/build.gradle):
 
 * androidx dependencies
 * kotlinx coroutines
-* [KPermissions by Fondesa](https://github.com/fondesa/kpermissions) (permission handling)
-* [android-file-chooser by Hedzr](https://github.com/hedzr/android-file-chooser) (for choosing a directory)
+* [klaxon by cbeust](https://github.com/cbeust/klaxon) (json parser)
+* [Dexter by Karumi](https://github.com/Karumi/Dexter) (permission handling)
+* [SimpleStorage by anggrayudi](https://github.com/anggrayudi/SimpleStorage) (storage handling and choosing a directory)
+
+## Translations
+
+The project can be translated [here](https://weblate.bubu1.eu/projects/nextcloud-cookbook-android-app/).
+
+Thanks to translators:
+
+* [@mondstern](https://mastodon.technology/@mondstern)
 
 ## License
 
-**Copyright 2020 by MicMun**
+**Copyright 2020-2021 by MicMun**
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU
 General Public License as published by the Free Software Foundation, either version 3 of the License, or
