@@ -109,10 +109,10 @@ fun TextView.setRecipeCategories(item: DbRecipe?) {
 @BindingAdapter("keywords")
 fun TextView.setKeywords(item: DbRecipe?) {
    item?.let { recipe ->
-      val keywords = if (recipe.recipeCore.keywords.isEmpty())
+      val keywords = if (recipe.keywords?.isEmpty() != false)
          resources.getString(R.string.text_no_keywords)
       else
-         recipe.recipeCore.keywords
+         recipe.keywords.joinToString(transform = {kw -> kw.keyword})
       @Suppress("DEPRECATION")
       text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
          Html.fromHtml(resources.getString(R.string.text_keywords, keywords), Html.FROM_HTML_MODE_LEGACY)

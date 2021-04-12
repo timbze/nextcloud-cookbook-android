@@ -24,7 +24,17 @@ data class DbRecipe(
    @Relation(parentColumn = "id", entityColumn = "recipeId")
    val recipeIngredient: List<DbIngredient>? = null,
    @Relation(parentColumn = "id", entityColumn = "recipeId")
-   val recipeInstructions: List<DbInstruction>? = null
+   val recipeInstructions: List<DbInstruction>? = null,
+   @Relation(
+     parentColumn = "id",
+     entity = DbKeyword::class,
+     entityColumn = "id",
+     associateBy = Junction(
+             DbRecipeKeywordRelation::class,
+             parentColumn = "recipeId",
+             entityColumn = "keywordId"),
+   )
+   val keywords: List<DbKeyword>? = null,
 )
 
 @Entity(tableName = "recipes")
@@ -46,7 +56,6 @@ data class DbRecipeCore(
    val imageUrl: String = "",
    val thumbImageUrl: String = "",
    val fullImageUrl: String = "",
-   val keywords: String = "",
    val name: String,
    @Embedded(prefix = "nutrition_") val nutrition: DbNutrition?,
    val prepTime: String = "",
@@ -186,4 +195,30 @@ data class DbInstruction(
    )
    var recipeId: Long = -1,
    val instruction: String
+)
+
+@Entity(tableName = "keywords", indices = [Index(value = ["keyword"], unique = true)])
+data class DbKeyword(
+  @PrimaryKey(autoGenerate = true)
+  val id: Long = 0L,
+  val keyword: String
+)
+
+@Entity(tableName = "recipeXKeywords", primaryKeys = ["recipeId", "keywordId"],
+   indices = [Index(value = ["keywordId"])])
+data class DbRecipeKeywordRelation(
+  @ForeignKey(
+    entity = DbRecipeCore::class,
+    parentColumns = ["id"],
+    childColumns = ["recipeId"],
+    onDelete = CASCADE
+  )
+  var recipeId: Long = -1,
+  @ForeignKey(
+    entity = DbKeyword::class,
+    parentColumns = ["id"],
+    childColumns = ["keywordId"],
+    onDelete = CASCADE
+  )
+  var keywordId: Long = -1
 )

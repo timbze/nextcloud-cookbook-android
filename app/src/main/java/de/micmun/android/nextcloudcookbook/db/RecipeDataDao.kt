@@ -49,6 +49,10 @@ interface RecipeDataDao {
    fun findByName(n: String): DbRecipe?
 
    @Transaction
+   @Query("SELECT * FROM keywords WHERE keyword IN(:n)")
+   fun findKeywords(n: List<String>): List<DbKeyword>?
+
+   @Transaction
    @RawQuery(observedEntities = [DbRecipeCore::class, DbInstruction::class, DbIngredient::class, DbTool::class,
       DbReview::class])
    fun filterRecipes(query: SupportSQLiteQuery): LiveData<List<DbRecipe>>
@@ -71,6 +75,12 @@ interface RecipeDataDao {
 
    @Insert
    fun insertIngredients(ingredient: List<DbIngredient>)
+
+   @Insert(onConflict = OnConflictStrategy.IGNORE)
+   fun insertKeywords(keywords: List<DbKeyword>)
+
+   @Insert(onConflict = OnConflictStrategy.IGNORE)
+   fun insertKeywordRefs(keywords: List<DbRecipeKeywordRelation>)
 
    @Update
    fun update(recipe: DbRecipeCore)
