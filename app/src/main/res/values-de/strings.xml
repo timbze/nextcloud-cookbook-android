@@ -1,94 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="no_information">Keine Angabe.</string>
-    <string name="app_logo_desc">Launcher-Icon der App zeigt ein Kochbuch-Symbol</string>
-    <!-- recipe list -->
-    <string name="empty_list">Keine Rezepte.</string>
-    <string name="recipe_list_image_desc">Bildvorschau des Rezepts</string>
-    <!-- recipe detail -->
-    <string name="img_desc_logo">Logo des Rezepts</string>
-    <string name="list_symbol">•</string>
-    <string name="title_duration">Dauer in HH:MM</string>
-    <string name="tooltip_prep_time">Vorbereitung</string>
-    <string name="tooltip_cook_time">Kochen</string>
-    <string name="tooltip_total_time">Gesamt</string>
-    <!-- tab titles -->
-    <string name="tab_info_title">Info</string>
-    <string name="tab_ingredients_title">Zutaten</string>
-    <string name="tab_instructions_title">Ablauf</string>
-    <string name="tab_nutritions_title">Nährwerte</string>
-    <!-- tab infos -->
-    <string name="text_uncategorized">Unkategorisiert</string>
-    <string name="text_categories"><![CDATA[<strong>Kategorie:</strong><br/> ]]> %1$s</string>
-    <string name="text_yield"><![CDATA[<strong>Portionen:</strong>]]> %1$s</string>
-    <string name="text_author">Autor: %1$s</string>
-    <string name="text_url">Quelle: %1$s</string>
-    <string name="text_no_keywords">Keine Schlüsselwörter.</string>
-    <string name="text_keywords"><![CDATA[<strong>Schlüsselwörter:</strong><br/> ]]> %1$s</string>
-    <string name="text_date_published">Veröffentlichungsdatum: %1$s</string>
-    <string name="text_tools"><![CDATA[<strong>Benötigte Werkzeuge:</strong><br/> ]]> %1$s</string>
-    <!-- Nutritions -->
-    <string name="nutrition_calories">Kalorien: %1$s</string>
-    <string name="nutrition_carbohydrate_content">Kohlenhydratgehalt: %1$s</string>
-    <string name="nutrition_cholesterol_content">Cholesteringehalt: %1$s</string>
-    <string name="nutrition_fat_content">Fettgehalt: %1$s</string>
-    <string name="nutrition_fiberContent">Ballaststoffgehalt: %1$s</string>
-    <string name="nutrition_protein_content">Eiweißgehalt: %1$s</string>
-    <string name="nutrition_saturated_fat_content">Gesättigter Fettgehalt: %1$s</string>
-    <string name="nutrition_serving_size">Serviergröße: %1$s</string>
-    <string name="nutrition_sodium_content">Natriumgehalt: %1$s</string>
-    <string name="nutrition_sugar_content">Zuckergehalt: %1$s</string>
-    <string name="nutrition_trans_fat_content">Transfettgehalt: %1$s</string>
-    <string name="nutrition_unsaturated_fat_content">Ungesättigter Fettgehalt: %1$s</string>
-    <!-- menu -->
-    <string name="menu_search_title">Erweiterte Suche</string>
-    <string name="menu_settings_title">Einstellungen</string>
-    <string name="menu_sort_title">Sortieren</string>
-    <string name="menu_refresh_tooltip">Rezepte neu laden</string>
-    <string name="menu_search_tooltip">Suche Rezept</string>
-    <string name="search_hint">Suche nach Name</string>
-    <!-- search formular -->
-    <string name="form_search_title">Erweiterte Suche</string>
-    <string name="form_search_hint">Suchbegriff</string>
-    <string name="form_ignore_case">Groß-/Kleinschreibung ignorieren?</string>
-    <string name="form_exact_search">Suche mit exakter Übereinstimmung?</string>
-    <string name="form_types">Suchtyp</string>
-    <string name="form_type_keyword">Suche nach Schlüsselwort</string>
-    <string name="form_type_ingredients">Suche nach Zutat</string>
-    <string name="form_type_yield">Suche nach Portionen</string>
-    <string name="form_search_options">Suchoptionen</string>
-    <string name="form_search_commit">Suchen</string>
-    <!-- navdrawer_menu -->
-    <string name="menu_all_categories">Alle Kategorien</string>
-    <string name="menu_uncategorized">Unkategorisiert</string>
-    <!-- preferences -->
-    <string name="pref_category_function">Funktionalität</string>
-    <string name="pref_category_design">Aussehen</string>
-    <string name="preftitle_recipeDir">Rezept-Verzeichnis</string>
-    <string name="title_dir_chooser">Wähle ein Verzeichnis…</string>
-    <string name="preftitle_allow_hidden">Zeige versteckte Verzeichnisse</string>
-    <string name="pref_hidden_folder_true">Der Auswahldialog des Rezept-Verzeichnisses zeigt versteckte Verzeichnisse an</string>
-    <string name="pref_hidden_folder_false">Der Auswahldialog des Rezept-Verzeichnisses zeigt keine versteckte Verzeichnisse an</string>
-    <string name="preftitle_theme">Wähle ein Theme</string>
-    <string name="about_title">Über</string>
-    <string name="about_version">App-Version: %1$s</string>
-    <string name="about_summary">© 2020-2021 by MicMun. Lizenziert unter GPLv3.\n\nNextcloud Cookbook ist eine App für Cookbook auf Nextcloud (ein Kochbuch für Nextcloud), um Rezepte zu verwalten.</string>
-    <string name="theme_name_light">Hell</string>
-    <string name="theme_name_dark">Dunkel</string>
-    <string name="theme_name_system">System</string>
-    <string name="sort_value_alpha_asc">Name A-Z</string>
-    <string name="sort_value_alpha_desc">Name Z-A</string>
-    <string name="sort_value_date_asc">Veröffentlichungsdatum aufsteigend</string>
-    <string name="sort_value_date_desc">Veröffentlichungsdatum absteigend</string>
-    <string name="sort_value_time_asc">Gesamtzeit aufsteigend</string>
-    <string name="sort_value_time_desc">Gesamtzeit absteigend</string>
-    <!-- permissions -->
-    <string name="permission_select_root">Bitte %1$s auswählen.</string>
-    <string name="permissions_error_message">Zugriff verweigert! Die App braucht Zugriff auf den Speicher, bitte in den Einstellungen aktivieren.</string>
-    <string name="permission_canceled">Durch den Benutzer abgebrochen</string>
-    <string name="permission_ok_message">Speicherzugriff wurde für %1$s gewährt.</string>
-    <string name="permission_please_grant">Bitte erlaube den Zugriff auf die SD-Karte.</string>
-    <string name="permission_warning_nowrite">Du hast keinen Schreibzuriff auf diesen Speicher, die Auswahl des Verzeichnisses ist nutzlos.\nWillst Du den Zugriff auf dieses Verzeichnis erlauben?</string>
-    <string name="folder_pick_cancel">Verzeichnisauswahl durch Benutzer abgebrochen.</string>
-    <string name="folder_pick_success">Verzeichnis %1$s ausgewählt.</string>
+   <string name="no_information">Keine Angabe.</string>
+   <string name="app_logo_desc">Launcher-Icon der App zeigt ein Kochbuch-Symbol</string>
+   <!-- recipe list -->
+   <string name="empty_list">Keine Rezepte.</string>
+   <string name="recipe_list_image_desc">Bildvorschau des Rezepts</string>
+   <!-- recipe detail -->
+   <string name="img_desc_logo">Logo des Rezepts</string>
+   <string name="list_symbol">•</string>
+   <string name="title_duration">Dauer in HH:MM</string>
+   <string name="tooltip_prep_time">Vorbereitung</string>
+   <string name="tooltip_cook_time">Kochen</string>
+   <string name="tooltip_total_time">Gesamt</string>
+   <!-- tab titles -->
+   <string name="tab_info_title">Info</string>
+   <string name="tab_ingredients_title">Zutaten</string>
+   <string name="tab_instructions_title">Ablauf</string>
+   <string name="tab_nutritions_title">Nährwerte</string>
+   <!-- tab infos -->
+   <string name="header_image_desc">Header-Bild des Rezepts</string>
+   <string name="text_uncategorized">Unkategorisiert</string>
+   <string name="text_categories"><![CDATA[<strong>Kategorie:</strong><br/> ]]> %1$s</string>
+   <string name="text_yield"><![CDATA[<strong>Portionen:</strong>]]> %1$s</string>
+   <string name="text_author">Autor: %1$s</string>
+   <string name="text_url">Quelle: %1$s</string>
+   <string name="text_no_keywords">Keine Schlüsselwörter.</string>
+   <string name="text_keywords"><![CDATA[<strong>Schlüsselwörter:</strong><br/> ]]> %1$s</string>
+   <string name="text_date_published">Veröffentlichungsdatum: %1$s</string>
+   <string name="text_tools"><![CDATA[<strong>Benötigte Werkzeuge:</strong><br/> ]]> %1$s</string>
+   <!-- Nutritions -->
+   <string name="nutrition_calories">Kalorien: %1$s</string>
+   <string name="nutrition_carbohydrate_content">Kohlenhydratgehalt: %1$s</string>
+   <string name="nutrition_cholesterol_content">Cholesteringehalt: %1$s</string>
+   <string name="nutrition_fat_content">Fettgehalt: %1$s</string>
+   <string name="nutrition_fiberContent">Ballaststoffgehalt: %1$s</string>
+   <string name="nutrition_protein_content">Eiweißgehalt: %1$s</string>
+   <string name="nutrition_saturated_fat_content">Gesättigter Fettgehalt: %1$s</string>
+   <string name="nutrition_serving_size">Serviergröße: %1$s</string>
+   <string name="nutrition_sodium_content">Natriumgehalt: %1$s</string>
+   <string name="nutrition_sugar_content">Zuckergehalt: %1$s</string>
+   <string name="nutrition_trans_fat_content">Transfettgehalt: %1$s</string>
+   <string name="nutrition_unsaturated_fat_content">Ungesättigter Fettgehalt: %1$s</string>
+   <!-- menu -->
+   <string name="menu_search_title">Erweiterte Suche</string>
+   <string name="menu_settings_title">Einstellungen</string>
+   <string name="menu_sort_title">Sortieren</string>
+   <string name="menu_refresh_tooltip">Rezepte neu laden</string>
+   <string name="menu_search_tooltip">Suche Rezept</string>
+   <string name="search_hint">Suche nach Name</string>
+   <!-- search formular -->
+   <string name="form_search_title">Erweiterte Suche</string>
+   <string name="form_search_hint">Suchbegriff</string>
+   <string name="form_ignore_case">Groß-/Kleinschreibung ignorieren?</string>
+   <string name="form_exact_search">Suche mit exakter Übereinstimmung?</string>
+   <string name="form_types">Suchtyp</string>
+   <string name="form_type_keyword">Suche nach Schlüsselwort</string>
+   <string name="form_type_ingredients">Suche nach Zutat</string>
+   <string name="form_type_yield">Suche nach Portionen</string>
+   <string name="form_search_options">Suchoptionen</string>
+   <string name="form_search_commit">Suchen</string>
+   <!-- navdrawer_menu -->
+   <string name="menu_all_categories">Alle Kategorien</string>
+   <string name="menu_uncategorized">Unkategorisiert</string>
+   <!-- preferences -->
+   <string name="pref_category_function">Funktionalität</string>
+   <string name="pref_category_design">Aussehen</string>
+   <string name="preftitle_recipeDir">Rezept-Verzeichnis</string>
+   <string name="title_dir_chooser">Wähle ein Verzeichnis…</string>
+   <string name="preftitle_allow_hidden">Zeige versteckte Verzeichnisse</string>
+   <string name="pref_hidden_folder_true">Der Auswahldialog des Rezept-Verzeichnisses zeigt versteckte Verzeichnisse an</string>
+   <string name="pref_hidden_folder_false">Der Auswahldialog des Rezept-Verzeichnisses zeigt keine versteckte Verzeichnisse an</string>
+   <string name="preftitle_theme">Wähle ein Theme</string>
+   <string name="about_title">Über</string>
+   <string name="about_version">App-Version: %1$s</string>
+   <string name="about_summary">© 2020-2021 by MicMun. Lizenziert unter GPLv3.\n\nNextcloud Cookbook ist eine App für Cookbook auf Nextcloud (ein Kochbuch für Nextcloud), um Rezepte zu verwalten.</string>
+   <string name="theme_name_light">Hell</string>
+   <string name="theme_name_dark">Dunkel</string>
+   <string name="theme_name_system">System</string>
+   <string name="sort_value_alpha_asc">Name A-Z</string>
+   <string name="sort_value_alpha_desc">Name Z-A</string>
+   <string name="sort_value_date_asc">Veröffentlichungsdatum aufsteigend</string>
+   <string name="sort_value_date_desc">Veröffentlichungsdatum absteigend</string>
+   <string name="sort_value_time_asc">Gesamtzeit aufsteigend</string>
+   <string name="sort_value_time_desc">Gesamtzeit absteigend</string>
+   <!-- permissions -->
+   <string name="permission_select_root">Bitte %1$s auswählen.</string>
+   <string name="permissions_error_message">Zugriff verweigert! Die App braucht Zugriff auf den Speicher, bitte in den Einstellungen aktivieren.</string>
+   <string name="permission_canceled">Durch den Benutzer abgebrochen</string>
+   <string name="permission_ok_message">Speicherzugriff wurde für %1$s gewährt.</string>
+   <string name="permission_please_grant">Bitte erlaube den Zugriff auf die SD-Karte.</string>
+   <string name="permission_warning_nowrite">Du hast keinen Schreibzuriff auf diesen Speicher, die Auswahl des Verzeichnisses ist nutzlos.\nWillst Du den Zugriff auf dieses Verzeichnis erlauben?</string>
+   <string name="folder_pick_cancel">Verzeichnisauswahl durch Benutzer abgebrochen.</string>
+   <string name="folder_pick_success">Verzeichnis %1$s ausgewählt.</string>
 </resources>

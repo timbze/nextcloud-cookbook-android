@@ -1,0 +1,16 @@
+name: nextcloud-cookbook.micmun.de
+metadataFile: skydroid-app.yaml
+skynetPortal: https://siasky.net
+
+checkVersion:
+  file: app/build.gradle
+  versionCode: 'versionCode\s+(\d+)'
+  versionName: 'versionName.+"(.+)"'
+
+uploadBuild:
+  file: app/release/app-release.apk
+
+updateMetadataFile:
+  updateWhatsNew: false
+
+# uploadMetadata:

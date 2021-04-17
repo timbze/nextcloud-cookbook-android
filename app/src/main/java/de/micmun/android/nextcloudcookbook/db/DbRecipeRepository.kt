@@ -16,7 +16,7 @@ import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
  * Repository for recipes.
  *
  * @author MicMun
- * @version 1.0, 07.04.21
+ * @version 1.2, 17.04.21
  */
 class DbRecipeRepository private constructor(application: Application) {
    private var mRecipeDao: RecipeDataDao = RecipeDatabase.getDatabase(application).recipeDataDao()
