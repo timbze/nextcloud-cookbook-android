@@ -19,10 +19,7 @@ localized:
       After that, the start view has a list of recipes and you select a recipe to view the details.
     summary: View the recipes from your Nextcloud Cookbook
     whatsNew: |-
-      - Seven Languages added: Finnish, Danish, Swedish, Portugese, Icelandic, Estonian and Basque
-      - New background loading of recipes (Bugfixes)
-      - Caching recipes in sqlite database
-      - Showing tools in the info tab (details)
+      - Bugfixes (App crush, no images, category problem)
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -42,10 +39,7 @@ localized:
       Anschließend findet sich auf der Hauptseite (die auch nach dem Start der App direkt angezeigt wird) die Liste der verfügbaren Rezepte. Zur Anzeige der Details tippt man einfach das gewünschte Rezept an.
     summary: Zeige die Rezepte aus Deinem Nextcloud Kochbuch an
     whatsNew: |-
-      - Sieben Sprachen hinzugefügt: Finnisch, Dänisch, Schwedisch, Portugisisch, Isländisch, Estnisch and Baskisch
-      - Neue Ladetechnick für Rezepte im Hintergrund (Fehlerkorrekturen)
-      - Caching der Rezepte in einer sqlite-Datenbank
-      - Benötigte Werkzeuge im Info-Tab anzeigen (Details)
+      - Fehlerbehebungen (Absturz der App, keine Bilder, Kategorie-Problem)
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/de/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
