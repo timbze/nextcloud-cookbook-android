@@ -16,6 +16,7 @@ import de.micmun.android.nextcloudcookbook.data.CategoryFilter
 import de.micmun.android.nextcloudcookbook.data.SortValue
 import de.micmun.android.nextcloudcookbook.util.Recipe2DbRecipeConverter
 import kotlinx.coroutines.*
+import java.net.URL
 import java.util.stream.Collectors
 
 /**
@@ -36,6 +37,7 @@ class RecipeListViewModel(private val app: Application) : AndroidViewModel(app) 
    // on updating
    val isUpdating = MutableLiveData(false)
    val isLoaded = MutableLiveData(false)
+   val isDownloading = MutableLiveData(false)
 
    private var recipeDir: String = ""
 
@@ -94,6 +96,21 @@ class RecipeListViewModel(private val app: Application) : AndroidViewModel(app) 
 
          isLoaded.postValue(true)
          isUpdating.postValue(false)
+      }
+   }
+
+   fun download(url: URL) {
+      uiScope.launch {
+         val rec = downloadImpl(url)
+      }
+   }
+
+   private suspend fun downloadImpl(url: URL): Recipe? {
+      return withContext(Dispatchers.IO) {
+         var obj = url.openConnection().content
+         var str = obj.toString()
+         //...
+         null
       }
    }
 
