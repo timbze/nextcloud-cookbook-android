@@ -9,7 +9,6 @@ import android.content.Context
 import android.os.Build
 import androidx.documentfile.provider.DocumentFile
 import com.anggrayudi.storage.file.DocumentFileType
-import com.anggrayudi.storage.file.absolutePath
 import com.anggrayudi.storage.file.findFiles
 import com.anggrayudi.storage.file.openInputStream
 import de.micmun.android.nextcloudcookbook.json.model.Recipe
@@ -23,7 +22,7 @@ import java.util.stream.Collectors
  * Repository with the recipe data.
  *
  * @author MicMun
- * @version 1.7, 28.02.21
+ * @version 1.8, 11.04.21
  */
 class JsonRecipeRepository {
    companion object {
@@ -54,15 +53,13 @@ class JsonRecipeRepository {
       if (recipeDir.exists()) {
          val subDirs = recipeDir.listFiles()
 
-         val tmpCategories = mutableSetOf<String>()
-
          subDirs.forEach { sd ->
             if (sd.exists() && sd.isDirectory) {
                val jsonFiles = sd.listFiles().filter { f -> f.name?.endsWith(".json") ?: false }
                val thumbFiles = sd.findFiles(arrayOf("thumb.jpg"), DocumentFileType.FILE)
                val fullFiles = sd.findFiles(arrayOf("full.jpg"), DocumentFileType.FILE)
-               val jsonFile = if (jsonFiles.isNotEmpty()) jsonFiles.first() else null
 
+               val jsonFile = if (jsonFiles.isNotEmpty()) jsonFiles.first() else null
                val thumbFile = if (thumbFiles.isNotEmpty()) thumbFiles.first() else null
                val fullFile = if (fullFiles.isNotEmpty()) fullFiles.first() else null
 
@@ -70,8 +67,8 @@ class JsonRecipeRepository {
                   val recipe = readRecipe(context, jsonFile)
 
                   if (recipe != null) {
-                     recipe.thumbImageUrl = thumbFile?.absolutePath ?: ""
-                     recipe.fullImageUrl = fullFile?.absolutePath ?: ""
+                     recipe.thumbImageUrl = thumbFile?.uri.toString() ?: ""
+                     recipe.fullImageUrl = fullFile?.uri.toString() ?: ""
 
                      recipeList.add(recipe)
 
@@ -79,7 +76,6 @@ class JsonRecipeRepository {
                      val cats = mutableListOf<String>()
                      categories?.forEach { c ->
                         if (c.trim().isNotEmpty()) {
-                           tmpCategories.add(c.trim())
                            cats.add(c.trim())
                         }
                      }

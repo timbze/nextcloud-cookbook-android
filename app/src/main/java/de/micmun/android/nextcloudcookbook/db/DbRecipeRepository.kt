@@ -6,6 +6,7 @@
 package de.micmun.android.nextcloudcookbook.db
 
 import android.app.Application
+import android.text.Html
 import androidx.lifecycle.LiveData
 import androidx.sqlite.db.SimpleSQLiteQuery
 import de.micmun.android.nextcloudcookbook.data.RecipeFilter
@@ -17,7 +18,7 @@ import de.micmun.android.nextcloudcookbook.db.model.DbRecipeKeywordRelation
  * Repository for recipes.
  *
  * @author MicMun
- * @version 1.0, 07.04.21
+ * @version 1.1, 11.04.21
  */
 class DbRecipeRepository private constructor(application: Application) {
    private var mRecipeDao: RecipeDataDao = RecipeDatabase.getDatabase(application).recipeDataDao()
@@ -45,13 +46,14 @@ class DbRecipeRepository private constructor(application: Application) {
    fun getRecipe(name: String) = mRecipeDao.getByName(name)
 
    fun filterCategory(sort: SortValue, category: String, recipeFilter: RecipeFilter? = null): LiveData<List<DbRecipe>> {
-      var select = "SELECT * FROM recipes WHERE recipeCategory = '${category}' "
+      val cat = Html.escapeHtml(category)
+      var select = "SELECT * FROM recipes WHERE recipeCategory = '${cat}' "
       if (recipeFilter != null && recipeFilter.type != RecipeFilter.QueryType.QUERY_INGREDIENTS) {
          select += " AND " + getWhereClause(recipeFilter)
       } else if (recipeFilter != null) {
          select =
             "SELECT * FROM recipes INNER JOIN ingredients ON recipes.id = ingredients.recipeId" +
-            " WHERE recipeCategory REGEXP '(^|,)\\s*${category} AND " + getWhereClause(recipeFilter)
+            " WHERE recipeCategory REGEXP '(^|,)\\s*${cat} AND " + getWhereClause(recipeFilter)
       }
       select += " ORDER BY " + getOrderBy(sort)
 

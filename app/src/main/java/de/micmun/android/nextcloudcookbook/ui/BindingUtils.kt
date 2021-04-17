@@ -23,7 +23,7 @@ import java.util.stream.Collectors
  * Utilities for binding data to view.
  *
  * @author MicMun
- * @version 1.9, 09.04.21
+ * @version 2.0, 11.04.21
  */
 
 // Overview list
@@ -33,6 +33,8 @@ fun ImageView.setRecipeImage(item: DbRecipe?) {
       if (it.recipeCore.thumbImageUrl.isNotEmpty()) {
          val thumbImage = DocumentFile.fromSingleUri(context, Uri.parse(it.recipeCore.thumbImageUrl))
          setImageURI(thumbImage?.uri)
+      } else {
+         setImageURI(null)
       }
    }
 }
@@ -170,7 +172,7 @@ fun TextView.setTools(item: DbRecipe?) {
          visibility = View.GONE
       } else {
          val tools = it.tool.stream().map { it.tool }.collect(Collectors.toList()).joinToString(", ")
- 
+
          @Suppress("DEPRECATION")
          text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             Html.fromHtml(resources.getString(R.string.text_tools, tools), Html.FROM_HTML_MODE_LEGACY)

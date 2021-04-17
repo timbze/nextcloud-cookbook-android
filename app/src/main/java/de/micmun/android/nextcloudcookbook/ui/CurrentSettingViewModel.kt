@@ -9,15 +9,15 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import de.micmun.android.nextcloudcookbook.data.CategoryFilter
 import de.micmun.android.nextcloudcookbook.settings.PreferenceDao
 import de.micmun.android.nextcloudcookbook.settings.SharedPreferenceLiveData
-import de.micmun.android.nextcloudcookbook.data.CategoryFilter
 
 /**
  * LiveData of the settings.
  *
  * @author MicMun
- * @version 1.0, 26.01.21
+ * @version 1.1, 11.04.21
  */
 class CurrentSettingViewModel(application: Application) : AndroidViewModel(application) {
    private val prefDao = PreferenceDao.getInstance(application)
@@ -30,11 +30,21 @@ class CurrentSettingViewModel(application: Application) : AndroidViewModel(appli
    val category: LiveData<CategoryFilter>
       get() = _category
 
+   // category changed
+   private val _categoryChanged = MutableLiveData<Boolean>()
+   val categoryChanged: LiveData<Boolean>
+      get() = _categoryChanged
+
    fun setSorting(sort: Int) {
       prefDao.setSort(sort)
    }
 
    fun setNewCategory(cat: CategoryFilter) {
       _category.value = cat
+      _categoryChanged.value = true
+   }
+
+   fun resetCategoryChanged() {
+      _categoryChanged.value = false
    }
 }
