@@ -5,7 +5,6 @@
  */
 package de.micmun.android.nextcloudcookbook.ui
 
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.text.Html
@@ -17,24 +16,27 @@ import androidx.documentfile.provider.DocumentFile
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 import de.micmun.android.nextcloudcookbook.util.DurationUtils
+import de.micmun.android.nextcloudcookbook.util.StorageManager
 import java.util.stream.Collectors
 
 /**
  * Utilities for binding data to view.
  *
  * @author MicMun
- * @version 2.0, 11.04.21
+ * @version 2.1, 17.04.21
  */
 
 // Overview list
 @BindingAdapter("recipeImage")
 fun ImageView.setRecipeImage(item: DbRecipe?) {
-   item?.let {
-      if (it.recipeCore.thumbImageUrl.isNotEmpty()) {
-         val thumbImage = DocumentFile.fromSingleUri(context, Uri.parse(it.recipeCore.thumbImageUrl))
-         setImageURI(thumbImage?.uri)
-      } else {
+   item?.run {
+      if (recipeCore.thumbImageUrl.isEmpty()) {
          setImageURI(null)
+      } else {
+         val thumbImage = StorageManager.getImageFromString(context, recipeCore.thumbImageUrl)
+         thumbImage?.run {
+            setImageURI(uri)
+         }
       }
    }
 }
@@ -51,11 +53,16 @@ fun TextView.setRecipeDesc(item: DbRecipe?) {
 
 // Detail view
 @BindingAdapter("recipeHeaderImage")
-fun TextView.setRecipeHeaderImage(item: DbRecipe?) {
-   item?.let {
-      if (it.recipeCore.fullImageUrl.isNotEmpty()) {
-         val image = Drawable.createFromPath(it.recipeCore.fullImageUrl)
-         setCompoundDrawablesRelativeWithIntrinsicBounds(null, image, null, null)
+fun ImageView.setRecipeHeaderImage(item: DbRecipe?) {
+   item?.run {
+      if (recipeCore.fullImageUrl.isEmpty()) {
+         setImageURI(null)
+         visibility = View.GONE
+      } else {
+         val fullImage = StorageManager.getImageFromString(context, recipeCore.fullImageUrl)
+         fullImage?.run {
+            setImageURI(uri)
+         }
       }
    }
 }

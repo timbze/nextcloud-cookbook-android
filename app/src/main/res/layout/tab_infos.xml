@@ -19,21 +19,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+         <ImageView
+               android:id="@+id/headerImage"
+               android:layout_width="0dp"
+               android:layout_height="@dimen/header_image_height"
+               android:layout_marginStart="16dp"
+               android:layout_marginTop="16dp"
+               android:layout_marginEnd="16dp"
+               android:contentDescription="Header image"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               app:recipeHeaderImage="@{recipe}" />
+
          <TextView
                android:id="@+id/headerText"
                android:layout_width="0dp"
                android:layout_height="wrap_content"
                android:layout_marginStart="16dp"
-               android:layout_marginTop="16dp"
                android:layout_marginEnd="16dp"
                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                android:textSize="@dimen/tab_info_text_size"
                app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintHorizontal_bias="0.0"
                app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toTopOf="parent"
-               app:recipeDescription="@{recipe}"
-               app:recipeHeaderImage="@{recipe}" />
+               app:layout_constraintTop_toBottomOf="@id/headerImage"
+               app:recipeDescription="@{recipe}" />
 
          <TextView
                android:id="@+id/datePublishedText"
