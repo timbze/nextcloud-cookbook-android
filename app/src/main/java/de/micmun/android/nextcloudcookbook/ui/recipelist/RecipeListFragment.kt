@@ -28,6 +28,7 @@ import de.micmun.android.nextcloudcookbook.databinding.FragmentRecipelistBinding
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModel
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModelFactory
 import de.micmun.android.nextcloudcookbook.ui.MainActivity
+import java.net.URL
 
 /**
  * Fragment for list of recipes.
@@ -111,6 +112,10 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
          }
          R.id.sortAction -> {
             showSortOptions()
+            true
+         }
+         R.id.downloadAction -> {
+            onDownload()
             true
          }
          else -> NavigationUI
@@ -236,6 +241,10 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
       }
       builder.setOnDismissListener { sortDialog = null }
       sortDialog = builder.show()
+   }
+
+   private fun onDownload() {
+      recipesViewModel.download(URL("https://www.chefkoch.de/rezepte/848621190292368/Hefe-Schnecken.html"))
    }
 
    override fun onRefresh() {
