@@ -17,7 +17,7 @@ import de.micmun.android.nextcloudcookbook.settings.SharedPreferenceLiveData
  * LiveData of the settings.
  *
  * @author MicMun
- * @version 1.1, 11.04.21
+ * @version 1.2, 17.04.21
  */
 class CurrentSettingViewModel(application: Application) : AndroidViewModel(application) {
    private val prefDao = PreferenceDao.getInstance(application)
@@ -40,8 +40,9 @@ class CurrentSettingViewModel(application: Application) : AndroidViewModel(appli
    }
 
    fun setNewCategory(cat: CategoryFilter) {
+      val changed = _category.value == cat
       _category.value = cat
-      _categoryChanged.value = true
+      _categoryChanged.value = changed
    }
 
    fun resetCategoryChanged() {
