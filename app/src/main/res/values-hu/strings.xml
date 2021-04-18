@@ -1,86 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-   <string name="app_logo_desc">Az alkalmazás indító ikonja, amely egy szakácskönyv szimbólumot mutat</string>
-   <string name="permissions_error_message">Hozzáférés megtagadva! App kell tárolási hozzáférést, kérjük, aktiválja a beállításokat.</string>
-   <string name="no_information">Nincs Információ.</string>
-   <!-- recipe list -->
-   <string name="empty_list">Nincs recept.</string>
-   <string name="recipe_list_image_desc">Kép miniatűr recept</string>
-   <!-- recipe detail -->
-   <string name="img_desc_logo">A recept logója</string>
-   <string name="title_duration">Időtartamok HH:MM</string>
-   <string name="tooltip_prep_time">Előkészítés</string>
-   <string name="tooltip_cook_time">Főzés</string>
-   <string name="tooltip_total_time">Összességében</string>
-   <!-- tab titles -->
-   <string name="tab_info_title">Információ</string>
-   <string name="tab_ingredients_title">Összetevők</string>
-   <string name="tab_instructions_title">Utasítások</string>
-   <string name="tab_nutritions_title">Táplálékok</string>
-   <!-- tab infos -->
-   <string name="text_uncategorized">Nem kategorizált</string>
-   <string name="text_categories"><strong>kategóriák:</strong><br /> %1$s</string>
-   <string name="text_yield"><strong>hozam:</strong> %1$s</string>
-   <string name="text_author">Szerző: %1$s</string>
-   <string name="text_url">Forrás: %1$s</string>
-   <string name="text_no_keywords">Nincsenek Kulcsszavak.</string>
-   <string name="text_keywords"><strong>kulcsszavak:</strong><br /> %1$s</string>
-   <string name="text_date_published">Megjelenési dátum: %1$s</string>
-   <!-- Nutritions -->
-   <string name="nutrition_calories">Kalória: %1$s</string>
-   <string name="nutrition_carbohydrate_content">Szénhidráttartalom: %1$s</string>
-   <string name="nutrition_cholesterol_content">Koleszterin tartalom: %1$s</string>
-   <string name="nutrition_fat_content">Zsírtartalom: %1$s</string>
-   <string name="nutrition_fiberContent">Rosttartalom: %1$s</string>
-   <string name="nutrition_protein_content">Fehérjetartalom: %1$s</string>
-   <string name="nutrition_saturated_fat_content">Telített zsírtartalom: %1$s</string>
-   <string name="nutrition_serving_size">Kiszolgáló mérete: %1$s</string>
-   <string name="nutrition_sodium_content">Nátriumtartalom: %1$s</string>
-   <string name="nutrition_sugar_content">Cukortartalom: %1$s</string>
-   <string name="nutrition_trans_fat_content">Transzzsírtartalom: %1$s</string>
-   <string name="nutrition_unsaturated_fat_content">Telítetlen zsírtartalom: %1$s</string>
-   <!-- menu -->
-   <string name="menu_search_title">Részletes Keresés</string>
-   <string name="menu_settings_title">Beállítás</string>
-   <string name="menu_sort_title">Rendezés</string>
-   <string name="menu_refresh_tooltip">Receptek újratöltése</string>
-   <string name="menu_search_tooltip">Keresés recept</string>
-   <string name="search_hint">Keresés név szerint</string>
-   <!-- search formular -->
-   <string name="form_search_title">Részletes Keresés</string>
-   <string name="form_search_hint">Keresési lekérdezés</string>
-   <string name="form_ignore_case">Figyelmen kívül hagyni az ügyet\?</string>
-   <string name="form_exact_search">Végezzen pontos keresést\?</string>
-   <string name="form_types">Írja be a keresést</string>
-   <string name="form_type_keyword">Keresés kulcsszó szerint</string>
-   <string name="form_type_ingredients">Keresés összetevő szerint</string>
-   <string name="form_type_yield">Keresés hozam szerint</string>
-   <string name="form_search_options">Keresési lehetőségek</string>
-   <string name="form_search_commit">Keresés</string>
-   <!-- navdrawer_menu -->
-   <string name="menu_all_categories">Az összes kategória megjelenítése</string>
-   <string name="menu_uncategorized">Nem kategorizált</string>
-   <!-- preferences -->
-   <string name="pref_category_function">Funkcionalitás</string>
-   <string name="pref_category_design">Tervezés</string>
-   <string name="preftitle_recipeDir">Receptkönyvtár</string>
-   <string name="title_dir_chooser">Válasszon egy könyvtárat…</string>
-   <string name="preftitle_allow_hidden">Rejtett mappa megjelenítése</string>
-   <string name="pref_hidden_folder_true">A választó a recept könyvtár mutatja rejtett mappa</string>
-   <string name="pref_hidden_folder_false">A receptkönyvtár választója nem jeleníti meg a rejtett mappát</string>
-   <string name="preftitle_theme">Téma Kiválasztása</string>
-   <string name="about_title">Ról ről</string>
-   <string name="about_version">Alkalmazás verzió: %1$s</string>
-   <string name="about_summary">© 2020-2021 by Micmunn. Licenc alatt GPLv3.
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_logo_desc">Az alkalmazás indító ikonja, amely egy szakácskönyv szimbólumot mutat</string>
+    <string name="permissions_error_message">Hozzáférés megtagadva! App kell tárolási hozzáférést, kérjük, aktiválja a beállításokat.</string>
+    <string name="no_information">Nincs Információ.</string>
+    <!-- recipe list -->
+    <string name="empty_list">Nincs recept.</string>
+    <string name="recipe_list_image_desc">Kép miniatűr recept</string>
+    <!-- recipe detail -->
+    <string name="img_desc_logo">A recept logója</string>
+    <string name="title_duration">Időtartamok HH:MM</string>
+    <string name="tooltip_prep_time">Előkészítés</string>
+    <string name="tooltip_cook_time">Főzés</string>
+    <string name="tooltip_total_time">Összességében</string>
+    <!-- tab titles -->
+    <string name="tab_info_title">Információ</string>
+    <string name="tab_ingredients_title">Összetevők</string>
+    <string name="tab_instructions_title">Utasítások</string>
+    <string name="tab_nutritions_title">Táplálékok</string>
+    <!-- tab infos -->
+    <string name="text_uncategorized">Nem kategorizált</string>
+    <string name="text_categories"><strong> Kategória: </strong> <br/> %1$s</string>
+    <string name="text_yield"><strong>hozam:</strong> %1$s</string>
+    <string name="text_author">Szerző: %1$s</string>
+    <string name="text_url">Forrás: %1$s</string>
+    <string name="text_no_keywords">Nincsenek Kulcsszavak.</string>
+    <string name="text_keywords"><strong>kulcsszavak:</strong><br/> %1$s</string>
+    <string name="text_date_published">Megjelenési dátum: %1$s</string>
+    <!-- Nutritions -->
+    <string name="nutrition_calories">Kalória: %1$s</string>
+    <string name="nutrition_carbohydrate_content">Szénhidráttartalom: %1$s</string>
+    <string name="nutrition_cholesterol_content">Koleszterin tartalom: %1$s</string>
+    <string name="nutrition_fat_content">Zsírtartalom: %1$s</string>
+    <string name="nutrition_fiberContent">Rosttartalom: %1$s</string>
+    <string name="nutrition_protein_content">Fehérjetartalom: %1$s</string>
+    <string name="nutrition_saturated_fat_content">Telített zsírtartalom: %1$s</string>
+    <string name="nutrition_serving_size">Kiszolgáló mérete: %1$s</string>
+    <string name="nutrition_sodium_content">Nátriumtartalom: %1$s</string>
+    <string name="nutrition_sugar_content">Cukortartalom: %1$s</string>
+    <string name="nutrition_trans_fat_content">Transzzsírtartalom: %1$s</string>
+    <string name="nutrition_unsaturated_fat_content">Telítetlen zsírtartalom: %1$s</string>
+    <!-- menu -->
+    <string name="menu_search_title">Részletes Keresés</string>
+    <string name="menu_settings_title">Beállítás</string>
+    <string name="menu_sort_title">Rendezés</string>
+    <string name="menu_refresh_tooltip">Receptek újratöltése</string>
+    <string name="menu_search_tooltip">Keresés recept</string>
+    <string name="search_hint">Keresés név szerint</string>
+    <!-- search formular -->
+    <string name="form_search_title">Részletes Keresés</string>
+    <string name="form_search_hint">Keresési lekérdezés</string>
+    <string name="form_ignore_case">Figyelmen kívül hagyni az ügyet\?</string>
+    <string name="form_exact_search">Végezzen pontos keresést\?</string>
+    <string name="form_types">Írja be a keresést</string>
+    <string name="form_type_keyword">Keresés kulcsszó szerint</string>
+    <string name="form_type_ingredients">Keresés összetevő szerint</string>
+    <string name="form_type_yield">Keresés hozam szerint</string>
+    <string name="form_search_options">Keresési lehetőségek</string>
+    <string name="form_search_commit">Keresés</string>
+    <!-- navdrawer_menu -->
+    <string name="menu_all_categories">Az összes kategória megjelenítése</string>
+    <string name="menu_uncategorized">Nem kategorizált</string>
+    <!-- preferences -->
+    <string name="pref_category_function">Funkcionalitás</string>
+    <string name="pref_category_design">Tervezés</string>
+    <string name="preftitle_recipeDir">Receptkönyvtár</string>
+    <string name="title_dir_chooser">Válasszon egy könyvtárat…</string>
+    <string name="preftitle_allow_hidden">Rejtett mappa megjelenítése</string>
+    <string name="pref_hidden_folder_true">A választó a recept könyvtár mutatja rejtett mappa</string>
+    <string name="pref_hidden_folder_false">A receptkönyvtár választója nem jeleníti meg a rejtett mappát</string>
+    <string name="preftitle_theme">Téma Kiválasztása</string>
+    <string name="about_title">Ról ről</string>
+    <string name="about_version">Alkalmazás verzió: %1$s</string>
+    <string name="about_summary">© 2020-2021 by Micmunn. Licenc alatt GPLv3.
 \n
 \nNextcloud Cookbook egy app szakácskönyv nextcloud kezelésére recepteket.</string>
-   <string name="theme_name_light">Fény</string>
-   <string name="theme_name_dark">Sötét</string>
-   <string name="theme_name_system">Rendszer</string>
-   <string name="sort_value_alpha_asc">Név A-Z</string>
-   <string name="sort_value_alpha_desc">Név Z-A</string>
-   <string name="sort_value_date_asc">Közzétett dátum növekvő</string>
-   <string name="sort_value_date_desc">Megjelent dátum csökkenő</string>
-   <string name="sort_value_time_asc">Teljes idő növekvő</string>
-   <string name="sort_value_time_desc">Teljes idő csökkenő</string>
+    <string name="theme_name_light">Fény</string>
+    <string name="theme_name_dark">Sötét</string>
+    <string name="theme_name_system">Rendszer</string>
+    <string name="sort_value_alpha_asc">Név A-Z</string>
+    <string name="sort_value_alpha_desc">Név Z-A</string>
+    <string name="sort_value_date_asc">Közzétett dátum növekvő</string>
+    <string name="sort_value_date_desc">Megjelent dátum csökkenő</string>
+    <string name="sort_value_time_asc">Teljes idő növekvő</string>
+    <string name="sort_value_time_desc">Teljes idő csökkenő</string>
+    <string name="text_tools"><strong> Szükséges eszközök: </strong> <br/> %1$s</string>
+    <string name="header_image_desc">A recept fejlécképe</string>
+    <string name="permission_please_grant" tools:ignore="MissingTranslation">Adjon meg tárolási engedélyeket.</string>
+    <string name="permission_canceled" tools:ignore="MissingTranslation">Felhasználó törölte</string>
+    <string name="permission_select_root" tools:ignore="MissingTranslation">Kérjük, válassza ki a következőt: %1$s.</string>
+    <string name="folder_pick_success" tools:ignore="MissingTranslation">mappa %1$s kiválasztva.</string>
+    <string name="folder_pick_cancel" tools:ignore="MissingTranslation">A felhasználó törölte a mappaválasztót.</string>
+    <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">Nincs írási hozzáférése ehhez a tárhelyhez, így hiába választja ki ezt a mappát.
+\nSzeretne hozzáférést biztosítani ehhez a mappához \?.</string>
+    <string name="permission_ok_message" tools:ignore="MissingTranslation">A tárhely-hozzáférés megadva %1$s számára.</string>
 </resources>
