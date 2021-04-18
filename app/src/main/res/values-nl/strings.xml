@@ -1,87 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-   <string name="app_logo_desc">Lanceerpictogram van de app met een kookboeksymbool</string>
-   <string name="permissions_error_message">Toegang geweigerd! App heeft toegang tot de opslagruimte nodig, activeer deze in de instellingen.</string>
-   <string name="no_information">Geen informatie.</string>
-   <!-- recipe list -->
-   <string name="empty_list">Geen recepten.</string>
-   <string name="recipe_list_image_desc">Afbeelding thumbnail van recept</string>
-   <!-- recipe detail -->
-   <string name="img_desc_logo">Logo van het recept</string>
-   <string name="title_duration">Duraties in HH:MM</string>
-   <string name="tooltip_prep_time">Voorbereiding</string>
-   <string name="tooltip_cook_time">Koken</string>
-   <string name="tooltip_total_time">Totaal</string>
-   <!-- tab titles -->
-   <string name="tab_info_title">Informatie</string>
-   <string name="tab_ingredients_title">Ingrediënten</string>
-   <string name="tab_instructions_title">Instructies</string>
-   <string name="tab_nutritions_title">Voedingsmiddelen</string>
-   <!-- tab infos -->
-   <string name="text_uncategorized">Ongecategoriseerd</string>
-   <string name="text_categories"><strong>Categorieën:</strong><br /> %1$s</string>
-   <string name="text_yield"><strong>Opbrengst:</strong> %1$s</string>
-   <string name="text_author">Auteur: %1$s</string>
-   <string name="text_url">Bron: %1$s</string>
-   <string name="text_no_keywords">Geen sleutelwoorden.</string>
-   <string name="text_keywords"><strong>Trefwoorden:</strong><br /> %1$s</string>
-   <string name="text_date_published">Datum publicatie: %1$s</string>
-   <!-- Nutritions -->
-   <string name="nutrition_calories">Calorieën: %1$s</string>
-   <string name="nutrition_carbohydrate_content">Koolhydraatgehalte: %1$s</string>
-   <string name="nutrition_cholesterol_content">Cholesterolgehalte: %1$s</string>
-   <string name="nutrition_fat_content">Vetgehalte: %1$s</string>
-   <string name="nutrition_fiberContent">Vezelinhoud: %1$s</string>
-   <string name="nutrition_protein_content">Eiwitgehalte: %1$s</string>
-   <string name="nutrition_saturated_fat_content">Verzadigd vetgehalte: %1$s</string>
-   <string name="nutrition_serving_size">Dienende Grootte: %1$s</string>
-   <string name="nutrition_sodium_content">Natriumgehalte: %1$s</string>
-   <string name="nutrition_sugar_content">Suikergehalte: %1$s</string>
-   <string name="nutrition_trans_fat_content">Trans vetgehalte: %1$s</string>
-   <string name="nutrition_unsaturated_fat_content">Onverzadigd vetgehalte: %1$s</string>
-   <!-- menu -->
-   <string name="menu_search_title">Uitgebreid zoeken</string>
-   <string name="menu_settings_title">Instellingen</string>
-   <string name="menu_sort_title">Sorteer</string>
-   <string name="menu_refresh_tooltip">Verfrissende recepten</string>
-   <string name="menu_search_tooltip">Recept zoeken</string>
-   <string name="search_hint">Zoeken op naam</string>
-   <!-- search formular -->
-   <string name="form_search_title">Uitgebreid zoeken</string>
-   <string name="form_search_hint">Zoekopdracht</string>
-   <string name="form_ignore_case">Negeer geval\?</string>
-   <string name="form_exact_search">Een exacte zoekactie doen\?</string>
-   <string name="form_types">Type om te zoeken</string>
-   <string name="form_type_keyword">Zoeken op trefwoord</string>
-   <string name="form_type_ingredients">Zoek op ingrediënt</string>
-   <string name="form_type_yield">Zoeken op opbrengst</string>
-   <string name="form_search_options">Zoekopties</string>
-   <string name="form_search_commit">Zoeken</string>
-   <!-- navdrawer_menu -->
-   <string name="menu_all_categories">Toon alle categorieën</string>
-   <string name="menu_uncategorized">Ongecategoriseerd</string>
-   <!-- preferences -->
-   <string name="pref_category_function">Functionaliteit</string>
-   <string name="pref_category_design">Ontwerp</string>
-   <string name="preftitle_recipeDir">Receptenlijst</string>
-   <string name="title_dir_chooser">Kies een directory…</string>
-   <string name="preftitle_allow_hidden">Verborgen folder tonen</string>
-   <string name="pref_hidden_folder_true">De kiezer voor de receptenmap toont de verborgen map</string>
-   <string name="pref_hidden_folder_false">De kiezer voor de receptenmap toont geen verborgen map</string>
-   <string name="preftitle_theme">Selecteer Thema</string>
-   <string name="about_title">Over</string>
-   <string name="about_version">App versie: %1$s</string>
-   <string name="about_summary">© 2020-2021 door MicMun. Licentie onder GPLv3.
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_logo_desc">Lanceerpictogram van de app met een kookboeksymbool</string>
+    <string name="permissions_error_message">Toegang geweigerd! App heeft toegang tot de opslagruimte nodig, activeer deze in de instellingen.</string>
+    <string name="no_information">Geen informatie.</string>
+    <!-- recipe list -->
+    <string name="empty_list">Geen recepten.</string>
+    <string name="recipe_list_image_desc">Afbeelding thumbnail van recept</string>
+    <!-- recipe detail -->
+    <string name="img_desc_logo">Logo van het recept</string>
+    <string name="title_duration">Duraties in HH:MM</string>
+    <string name="tooltip_prep_time">Voorbereiding</string>
+    <string name="tooltip_cook_time">Koken</string>
+    <string name="tooltip_total_time">Totaal</string>
+    <!-- tab titles -->
+    <string name="tab_info_title">Informatie</string>
+    <string name="tab_ingredients_title">Ingrediënten</string>
+    <string name="tab_instructions_title">Instructies</string>
+    <string name="tab_nutritions_title">Voedingsmiddelen</string>
+    <!-- tab infos -->
+    <string name="text_uncategorized">Ongecategoriseerd</string>
+    <string name="text_categories"><strong>Categorie:</strong><br/> %1$s</string>
+    <string name="text_yield"><strong>Opbrengst:</strong> %1$s</string>
+    <string name="text_author">Auteur: %1$s</string>
+    <string name="text_url">Bron: %1$s</string>
+    <string name="text_no_keywords">Geen sleutelwoorden.</string>
+    <string name="text_keywords"><strong>Trefwoorden:</strong><br/> %1$s</string>
+    <string name="text_date_published">Datum publicatie: %1$s</string>
+    <!-- Nutritions -->
+    <string name="nutrition_calories">Calorieën: %1$s</string>
+    <string name="nutrition_carbohydrate_content">Koolhydraatgehalte: %1$s</string>
+    <string name="nutrition_cholesterol_content">Cholesterolgehalte: %1$s</string>
+    <string name="nutrition_fat_content">Vetgehalte: %1$s</string>
+    <string name="nutrition_fiberContent">Vezelinhoud: %1$s</string>
+    <string name="nutrition_protein_content">Eiwitgehalte: %1$s</string>
+    <string name="nutrition_saturated_fat_content">Verzadigd vetgehalte: %1$s</string>
+    <string name="nutrition_serving_size">Dienende Grootte: %1$s</string>
+    <string name="nutrition_sodium_content">Natriumgehalte: %1$s</string>
+    <string name="nutrition_sugar_content">Suikergehalte: %1$s</string>
+    <string name="nutrition_trans_fat_content">Trans vetgehalte: %1$s</string>
+    <string name="nutrition_unsaturated_fat_content">Onverzadigd vetgehalte: %1$s</string>
+    <!-- menu -->
+    <string name="menu_search_title">Uitgebreid zoeken</string>
+    <string name="menu_settings_title">Instellingen</string>
+    <string name="menu_sort_title">Sorteer</string>
+    <string name="menu_refresh_tooltip">Verfrissende recepten</string>
+    <string name="menu_search_tooltip">Recept zoeken</string>
+    <string name="search_hint">Zoeken op naam</string>
+    <!-- search formular -->
+    <string name="form_search_title">Uitgebreid zoeken</string>
+    <string name="form_search_hint">Zoekopdracht</string>
+    <string name="form_ignore_case">Negeer geval\?</string>
+    <string name="form_exact_search">Een exacte zoekactie doen\?</string>
+    <string name="form_types">Type om te zoeken</string>
+    <string name="form_type_keyword">Zoeken op trefwoord</string>
+    <string name="form_type_ingredients">Zoek op ingrediënt</string>
+    <string name="form_type_yield">Zoeken op opbrengst</string>
+    <string name="form_search_options">Zoekopties</string>
+    <string name="form_search_commit">Zoeken</string>
+    <!-- navdrawer_menu -->
+    <string name="menu_all_categories">Toon alle categorieën</string>
+    <string name="menu_uncategorized">Ongecategoriseerd</string>
+    <!-- preferences -->
+    <string name="pref_category_function">Functionaliteit</string>
+    <string name="pref_category_design">Ontwerp</string>
+    <string name="preftitle_recipeDir">Receptenlijst</string>
+    <string name="title_dir_chooser">Kies een directory…</string>
+    <string name="preftitle_allow_hidden">Verborgen folder tonen</string>
+    <string name="pref_hidden_folder_true">De kiezer voor de receptenmap toont de verborgen map</string>
+    <string name="pref_hidden_folder_false">De kiezer voor de receptenmap toont geen verborgen map</string>
+    <string name="preftitle_theme">Selecteer Thema</string>
+    <string name="about_title">Over</string>
+    <string name="about_version">App versie: %1$s</string>
+    <string name="about_summary">© 2020-2021 door MicMun. Licentie onder GPLv3.
 \n
 \nNextcloud Cookbook is een app voor kookboek op nextcloud om recepten te beheren.</string>
-
-   <string name="theme_name_light">Licht</string>
-   <string name="theme_name_dark">Donker</string>
-   <string name="theme_name_system">Systeem</string>
-   <string name="sort_value_alpha_asc">Naam A-Z</string>
-   <string name="sort_value_alpha_desc">Naam Z-A</string>
-   <string name="sort_value_date_asc">Datum publicatie oplopend</string>
-   <string name="sort_value_date_desc">Uitgegeven datum in aflopende volgorde</string>
-   <string name="sort_value_time_asc">Totale tijd oplopend</string>
-   <string name="sort_value_time_desc">Totale tijd aflopend</string>
+    <string name="theme_name_light">Licht</string>
+    <string name="theme_name_dark">Donker</string>
+    <string name="theme_name_system">Systeem</string>
+    <string name="sort_value_alpha_asc">Naam A-Z</string>
+    <string name="sort_value_alpha_desc">Naam Z-A</string>
+    <string name="sort_value_date_asc">Datum publicatie oplopend</string>
+    <string name="sort_value_date_desc">Uitgegeven datum in aflopende volgorde</string>
+    <string name="sort_value_time_asc">Totale tijd oplopend</string>
+    <string name="sort_value_time_desc">Totale tijd aflopend</string>
+    <string name="header_image_desc">Kop afbeelding van recept</string>
+    <string name="permission_select_root" tools:ignore="MissingTranslation">Selecteer %1$s.</string>
+    <string name="permission_ok_message" tools:ignore="MissingTranslation">Er is opslagtoegang verleend voor %1$s.</string>
+    <string name="permission_canceled" tools:ignore="MissingTranslation">Geannuleerd door gebruiker</string>
+    <string name="folder_pick_success" tools:ignore="MissingTranslation">Map %1$s geselecteerd.</string>
+    <string name="folder_pick_cancel" tools:ignore="MissingTranslation">Map kiezer geannuleerd door gebruiker.</string>
+    <string name="permission_please_grant" tools:ignore="MissingTranslation">Geef opslagrechten.</string>
+    <string name="text_tools"><strong>Nodig gereedschap:</strong><br/> %1$s</string>
+    <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">U heeft geen schrijftoegang tot deze opslag, dus het selecteren van deze map is zinloos.
+\nWilt u toegang verlenen tot deze map\?.</string>
 </resources>
