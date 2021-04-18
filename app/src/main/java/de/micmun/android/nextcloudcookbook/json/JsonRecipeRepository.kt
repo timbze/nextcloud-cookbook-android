@@ -22,7 +22,7 @@ import java.util.stream.Collectors
  * Repository with the recipe data.
  *
  * @author MicMun
- * @version 1.8, 11.04.21
+ * @version 1.9, 17.04.21
  */
 class JsonRecipeRepository {
    companion object {
@@ -67,8 +67,8 @@ class JsonRecipeRepository {
                   val recipe = readRecipe(context, jsonFile)
 
                   if (recipe != null) {
-                     recipe.thumbImageUrl = thumbFile?.uri.toString() ?: ""
-                     recipe.fullImageUrl = fullFile?.uri.toString() ?: ""
+                     recipe.thumbImageUrl = thumbFile?.uri?.toString() ?: ""
+                     recipe.fullImageUrl = fullFile?.uri?.toString() ?: ""
 
                      recipeList.add(recipe)
 

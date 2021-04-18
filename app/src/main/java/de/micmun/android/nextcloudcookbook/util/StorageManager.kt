@@ -9,12 +9,14 @@ import android.content.Context
 import android.net.Uri
 import androidx.documentfile.provider.DocumentFile
 import com.anggrayudi.storage.SimpleStorage
+import com.anggrayudi.storage.file.DocumentFileCompat
+import com.anggrayudi.storage.file.DocumentFileType
 
 /**
  * Manages the storage access.
  *
  * @author MicMun
- * @version 1.0, 10.01.21
+ * @version 1.2, 17.04.21
  */
 class StorageManager private constructor() {
    var storage: SimpleStorage? = null
@@ -36,7 +38,27 @@ class StorageManager private constructor() {
       }
 
       fun getDocumentFromString(context: Context, path: String): DocumentFile? {
-         return DocumentFile.fromTreeUri(context, Uri.parse(path))
+         return getDocumentFile(context, path, DocumentFileType.FOLDER)
+      }
+
+      fun getImageFromString(context: Context, path: String): DocumentFile? {
+         return getDocumentFile(context, path, DocumentFileType.FILE)
+      }
+
+      private fun getDocumentFile(context: Context, path: String, type: DocumentFileType): DocumentFile? {
+         return if (path.startsWith("content:")) {
+            try {
+               DocumentFile.fromTreeUri(context, Uri.parse(path))
+            } catch (e: IllegalArgumentException) {
+               null
+            }
+         } else {
+            try {
+               DocumentFileCompat.fromFullPath(context, path, type)
+            } catch (e: IllegalArgumentException) {
+               null
+            }
+         }
       }
    }
 }

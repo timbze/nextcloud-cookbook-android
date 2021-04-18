@@ -22,6 +22,7 @@
    <string name="tab_nutritions_title">Nährwerte</string>
 
    <!-- tab infos -->
+   <string name="header_image_desc">Header-Bild des Rezepts</string>
    <string name="text_uncategorized">Unkategorisiert</string>
    <string name="text_categories"><![CDATA[<strong>Kategorie:</strong><br/> ]]> %1$s</string>
    <string name="text_yield"><![CDATA[<strong>Portionen:</strong>]]> %1$s</string>

@@ -19,10 +19,7 @@ localized:
       After that, the start view has a list of recipes and you select a recipe to view the details.
     summary: View the recipes from your Nextcloud Cookbook
     whatsNew: |-
-      - Seven Languages added: Finnish, Danish, Swedish, Portugese, Icelandic, Estonian and Basque
-      - New background loading of recipes (Bugfixes)
-      - Caching recipes in sqlite database
-      - Showing tools in the info tab (details)
+      - Bugfixes (App crush, no images, category problem)
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -42,10 +39,7 @@ localized:
       Anschließend findet sich auf der Hauptseite (die auch nach dem Start der App direkt angezeigt wird) die Liste der verfügbaren Rezepte. Zur Anzeige der Details tippt man einfach das gewünschte Rezept an.
     summary: Zeige die Rezepte aus Deinem Nextcloud Kochbuch an
     whatsNew: |-
-      - Sieben Sprachen hinzugefügt: Finnisch, Dänisch, Schwedisch, Portugisisch, Isländisch, Estnisch and Baskisch
-      - Neue Ladetechnick für Rezepte im Hintergrund (Fehlerkorrekturen)
-      - Caching der Rezepte in einer sqlite-Datenbank
-      - Benötigte Werkzeuge im Info-Tab anzeigen (Details)
+      - Fehlerbehebungen (Absturz der App, keine Bilder, Kategorie-Problem)
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/de/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -56,13 +50,17 @@ localized:
       - screenshot_settings.png
 
 builds:
+  - versionName: 2.0.1
+    versionCode: 201
+    sha256: b0aadf1292fcef9315d28499ee0953969f7305c45d884026f5afecd85c519e0f
+    apkLink: sia://_BkydKutqQ0erFROcvLVrmX1LZlpCxnEz8aSiK1tlXA_6A
   - versionName: 2.0.0
     versionCode: 200
     sha256: ab98ebfffc1cbbd15f1d7cb48644ae68733ca4669d39ebaf9817679bfc989912
     apkLink: sia://_Bka9tS-fiGpHIjylx-yjr1caGY_w7p-2vhm5rU9gqhG-w
 
-currentVersionName: 2.0.0
-currentVersionCode: 200
+currentVersionName: 2.0.1
+currentVersionCode: 201
 
 added: 1618153205273
-lastUpdated: 1618158820455
+lastUpdated: 1618671278061
