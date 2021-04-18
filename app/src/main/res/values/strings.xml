@@ -52,6 +52,7 @@
    <string name="menu_search_title">Advanced Search</string>
    <string name="menu_settings_title">Settings</string>
    <string name="menu_sort_title">Sort</string>
+   <string name="menu_download_title">Download</string>
    <string name="menu_refresh_tooltip">Refresh recipes</string>
    <string name="menu_search_tooltip">Search recipe</string>
    <string name="menu_download_tooltip">download recipe</string>
@@ -68,6 +69,13 @@
    <string name="form_type_yield">Search by Yield</string>
    <string name="form_search_options">Search options</string>
    <string name="form_search_commit">Search</string>
+
+   <!-- download formular -->
+   <string name="form_download_url_hint">Recipe URL</string>
+   <string name="form_download_options">Options</string>
+   <string name="form_download_override_existing">Replace existing recipe folder</string>
+   <string name="form_download_commit">Download</string>
+   <string name="form_download_folder">Override target folder</string>
 
    <!-- navdrawer_menu -->
    <string name="menu_all_categories">Show all categories</string>
