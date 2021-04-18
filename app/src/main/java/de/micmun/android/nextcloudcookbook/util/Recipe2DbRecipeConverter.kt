@@ -31,7 +31,6 @@ class Recipe2DbRecipeConverter(private val recipe: Recipe) {
          imageUrl = cns(recipe.imageUrl),
          thumbImageUrl = cns(recipe.thumbImageUrl),
          fullImageUrl = cns(recipe.fullImageUrl),
-         keywords = cns(recipe.keywords),
          name = recipe.name,
          prepTime = cns(recipe.prepTime),
          printImage = cns(recipe.printImage),
@@ -51,7 +50,8 @@ class Recipe2DbRecipeConverter(private val recipe: Recipe) {
          tool = getTools(recipe.tool),
          review = getReview(recipe.review),
          recipeIngredient = getIngredients(recipe.recipeIngredient),
-         recipeInstructions = getInstructions(recipe.recipeInstructions)
+         recipeInstructions = getInstructions(recipe.recipeInstructions),
+         keywords = recipe.keywords?.splitToSequence(",")?.map { str -> DbKeyword(keyword = str) }?.toList(),
       )
    }
 
