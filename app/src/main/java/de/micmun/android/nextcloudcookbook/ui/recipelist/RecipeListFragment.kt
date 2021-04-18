@@ -120,7 +120,6 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
       // refreshItem
       refreshItem = menu.findItem(R.id.refreshAction)
-      downloadItem = menu.findItem(R.id.downloadAction)
    }
 
    override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -131,10 +130,6 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
          }
          R.id.sortAction -> {
             showSortOptions()
-            true
-         }
-         R.id.downloadAction -> {
-            onDownload()
             true
          }
          else -> NavigationUI
@@ -260,10 +255,6 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
       }
       builder.setOnDismissListener { sortDialog = null }
       sortDialog = builder.show()
-   }
-
-   private fun onDownload() {
-      recipesViewModel.download(URL("https://www.chefkoch.de/rezepte/848621190292368/Hefe-Schnecken.html"))
    }
 
    override fun onRefresh() {

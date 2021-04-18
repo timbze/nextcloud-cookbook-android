@@ -126,11 +126,13 @@
    <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">You have no write access to this storage, thus selecting this folder is useless.\nWould you like to grant access to this folder?.</string>
    <string name="folder_pick_cancel" tools:ignore="MissingTranslation">Folder picker cancelled by user.</string>
    <string name="folder_pick_success" tools:ignore="MissingTranslation">Folder %1$s selected.</string>
-   <string name="menu_download_tooltip" tools:ignore="MissingTranslation">download recipe</string>
+
+   <!-- download -->
+   <string name="menu_download_title">Download</string>
+   <string name="form_download_title">Download Recipe</string>
    <string name="form_download_url_hint">Recipe URL</string>
    <string name="form_download_options">Options</string>
    <string name="form_download_override_existing">Replace existing recipe folder</string>
    <string name="form_download_commit">Download</string>
    <string name="form_download_folder">Override target folder</string>
-   <string name="menu_download_title">Download</string>
 </resources>
