@@ -3,9 +3,9 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
    <item
-       android:id="@+id/downloadAction"
+       android:id="@+id/downloadFormFragment"
        android:icon="@android:drawable/stat_sys_download_done"
-       android:title="@string/menu_download_tooltip"
+       android:title="@string/menu_download_title"
        app:showAsAction="ifRoom" />
    <item
          android:id="@+id/refreshAction"
@@ -31,8 +31,4 @@
          android:id="@+id/preferenceFragment"
          android:title="@string/menu_settings_title"
          app:showAsAction="never" />
-   <item
-       android:id="@+id/downloadFormFragment"
-       android:title="@string/menu_download_title"
-       app:showAsAction="never" />
 </menu>

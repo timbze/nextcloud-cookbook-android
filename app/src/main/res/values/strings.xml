@@ -71,6 +71,7 @@
    <string name="form_search_commit">Search</string>
 
    <!-- download formular -->
+   <string name="form_download_title">Download Recipe</string>
    <string name="form_download_url_hint">Recipe URL</string>
    <string name="form_download_options">Options</string>
    <string name="form_download_override_existing">Replace existing recipe folder</string>
