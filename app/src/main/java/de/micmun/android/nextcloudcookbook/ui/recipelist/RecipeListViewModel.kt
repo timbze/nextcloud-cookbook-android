@@ -6,16 +6,17 @@
 package de.micmun.android.nextcloudcookbook.ui.recipelist
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
-import de.micmun.android.nextcloudcookbook.json.JsonRecipeRepository
-import de.micmun.android.nextcloudcookbook.db.DbRecipeRepository
-import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
-import de.micmun.android.nextcloudcookbook.json.model.Recipe
 import de.micmun.android.nextcloudcookbook.data.CategoryFilter
 import de.micmun.android.nextcloudcookbook.data.SortValue
+import de.micmun.android.nextcloudcookbook.db.DbRecipeRepository
+import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
+import de.micmun.android.nextcloudcookbook.json.JsonRecipeRepository
+import de.micmun.android.nextcloudcookbook.json.model.Recipe
 import de.micmun.android.nextcloudcookbook.util.Recipe2DbRecipeConverter
+import de.micmun.android.nextcloudcookbook.util.json.RecipeJsonParser
 import kotlinx.coroutines.*
+import org.jsoup.Jsoup
 import java.net.URL
 import java.util.stream.Collectors
 
@@ -100,16 +101,27 @@ class RecipeListViewModel(private val app: Application) : AndroidViewModel(app) 
    }
 
    fun download(url: URL) {
+      isDownloading.postValue(true)
       uiScope.launch {
-         val rec = downloadImpl(url)
+         downloadImpl(url)
+         Thread.sleep(1000)
+         isDownloading.postValue(false)
       }
    }
 
    private suspend fun downloadImpl(url: URL): Recipe? {
       return withContext(Dispatchers.IO) {
-         var obj = url.openConnection().content
-         var str = obj.toString()
-         //...
+         val document = Jsoup.connect(url.toString()).get()
+         for (element in document.getElementsByTag("script")) {
+            if (element.attr("type")?.equals("application/ld+json") == true) {
+               val json = element.text()
+               if (json.contains("\"@type\": \"Recipe\"")) {
+                  val recipe = RecipeJsonParser().parse(json)
+                  print(recipe)
+                  return@withContext recipe
+               }
+            }
+         }
          null
       }
    }
