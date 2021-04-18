@@ -43,6 +43,7 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
    private lateinit var adapter: RecipeListAdapter
 
    private var refreshItem: MenuItem? = null
+   private var downloadItem: MenuItem? = null
 
    private var sortDialog: AlertDialog? = null
    private var currentSort: SortValue? = null
@@ -69,6 +70,23 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             } else {
                binding.swipeContainer.isRefreshing = false
                refreshItem?.let { it.isEnabled = true }
+            }
+         }
+      })
+
+      recipesViewModel.isDownloading.observe(viewLifecycleOwner, { isDownloading ->
+         isDownloading?.let {
+            if (isDownloading) {
+               downloadItem?.let {
+                  it.isEnabled = false
+                  it.setIcon(android.R.drawable.stat_sys_download)
+               }
+
+            } else {
+               downloadItem?.let {
+                  it.isEnabled = true
+                  it.setIcon(android.R.drawable.stat_sys_download_done)
+               }
             }
          }
       })
@@ -102,6 +120,7 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
       // refreshItem
       refreshItem = menu.findItem(R.id.refreshAction)
+      downloadItem = menu.findItem(R.id.downloadAction)
    }
 
    override fun onOptionsItemSelected(item: MenuItem): Boolean {
