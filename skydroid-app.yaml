@@ -1,0 +1,66 @@
+name: Nextcloud Cookbook
+authorName: MicMun
+packageName: de.micmun.android.nextcloudcookbook
+license: GPLv3
+authorEmail: micmun@micmun.de
+sourceCode: https://codeberg.org/MicMun/nextcloud-cookbook
+issueTracker: https://codeberg.org/MicMun/nextcloud-cookbook/issues
+icon: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/de/images/icon.png
+
+localized:
+  en-US:
+    description: |-
+      This app is a viewer for recipes in Nextcloud App. You need another app (e.g. the Nextcloud Android client) to sync the recipes to your Android device.
+
+      <b>First steps</b>
+      After installation you must go into the settings view and select the recipe directory with the recipes inside.
+      When using the Nextcloud Android client, you find it on your storage under <code>Android/media/com.nextcloud.client/nextcloud/&lt;your account&gt;/&lt;folder&gt;</code>.
+      You also can choose the theme in the settings.
+      After that, the start view has a list of recipes and you select a recipe to view the details.
+    summary: View the recipes from your Nextcloud Cookbook
+    whatsNew: |-
+      - Bugfixes (App crush, no images, category problem)
+    phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/
+    phoneScreenshots:
+      - screenshot_start.png
+      - screenshot_search.png
+      - screenshot_advanced_search.png
+      - screenshot_detail_info.png
+      - screenshot_detail_ingredients.png
+      - screenshot_settings.png
+  de-DE:
+    description: |-
+      Diese App ist ein Betrachter für die Rezepte der Nextcloud App. Für die Synchronisation der Rezepte wird eine andere App (z. B. der Nextcloud Client für Android) benötigt.
+
+      <b>Erste Schritte</b>
+      Nach der Installation muss man zunächst in die Einstellungen gehen und das Verzeichnis auswählen, in welchem sich die von der Nextcloud synchronisierten Rezepte befinden.
+      Bei Nutzung der Nextcloud App für Android, ist dies üblicherweise <code>Android/media/com.nextcloud.client/nextcloud/&lt;Account-Name&gt;/&lt;Verzeichnis&gt;</code>.
+      In den Einstellungen lässt sich auch das Theme wählen.
+      Anschließend findet sich auf der Hauptseite (die auch nach dem Start der App direkt angezeigt wird) die Liste der verfügbaren Rezepte. Zur Anzeige der Details tippt man einfach das gewünschte Rezept an.
+    summary: Zeige die Rezepte aus Deinem Nextcloud Kochbuch an
+    whatsNew: |-
+      - Fehlerbehebungen (Absturz der App, keine Bilder, Kategorie-Problem)
+    phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/de/images/phoneScreenshots/
+    phoneScreenshots:
+      - screenshot_start.png
+      - screenshot_search.png
+      - screenshot_advanced_search.png
+      - screenshot_detail_info.png
+      - screenshot_detail_ingredients.png
+      - screenshot_settings.png
+
+builds:
+  - versionName: 2.0.1
+    versionCode: 201
+    sha256: b0aadf1292fcef9315d28499ee0953969f7305c45d884026f5afecd85c519e0f
+    apkLink: sia://_BkydKutqQ0erFROcvLVrmX1LZlpCxnEz8aSiK1tlXA_6A
+  - versionName: 2.0.0
+    versionCode: 200
+    sha256: ab98ebfffc1cbbd15f1d7cb48644ae68733ca4669d39ebaf9817679bfc989912
+    apkLink: sia://_Bka9tS-fiGpHIjylx-yjr1caGY_w7p-2vhm5rU9gqhG-w
+
+currentVersionName: 2.0.1
+currentVersionCode: 201
+
+added: 1618153205273
+lastUpdated: 1618671278061

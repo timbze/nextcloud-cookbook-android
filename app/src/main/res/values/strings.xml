@@ -23,6 +23,7 @@
    <string name="tab_nutritions_title">Nutritions</string>
 
    <!-- tab infos -->
+   <string name="header_image_desc">Header image of recipe</string>
    <string name="text_uncategorized">Uncategorized</string>
    <string name="text_categories"><![CDATA[<strong>Category:</strong><br/> ]]> %1$s</string>
    <string name="text_yield"><![CDATA[<strong>Yield:</strong>]]> %1$s</string>

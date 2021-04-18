@@ -11,12 +11,13 @@ import androidx.sqlite.db.SimpleSQLiteQuery
 import de.micmun.android.nextcloudcookbook.data.RecipeFilter
 import de.micmun.android.nextcloudcookbook.data.SortValue
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
+import de.micmun.android.nextcloudcookbook.db.model.DbRecipeKeywordRelation
 
 /**
  * Repository for recipes.
  *
  * @author MicMun
- * @version 1.0, 07.04.21
+ * @version 1.2, 17.04.21
  */
 class DbRecipeRepository private constructor(application: Application) {
    private var mRecipeDao: RecipeDataDao = RecipeDatabase.getDatabase(application).recipeDataDao()
@@ -121,6 +122,7 @@ class DbRecipeRepository private constructor(application: Application) {
                recipe.review?.let { mRecipeDao.insertReviews(it) }
                recipe.recipeInstructions?.let { mRecipeDao.insertInstructions(it) }
                recipe.recipeIngredient?.let { mRecipeDao.insertIngredients(it) }
+               updateKeywords(recipe, id)
             } else {
                val id = r.recipeCore.id
                recipe.recipeCore.id = id
@@ -131,6 +133,7 @@ class DbRecipeRepository private constructor(application: Application) {
                recipe.review?.let { mRecipeDao.updateReviews(it) }
                recipe.recipeInstructions?.let { mRecipeDao.updateInstructions(it) }
                recipe.recipeIngredient?.let { mRecipeDao.updateIngredients(it) }
+               updateKeywords(recipe, id)
             }
          }
       }
@@ -215,6 +218,16 @@ class DbRecipeRepository private constructor(application: Application) {
       }
       recipe.recipeIngredient?.let { ing ->
          ing.forEach { it.recipeId = id }
+      }
+   }
+
+   private fun updateKeywords(recipe: DbRecipe, recipeId: Long) {
+      recipe.keywords?.let {
+         mRecipeDao.insertKeywords(it)
+         mRecipeDao.findKeywords(it.map { kw -> kw.keyword })?.let {
+            mRecipeDao.insertKeywordRefs(
+               it.map { kw -> DbRecipeKeywordRelation(recipeId = recipeId, keywordId = kw.id) })
+         }
       }
    }
 }

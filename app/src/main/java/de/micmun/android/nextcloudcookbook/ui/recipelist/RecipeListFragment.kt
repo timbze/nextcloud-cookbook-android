@@ -3,9 +3,7 @@ package de.micmun.android.nextcloudcookbook.ui.recipelist
 import android.app.SearchManager
 import android.content.Context
 import android.content.DialogInterface
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -34,7 +32,7 @@ import java.net.URL
  * Fragment for list of recipes.
  *
  * @author MicMun
- * @version 2.1, 26.01.21
+ * @version 2.3, 17.04.21
  */
 class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
    private lateinit var binding: FragmentRecipelistBinding
@@ -174,11 +172,16 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             setCategoryTitle(it)
             loadData()
 
-            if (it.type == CategoryFilter.CategoryFilterOption.ALL_CATEGORIES) {
-               binding.recipeList.postDelayed(200) {
-                  binding.recipeList.smoothScrollToPosition(0)
+            settingViewModel.categoryChanged.observe(viewLifecycleOwner, { changed ->
+               changed?.let {
+                  if (it) {
+                     binding.recipeList.postDelayed(250) {
+                        binding.recipeList.smoothScrollToPosition(0)
+                     }
+                     settingViewModel.resetCategoryChanged()
+                  }
                }
-            }
+            })
          }
       })
 
@@ -202,11 +205,7 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
             menu.removeGroup(R.id.menu_categories_group)
             categories.forEach { category ->
-               @Suppress("DEPRECATION") val title = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                  Html.fromHtml(category, Html.FROM_HTML_MODE_LEGACY)
-               else
-                  Html.fromHtml(category)
-               menu.add(R.id.menu_categories_group, category.hashCode(), order++, title)
+               menu.add(R.id.menu_categories_group, category.hashCode(), order++, category)
             }
          }
       })

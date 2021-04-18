@@ -13,7 +13,7 @@ import java.util.stream.Collectors
  * Converter for recipe into database recipe pojo.
  *
  * @author MicMun
- * @version 1.0, 19.02.21
+ * @version 1.1, 17.04.21
  */
 class Recipe2DbRecipeConverter(private val recipe: Recipe) {
    fun convert(): DbRecipe {
@@ -31,7 +31,6 @@ class Recipe2DbRecipeConverter(private val recipe: Recipe) {
          imageUrl = cns(recipe.imageUrl),
          thumbImageUrl = cns(recipe.thumbImageUrl),
          fullImageUrl = cns(recipe.fullImageUrl),
-         keywords = cns(recipe.keywords),
          name = recipe.name,
          prepTime = cns(recipe.prepTime),
          printImage = cns(recipe.printImage),
@@ -51,7 +50,8 @@ class Recipe2DbRecipeConverter(private val recipe: Recipe) {
          tool = getTools(recipe.tool),
          review = getReview(recipe.review),
          recipeIngredient = getIngredients(recipe.recipeIngredient),
-         recipeInstructions = getInstructions(recipe.recipeInstructions)
+         recipeInstructions = getInstructions(recipe.recipeInstructions),
+         keywords = recipe.keywords?.splitToSequence(",")?.map { str -> DbKeyword(keyword = str) }?.toList(),
       )
    }
 
@@ -107,31 +107,17 @@ class Recipe2DbRecipeConverter(private val recipe: Recipe) {
       var value: List<DbReview>? = null
 
       if (reviews != null) {
-         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            value = reviews.stream()
-               .map { t ->
-                  DbReview(
-                     type = cns(t.type),
-                     dateCreated = cns(t.dateCreated),
-                     description = cns(t.description),
-                     author = getAuthor(t.author),
-                     itemReviewed = getItemReviewed(t.itemReviewed)
-                  )
-               }
-               .collect(Collectors.toList())
-         } else {
-            value = mutableListOf()
-            reviews.forEach { t ->
-               val dbReview = DbReview(
+         value = reviews.stream()
+            .map { t ->
+               DbReview(
                   type = cns(t.type),
                   dateCreated = cns(t.dateCreated),
                   description = cns(t.description),
                   author = getAuthor(t.author),
                   itemReviewed = getItemReviewed(t.itemReviewed)
                )
-               value.add(dbReview)
             }
-         }
+            .collect(Collectors.toList())
       }
 
       return value
