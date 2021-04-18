@@ -15,7 +15,7 @@
     <!-- tab titles -->
     <string name="tab_info_title">Informations</string>
     <string name="tab_ingredients_title">Ingrédients</string>
-    <string name="tab_instructions_title">Instructions</string>
+    <string name="tab_instructions_title">Indications</string>
     <string name="tab_nutritions_title">Nourriture</string>
     <!-- tab infos -->
     <string name="text_uncategorized">Non classé</string>
@@ -86,4 +86,11 @@
     <string name="permission_canceled" tools:ignore="MissingTranslation">Annulé par l\'utilisateur</string>
     <string name="text_tools"><strong>Outils requis:</strong><br/> %1$s</string>
     <string name="permission_select_root" tools:ignore="MissingTranslation">Veuillez choisir %1$s.</string>
+    <string name="header_image_desc">Image d\'en-tête de la recette</string>
+    <string name="permission_please_grant" tools:ignore="MissingTranslation">Veuillez accorder des autorisations de stockage.</string>
+    <string name="folder_pick_success" tools:ignore="MissingTranslation">Dossier %1$s sélectionné.</string>
+    <string name="folder_pick_cancel" tools:ignore="MissingTranslation">Le sélecteur de dossiers a été annulé par l\'utilisateur.</string>
+    <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">Vous n\'avez pas d\'accès en écriture à ce stockage, la sélection de ce dossier est donc inutile.
+\nVoulez-vous accorder l\'accès à ce dossier \?.</string>
+    <string name="permission_ok_message" tools:ignore="MissingTranslation">L\'accès au stockage a été accordé pour %1$s.</string>
 </resources>
