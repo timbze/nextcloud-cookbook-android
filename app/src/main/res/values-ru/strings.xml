@@ -1,2 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="no_information">Нет информации.</string>
+    <string name="empty_list">Нет рецептов.</string>
+    <string name="img_desc_logo">Логотип рецепта</string>
+    <string name="title_duration">Продолжительность в ЧЧ:ММ</string>
+    <string name="tooltip_cook_time">Готовка</string>
+    <string name="tab_info_title">Информация</string>
+    <string name="tab_ingredients_title">Ингредиенты</string>
+    <string name="tab_instructions_title">Инструкции</string>
+    <string name="tab_nutritions_title">Питание</string>
+    <string name="text_uncategorized">Без категории</string>
+    <string name="text_categories"><strong>Категория:</strong><br/> %1$s</string>
+    <string name="text_author">Автор: %1$s</string>
+    <string name="text_url">Источник: %1$s</string>
+    <string name="text_no_keywords">Нет ключевых слов.</string>
+    <string name="text_keywords"><strong>Ключевые слова:</strong><br/> %1$s</string>
+    <string name="text_date_published">Дата публикации: %1$s</string>
+    <string name="text_tools"><strong>Необходимые инструменты:</strong><br/> %1$s</string>
+    <string name="nutrition_calories">Калории: %1$s</string>
+    <string name="nutrition_carbohydrate_content">Содержание углеводов: %1$s</string>
+    <string name="nutrition_fat_content">Содержание жира: %1$s</string>
+    <string name="nutrition_fiberContent">Содержание клетчатки: %1$s</string>
+    <string name="nutrition_protein_content">Содержание белка: %1$s</string>
+    <string name="nutrition_serving_size">Размер порции: %1$s</string>
+    <string name="nutrition_sodium_content">Содержание натрия: %1$s</string>
+    <string name="nutrition_sugar_content">Содержание сахара: %1$s</string>
+    <string name="nutrition_trans_fat_content">Содержание транс-жира: %1$s</string>
+    <string name="menu_search_title">Расширенный поиск</string>
+    <string name="menu_settings_title">Настройки</string>
+    <string name="menu_sort_title">Сортировка</string>
+    <string name="menu_refresh_tooltip">Обновить рецепты</string>
+    <string name="recipe_list_image_desc">Миниатюры изображений рецептов</string>
+    <string name="tooltip_prep_time">Подготовка</string>
+    <string name="text_yield"><strong>Рацион:</strong> %1$s</string>
+    <string name="tooltip_total_time">Общее время</string>
+    <string name="header_image_desc">Изображение заголовка рецепта</string>
+    <string name="menu_search_tooltip">Поиск рецепта</string>
+    <string name="search_hint">Поиск по названию</string>
+    <string name="form_search_title">Расширенный поиск</string>
+    <string name="form_search_hint">Поисковый запрос</string>
+    <string name="form_ignore_case">Игнорировать регистр\?</string>
+    <string name="form_exact_search">Выполнить точный поиск\?</string>
+    <string name="form_types">Напишите для поиска</string>
+    <string name="form_type_ingredients">Поиск по ингредиенту</string>
+    <string name="form_type_yield">Поиск по рациону</string>
+    <string name="form_search_options">Опции поиска</string>
+    <string name="form_search_commit">Поиск</string>
+    <string name="menu_all_categories">Показать все категории</string>
+    <string name="menu_uncategorized">Без категории</string>
+    <string name="pref_category_design">Дизайн</string>
+    <string name="preftitle_recipeDir">Каталог рецептов</string>
+    <string name="title_dir_chooser">Выберите каталог…</string>
+    <string name="preftitle_allow_hidden">Показать скрытые папки</string>
+    <string name="preftitle_theme">Выбрать тему</string>
+    <string name="about_title">О приложении</string>
+    <string name="about_version">Версия приложения: %1$s</string>
+    <string name="theme_name_light">Светлая</string>
+    <string name="theme_name_dark">Тёмная</string>
+    <string name="theme_name_system">Системная</string>
+    <string name="sort_value_alpha_asc">Название А-Я</string>
+    <string name="sort_value_alpha_desc">Название Я-А</string>
+    <string name="sort_value_date_asc">Дата публикации по возрастанию</string>
+    <string name="sort_value_date_desc">Дата публикации по убыванию</string>
+    <string name="sort_value_time_asc">Общее время по возрастанию</string>
+    <string name="sort_value_time_desc">Общее время по убыванию</string>
+    <string name="permission_select_root" tools:ignore="MissingTranslation">Пожалуйста, выберите %1$s.</string>
+    <string name="permission_canceled" tools:ignore="MissingTranslation">Отменено пользователем</string>
+    <string name="permission_ok_message" tools:ignore="MissingTranslation">Доступ к хранилищу был предоставлен %1$s.</string>
+    <string name="permission_please_grant" tools:ignore="MissingTranslation">Пожалуйста, предоставьте разрешения на хранение.</string>
+    <string name="folder_pick_cancel" tools:ignore="MissingTranslation">Выбор папки отменён пользователем.</string>
+    <string name="nutrition_cholesterol_content">Содержание холестерина: %1$s</string>
+    <string name="nutrition_saturated_fat_content">Содержание насыщенного жира: %1$s</string>
+    <string name="nutrition_unsaturated_fat_content">Содержание ненасыщенного жира: %1$s</string>
+    <string name="form_type_keyword">Поиск по ключевым словам</string>
+    <string name="pref_category_function">Функциональность</string>
+    <string name="pref_hidden_folder_true">Выбор каталога рецептов показывает скрытые папки</string>
+    <string name="pref_hidden_folder_false">Выбор каталога рецептов не показывает скрытые папки</string>
+    <string name="about_summary">© 2020-2021 от MicMun. Лицензия под GPLV3.
+\n
+\nNextCloud Cookbook - это приложение кулинарной книги на NextCloud для управления рецептами.</string>
+    <string name="app_logo_desc">Икона запуска приложения, показывающая символ кулинарной книги</string>
+    <string name="permissions_error_message">Доступ запрещён! Приложение нуждается в доступе к хранилищу, пожалуйста, активируйте его в настройках.</string>
+    <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">У вас нет доступа на запись в это хранилище, поэтому выбор этой папки бесполезен.
+\nВы хотите предоставить доступ к этой папке\?</string>
+    <string name="folder_pick_success" tools:ignore="MissingTranslation">Папка %1$s выбрана.</string>
+</resources>
