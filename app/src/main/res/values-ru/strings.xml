@@ -3,17 +3,17 @@
     <string name="no_information">Нет информации.</string>
     <string name="empty_list">Нет рецептов.</string>
     <string name="img_desc_logo">Логотип рецепта</string>
-    <string name="title_duration">Продолжительность в ЧЧ:ММ</string>
+    <string name="title_duration">Длительность в ЧЧ:ММ</string>
     <string name="tooltip_cook_time">Готовка</string>
     <string name="tab_info_title">Информация</string>
     <string name="tab_ingredients_title">Ингредиенты</string>
     <string name="tab_instructions_title">Инструкции</string>
-    <string name="tab_nutritions_title">Питание</string>
-    <string name="text_uncategorized">Без категории</string>
+    <string name="tab_nutritions_title">Kормление</string>
+    <string name="text_uncategorized">Некатегорированный</string>
     <string name="text_categories"><strong>Категория:</strong><br/> %1$s</string>
     <string name="text_author">Автор: %1$s</string>
     <string name="text_url">Источник: %1$s</string>
-    <string name="text_no_keywords">Нет ключевых слов.</string>
+    <string name="text_no_keywords">Никаких ключевых слов.</string>
     <string name="text_keywords"><strong>Ключевые слова:</strong><br/> %1$s</string>
     <string name="text_date_published">Дата публикации: %1$s</string>
     <string name="text_tools"><strong>Необходимые инструменты:</strong><br/> %1$s</string>
@@ -33,17 +33,17 @@
     <string name="recipe_list_image_desc">Миниатюры изображений рецептов</string>
     <string name="tooltip_prep_time">Подготовка</string>
     <string name="text_yield"><strong>Рацион:</strong> %1$s</string>
-    <string name="tooltip_total_time">Общее время</string>
-    <string name="header_image_desc">Изображение заголовка рецепта</string>
+    <string name="tooltip_total_time">Всего</string>
+    <string name="header_image_desc">Заголовок изображения рецепта</string>
     <string name="menu_search_tooltip">Поиск рецепта</string>
     <string name="search_hint">Поиск по названию</string>
     <string name="form_search_title">Расширенный поиск</string>
     <string name="form_search_hint">Поисковый запрос</string>
-    <string name="form_ignore_case">Игнорировать регистр\?</string>
+    <string name="form_ignore_case">Игнорировать дело\?</string>
     <string name="form_exact_search">Выполнить точный поиск\?</string>
-    <string name="form_types">Напишите для поиска</string>
+    <string name="form_types">Тип для поиска</string>
     <string name="form_type_ingredients">Поиск по ингредиенту</string>
-    <string name="form_type_yield">Поиск по рациону</string>
+    <string name="form_type_yield">Поиск по доходности</string>
     <string name="form_search_options">Опции поиска</string>
     <string name="form_search_commit">Поиск</string>
     <string name="menu_all_categories">Показать все категории</string>
@@ -82,6 +82,6 @@
     <string name="app_logo_desc">Икона запуска приложения, показывающая символ кулинарной книги</string>
     <string name="permissions_error_message">Доступ запрещён! Приложение нуждается в доступе к хранилищу, пожалуйста, активируйте его в настройках.</string>
     <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">У вас нет доступа на запись в это хранилище, поэтому выбор этой папки бесполезен.
-\nВы хотите предоставить доступ к этой папке\?</string>
+\nВы хотите предоставить доступ к этой папке\?.</string>
     <string name="folder_pick_success" tools:ignore="MissingTranslation">Папка %1$s выбрана.</string>
 </resources>
