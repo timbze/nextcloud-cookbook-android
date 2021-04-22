@@ -44,6 +44,7 @@ data class Recipe @JvmOverloads constructor(
    var thumbImageUrl: String? = null,
    @Json(ignored = true)
    var fullImageUrl: String? = null,
+   @RecipeListString
    val keywords: String? = null,
    val name: String = "",
    @RecipeNutrition

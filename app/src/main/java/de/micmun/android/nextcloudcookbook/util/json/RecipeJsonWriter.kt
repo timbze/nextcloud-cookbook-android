@@ -20,6 +20,7 @@ class RecipeJsonWriter {
       return Klaxon()
          .fieldConverter(RecipeDate::class, DateConverter())
          .fieldConverter(RecipeStringList::class, ListConverter())
+         .fieldConverter(RecipeListString::class, List2StringConverter())
          .fieldConverter(RecipeNutrition::class, NutritionConverter())
          .fieldConverter(Recipe2String::class, Value2StringConverter())
          .fieldConverter(RecipeAuthor::class, AuthorConverter())
