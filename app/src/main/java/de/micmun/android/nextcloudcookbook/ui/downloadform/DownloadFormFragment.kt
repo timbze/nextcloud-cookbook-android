@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.databinding.FragmentDownloadFormBinding
+import de.micmun.android.nextcloudcookbook.ui.recipelist.DownloadRequest
 import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListViewModel
 import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListViewModelFactory
 import java.net.URL
@@ -36,6 +37,10 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
       val recipeListViewModelFactory = RecipeListViewModelFactory(requireActivity().application)
       recipesViewModel = ViewModelProvider(this, recipeListViewModelFactory).get(RecipeListViewModel::class.java)
 
+      recipesViewModel.isDownloading.observe (viewLifecycleOwner, { isDownloading ->
+         binding.downloadBtn.isEnabled = !isDownloading
+      })
+
       return binding.root
    }
 
@@ -48,7 +53,9 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
    override fun doDownload() {
       // TODO should we enable cleartext traffic (http)?
       val url = URL(binding.recipeUrlTxt.text.toString())
-      recipesViewModel.download(url)
+      val request = DownloadRequest(url, binding.recipeOverridePath.text.toString(),
+              binding.replaceExistingChkBox.isChecked)
+      recipesViewModel.download(request)
    }
 }
 

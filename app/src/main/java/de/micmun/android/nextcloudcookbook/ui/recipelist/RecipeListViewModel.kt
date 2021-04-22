@@ -7,17 +7,25 @@ package de.micmun.android.nextcloudcookbook.ui.recipelist
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.anggrayudi.storage.file.DocumentFileCompat
+import com.anggrayudi.storage.file.DocumentFileType
+import com.anggrayudi.storage.file.openOutputStream
+import com.beust.klaxon.KlaxonException
 import de.micmun.android.nextcloudcookbook.data.CategoryFilter
 import de.micmun.android.nextcloudcookbook.data.SortValue
 import de.micmun.android.nextcloudcookbook.db.DbRecipeRepository
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 import de.micmun.android.nextcloudcookbook.json.JsonRecipeRepository
 import de.micmun.android.nextcloudcookbook.json.model.Recipe
+import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModel
 import de.micmun.android.nextcloudcookbook.util.Recipe2DbRecipeConverter
+import de.micmun.android.nextcloudcookbook.util.StorageManager
 import de.micmun.android.nextcloudcookbook.util.json.RecipeJsonParser
+import de.micmun.android.nextcloudcookbook.util.json.RecipeJsonWriter
 import kotlinx.coroutines.*
 import org.jsoup.Jsoup
 import java.net.URL
+import java.util.*
 import java.util.stream.Collectors
 
 /**
@@ -100,11 +108,26 @@ class RecipeListViewModel(private val app: Application) : AndroidViewModel(app) 
       }
    }
 
-   fun download(url: URL) {
+   fun download(request: DownloadRequest) {
       isDownloading.postValue(true)
       uiScope.launch {
-         downloadImpl(url)
-         Thread.sleep(1000)
+         downloadImpl(request.url)?.let { recipe ->
+            CurrentSettingViewModel(app).recipeDirectory.value?.let { basedir ->
+               val recipePath = "$basedir/${recipe.name}"
+               if (recipePath.isNotEmpty()) {
+                  val recipeDir = StorageManager.getDocumentFromString(app, recipePath)
+                  if (recipeDir?.exists() == false || request.replaceExisting) {
+                     DocumentFileCompat.mkdirs(app, recipePath)
+
+                     DocumentFileCompat.fromFullPath(app, "$recipePath/recipe.json", DocumentFileType.FILE)?.let { jsonFile->
+                        jsonFile.openOutputStream(app, false)
+                                ?.bufferedWriter()
+                                ?.write(RecipeJsonWriter().write(recipe))
+                     }
+                  }
+               }
+            }
+         }
          isDownloading.postValue(false)
       }
    }
@@ -114,11 +137,15 @@ class RecipeListViewModel(private val app: Application) : AndroidViewModel(app) 
          val document = Jsoup.connect(url.toString()).get()
          for (element in document.getElementsByTag("script")) {
             if (element.attr("type")?.equals("application/ld+json") == true) {
-               val json = element.text()
-               if (json.contains("\"@type\": \"Recipe\"")) {
+               val json = element.html()
+               try {
                   val recipe = RecipeJsonParser().parse(json)
-                  print(recipe)
-                  return@withContext recipe
+                  if (recipe != null && recipe.type == "Recipe") {
+                     return@withContext recipe
+                  }
+
+               } catch (e: KlaxonException) {
+                  print(e)
                }
             }
          }
@@ -156,3 +183,9 @@ class RecipeListViewModelFactory(private val application: Application) : ViewMod
       throw IllegalArgumentException("Unknown ViewModel class")
    }
 }
+
+data class DownloadRequest(
+   var url: URL,
+   var overridePath: String?,
+   var replaceExisting: Boolean
+)
