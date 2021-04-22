@@ -32,7 +32,7 @@ class ListConverter : Converter {
       if (array is JsonArray<*>) {
          return array.toList().stream().map { it.toString() }.collect(Collectors.toList()).toList()
       } else if (array is String && array.isNotEmpty()) {
-         return listOf(array)
+         return arrayListOf(array)
       } else if (array is String && array.isEmpty()) {
          return emptyList<String>()
       } else {
