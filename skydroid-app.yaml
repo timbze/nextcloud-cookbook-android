@@ -19,7 +19,9 @@ localized:
       After that, the start view has a list of recipes and you select a recipe to view the details.
     summary: View the recipes from your Nextcloud Cookbook
     whatsNew: |-
-      - Bugfixes (App crush, no images, category problem)
+      - Bugfix: If there is no folder picker, the app doesn't crash, instead it will show an error message
+      - New: Search of keywords with chossing from a list of keywords
+      - Update translations
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -39,7 +41,9 @@ localized:
       Anschließend findet sich auf der Hauptseite (die auch nach dem Start der App direkt angezeigt wird) die Liste der verfügbaren Rezepte. Zur Anzeige der Details tippt man einfach das gewünschte Rezept an.
     summary: Zeige die Rezepte aus Deinem Nextcloud Kochbuch an
     whatsNew: |-
-      - Fehlerbehebungen (Absturz der App, keine Bilder, Kategorie-Problem)
+      - Fehlerkorrektur: Wenn keine Verzeichnisauswahl möglich ist, dann stürzt die App nicht mehr ab, sondern es wird jetzt eine Fehlermeldung angezeigt
+      - Neu: Suche nach Schlüsselwörtern mit Auswahlliste vorhandener Schlüsselwörter
+      - Übersetzungen wieder aktualisiert
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/de/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
