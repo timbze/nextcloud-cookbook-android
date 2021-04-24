@@ -7,9 +7,11 @@ package de.micmun.android.nextcloudcookbook.ui.preferences
 
 import android.Manifest.permission
 import android.app.TaskStackBuilder
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.documentfile.provider.DocumentFile
@@ -21,6 +23,8 @@ import com.anggrayudi.storage.callback.FolderPickerCallback
 import com.anggrayudi.storage.callback.StorageAccessCallback
 import com.anggrayudi.storage.file.StorageType
 import com.anggrayudi.storage.file.absolutePath
+import com.anggrayudi.storage.file.fullName
+import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener
@@ -32,7 +36,7 @@ import de.micmun.android.nextcloudcookbook.util.StorageManager
  * Fragment for settings.
  *
  * @author MicMun
- * @version 1.5, 07.04.21
+ * @version 1.6, 24.04.21
  */
 class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener,
                            Preference.OnPreferenceClickListener {
@@ -73,6 +77,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
       viewModel.recipeDirectory.observe(this, {
          val summary =
             if (it.isEmpty()) "" else StorageManager.getDocumentFromString(requireContext(), it)?.absolutePath ?: ""
+         Log.d("PreferenceFragment", "summary = $summary")
          dirPreference.summary = summary
       })
 
@@ -137,7 +142,11 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
     */
    private fun chooseFolder() {
       setupFolderPickerCallback()
-      storageManager.storage?.openFolderPicker(REQUEST_CODE_PICK_FOLDER)
+      try {
+         storageManager.storage?.openFolderPicker(REQUEST_CODE_PICK_FOLDER)
+      } catch (e: ActivityNotFoundException) {
+         Snackbar.make(requireView(), R.string.dir_chooser_error_message, Snackbar.LENGTH_LONG)
+      }
    }
 
    private fun requestStoragePermission() {
