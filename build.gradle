@@ -14,7 +14,7 @@ buildscript {
       version_appcompat = '1.2.0'
       version_material = '1.3.0'
       version_viewpager2 = '1.1.0-alpha01'
-      version_room = '2.2.6'
+      version_room = '2.3.0'
    }
 
    repositories {
@@ -42,6 +42,10 @@ allprojects {
          includeRuntime = true
       }
    }
+}
+
+wrapper {
+   gradleVersion = "6.8"
 }
 
 task clean(type: Delete) {

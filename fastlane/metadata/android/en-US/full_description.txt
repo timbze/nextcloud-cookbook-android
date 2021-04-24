@@ -5,3 +5,6 @@ After installation you must go into the settings view and select the recipe dire
 When using the Nextcloud Android client, you find it on your storage under <code>Android/media/com.nextcloud.client/nextcloud/&lt;your account&gt;/&lt;folder&gt;</code>.
 You also can choose the theme in the settings.
 After that, the start view has a list of recipes and you select a recipe to view the details.
+
+<b>IMPORTANT</b>: With direct pick of the nextcloud folder there will no images shown and the uri can't be stored right. Perhaps at next app start no recipes can be loaded.
+Therefore it is better to use the above mentioned path on the SD card (see First steps).
