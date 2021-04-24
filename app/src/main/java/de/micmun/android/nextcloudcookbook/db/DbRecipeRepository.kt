@@ -17,7 +17,7 @@ import de.micmun.android.nextcloudcookbook.db.model.DbRecipeKeywordRelation
  * Repository for recipes.
  *
  * @author MicMun
- * @version 1.2, 17.04.21
+ * @version 1.3, 24.04.21
  */
 class DbRecipeRepository private constructor(application: Application) {
    private var mRecipeDao: RecipeDataDao = RecipeDatabase.getDatabase(application).recipeDataDao()
@@ -79,13 +79,14 @@ class DbRecipeRepository private constructor(application: Application) {
    }
 
    fun filterAll(sort: SortValue, recipeFilter: RecipeFilter): LiveData<List<DbRecipe>> {
-      var select = "SELECT * FROM recipes WHERE "
-      if (recipeFilter.type != RecipeFilter.QueryType.QUERY_INGREDIENTS) {
-         select += getWhereClause(recipeFilter)
-      } else {
-         select =
-            "SELECT * FROM recipes INNER JOIN ingredients ON recipes.id = ingredients.recipeId" +
-            " WHERE " + getWhereClause(recipeFilter)
+      var select = when (recipeFilter.type) {
+         RecipeFilter.QueryType.QUERY_KEYWORD -> "SELECT * FROM recipes r" +
+                                                 " INNER JOIN recipeXKeywords x ON x.recipeId = r.id" +
+                                                 " INNER JOIN keywords k ON k.id = x.keywordId" +
+                                                 " WHERE " + getWhereClause(recipeFilter)
+         RecipeFilter.QueryType.QUERY_INGREDIENTS -> "SELECT * FROM recipes INNER JOIN ingredients ON recipes.id = ingredients.recipeId" +
+                                                     " WHERE " + getWhereClause(recipeFilter)
+         else -> "SELECT * FROM recipes WHERE " + getWhereClause(recipeFilter)
       }
 
       select += " ORDER BY " + getOrderBy(sort)
@@ -95,6 +96,8 @@ class DbRecipeRepository private constructor(application: Application) {
       val query = SimpleSQLiteQuery(select, args)
       return mRecipeDao.filterRecipes(query)
    }
+
+   fun getKeywords() = mRecipeDao.getAllKeywords()
 
    fun sort(sort: SortValue): LiveData<List<DbRecipe>> {
       return when (sort) {
@@ -176,7 +179,7 @@ class DbRecipeRepository private constructor(application: Application) {
 
       var sql = when (recipeFilter.type) {
          RecipeFilter.QueryType.QUERY_NAME -> upper.format("name")
-         RecipeFilter.QueryType.QUERY_KEYWORD -> upper.format("keywords")
+         RecipeFilter.QueryType.QUERY_KEYWORD -> upper.format("keyword")
          RecipeFilter.QueryType.QUERY_YIELD -> upper.format("recipeYield")
          RecipeFilter.QueryType.QUERY_INGREDIENTS -> upper.format("ingredient")
       }
@@ -223,10 +226,12 @@ class DbRecipeRepository private constructor(application: Application) {
 
    private fun updateKeywords(recipe: DbRecipe, recipeId: Long) {
       recipe.keywords?.let {
-         mRecipeDao.insertKeywords(it)
-         mRecipeDao.findKeywords(it.map { kw -> kw.keyword })?.let {
-            mRecipeDao.insertKeywordRefs(
-               it.map { kw -> DbRecipeKeywordRelation(recipeId = recipeId, keywordId = kw.id) })
+         if (it.isNotEmpty()) {
+            mRecipeDao.insertKeywords(it)
+            mRecipeDao.findKeywords(it.map { kw -> kw.keyword })?.let {
+               mRecipeDao.insertKeywordRefs(
+                  it.map { kw -> DbRecipeKeywordRelation(recipeId = recipeId, keywordId = kw.id) })
+            }
          }
       }
    }

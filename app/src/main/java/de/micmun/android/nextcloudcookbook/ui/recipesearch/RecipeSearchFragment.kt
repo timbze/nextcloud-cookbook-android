@@ -22,6 +22,7 @@ import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.RecipeFilter
 import de.micmun.android.nextcloudcookbook.data.SortValue
 import de.micmun.android.nextcloudcookbook.databinding.FragmentRecipesearchBinding
+import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModel
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModelFactory
 import de.micmun.android.nextcloudcookbook.ui.MainActivity
@@ -32,7 +33,7 @@ import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListListener
  * Fragment for search result.
  *
  * @author MicMun
- * @version 1.5, 07.04.21
+ * @version 1.6, 24.04.21
  */
 class RecipeSearchFragment : Fragment() {
    private lateinit var binding: FragmentRecipesearchBinding
@@ -105,7 +106,7 @@ class RecipeSearchFragment : Fragment() {
             // observe live data
             recipeSearchViewModel.getRecipes().observe(viewLifecycleOwner, {
                it?.let {
-                  adapter.submitList(it)
+                  adapter.submitList(removeDuplicates(it))
 
                   if (it.isNotEmpty()) {
                      if (R.id.titleConstraint == binding.switcher2.nextView.id) {
@@ -148,5 +149,12 @@ class RecipeSearchFragment : Fragment() {
       if (listState != null) {
          binding.recipeResultList.layoutManager?.onRestoreInstanceState(listState)
       }
+   }
+
+   private fun removeDuplicates(recipes: List<DbRecipe>): List<DbRecipe> {
+      val hashSet = LinkedHashSet<DbRecipe>(recipes)
+      val arrayList = ArrayList<DbRecipe>(hashSet.size)
+      arrayList.addAll(hashSet)
+      return arrayList
    }
 }

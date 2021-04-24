@@ -13,7 +13,7 @@ import java.util.stream.Collectors
  * Converter for recipe into database recipe pojo.
  *
  * @author MicMun
- * @version 1.1, 17.04.21
+ * @version 1.2, 24.04.21
  */
 class Recipe2DbRecipeConverter(private val recipe: Recipe) {
    fun convert(): DbRecipe {
@@ -51,7 +51,8 @@ class Recipe2DbRecipeConverter(private val recipe: Recipe) {
          review = getReview(recipe.review),
          recipeIngredient = getIngredients(recipe.recipeIngredient),
          recipeInstructions = getInstructions(recipe.recipeInstructions),
-         keywords = recipe.keywords?.splitToSequence(",")?.map { str -> DbKeyword(keyword = str) }?.toList(),
+         keywords = recipe.keywords?.splitToSequence(",")?.filter { str -> str.isNotEmpty() }
+            ?.map { str -> DbKeyword(keyword = str) }?.toList()
       )
    }
 

@@ -5,14 +5,12 @@
  */
 package de.micmun.android.nextcloudcookbook.ui
 
-import android.net.Uri
 import android.os.Build
 import android.text.Html
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import androidx.documentfile.provider.DocumentFile
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 import de.micmun.android.nextcloudcookbook.util.DurationUtils
@@ -23,7 +21,7 @@ import java.util.stream.Collectors
  * Utilities for binding data to view.
  *
  * @author MicMun
- * @version 2.1, 17.04.21
+ * @version 2.2, 24.04.21
  */
 
 // Overview list
@@ -118,10 +116,10 @@ fun TextView.setRecipeCategories(item: DbRecipe?) {
 @BindingAdapter("keywords")
 fun TextView.setKeywords(item: DbRecipe?) {
    item?.let { recipe ->
-      val keywords = if (recipe.keywords?.isEmpty() != false)
+      val keywords = if (recipe.keywords.isNullOrEmpty())
          resources.getString(R.string.text_no_keywords)
       else
-         recipe.keywords.joinToString(transform = {kw -> kw.keyword})
+         recipe.keywords.joinToString(transform = { kw -> kw.keyword })
       @Suppress("DEPRECATION")
       text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
          Html.fromHtml(resources.getString(R.string.text_keywords, keywords), Html.FROM_HTML_MODE_LEGACY)

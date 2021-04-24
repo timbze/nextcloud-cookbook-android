@@ -13,7 +13,7 @@ import de.micmun.android.nextcloudcookbook.R.string.*
  * Database entity for recipe.
  *
  * @author MicMun
- * @version 1.0, 20.03.21
+ * @version 1.1, 24.04.21
  */
 data class DbRecipe(
    @Embedded val recipeCore: DbRecipeCore,
@@ -26,16 +26,24 @@ data class DbRecipe(
    @Relation(parentColumn = "id", entityColumn = "recipeId")
    val recipeInstructions: List<DbInstruction>? = null,
    @Relation(
-     parentColumn = "id",
-     entity = DbKeyword::class,
-     entityColumn = "id",
-     associateBy = Junction(
-             DbRecipeKeywordRelation::class,
-             parentColumn = "recipeId",
-             entityColumn = "keywordId"),
+      parentColumn = "id",
+      entity = DbKeyword::class,
+      entityColumn = "id",
+      associateBy = Junction(
+         DbRecipeKeywordRelation::class,
+         parentColumn = "recipeId",
+         entityColumn = "keywordId"),
    )
    val keywords: List<DbKeyword>? = null,
-)
+) {
+   override fun equals(other: Any?): Boolean {
+      return if (other == null || other !is DbRecipe) false else recipeCore.name == other.recipeCore.name
+   }
+
+   override fun hashCode(): Int {
+      return recipeCore.name.hashCode()
+   }
+}
 
 @Entity(tableName = "recipes")
 data class DbRecipeCore(
@@ -132,16 +140,14 @@ data class DbNutrition(
    }
 }
 
-@Entity(tableName = "reviews")
+@Entity(tableName = "reviews", foreignKeys = [ForeignKey(entity = DbRecipeCore::class,
+                                                         parentColumns = ["id"],
+                                                         childColumns = ["recipeId"],
+                                                         onDelete = CASCADE)],
+        indices = [Index("recipeId")])
 data class DbReview(
    @PrimaryKey(autoGenerate = true)
    val id: Long = 0L,
-   @ForeignKey(
-      entity = DbRecipeCore::class,
-      parentColumns = ["id"],
-      childColumns = ["recipeId"],
-      onDelete = CASCADE
-   )
    var recipeId: Long = -1,
    val type: String = "",
    @Embedded(prefix = "author_") val author: DbAuthor? = null,
@@ -155,70 +161,60 @@ data class DbItemReviewed(
    val name: String = ""
 )
 
-@Entity(tableName = "tools")
+@Entity(tableName = "tools", foreignKeys = [ForeignKey(entity = DbRecipeCore::class,
+                                                       parentColumns = ["id"],
+                                                       childColumns = ["recipeId"],
+                                                       onDelete = CASCADE)],
+        indices = [Index("recipeId")])
 data class DbTool(
    @PrimaryKey(autoGenerate = true)
    val id: Long = 0L,
-   @ForeignKey(
-      entity = DbRecipeCore::class,
-      parentColumns = ["id"],
-      childColumns = ["recipeId"],
-      onDelete = CASCADE
-   )
    var recipeId: Long = -1,
    val tool: String
 )
 
-@Entity(tableName = "ingredients")
+@Entity(tableName = "ingredients", foreignKeys = [ForeignKey(entity = DbRecipeCore::class,
+                                                             parentColumns = ["id"],
+                                                             childColumns = ["recipeId"],
+                                                             onDelete = CASCADE)],
+        indices = [Index("recipeId")])
 data class DbIngredient(
    @PrimaryKey(autoGenerate = true)
    val id: Long = 0L,
-   @ForeignKey(
-      entity = DbRecipeCore::class,
-      parentColumns = ["id"],
-      childColumns = ["recipeId"],
-      onDelete = CASCADE
-   )
    var recipeId: Long = -1,
    val ingredient: String
 )
 
-@Entity(tableName = "instructions")
+@Entity(tableName = "instructions", foreignKeys = [ForeignKey(entity = DbRecipeCore::class,
+                                                              parentColumns = ["id"],
+                                                              childColumns = ["recipeId"],
+                                                              onDelete = CASCADE)],
+        indices = [Index("recipeId")])
 data class DbInstruction(
    @PrimaryKey(autoGenerate = true)
    val id: Long = 0L,
-   @ForeignKey(
-      entity = DbRecipeCore::class,
-      parentColumns = ["id"],
-      childColumns = ["recipeId"],
-      onDelete = CASCADE
-   )
    var recipeId: Long = -1,
    val instruction: String
 )
 
 @Entity(tableName = "keywords", indices = [Index(value = ["keyword"], unique = true)])
 data class DbKeyword(
-  @PrimaryKey(autoGenerate = true)
-  val id: Long = 0L,
-  val keyword: String
+   @PrimaryKey(autoGenerate = true)
+   val id: Long = 0L,
+   val keyword: String
 )
 
 @Entity(tableName = "recipeXKeywords", primaryKeys = ["recipeId", "keywordId"],
-   indices = [Index(value = ["keywordId"])])
+        indices = [Index(value = ["keywordId"])],
+        foreignKeys = [ForeignKey(entity = DbRecipeCore::class,
+                                  parentColumns = ["id"],
+                                  childColumns = ["recipeId"],
+                                  onDelete = CASCADE),
+           ForeignKey(entity = DbKeyword::class,
+                      parentColumns = ["id"],
+                      childColumns = ["keywordId"],
+                      onDelete = CASCADE)])
 data class DbRecipeKeywordRelation(
-  @ForeignKey(
-    entity = DbRecipeCore::class,
-    parentColumns = ["id"],
-    childColumns = ["recipeId"],
-    onDelete = CASCADE
-  )
-  var recipeId: Long = -1,
-  @ForeignKey(
-    entity = DbKeyword::class,
-    parentColumns = ["id"],
-    childColumns = ["keywordId"],
-    onDelete = CASCADE
-  )
-  var keywordId: Long = -1
+   var recipeId: Long = -1,
+   var keywordId: Long = -1
 )

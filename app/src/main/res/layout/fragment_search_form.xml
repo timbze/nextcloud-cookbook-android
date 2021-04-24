@@ -20,20 +20,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-         <EditText
-               android:id="@+id/searchTxt"
+         <Spinner
+               android:id="@+id/searchKeyWord"
                android:layout_width="0dp"
                android:layout_height="wrap_content"
                android:layout_marginStart="16dp"
                android:layout_marginTop="16dp"
                android:layout_marginEnd="16dp"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent" />
+
+         <EditText
+               android:id="@+id/searchTxt"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="16dp"
+               android:layout_marginTop="8dp"
+               android:layout_marginEnd="16dp"
                android:autofillHints=""
                android:hint="@string/form_search_hint"
                android:inputType="text"
                android:text=""
+               android:visibility="gone"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toTopOf="parent" />
+               app:layout_constraintTop_toBottomOf="@id/searchKeyWord" />
+
 
          <TextView
                android:id="@+id/searchTypesLabel"
@@ -71,11 +84,12 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:text="@string/form_type_ingredients" />
+
             <RadioButton
+                  android:id="@+id/typeYield"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:id="@+id/typeYield"
-                  android:text="@string/form_type_yield"/>
+                  android:text="@string/form_type_yield" />
 
          </RadioGroup>
 

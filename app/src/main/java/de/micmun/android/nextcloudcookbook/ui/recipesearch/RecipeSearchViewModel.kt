@@ -21,7 +21,7 @@ import kotlinx.coroutines.runBlocking
  * ViewModel for recipe search result.
  *
  * @author MicMun
- * @version 1.3, 07.04.21
+ * @version 1.4, 24.04.21
  */
 class RecipeSearchViewModel(application: Application) :
    AndroidViewModel(application) {
@@ -35,7 +35,7 @@ class RecipeSearchViewModel(application: Application) :
       get() = _filter
 
    fun getRecipes(): LiveData<List<DbRecipe>> {
-      var recipes: LiveData<List<DbRecipe>> = MutableLiveData(emptyList())
+      var recipes: LiveData<List<DbRecipe>>
 
       runBlocking(Dispatchers.IO) {
          recipes =

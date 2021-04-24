@@ -14,7 +14,7 @@ import de.micmun.android.nextcloudcookbook.db.model.*
  * Interface for database operations.
  *
  * @author MicMun
- * @version 1.0, 20.03.21
+ * @version 1.1, 24.04.21
  */
 @Dao
 interface RecipeDataDao {
@@ -53,8 +53,12 @@ interface RecipeDataDao {
    fun findKeywords(n: List<String>): List<DbKeyword>?
 
    @Transaction
+   @Query("SELECT * FROM keywords ORDER BY keyword")
+   fun getAllKeywords(): LiveData<List<DbKeyword>>
+
+   @Transaction
    @RawQuery(observedEntities = [DbRecipeCore::class, DbInstruction::class, DbIngredient::class, DbTool::class,
-      DbReview::class])
+      DbReview::class, DbKeyword::class, DbRecipeKeywordRelation::class])
    fun filterRecipes(query: SupportSQLiteQuery): LiveData<List<DbRecipe>>
 
    @Transaction
