@@ -46,7 +46,6 @@
     <string name="pref_category_design">Thiết kế</string>
     <string name="preftitle_recipeDir">Thư mục công thức</string>
     <string name="title_dir_chooser">Chọn thư mục…</string>
-    <string name="preftitle_allow_hidden">Hiện thư mục ẩn</string>
     <string name="preftitle_theme">Chọn chủ đề</string>
     <string name="about_title">Giới thiệu</string>
     <string name="about_version">Phiên bản ứng dụng: %1$s</string>
@@ -73,8 +72,6 @@
     <string name="form_search_title">Tìm kiếm nâng cao</string>
     <string name="form_type_ingredients">Tìm kiếm theo nguyên liệu</string>
     <string name="menu_uncategorized">Chưa phân loại</string>
-    <string name="pref_hidden_folder_true">Trình chọn thư mục công thức sẽ hiện thư mục ẩn</string>
-    <string name="pref_hidden_folder_false">Trình chọn thư mục công thức sẽ không hiện thư mục ẩn</string>
     <string name="about_summary">© 2020-2021 bởi MicMun. Được cấp phép dưới GPLv3.
 \n
 \nNextcloud Cookbook là một ứng dụng dành cho sách nấu ăn trên nextcloud để quản lý các công thức.</string>

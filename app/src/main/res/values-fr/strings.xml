@@ -65,9 +65,6 @@
     <string name="pref_category_design">Conception</string>
     <string name="preftitle_recipeDir">Répertoire des recettes</string>
     <string name="title_dir_chooser">Choisissez un répertoire…</string>
-    <string name="preftitle_allow_hidden">Afficher le dossier caché</string>
-    <string name="pref_hidden_folder_true">Le sélecteur du répertoire des recettes affiche un dossier caché</string>
-    <string name="pref_hidden_folder_false">Le sélecteur du répertoire des recettes n\'affiche pas le dossier caché</string>
     <string name="preftitle_theme">Sélectionnez un thème</string>
     <string name="about_title">A propos de</string>
     <string name="about_version">Version de l\'application : %1$s</string>

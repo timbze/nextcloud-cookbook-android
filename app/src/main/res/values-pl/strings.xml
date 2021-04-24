@@ -65,9 +65,6 @@
     <string name="pref_category_design">Wzór</string>
     <string name="preftitle_recipeDir">Katalog Przepisów</string>
     <string name="title_dir_chooser">Wybierz katalog…</string>
-    <string name="preftitle_allow_hidden">Pokaż ukryty folder</string>
-    <string name="pref_hidden_folder_true">Wybierak katalogu przepisów pokazuje ukryty folder</string>
-    <string name="pref_hidden_folder_false">Wybierak katalogu przepisów nie pokazuje ukrytego folderu</string>
     <string name="preftitle_theme">Wybierz temat</string>
     <string name="about_title">Około</string>
     <string name="about_version">Wersja App: %1$s</string>

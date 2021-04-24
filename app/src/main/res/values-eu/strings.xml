@@ -17,9 +17,6 @@
     <string name="about_version">Aplikazioaren bertsioa: %1$s</string>
     <string name="about_title">Buruz</string>
     <string name="preftitle_theme">Aukeratu Gaia</string>
-    <string name="pref_hidden_folder_false">Errezeta direktorioaren hautatzaileak ez du ezkutuko karpeta erakusten</string>
-    <string name="pref_hidden_folder_true">Errezeta direktorioaren hautatzaileak ezkutuko karpeta erakusten du</string>
-    <string name="preftitle_allow_hidden">Erakutsi ezkutuko karpeta</string>
     <string name="title_dir_chooser">Aukeratu direktorio bat…</string>
     <string name="preftitle_recipeDir">Errezeten direktorioa</string>
     <string name="pref_category_design">Diseinua</string>

@@ -53,8 +53,6 @@
     <string name="menu_uncategorized">Okategoriserat</string>
     <string name="pref_category_function">Funktionalitet</string>
     <string name="preftitle_recipeDir">Recept Katalog</string>
-    <string name="preftitle_allow_hidden">Visa dold mapp</string>
-    <string name="pref_hidden_folder_true">Väljaren för receptkatalogen visar dold mapp</string>
     <string name="preftitle_theme">Välj Tema</string>
     <string name="about_title">Om</string>
     <string name="about_summary">© 2020-2021 av MicMun. Licens under GPLv3.
@@ -72,7 +70,6 @@
     <string name="about_version">Appversion: %1$s</string>
     <string name="form_type_keyword">Sök efter nyckelord</string>
     <string name="title_dir_chooser">Välj en katalog…</string>
-    <string name="pref_hidden_folder_false">Väljaren för receptkatalogen visar inte dold mapp</string>
     <string name="sort_value_date_desc">Datum publicerat fallande</string>
     <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">Du har ingen skrivåtkomst till detta lagringsutrymme, så det är meningslöst att välja denna mapp.
 \nVill du ge tillgång till den här mappen\?.</string>

@@ -65,9 +65,6 @@
     <string name="pref_category_design">Kresba</string>
     <string name="preftitle_recipeDir">Adresář receptů</string>
     <string name="title_dir_chooser">Vyberte adresář…</string>
-    <string name="preftitle_allow_hidden">Zobrazit skrytou složku</string>
-    <string name="pref_hidden_folder_true">Volba adresáře receptů zobrazuje skrytou složku</string>
-    <string name="pref_hidden_folder_false">Výběr adresáře receptů nezobrazuje skrytou složku</string>
     <string name="preftitle_theme">Vyberte téma</string>
     <string name="about_title">O</string>
     <string name="about_version">Verze aplikace: %1$s</string>

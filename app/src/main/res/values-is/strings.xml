@@ -47,8 +47,6 @@
     <string name="pref_category_design">Hönnun</string>
     <string name="preftitle_recipeDir">Uppskrift Möppu</string>
     <string name="title_dir_chooser">Velja möppu…</string>
-    <string name="preftitle_allow_hidden">Sýna falinn möppu</string>
-    <string name="pref_hidden_folder_true">Við val fyrir uppskrift skrá sýnir falinn möppu</string>
     <string name="preftitle_theme">Veldu Þema</string>
     <string name="about_title">Um</string>
     <string name="about_version">App útgáfa: %1$s</string>
@@ -59,7 +57,6 @@
     <string name="no_information">Engar Upplýsingar.</string>
     <string name="nutrition_sugar_content">Sykur Efni: %1$s</string>
     <string name="form_type_ingredients">Leita að með því að efnið</string>
-    <string name="pref_hidden_folder_false">Við val fyrir uppskrift skrá ekki sýna falinn möppu</string>
     <string name="sort_value_alpha_desc">Nafn Z-A</string>
     <string name="sort_value_date_asc">Dagsetningu út hækkandi</string>
     <string name="sort_value_date_desc">Dagsetningu út lækkandi</string>

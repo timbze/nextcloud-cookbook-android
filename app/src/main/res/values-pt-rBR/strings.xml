@@ -65,9 +65,6 @@
     <string name="pref_category_design">Projeto</string>
     <string name="preftitle_recipeDir">Diretório de receitas</string>
     <string name="title_dir_chooser">Escolha um diretório…</string>
-    <string name="preftitle_allow_hidden">Mostrar pasta oculta</string>
-    <string name="pref_hidden_folder_true">O seletor do diretório de receitas mostra uma pasta oculta</string>
-    <string name="pref_hidden_folder_false">O seletor do diretório de receitas não mostra uma pasta oculta</string>
     <string name="preftitle_theme">Selecionar Tema</string>
     <string name="about_title">Sobre</string>
     <string name="about_version">Versão do aplicativo: %1$s</string>

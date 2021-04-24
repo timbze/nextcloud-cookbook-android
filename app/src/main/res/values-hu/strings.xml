@@ -65,9 +65,6 @@
     <string name="pref_category_design">Tervezés</string>
     <string name="preftitle_recipeDir">Receptkönyvtár</string>
     <string name="title_dir_chooser">Válasszon egy könyvtárat…</string>
-    <string name="preftitle_allow_hidden">Rejtett mappa megjelenítése</string>
-    <string name="pref_hidden_folder_true">A választó a recept könyvtár mutatja rejtett mappa</string>
-    <string name="pref_hidden_folder_false">A receptkönyvtár választója nem jeleníti meg a rejtett mappát</string>
     <string name="preftitle_theme">Téma Kiválasztása</string>
     <string name="about_title">Ról ről</string>
     <string name="about_version">Alkalmazás verzió: %1$s</string>

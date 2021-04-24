@@ -46,11 +46,9 @@
     <string name="pref_category_function">Funktionalitet</string>
     <string name="preftitle_recipeDir">Opskrift Bibliotek</string>
     <string name="title_dir_chooser">Vælg en mappe…</string>
-    <string name="pref_hidden_folder_false">Vælgeren til opskrift mappe viser ikke skjult mappe</string>
     <string name="preftitle_theme">Vælg Tema</string>
     <string name="about_title">Om</string>
     <string name="pref_category_design">Formgivning</string>
-    <string name="preftitle_allow_hidden">Vis skjult mappe</string>
     <string name="about_version">App-version: %1$s</string>
     <string name="app_logo_desc">Launcher Ikon af app viser en kogebog symbol</string>
     <string name="permissions_error_message">Adgang nægtet! App har brug for lageradgang, skal du aktivere i indstillingerne.</string>
@@ -61,7 +59,6 @@
     <string name="nutrition_trans_fat_content">Transfedtindhold: %1$s</string>
     <string name="form_search_title">Avanceret Søgning</string>
     <string name="form_search_options">Søgefunktion</string>
-    <string name="pref_hidden_folder_true">Vælgeren til opskrift mappe viser skjult mappe</string>
     <string name="about_summary">© 2020-2021 MicMun. Lisenssi GPLv3: n nojalla.
 \n
 \nNextcloud Cookbook on sovellus keittokirjaan nextcloudissa reseptien hallitsemiseksi.</string>

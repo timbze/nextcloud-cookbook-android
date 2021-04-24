@@ -65,9 +65,6 @@
     <string name="pref_category_design">Diseño</string>
     <string name="preftitle_recipeDir">Directorio de recetas</string>
     <string name="title_dir_chooser">Elija un directorio…</string>
-    <string name="preftitle_allow_hidden">Mostrar carpeta oculta</string>
-    <string name="pref_hidden_folder_true">El selector de directorio de recetas muestra la carpeta oculta</string>
-    <string name="pref_hidden_folder_false">El selector de directorio de recetas no muestra la carpeta oculta</string>
     <string name="preftitle_theme">Seleccione el tema</string>
     <string name="about_title">Sobre</string>
     <string name="about_version">Versión de la aplicación: %1$s</string>

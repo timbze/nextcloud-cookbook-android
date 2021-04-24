@@ -65,9 +65,6 @@
     <string name="pref_category_design">Ontwerp</string>
     <string name="preftitle_recipeDir">Receptenlijst</string>
     <string name="title_dir_chooser">Kies een directory…</string>
-    <string name="preftitle_allow_hidden">Verborgen folder tonen</string>
-    <string name="pref_hidden_folder_true">De kiezer voor de receptenmap toont de verborgen map</string>
-    <string name="pref_hidden_folder_false">De kiezer voor de receptenmap toont geen verborgen map</string>
     <string name="preftitle_theme">Selecteer Thema</string>
     <string name="about_title">Over</string>
     <string name="about_version">App versie: %1$s</string>

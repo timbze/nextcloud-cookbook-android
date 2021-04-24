@@ -47,8 +47,6 @@
     <string name="pref_category_design">Concepção</string>
     <string name="preftitle_recipeDir">Directório de receitas</string>
     <string name="title_dir_chooser">Escolher um directório…</string>
-    <string name="preftitle_allow_hidden">Mostrar pasta escondida</string>
-    <string name="pref_hidden_folder_false">O selector do directório de receitas não mostra uma pasta escondida</string>
     <string name="preftitle_theme">Seleccione Tema</string>
     <string name="about_title">Sobre</string>
     <string name="about_version">Versão App: %1$s</string>
@@ -69,7 +67,6 @@
     <string name="text_keywords"><strong>Palavras-chave:</strong> <br/>%1$s</string>
     <string name="menu_all_categories">Mostrar todas as categorias</string>
     <string name="nutrition_carbohydrate_content">Conteúdo carboidratos: %1$s</string>
-    <string name="pref_hidden_folder_true">O selector do directório de receitas mostra uma pasta oculta</string>
     <string name="nutrition_fiberContent">Conteúdo de fibra: %1$s</string>
     <string name="about_summary">© 2020-2021 por MicMun. Licença ao abrigo da GPLv3.
 \n

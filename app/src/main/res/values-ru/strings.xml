@@ -51,7 +51,6 @@
     <string name="pref_category_design">Дизайн</string>
     <string name="preftitle_recipeDir">Каталог рецептов</string>
     <string name="title_dir_chooser">Выберите каталог…</string>
-    <string name="preftitle_allow_hidden">Показать скрытые папки</string>
     <string name="preftitle_theme">Выбрать тему</string>
     <string name="about_title">О приложении</string>
     <string name="about_version">Версия приложения: %1$s</string>
@@ -74,8 +73,6 @@
     <string name="nutrition_unsaturated_fat_content">Содержание ненасыщенного жира: %1$s</string>
     <string name="form_type_keyword">Поиск по ключевым словам</string>
     <string name="pref_category_function">Функциональность</string>
-    <string name="pref_hidden_folder_true">Выбор каталога рецептов показывает скрытые папки</string>
-    <string name="pref_hidden_folder_false">Выбор каталога рецептов не показывает скрытые папки</string>
     <string name="about_summary">© 2020-2021 от MicMun. Лицензия под GPLV3.
 \n
 \nNextCloud Cookbook - это приложение кулинарной книги на NextCloud для управления рецептами.</string>

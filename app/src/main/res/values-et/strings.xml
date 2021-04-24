@@ -56,9 +56,6 @@
     <string name="pref_category_design">Kujundus</string>
     <string name="preftitle_recipeDir">Retseptide kataloog</string>
     <string name="title_dir_chooser">Valige kataloog…</string>
-    <string name="preftitle_allow_hidden">Kuva peidetud kaust</string>
-    <string name="pref_hidden_folder_true">Retseptikataloogi valija näitab peidetud kausta</string>
-    <string name="pref_hidden_folder_false">Retseptikataloogi valija ei näita peidetud kausta</string>
     <string name="preftitle_theme">Valige Teema</string>
     <string name="about_title">Umbes</string>
     <string name="about_version">Rakenduse versioon: %1$s</string>

@@ -52,8 +52,6 @@
     <string name="form_type_keyword">Haku avainsanan mukaan</string>
     <string name="preftitle_recipeDir">Resepti Hakemisto</string>
     <string name="title_dir_chooser">Valitse hakemisto…</string>
-    <string name="preftitle_allow_hidden">Näytä piilotettu kansio</string>
-    <string name="pref_hidden_folder_true">Reseptihakemiston valitsin näyttää piilotetun kansion</string>
     <string name="preftitle_theme">Valitse Teema</string>
     <string name="about_title">Jokseenkin</string>
     <string name="about_version">Sovelluksen versio: %1$s</string>
@@ -70,7 +68,6 @@
     <string name="text_no_keywords">Ei avainsanoja.</string>
     <string name="nutrition_protein_content">Proteiinipitoisuus: %1$s</string>
     <string name="menu_refresh_tooltip">Päivitä reseptit</string>
-    <string name="pref_hidden_folder_false">Reseptihakemiston valitsin ei näytä Piilotettua kansiota</string>
     <string name="about_summary">© 2020-2021 MicMun. Lisenssin GPLv3.
 \n
 \nNextcloud keittokirja on sovellus keittokirja nextcloud hallita reseptejä.</string>

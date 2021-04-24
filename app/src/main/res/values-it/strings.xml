@@ -65,9 +65,6 @@
     <string name="pref_category_design">Disegno</string>
     <string name="preftitle_recipeDir">Elenco delle ricette</string>
     <string name="title_dir_chooser">Scegliere un elenco…</string>
-    <string name="preftitle_allow_hidden">Visualizza cartella nascosta</string>
-    <string name="pref_hidden_folder_true">Il selezionatore per la directory delle ricette mostra la cartella nascosta</string>
-    <string name="pref_hidden_folder_false">Il selezionatore per la directory delle ricette non mostra la cartella nascosta</string>
     <string name="preftitle_theme">Seleziona Tema</string>
     <string name="about_title">Informazioni</string>
     <string name="about_version">Versione App: %1$s</string>
