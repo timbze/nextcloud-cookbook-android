@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="no_information">Không có thông tin.</string>
+    <string name="recipe_list_image_desc">Hình thu nhỏ của công thức</string>
+    <string name="img_desc_logo">Logo của công thức</string>
+    <string name="title_duration">Thời gian dưới dạng HH:MM</string>
+    <string name="tooltip_prep_time">Chuẩn bị</string>
+    <string name="tooltip_cook_time">Nấu ăn</string>
+    <string name="tooltip_total_time">Tổng</string>
+    <string name="tab_info_title">Thông tin</string>
+    <string name="tab_ingredients_title">Nguyên liệu</string>
+    <string name="tab_nutritions_title">Dinh dưỡng</string>
+    <string name="text_uncategorized">Chưa phân loại</string>
+    <string name="text_categories"><strong>Thể loại:</strong><br/> %1$s</string>
+    <string name="text_author">Tác giả: %1$s</string>
+    <string name="text_url">Nguồn: %1$s</string>
+    <string name="text_no_keywords">Không có từ khoá.</string>
+    <string name="text_keywords"><strong>Từ khoá:</strong><br/> %1$s</string>
+    <string name="text_date_published">Ngày xuất bản: %1$s</string>
+    <string name="nutrition_calories">Calo: %1$s</string>
+    <string name="nutrition_carbohydrate_content">Cacbohiđrat: %1$s</string>
+    <string name="nutrition_cholesterol_content">Cholesterol: %1$s</string>
+    <string name="nutrition_fat_content">Chất béo: %1$s</string>
+    <string name="nutrition_fiberContent">Chất xơ: %1$s</string>
+    <string name="nutrition_protein_content">Chất đạm: %1$s</string>
+    <string name="nutrition_saturated_fat_content">Chất béo bão hoà: %1$s</string>
+    <string name="nutrition_serving_size">Kích cỡ khẩu phần: %1$s</string>
+    <string name="nutrition_sodium_content">Natri: %1$s</string>
+    <string name="nutrition_sugar_content">Đường: %1$s</string>
+    <string name="nutrition_trans_fat_content">Trans Fat: %1$s</string>
+    <string name="menu_search_title">Tìm kiếm nâng cao</string>
+    <string name="menu_settings_title">Cài đặt</string>
+    <string name="menu_refresh_tooltip">Làm mới các công thức</string>
+    <string name="menu_search_tooltip">Tìm kiếm công thức</string>
+    <string name="search_hint">Tìm kiếm theo tên</string>
+    <string name="form_search_hint">Truy vấn tìm kiếm</string>
+    <string name="form_ignore_case">Bỏ qua chữ hoa/chữ thường\?</string>
+    <string name="form_exact_search">Tìm kiếm chính xác\?</string>
+    <string name="form_types">Đánh vào để tìm kiếm</string>
+    <string name="form_type_keyword">Tìm kiếm theo từ khoá</string>
+    <string name="form_type_yield">Tìm kiếm theo khẩu phần</string>
+    <string name="form_search_options">Tuỳ chọn tìm kiếm</string>
+    <string name="form_search_commit">Tìm kiếm</string>
+    <string name="menu_all_categories">Hiện tất cả thể loại</string>
+    <string name="pref_category_function">Chức năng</string>
+    <string name="pref_category_design">Thiết kế</string>
+    <string name="preftitle_recipeDir">Thư mục công thức</string>
+    <string name="title_dir_chooser">Chọn thư mục…</string>
+    <string name="preftitle_allow_hidden">Hiện thư mục ẩn</string>
+    <string name="preftitle_theme">Chọn chủ đề</string>
+    <string name="about_title">Giới thiệu</string>
+    <string name="about_version">Phiên bản ứng dụng: %1$s</string>
+    <string name="theme_name_light">Sáng</string>
+    <string name="theme_name_dark">Tối</string>
+    <string name="theme_name_system">Hệ thống</string>
+    <string name="sort_value_alpha_asc">Tên A-Z</string>
+    <string name="sort_value_alpha_desc">Tên Z-A</string>
+    <string name="sort_value_date_asc">Ngày xuất bản tăng dần</string>
+    <string name="sort_value_date_desc">Ngày xuất bản giảm dần</string>
+    <string name="sort_value_time_asc">Tổng thời gian tăng dần</string>
+    <string name="sort_value_time_desc">Tổng thời gian giảm dần</string>
+    <string name="permission_canceled" tools:ignore="MissingTranslation">Bị người dùng huỷ</string>
+    <string name="permission_please_grant" tools:ignore="MissingTranslation">Vui lòng cấp quyền bộ nhớ.</string>
+    <string name="folder_pick_cancel" tools:ignore="MissingTranslation">Trình chọn thư mục đã bị người dùng huỷ.</string>
+    <string name="folder_pick_success" tools:ignore="MissingTranslation">Đã chọn thư mục %1$s.</string>
+    <string name="app_logo_desc">Biểu tượng ứng dụng trên launcher hiển thị một biểu tượng quyển sách nấu ăn</string>
+    <string name="text_tools"><strong>Công cụ cần thiết:</strong><br/> %1$s</string>
+    <string name="empty_list">Không có công thức.</string>
+    <string name="tab_instructions_title">Hướng dẫn</string>
+    <string name="nutrition_unsaturated_fat_content">Chất béo không bão hoà: %1$s</string>
+    <string name="text_yield"><strong>Khẩu phần:</strong> %1$s</string>
+    <string name="menu_sort_title">Sắp xếp</string>
+    <string name="form_search_title">Tìm kiếm nâng cao</string>
+    <string name="form_type_ingredients">Tìm kiếm theo nguyên liệu</string>
+    <string name="menu_uncategorized">Chưa phân loại</string>
+    <string name="pref_hidden_folder_true">Trình chọn thư mục công thức sẽ hiện thư mục ẩn</string>
+    <string name="pref_hidden_folder_false">Trình chọn thư mục công thức sẽ không hiện thư mục ẩn</string>
+    <string name="about_summary">© 2020-2021 bởi MicMun. Được cấp phép dưới GPLv3.
+\n
+\nNextcloud Cookbook là một ứng dụng dành cho sách nấu ăn trên nextcloud để quản lý các công thức.</string>
+    <string name="permission_select_root" tools:ignore="MissingTranslation">Vui lòng chọn %1$s.</string>
+    <string name="permissions_error_message">Truy cập bị từ chối! Ứng dụng cần quyền truy cập bộ nhớ, vui lòng kích hoạt trong cài đặt.</string>
+    <string name="permission_ok_message" tools:ignore="MissingTranslation">Quyền truy cập bộ nhớ đã được cấp cho %1$s.</string>
+    <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">Bạn không có quyền truy cập ghi vào kho lưu trữ này, do đó việc chọn thư mục này là vô dụng.
+\nBạn có muốn cấp quyền truy cập vào thư mục này không\?.</string>
+</resources>

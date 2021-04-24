@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="no_information">Ingen Information.</string>
     <string name="empty_list">Inga recept.</string>
     <string name="recipe_list_image_desc">Miniatyrbild av recept</string>
@@ -12,7 +12,7 @@
     <string name="tab_nutritions_title">Näring</string>
     <string name="text_uncategorized">Okategoriserat</string>
     <string name="text_no_keywords">Inga sökord.</string>
-    <string name="text_categories"><strong>kategorier: </strong> <br/> %1$s</string>
+    <string name="text_categories"><strong>Kategori:</strong><br/> %1$s</string>
     <string name="text_yield"><strong>Kapacitet:</strong> %1$s</string>
     <string name="text_author">Författare: %1$s</string>
     <string name="text_url">Källa: %1$s</string>
@@ -57,9 +57,9 @@
     <string name="pref_hidden_folder_true">Väljaren för receptkatalogen visar dold mapp</string>
     <string name="preftitle_theme">Välj Tema</string>
     <string name="about_title">Om</string>
-    <string name="about_summary">© 2020 av MicMun. Licens enligt GPLv3.
+    <string name="about_summary">© 2020-2021 av MicMun. Licens under GPLv3.
 \n
-\nNextcloud Cookbook är en app för kokbok på nextcloud för att hantera recept.</string>
+\nNextcloud Cookbook är en app för cookbook på nextcloud för att hantera recept.</string>
     <string name="theme_name_light">Ljus</string>
     <string name="theme_name_dark">Mörk</string>
     <string name="theme_name_system">Systemet</string>
@@ -74,4 +74,14 @@
     <string name="title_dir_chooser">Välj en katalog…</string>
     <string name="pref_hidden_folder_false">Väljaren för receptkatalogen visar inte dold mapp</string>
     <string name="sort_value_date_desc">Datum publicerat fallande</string>
+    <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">Du har ingen skrivåtkomst till detta lagringsutrymme, så det är meningslöst att välja denna mapp.
+\nVill du ge tillgång till den här mappen\?.</string>
+    <string name="permission_please_grant" tools:ignore="MissingTranslation">Bevilja lagringsrättigheter.</string>
+    <string name="permission_ok_message" tools:ignore="MissingTranslation">Lagringsåtkomst har beviljats för %1$s.</string>
+    <string name="header_image_desc">Huvudbilden av receptet</string>
+    <string name="folder_pick_cancel" tools:ignore="MissingTranslation">Mappväljaren har avbrutits av användaren.</string>
+    <string name="permission_canceled" tools:ignore="MissingTranslation">Avbokad av användaren</string>
+    <string name="permission_select_root" tools:ignore="MissingTranslation">Välj %1$s.</string>
+    <string name="text_tools"><strong>Nödvändiga verktyg:</strong><br/> %1$s</string>
+    <string name="folder_pick_success" tools:ignore="MissingTranslation">Mapp %1$s vald.</string>
 </resources>
