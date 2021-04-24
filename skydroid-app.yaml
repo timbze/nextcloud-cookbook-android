@@ -54,6 +54,10 @@ localized:
       - screenshot_settings.png
 
 builds:
+  - versionName: 2.1.0
+    versionCode: 210
+    sha256: 160150040dd390882e9ce085b6c0c62e2912e005f5c87eab6537d57481da73f9
+    apkLink: sia://_BmvrMdCqMbkCoQx8fznbzQDFLYbYTsvpLf88TPLgHcd1w
   - versionName: 2.0.1
     versionCode: 201
     sha256: b0aadf1292fcef9315d28499ee0953969f7305c45d884026f5afecd85c519e0f
@@ -63,8 +67,8 @@ builds:
     sha256: ab98ebfffc1cbbd15f1d7cb48644ae68733ca4669d39ebaf9817679bfc989912
     apkLink: sia://_Bka9tS-fiGpHIjylx-yjr1caGY_w7p-2vhm5rU9gqhG-w
 
-currentVersionName: 2.0.1
-currentVersionCode: 201
+currentVersionName: 2.1.0
+currentVersionCode: 210
 
 added: 1618153205273
-lastUpdated: 1618671278061
+lastUpdated: 1619279544459
