@@ -23,7 +23,7 @@
     <string name="nutrition_fiberContent">Содержание клетчатки: %1$s</string>
     <string name="nutrition_protein_content">Содержание белка: %1$s</string>
     <string name="nutrition_serving_size">Размер порции: %1$s</string>
-    <string name="nutrition_sodium_content">Содержание натрия: %1$s</string>
+    <string name="nutrition_sodium_content">Содержание соли: %1$s</string>
     <string name="nutrition_sugar_content">Содержание сахара: %1$s</string>
     <string name="nutrition_trans_fat_content">Содержание транс-жира: %1$s</string>
     <string name="menu_search_title">Расширенный поиск</string>
@@ -33,7 +33,7 @@
     <string name="recipe_list_image_desc">Миниатюры изображений рецептов</string>
     <string name="tooltip_prep_time">Подготовка</string>
     <string name="text_yield"><strong>Рацион:</strong> %1$s</string>
-    <string name="tooltip_total_time">Всего</string>
+    <string name="tooltip_total_time">Общее время</string>
     <string name="header_image_desc">Заголовок изображения рецепта</string>
     <string name="menu_search_tooltip">Поиск рецепта</string>
     <string name="search_hint">Поиск по названию</string>
