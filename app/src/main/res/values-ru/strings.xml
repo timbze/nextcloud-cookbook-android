@@ -81,4 +81,5 @@
     <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">У вас нет доступа на запись в это хранилище, поэтому выбор этой папки бесполезен.
 \nВы хотите предоставить доступ к этой папке\?.</string>
     <string name="folder_pick_success" tools:ignore="MissingTranslation">Папка %1$s выбрана.</string>
+    <string name="dir_chooser_error_message">Ошибка: Не удается открыть средство выбора папок!</string>
 </resources>
