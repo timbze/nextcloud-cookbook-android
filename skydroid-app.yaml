@@ -17,11 +17,14 @@ localized:
       When using the Nextcloud Android client, you find it on your storage under <code>Android/media/com.nextcloud.client/nextcloud/&lt;your account&gt;/&lt;folder&gt;</code>.
       You also can choose the theme in the settings.
       After that, the start view has a list of recipes and you select a recipe to view the details.
+
+      <b>IMPORTANT</b>: With direct pick of the nextcloud folder there will no images shown and the uri can't be stored right. Perhaps at next app start no recipes can be loaded.
+      Therefore it is better to use the above mentioned path on the SD card (see First steps).
     summary: View the recipes from your Nextcloud Cookbook
     whatsNew: |-
-      - Bugfix: If there is no folder picker, the app doesn't crash, instead it will show an error message
-      - New: Search of keywords with chossing from a list of keywords
-      - Update translations
+      + Bugfix: If there is no folder picker, the app doesn't crash, instead it will show an error message
+      + New: Search of keywords with chossing from a list of keywords
+      + Update translations
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -39,11 +42,14 @@ localized:
       Bei Nutzung der Nextcloud App für Android, ist dies üblicherweise <code>Android/media/com.nextcloud.client/nextcloud/&lt;Account-Name&gt;/&lt;Verzeichnis&gt;</code>.
       In den Einstellungen lässt sich auch das Theme wählen.
       Anschließend findet sich auf der Hauptseite (die auch nach dem Start der App direkt angezeigt wird) die Liste der verfügbaren Rezepte. Zur Anzeige der Details tippt man einfach das gewünschte Rezept an.
+
+      <b>WICHTIG</b>: Bei direkter Auswahl des Nextcloud-Verzeichnisses werden keine Bilder angezeigt und die URI kann nicht ordentlich gespeichert werden. Evtl. funktioniert dann beim nächsten Start das Nachladen der Rezepte nicht.
+      Deshalb bitte besser den oben genannten Pfad auf der SD-Karte nutzen (siehe Erste Schritte).
     summary: Zeige die Rezepte aus Deinem Nextcloud Kochbuch an
     whatsNew: |-
-      - Fehlerkorrektur: Wenn keine Verzeichnisauswahl möglich ist, dann stürzt die App nicht mehr ab, sondern es wird jetzt eine Fehlermeldung angezeigt
-      - Neu: Suche nach Schlüsselwörtern mit Auswahlliste vorhandener Schlüsselwörter
-      - Übersetzungen wieder aktualisiert
+      + Fehlerkorrektur: Wenn keine Verzeichnisauswahl möglich ist, dann stürzt die App nicht mehr ab, sondern es wird jetzt eine Fehlermeldung angezeigt
+      + Neu: Suche nach Schlüsselwörtern mit Auswahlliste vorhandener Schlüsselwörter
+      + Übersetzungen wieder aktualisiert
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/de/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
