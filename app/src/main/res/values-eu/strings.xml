@@ -81,4 +81,5 @@
     <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">Ez duzu idatzi honetan sartzeko, biltegiratze, beraz, hautatu karpeta hau da alferrikakoa.
 \nNahi duzu sarbidea emateko karpeta hau\?.</string>
     <string name="text_tools"><strong>Beharrezko tresnak:</strong><br/> %1$s</string>
+    <string name="dir_chooser_error_message">Errorea: Ezin ireki karpeta-hautatzailearen!</string>
 </resources>
