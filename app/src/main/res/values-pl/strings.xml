@@ -90,4 +90,5 @@
 \nCzy chcesz przyznać dostęp do tego folderu\?.</string>
     <string name="header_image_desc">Zdjęcie nagłówka przepisu</string>
     <string name="text_tools"><strong>Potrzebne narzędzia:</strong><br/> %1$s</string>
+    <string name="dir_chooser_error_message">Błąd: Nie można otworzyć selektora folderów!</string>
 </resources>
