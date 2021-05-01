@@ -21,7 +21,7 @@ import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
  * Fragment for detail of a recipe.
  *
  * @author MicMun
- * @version 1.6, 21.03.21
+ * @version 1.7, 01.05.21
  */
 class RecipeDetailFragment : Fragment() {
    private lateinit var binding: FragmentDetailBinding
@@ -31,6 +31,7 @@ class RecipeDetailFragment : Fragment() {
    private lateinit var ingredientsIcons: TypedArray
    private lateinit var instructionsIcons: TypedArray
    private lateinit var nutritionsIcons: TypedArray
+   private var adapter: ViewPagerAdapter? = null
 
    private var currentPage = 0
 
@@ -46,6 +47,8 @@ class RecipeDetailFragment : Fragment() {
       viewModel = ViewModelProvider(this, viewModelFactory).get(RecipeViewModel::class.java)
       binding.lifecycleOwner = this
 
+      val orientation = resources.configuration.orientation
+
       infoIcons = requireActivity().obtainStyledAttributes(intArrayOf(R.attr.tab_info_icon))
       ingredientsIcons = requireActivity().obtainStyledAttributes(intArrayOf(R.attr.tab_ingredients_icon))
       instructionsIcons = requireActivity().obtainStyledAttributes(intArrayOf(R.attr.tab_instructions_icon))
@@ -53,7 +56,7 @@ class RecipeDetailFragment : Fragment() {
 
       viewModel.recipe.observe(viewLifecycleOwner, { recipe ->
          recipe?.let {
-            initPager(it)
+            initPager(it, orientation)
             setTitle(it.recipeCore.name)
          }
       })
@@ -70,12 +73,13 @@ class RecipeDetailFragment : Fragment() {
     *
     * @param recipe current recipe data.
     */
-   private fun initPager(recipe: DbRecipe) {
-      binding.pager.adapter = ViewPagerAdapter(recipe)
-      binding.pager.offscreenPageLimit = 4
+   private fun initPager(recipe: DbRecipe, orientation: Int) {
+      adapter = ViewPagerAdapter(recipe, orientation)
+      binding.pager.adapter = adapter
+      binding.pager.offscreenPageLimit = adapter!!.itemCount
       val tabLayout = binding.tabLayout
       TabLayoutMediator(tabLayout, binding.pager) { tab, position ->
-         when (position) {
+         when (adapter!!.getItemViewType(position)) {
             ViewPagerAdapter.TYPE_INFO -> {
                tab.text = resources.getString(R.string.tab_info_title)
                tab.icon = ResourcesCompat.getDrawable(resources, infoIcons.getResourceId(0, 1), requireActivity().theme)
@@ -95,6 +99,13 @@ class RecipeDetailFragment : Fragment() {
                tab.icon =
                   ResourcesCompat.getDrawable(resources, nutritionsIcons.getResourceId(0, 1), requireActivity().theme)
             }
+            ViewPagerAdapter.TYPE_INGRED_AND_INSTRUCT -> {
+               tab.text = "${resources.getString(R.string.tab_ingredients_title)} & ${
+                  resources.getString(R.string.tab_instructions_title)
+               }"
+               tab.icon =
+                  ResourcesCompat.getDrawable(resources, instructionsIcons.getResourceId(0, 1), requireActivity().theme)
+            }
          }
       }.attach()
 
@@ -103,7 +114,9 @@ class RecipeDetailFragment : Fragment() {
             super.onPageSelected(position)
             currentPage = position
 
-            if (position == ViewPagerAdapter.TYPE_INSTRUCTIONS) {
+            val type = adapter!!.getItemViewType(position)
+
+            if (type == ViewPagerAdapter.TYPE_INSTRUCTIONS || type == ViewPagerAdapter.TYPE_INGRED_AND_INSTRUCT) {
                activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
             } else {
                activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -124,8 +137,11 @@ class RecipeDetailFragment : Fragment() {
 
    override fun onResume() {
       super.onResume()
-      if (currentPage == 2) {
-         activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+      if (adapter != null) {
+         val type = adapter!!.getItemViewType(currentPage)
+         if (type == ViewPagerAdapter.TYPE_INSTRUCTIONS || type == ViewPagerAdapter.TYPE_INGRED_AND_INSTRUCT) {
+            activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+         }
       }
    }
 
