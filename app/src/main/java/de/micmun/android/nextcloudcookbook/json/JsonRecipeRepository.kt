@@ -7,10 +7,13 @@ package de.micmun.android.nextcloudcookbook.json
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import androidx.documentfile.provider.DocumentFile
 import com.anggrayudi.storage.file.DocumentFileType
+import com.anggrayudi.storage.file.absolutePath
 import com.anggrayudi.storage.file.findFiles
 import com.anggrayudi.storage.file.openInputStream
+import com.beust.klaxon.KlaxonException
 import de.micmun.android.nextcloudcookbook.json.model.Recipe
 import de.micmun.android.nextcloudcookbook.util.StorageManager
 import de.micmun.android.nextcloudcookbook.util.json.RecipeJsonParser
@@ -115,6 +118,11 @@ class JsonRecipeRepository {
          json = strBuilder.toString()
       }
 
-      return RecipeJsonParser().parse(json)
+      try {
+         return RecipeJsonParser().parse(json)
+      } catch (e: KlaxonException) {
+         Log.e("JSON", "Parsing failed for ${file.absolutePath}", e)
+      }
+      return null
    }
 }
