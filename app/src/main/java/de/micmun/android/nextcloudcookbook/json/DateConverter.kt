@@ -81,7 +81,7 @@ class DateConverter : Converter {
 
    private fun toJsonImpl(date: Date): String {
       val ldt = LocalDateTime.ofEpochSecond(date.time / 1000, 0, ZoneOffset.UTC)
-      return ldt.toString()
+      return "\"${ldt}\""
    }
 }
 
