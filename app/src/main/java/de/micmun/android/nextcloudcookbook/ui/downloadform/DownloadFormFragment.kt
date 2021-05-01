@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -28,8 +29,11 @@ import de.micmun.android.nextcloudcookbook.util.StorageManager
 import de.micmun.android.nextcloudcookbook.util.json.RecipeJsonParser
 import de.micmun.android.nextcloudcookbook.util.json.RecipeJsonWriter
 import kotlinx.coroutines.*
+import org.jsoup.HttpStatusException
 import org.jsoup.Jsoup
-import java.net.URL
+import org.jsoup.nodes.Document
+import java.lang.Exception
+import java.net.MalformedURLException
 
 /**
  * Fragment for recipe download form.
@@ -73,19 +77,18 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
    }
 
    override fun doDownload() {
-      // TODO should we enable cleartext traffic (http)?
-      val url = URL(binding.recipeUrlTxt.text.toString())
-      val request = DownloadRequest(url, binding.recipeOverridePath.text.toString(),
-              binding.replaceExistingChkBox.isChecked)
+      val overridePath = binding.recipeOverridePath.text.toString()
+      val replaceExisting = binding.replaceExistingChkBox.isChecked
 
       isDownloading.postValue(true)
       uiScope.launch {
-         downloadImpl(request.url)?.let { recipe ->
+         val recipe = downloadImpl(binding.recipeUrlTxt.text.toString())
+         if (recipe != null) {
             if (recipe.name.isNotEmpty()) {
                val storage = StorageManager.getDocumentFromString(requireContext(), this@DownloadFormFragment.recipeDir ?: "")
                if (storage?.exists() == true) {
                   var recipeDir = storage.findFolder(recipe.name)
-                  if (recipeDir == null || request.replaceExisting) {
+                  if (recipeDir == null || replaceExisting) {
                      if (recipeDir == null)
                         recipeDir = storage.createDirectory(recipe.name)
                      val recipeFile = recipeDir?.findFile("recipe.json")
@@ -93,18 +96,34 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
                      val writer = recipeFile?.openOutputStream(requireContext(), false)?.bufferedWriter()
                      writer?.write(RecipeJsonWriter().write(recipe))
                      writer?.close()
-                 }
-               }
-            }
+                 } else { downloadError("Directory '${recipe.name}' already exists") }
+               } else { downloadError("No recipe directory found. Check the settings") }
+            } else { downloadError("Parsed recipe has no name") }
          }
          isDownloading.postValue(false)
       }
    }
 
-   private suspend fun downloadImpl(url: URL): Recipe? {
+   private suspend fun downloadImpl(url: String): Recipe? {
       //return Recipe(0, name = "Test")
       return withContext(Dispatchers.IO) {
-         val document = Jsoup.connect(url.toString()).get()
+         val document : Document
+         try {
+            // TODO should we enable cleartext traffic (http)?
+            document = Jsoup.connect(url).get()
+         }
+         catch (e : MalformedURLException) {
+            downloadError("Malformed URL")
+            return@withContext null
+         }
+         catch (e : HttpStatusException) {
+            downloadError("Http Error ${e.statusCode}")
+            return@withContext null
+         }
+         catch (e : Exception) {
+            downloadError("Connection failed")
+            return@withContext null
+         }
          for (element in document.getElementsByTag("script")) {
             if (element.attr("type")?.equals("application/ld+json") == true) {
                val json = element.html()
@@ -118,15 +137,16 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
                }
             }
          }
+         downloadError("No parsable recipe found")
          null
       }
    }
 
-   private data class DownloadRequest(
-           var url: URL,
-           var overridePath: String?,
-           var replaceExisting: Boolean
-   )
+   private fun downloadError(message: String){
+      activity?.runOnUiThread {
+         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+      }
+   }
 }
 
 interface DownloadClickListener {
