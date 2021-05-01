@@ -5,15 +5,15 @@
  */
 package de.micmun.android.nextcloudcookbook.ui.recipedetail
 
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.micmun.android.nextcloudcookbook.R
-import de.micmun.android.nextcloudcookbook.databinding.TabInfosBinding
-import de.micmun.android.nextcloudcookbook.databinding.TabIngredientsBinding
-import de.micmun.android.nextcloudcookbook.databinding.TabInstructionsBinding
-import de.micmun.android.nextcloudcookbook.databinding.TabNutritionsBinding
+import de.micmun.android.nextcloudcookbook.databinding.*
 import de.micmun.android.nextcloudcookbook.db.model.DbNutrition
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 
@@ -21,15 +21,16 @@ import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
  * Adapter for the ViewPager2 to present tabs.
  *
  * @author MicMun
- * @version 1.5, 21.03.21
+ * @version 1.7, 01.05.21
  */
-class ViewPagerAdapter(private val recipe: DbRecipe) :
+class ViewPagerAdapter(private val recipe: DbRecipe, private val orientation: Int) :
    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
    companion object {
       const val TYPE_INFO = 0
       const val TYPE_NUTRITIONS = 1
       const val TYPE_INGREDIENTS = 2
       const val TYPE_INSTRUCTIONS = 3
+      const val TYPE_INGRED_AND_INSTRUCT = 4
    }
 
    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -38,12 +39,13 @@ class ViewPagerAdapter(private val recipe: DbRecipe) :
          TYPE_INGREDIENTS -> IngredientsViewHolder.from(parent)
          TYPE_INSTRUCTIONS -> InstructionsViewHolder.from(parent)
          TYPE_NUTRITIONS -> NutritionsViewHolder.from(parent)
+         TYPE_INGRED_AND_INSTRUCT -> IngredientsAndInstructionsViewHolder.from(parent)
          else -> InfoViewHolder.from(parent)
       }
    }
 
    override fun getItemCount(): Int {
-      return 4
+      return if (orientation == Configuration.ORIENTATION_PORTRAIT) 4 else 3
    }
 
    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -64,11 +66,18 @@ class ViewPagerAdapter(private val recipe: DbRecipe) :
             val viewHolder = holder as InstructionsViewHolder
             viewHolder.bind(recipe)
          }
+         TYPE_INGRED_AND_INSTRUCT -> {
+            val viewHolder = holder as IngredientsAndInstructionsViewHolder
+            viewHolder.bind(recipe)
+         }
       }
    }
 
    override fun getItemViewType(position: Int): Int {
-      return position
+      return if (orientation == Configuration.ORIENTATION_LANDSCAPE && position > 1)
+         TYPE_INGRED_AND_INSTRUCT
+      else
+         position
    }
 
    class InfoViewHolder private constructor(private val binding: TabInfosBinding) :
@@ -122,6 +131,9 @@ class ViewPagerAdapter(private val recipe: DbRecipe) :
        */
       fun bind(recipe: DbRecipe) {
          binding.instructionsView.adapter = RecipeInstructionsAdapter(recipe.recipeInstructions ?: emptyList())
+         val orientation = (binding.instructionsView.layoutManager as LinearLayoutManager).orientation
+         val dividerItemDecoration = DividerItemDecoration(binding.instructionsView.context, orientation)
+         binding.instructionsView.addItemDecoration(dividerItemDecoration)
          binding.executePendingBindings()
       }
 
@@ -144,7 +156,6 @@ class ViewPagerAdapter(private val recipe: DbRecipe) :
        */
       fun bind(recipe: DbRecipe) {
          val switcher = binding.nutritionSwitcher
-
          val nutritions = getNutritionList(recipe.recipeCore.nutrition)
 
          if (nutritions.isEmpty() && R.id.nutritionEmptyLayout == switcher.nextView.id) {
@@ -180,6 +191,30 @@ class ViewPagerAdapter(private val recipe: DbRecipe) :
             return emptyList()
          }
          return nutritions
+      }
+   }
+
+   class IngredientsAndInstructionsViewHolder private constructor(private val binding: TabRecipeBinding) :
+      RecyclerView.ViewHolder(binding.root) {
+      fun bind(recipe: DbRecipe) {
+         // ingredients
+         binding.incredientsView.adapter = RecipeIngredientsAdapter(recipe.recipeIngredient ?: emptyList())
+
+         // instructions
+         binding.instructionsView.adapter = RecipeInstructionsAdapter(recipe.recipeInstructions ?: emptyList())
+         val orientation = (binding.instructionsView.layoutManager as LinearLayoutManager).orientation
+         val dividerItemDecoration = DividerItemDecoration(binding.instructionsView.context, orientation)
+         binding.instructionsView.addItemDecoration(dividerItemDecoration)
+
+         binding.executePendingBindings()
+      }
+
+      companion object {
+         fun from(parent: ViewGroup): IngredientsAndInstructionsViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val binding = TabRecipeBinding.inflate(layoutInflater, parent, false)
+            return IngredientsAndInstructionsViewHolder(binding)
+         }
       }
    }
 }

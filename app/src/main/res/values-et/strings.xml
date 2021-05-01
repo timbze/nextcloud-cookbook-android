@@ -81,4 +81,5 @@
 \nKas soovite sellele kaustale juurdepääsu anda\?.</string>
     <string name="permission_canceled" tools:ignore="MissingTranslation">Tühistatud kasutaja poolt</string>
     <string name="text_tools"><strong>Vajalikud tööriistad:</strong><br/> %1$s</string>
+    <string name="dir_chooser_error_message">Viga: kaustavalijat ei saa avada!</string>
 </resources>

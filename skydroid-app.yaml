@@ -22,8 +22,9 @@ localized:
       Therefore it is better to use the above mentioned path on the SD card (see First steps).
     summary: View the recipes from your Nextcloud Cookbook
     whatsNew: |-
-      + Bugfix: If there is no folder picker, the app doesn't crash, instead it will show an error message
-      + New: Search of keywords with chossing from a list of keywords
+      + Bugfix: little fixes in json parsing
+      + New: Numbered instructions can be marked as done
+      + New: In landscape mode it shows ingredients and instructions side by side
       + Update translations
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/
     phoneScreenshots:
@@ -47,9 +48,10 @@ localized:
       Deshalb bitte besser den oben genannten Pfad auf der SD-Karte nutzen (siehe Erste Schritte).
     summary: Zeige die Rezepte aus Deinem Nextcloud Kochbuch an
     whatsNew: |-
-      + Fehlerkorrektur: Wenn keine Verzeichnisauswahl möglich ist, dann stürzt die App nicht mehr ab, sondern es wird jetzt eine Fehlermeldung angezeigt
-      + Neu: Suche nach Schlüsselwörtern mit Auswahlliste vorhandener Schlüsselwörter
-      + Übersetzungen wieder aktualisiert
+      + Fehlerbehebung: Kleinere Korrekturen beim JSON-Parsing
+      + Neu: Nummerierte Anweisungen, die als erledigt markiert werden können
+      + Neu: Im Landscape-Modus werden Zutaten und Anweisungen nebeneinander angezeigt
+      + Übersetzungen aktualisiert
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/de/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -60,6 +62,10 @@ localized:
       - screenshot_settings.png
 
 builds:
+  - versionName: 2.2.0
+    versionCode: 220
+    sha256: aac6a935ebea0beeb539a06289540a06c4dbb0d70920d6de65ca70938e5fc835
+    apkLink: sia://_BlDmlz1D7Pr_kMXQdc-vUA4WMEy1FTLm6YaMBt1p2PpcA
   - versionName: 2.1.0
     versionCode: 210
     sha256: 160150040dd390882e9ce085b6c0c62e2912e005f5c87eab6537d57481da73f9
@@ -73,8 +79,8 @@ builds:
     sha256: ab98ebfffc1cbbd15f1d7cb48644ae68733ca4669d39ebaf9817679bfc989912
     apkLink: sia://_Bka9tS-fiGpHIjylx-yjr1caGY_w7p-2vhm5rU9gqhG-w
 
-currentVersionName: 2.1.0
-currentVersionCode: 210
+currentVersionName: 2.2.0
+currentVersionCode: 220
 
 added: 1618153205273
-lastUpdated: 1619279544459
+lastUpdated: 1619890248431

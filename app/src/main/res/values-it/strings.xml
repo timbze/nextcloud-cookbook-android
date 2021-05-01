@@ -90,4 +90,5 @@
     <string name="permission_ok_message" tools:ignore="MissingTranslation">L\'accesso allo stoccaggio è stato concesso per %1$s.</string>
     <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">Non hai accesso in scrittura a questo archivio, quindi selezionare questa cartella è inutile.
 \nVuoi concedere l\'accesso a questa cartella\?.</string>
+    <string name="dir_chooser_error_message">Errore: Impossibile aprire un raccoglitore di cartelle!</string>
 </resources>

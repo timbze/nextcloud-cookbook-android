@@ -8,6 +8,7 @@ package de.micmun.android.nextcloudcookbook.ui.recipedetail
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.databinding.InstructionsItemBinding
 import de.micmun.android.nextcloudcookbook.db.model.DbInstruction
 
@@ -15,7 +16,7 @@ import de.micmun.android.nextcloudcookbook.db.model.DbInstruction
  * Adapter for recipe ingredients.
  *
  * @author MicMun
- * @version 1.1, 28.02.21
+ * @version 1.2, 01.05.21
  */
 class RecipeInstructionsAdapter(private val instructions: List<DbInstruction>) :
    RecyclerView.Adapter<RecipeInstructionsAdapter.InstructionsViewHolder>() {
@@ -28,7 +29,7 @@ class RecipeInstructionsAdapter(private val instructions: List<DbInstruction>) :
 
    override fun onBindViewHolder(holder: InstructionsViewHolder, position: Int) {
       val ingredient = instructions[position].instruction.trim()
-      holder.bind(ingredient)
+      holder.bind(position + 1, ingredient)
    }
 
    class InstructionsViewHolder private constructor(val binding: InstructionsItemBinding) :
@@ -38,8 +39,18 @@ class RecipeInstructionsAdapter(private val instructions: List<DbInstruction>) :
        *
        * @param instruction Instruction String to show in view.
        */
-      fun bind(instruction: String) {
+      fun bind(counter: Int, instruction: String) {
          binding.instruction = instruction
+         binding.counter = counter.toString()
+         //listener to mark as done or undone
+         binding.instructionListPosition.setOnClickListener {
+            if (R.id.instructionDoneSymbol == binding.instructionsListSwitcher.nextView.id)
+               binding.instructionsListSwitcher.showNext()
+         }
+         binding.instructionDoneSymbol.setOnClickListener {
+            if (R.id.instructionListPosition == binding.instructionsListSwitcher.nextView.id)
+               binding.instructionsListSwitcher.showNext()
+         }
          binding.executePendingBindings()
       }
 
