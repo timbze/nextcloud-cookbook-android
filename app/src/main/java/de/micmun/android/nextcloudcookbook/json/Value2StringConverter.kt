@@ -36,6 +36,9 @@ class Value2StringConverter : Converter {
    }
 
    override fun toJson(value: Any): String {
+      if (value is String) {
+         return "\"${value}\""
+      }
       return value.toString()
    }
 }

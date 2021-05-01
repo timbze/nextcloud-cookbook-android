@@ -33,7 +33,7 @@ class List2StringConverter : Converter {
    }
 
    override fun toJson(value: Any): String {
-      return value as String
+      return "\"${value as String}\""
    }
 }
 
