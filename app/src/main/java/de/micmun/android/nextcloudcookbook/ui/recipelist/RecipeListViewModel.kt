@@ -7,25 +7,14 @@ package de.micmun.android.nextcloudcookbook.ui.recipelist
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.anggrayudi.storage.file.DocumentFileCompat
-import com.anggrayudi.storage.file.DocumentFileType
-import com.anggrayudi.storage.file.openOutputStream
-import com.beust.klaxon.KlaxonException
 import de.micmun.android.nextcloudcookbook.data.CategoryFilter
 import de.micmun.android.nextcloudcookbook.data.SortValue
 import de.micmun.android.nextcloudcookbook.db.DbRecipeRepository
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 import de.micmun.android.nextcloudcookbook.json.JsonRecipeRepository
 import de.micmun.android.nextcloudcookbook.json.model.Recipe
-import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModel
 import de.micmun.android.nextcloudcookbook.util.Recipe2DbRecipeConverter
-import de.micmun.android.nextcloudcookbook.util.StorageManager
-import de.micmun.android.nextcloudcookbook.util.json.RecipeJsonParser
-import de.micmun.android.nextcloudcookbook.util.json.RecipeJsonWriter
 import kotlinx.coroutines.*
-import org.jsoup.Jsoup
-import java.net.URL
-import java.util.*
 import java.util.stream.Collectors
 
 /**
@@ -46,7 +35,6 @@ class RecipeListViewModel(private val app: Application) : AndroidViewModel(app) 
    // on updating
    val isUpdating = MutableLiveData(false)
    val isLoaded = MutableLiveData(false)
-   val isDownloading = MutableLiveData(false)
 
    private var recipeDir: String = ""
 
@@ -108,51 +96,6 @@ class RecipeListViewModel(private val app: Application) : AndroidViewModel(app) 
       }
    }
 
-   fun download(request: DownloadRequest) {
-      isDownloading.postValue(true)
-      uiScope.launch {
-         downloadImpl(request.url)?.let { recipe ->
-            CurrentSettingViewModel(app).recipeDirectory.value?.let { basedir ->
-               val recipePath = "$basedir/${recipe.name}"
-               if (recipePath.isNotEmpty()) {
-                  val recipeDir = StorageManager.getDocumentFromString(app, recipePath)
-                  if (recipeDir?.exists() == false || request.replaceExisting) {
-                     DocumentFileCompat.mkdirs(app, recipePath)
-
-                     DocumentFileCompat.fromFullPath(app, "$recipePath/recipe.json", DocumentFileType.FILE)?.let { jsonFile->
-                        jsonFile.openOutputStream(app, false)
-                                ?.bufferedWriter()
-                                ?.write(RecipeJsonWriter().write(recipe))
-                     }
-                  }
-               }
-            }
-         }
-         isDownloading.postValue(false)
-      }
-   }
-
-   private suspend fun downloadImpl(url: URL): Recipe? {
-      return withContext(Dispatchers.IO) {
-         val document = Jsoup.connect(url.toString()).get()
-         for (element in document.getElementsByTag("script")) {
-            if (element.attr("type")?.equals("application/ld+json") == true) {
-               val json = element.html()
-               try {
-                  val recipe = RecipeJsonParser().parse(json)
-                  if (recipe != null && recipe.type == "Recipe") {
-                     return@withContext recipe
-                  }
-
-               } catch (e: KlaxonException) {
-                  print(e)
-               }
-            }
-         }
-         null
-      }
-   }
-
    private suspend fun getRecipesFromRepo(path: String): List<Recipe> {
       return withContext(Dispatchers.IO) {
          JsonRecipeRepository.getInstance().getAllRecipes(app, path)
@@ -183,9 +126,3 @@ class RecipeListViewModelFactory(private val application: Application) : ViewMod
       throw IllegalArgumentException("Unknown ViewModel class")
    }
 }
-
-data class DownloadRequest(
-   var url: URL,
-   var overridePath: String?,
-   var replaceExisting: Boolean
-)
