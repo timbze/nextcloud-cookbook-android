@@ -63,7 +63,7 @@ class DateConverter : Converter {
 
    override fun toJson(value: Any): String {
       val date = sdf.parse(value as String)
-      return if (date != null) toJson(date) else ""
+      return if (date != null) toJsonImpl(date) else ""
    }
 
    private fun parseIso8861(dateString: String): LocalDateTime? {
@@ -79,7 +79,7 @@ class DateConverter : Converter {
       }
    }
 
-   private fun toJson(date: Date): String {
+   private fun toJsonImpl(date: Date): String {
       val ldt = LocalDateTime.ofEpochSecond(date.time / 1000, 0, ZoneOffset.UTC)
       return ldt.toString()
    }
