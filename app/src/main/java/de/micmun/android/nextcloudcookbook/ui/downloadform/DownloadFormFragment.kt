@@ -77,26 +77,28 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
    }
 
    override fun doDownload() {
+      val url = binding.recipeUrlTxt.text.toString()
       val overridePath = binding.recipeOverridePath.text.toString()
       val replaceExisting = binding.replaceExistingChkBox.isChecked
 
       isDownloading.postValue(true)
       uiScope.launch {
-         val recipe = downloadImpl(binding.recipeUrlTxt.text.toString())
+         val recipe = downloadImpl(url)
          if (recipe != null) {
             if (recipe.name.isNotEmpty()) {
                val storage = StorageManager.getDocumentFromString(requireContext(), this@DownloadFormFragment.recipeDir ?: "")
                if (storage?.exists() == true) {
-                  var recipeDir = storage.findFolder(recipe.name)
+                  val recipeDirName = if (overridePath.isEmpty()) recipe.name else overridePath
+                  var recipeDir = storage.findFolder(recipeDirName)
                   if (recipeDir == null || replaceExisting) {
                      if (recipeDir == null)
-                        recipeDir = storage.createDirectory(recipe.name)
+                        recipeDir = storage.createDirectory(recipeDirName)
                      val recipeFile = recipeDir?.findFile("recipe.json")
                              ?:recipeDir?.createFile("application/json", "recipe.json")
                      val writer = recipeFile?.openOutputStream(requireContext(), false)?.bufferedWriter()
                      writer?.write(RecipeJsonWriter().write(recipe))
                      writer?.close()
-                 } else { downloadError("Directory '${recipe.name}' already exists") }
+                 } else { downloadError("Directory '${recipeDirName}' already exists") }
                } else { downloadError("No recipe directory found. Check the settings") }
             } else { downloadError("Parsed recipe has no name") }
          }
