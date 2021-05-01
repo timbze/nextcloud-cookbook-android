@@ -8,6 +8,8 @@ package de.micmun.android.nextcloudcookbook.ui.recipedetail
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.databinding.TabInfosBinding
@@ -21,7 +23,7 @@ import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
  * Adapter for the ViewPager2 to present tabs.
  *
  * @author MicMun
- * @version 1.5, 21.03.21
+ * @version 1.6, 01.05.21
  */
 class ViewPagerAdapter(private val recipe: DbRecipe) :
    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -122,6 +124,9 @@ class ViewPagerAdapter(private val recipe: DbRecipe) :
        */
       fun bind(recipe: DbRecipe) {
          binding.instructionsView.adapter = RecipeInstructionsAdapter(recipe.recipeInstructions ?: emptyList())
+         val orientation = (binding.instructionsView.layoutManager as LinearLayoutManager).orientation
+         val dividerItemDecoration = DividerItemDecoration(binding.instructionsView.context, orientation)
+         binding.instructionsView.addItemDecoration(dividerItemDecoration)
          binding.executePendingBindings()
       }
 
@@ -132,6 +137,7 @@ class ViewPagerAdapter(private val recipe: DbRecipe) :
             return InstructionsViewHolder(binding)
          }
       }
+
    }
 
    class NutritionsViewHolder private constructor(private val binding: TabNutritionsBinding,
@@ -144,7 +150,6 @@ class ViewPagerAdapter(private val recipe: DbRecipe) :
        */
       fun bind(recipe: DbRecipe) {
          val switcher = binding.nutritionSwitcher
-
          val nutritions = getNutritionList(recipe.recipeCore.nutrition)
 
          if (nutritions.isEmpty() && R.id.nutritionEmptyLayout == switcher.nextView.id) {

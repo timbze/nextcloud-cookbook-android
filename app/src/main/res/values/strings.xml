@@ -11,6 +11,7 @@
    <!-- recipe detail -->
    <string name="img_desc_logo">Logo of the recipe</string>
    <string name="list_symbol" translatable="false">•</string>
+   <string name="done_image_desc" translatable="false">Done image</string>
    <string name="title_duration">Durations in HH:MM</string>
    <string name="tooltip_prep_time">Preparation</string>
    <string name="tooltip_cook_time">Cooking</string>
