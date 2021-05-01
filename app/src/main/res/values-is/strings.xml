@@ -81,4 +81,5 @@
 \nViltu veita aðgang að þessari möppu \?.</string>
     <string name="text_tools"><strong> Nauðsynleg verkfæri: </strong> <br/> %1$s</string>
     <string name="permission_select_root" tools:ignore="MissingTranslation">Veldu %1$s.</string>
+    <string name="dir_chooser_error_message">Villa: get Ekki opnað möppu glæsilegur!</string>
 </resources>

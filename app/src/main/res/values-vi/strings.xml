@@ -80,4 +80,6 @@
     <string name="permission_ok_message" tools:ignore="MissingTranslation">Quyền truy cập bộ nhớ đã được cấp cho %1$s.</string>
     <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">Bạn không có quyền truy cập ghi vào kho lưu trữ này, do đó việc chọn thư mục này là vô dụng.
 \nBạn có muốn cấp quyền truy cập vào thư mục này không\?.</string>
+    <string name="header_image_desc">Hình ảnh tiêu đề của công thức</string>
+    <string name="dir_chooser_error_message">Lỗi: Không thể mở một mục chọn!</string>
 </resources>

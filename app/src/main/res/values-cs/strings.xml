@@ -90,4 +90,5 @@
     <string name="permission_select_root" tools:ignore="MissingTranslation">Vyberte prosím %1$s.</string>
     <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">K tomuto úložišti nemáte přístup pro zápis, a proto je výběr této složky zbytečný.
 \nChcete povolit přístup k této složce\?.</string>
+    <string name="dir_chooser_error_message">Chyba: Nelze otevřít nástroj pro výběr složek!</string>
 </resources>

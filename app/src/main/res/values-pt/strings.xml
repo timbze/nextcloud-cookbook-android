@@ -81,4 +81,5 @@
 \nGostaria de conceder acesso a esta pasta\?.</string>
     <string name="permission_please_grant" tools:ignore="MissingTranslation">Por favor, conceder permissões de armazenamento.</string>
     <string name="permission_ok_message" tools:ignore="MissingTranslation">O acesso ao armazenamento foi concedido por %1$s.</string>
+    <string name="dir_chooser_error_message">Erro: Não é possível abrir um apanhador de pastas!</string>
 </resources>
