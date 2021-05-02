@@ -6,6 +6,7 @@
 package de.micmun.android.nextcloudcookbook.ui.downloadform
 
 import android.graphics.*
+import android.net.UrlQuerySanitizer
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -127,12 +128,28 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
       }
    }
 
+   private fun sanitizeURL(str: String): String {
+      // TODO should we enable cleartext traffic (http)?
+      var url: URL
+      try {
+         url = URL(str)
+      } catch (e: MalformedURLException) {
+         try {
+            url = URL("https://$str")
+         } catch (e: MalformedURLException) {
+            return str
+         }
+      }
+      if (url.protocol != "https")
+         url = URL("https", url.host, url.file)
+      return url.toString()
+   }
+
    private suspend fun fetchAndParse(url: String): Recipe? {
       return withContext(Dispatchers.IO) {
          val document : Document
          try {
-            // TODO should we enable cleartext traffic (http)?
-            document = Jsoup.connect(url).get()
+            document = Jsoup.connect(sanitizeURL(url)).get()
          }
          catch (e : MalformedURLException) {
             downloadError("Malformed URL")
@@ -170,7 +187,7 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
    private suspend fun fetchImage(url: String): Bitmap? {
       return withContext(Dispatchers.IO) {
          try {
-            val stream = URL(url).openStream()
+            val stream = URL(sanitizeURL(url)).openStream()
             val bm = BitmapFactory.decodeStream(stream)
             stream.close()
             return@withContext bm
