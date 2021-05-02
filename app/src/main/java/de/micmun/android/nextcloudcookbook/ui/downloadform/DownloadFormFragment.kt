@@ -30,8 +30,7 @@ import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModel
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModelFactory
 import de.micmun.android.nextcloudcookbook.ui.MainActivity
 import de.micmun.android.nextcloudcookbook.util.StorageManager
-import de.micmun.android.nextcloudcookbook.util.json.RecipeJsonParser
-import de.micmun.android.nextcloudcookbook.util.json.RecipeJsonWriter
+import de.micmun.android.nextcloudcookbook.util.json.RecipeJsonConverter
 import kotlinx.coroutines.*
 import org.jsoup.HttpStatusException
 import org.jsoup.Jsoup
@@ -101,7 +100,7 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
                         recipeDir = storage.createDirectory(recipeDirName)
                      val recipeFile = recipeDir?.findOrCreateFile("application/json", "recipe.json")
                      val writer = recipeFile?.openOutputStream(requireContext(), false)?.bufferedWriter()
-                     writer?.write(RecipeJsonWriter().write(recipe))
+                     writer?.write(RecipeJsonConverter.write(recipe))
                      writer?.close()
 
                      if (recipe.image?.isNotBlank() == true) {
@@ -167,7 +166,7 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
             if (element.attr("type")?.equals("application/ld+json") == true) {
                val json = element.html()
                try {
-                  val recipe = RecipeJsonParser().parseFromWeb(json)
+                  val recipe = RecipeJsonConverter.parseFromWeb(json)
                   if (recipe != null) {
                      if (recipe.url == null || recipe.url.isBlank()) {
                         return@withContext recipe.copy(url = url)
