@@ -28,7 +28,7 @@ class List2StringConverter : Converter {
       jv.string?.let {
          return it
       }
-      Log.e("List2StringConverter", "FEHLER: Unbekannter Typ $jv")
+      Log.w("List2StringConverter", "Unknown type or missing field")
       return ""
    }
 
