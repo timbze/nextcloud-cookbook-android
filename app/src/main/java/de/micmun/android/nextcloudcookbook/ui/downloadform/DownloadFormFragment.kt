@@ -150,8 +150,8 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
             if (element.attr("type")?.equals("application/ld+json") == true) {
                val json = element.html()
                try {
-                  val recipe = RecipeJsonParser().parse(json)
-                  if (recipe != null && recipe.type == "Recipe") {
+                  val recipe = RecipeJsonParser().parseFromWeb(json)
+                  if (recipe != null) {
                      return@withContext recipe
                   }
                } catch (e: KlaxonException) {
