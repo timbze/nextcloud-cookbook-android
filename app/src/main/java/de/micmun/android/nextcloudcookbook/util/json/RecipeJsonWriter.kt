@@ -24,6 +24,7 @@ class RecipeJsonWriter {
          .fieldConverter(RecipeNutrition::class, NutritionConverter())
          .fieldConverter(Recipe2String::class, Value2StringConverter())
          .fieldConverter(RecipeAuthor::class, AuthorConverter())
+         .fieldConverter(RecipeImage::class, ImageURLConverter())
          .toJsonString(recipe)
    }
 }

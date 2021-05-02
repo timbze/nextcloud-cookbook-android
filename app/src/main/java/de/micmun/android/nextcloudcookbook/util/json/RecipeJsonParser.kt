@@ -26,6 +26,7 @@ class RecipeJsonParser {
          .fieldConverter(RecipeNutrition::class, NutritionConverter())
          .fieldConverter(Recipe2String::class, Value2StringConverter())
          .fieldConverter(RecipeAuthor::class, AuthorConverter())
+         .fieldConverter(RecipeImage::class, ImageURLConverter())
          .parse<Recipe>(json)
    }
 
@@ -37,6 +38,7 @@ class RecipeJsonParser {
               .fieldConverter(RecipeNutrition::class, NutritionConverter())
               .fieldConverter(Recipe2String::class, Value2StringConverter())
               .fieldConverter(RecipeAuthor::class, AuthorConverter())
+              .fieldConverter(RecipeImage::class, ImageURLConverter())
 
       // websites may provide multiple ld-json in one script tag as an array
       try {
