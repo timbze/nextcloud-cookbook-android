@@ -152,6 +152,9 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
                try {
                   val recipe = RecipeJsonParser().parseFromWeb(json)
                   if (recipe != null) {
+                     if (recipe.url == null || recipe.url.isBlank()) {
+                        return@withContext recipe.copy(url = url)
+                     }
                      return@withContext recipe
                   }
                } catch (e: KlaxonException) {
