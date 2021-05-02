@@ -30,7 +30,6 @@
              android:autofillHints=""
              android:hint="@string/form_download_url_hint"
              android:inputType="textUri"
-             android:text="https://www.chefkoch.de/rezepte/848621190292368/Hefe-Schnecken.html"
              app:layout_constraintBottom_toTopOf="@id/downloadOptionsTxt"
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintStart_toStartOf="parent"
