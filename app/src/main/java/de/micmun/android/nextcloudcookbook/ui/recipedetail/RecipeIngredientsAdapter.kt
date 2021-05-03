@@ -5,6 +5,7 @@
  */
 package de.micmun.android.nextcloudcookbook.ui.recipedetail
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -40,6 +41,10 @@ class RecipeIngredientsAdapter(private val ingredients: List<DbIngredient>) :
        */
       fun bind(ingredient: String) {
          binding.ingredient = ingredient
+         binding.ingredientsItemText.setOnClickListener {
+            binding.ingredientsItemText.paintFlags =
+                    binding.ingredientsItemText.paintFlags.xor(Paint.STRIKE_THRU_TEXT_FLAG)
+         }
          binding.executePendingBindings()
       }
 
