@@ -18,22 +18,16 @@ import java.util.stream.Collectors
 class Recipe2DbRecipeConverter(private val recipe: Recipe) {
    fun convert(): DbRecipe {
       val core = DbRecipeCore(
-         context = cns(recipe.context),
-         idUrl = cns(recipe.idUrl),
-         jsonId = cns(recipe.jsonId),
-         type = cns(recipe.type),
          cookTime = cns(recipe.cookTime),
          dateCreated = cns(recipe.dateCreated),
          dateModified = cns(recipe.dateModified),
          datePublished = cns(recipe.datePublished),
          description = cns(recipe.description),
          image = cns(recipe.image),
-         imageUrl = cns(recipe.imageUrl),
          thumbImageUrl = cns(recipe.thumbImageUrl),
          fullImageUrl = cns(recipe.fullImageUrl),
          name = recipe.name,
          prepTime = cns(recipe.prepTime),
-         printImage = cns(recipe.printImage),
          recipeCategory = recipe.recipeCategory?.joinToString(",") ?: "",
          recipeYield = cns(recipe.recipeYield),
          totalTime = cns(recipe.totalTime),
