@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
+import de.micmun.android.nextcloudcookbook.db.model.DbRecipePreview
 import de.micmun.android.nextcloudcookbook.util.DurationUtils
 import de.micmun.android.nextcloudcookbook.util.StorageManager
 import java.util.stream.Collectors
@@ -26,12 +27,12 @@ import java.util.stream.Collectors
 
 // Overview list
 @BindingAdapter("recipeImage")
-fun ImageView.setRecipeImage(item: DbRecipe?) {
+fun ImageView.setRecipeImage(item: DbRecipePreview?) {
    item?.run {
-      if (recipeCore.thumbImageUrl.isEmpty()) {
+      if (thumbImageUrl.isEmpty()) {
          setImageURI(null)
       } else {
-         val thumbImage = StorageManager.getImageFromString(context, recipeCore.thumbImageUrl)
+         val thumbImage = StorageManager.getImageFromString(context, thumbImageUrl)
          thumbImage?.run {
             setImageURI(uri)
          }
@@ -40,13 +41,18 @@ fun ImageView.setRecipeImage(item: DbRecipe?) {
 }
 
 @BindingAdapter("recipeName")
-fun TextView.setRecipeName(item: DbRecipe?) {
-   item?.let { text = it.recipeCore.name }
+fun TextView.setRecipeName(item: DbRecipePreview?) {
+   item?.let { text = it.name }
 }
 
 @BindingAdapter("recipeDescription")
 fun TextView.setRecipeDesc(item: DbRecipe?) {
    item?.let { text = it.recipeCore.description }
+}
+
+@BindingAdapter("recipeDescription")
+fun TextView.setRecipeDesc(item: DbRecipePreview?) {
+   item?.let { text = it.description }
 }
 
 // Detail view

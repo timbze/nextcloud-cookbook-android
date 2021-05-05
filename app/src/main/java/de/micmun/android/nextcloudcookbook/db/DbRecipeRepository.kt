@@ -12,6 +12,7 @@ import de.micmun.android.nextcloudcookbook.data.RecipeFilter
 import de.micmun.android.nextcloudcookbook.data.SortValue
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipeKeywordRelation
+import de.micmun.android.nextcloudcookbook.db.model.DbRecipePreview
 
 /**
  * Repository for recipes.
@@ -40,11 +41,11 @@ class DbRecipeRepository private constructor(application: Application) {
       }
    }
 
-   fun getAllRecipes() = mRecipeDao.getAllRecipes()
+   fun getAllRecipePreviews() = mRecipeDao.getAllRecipePreviews()
 
    fun getRecipe(name: String) = mRecipeDao.getByName(name)
 
-   fun filterCategory(sort: SortValue, category: String, recipeFilter: RecipeFilter? = null): LiveData<List<DbRecipe>> {
+   fun filterCategory(sort: SortValue, category: String, recipeFilter: RecipeFilter? = null): LiveData<List<DbRecipePreview>> {
       var select = "SELECT * FROM recipes WHERE recipeCategory = '${category}' "
       if (recipeFilter != null && recipeFilter.type != RecipeFilter.QueryType.QUERY_INGREDIENTS) {
          select += " AND " + getWhereClause(recipeFilter)
@@ -60,13 +61,13 @@ class DbRecipeRepository private constructor(application: Application) {
       return mRecipeDao.filterRecipes(query)
    }
 
-   fun filterUncategorized(sort: SortValue, recipeFilter: RecipeFilter? = null): LiveData<List<DbRecipe>> {
-      var select = "SELECT * FROM recipes WHERE recipeCategory = ''"
+   fun filterUncategorized(sort: SortValue, recipeFilter: RecipeFilter? = null): LiveData<List<DbRecipePreview>> {
+      var select = "SELECT ${DbRecipePreview.DbFields} FROM recipes WHERE recipeCategory = ''"
       if (recipeFilter != null && recipeFilter.type != RecipeFilter.QueryType.QUERY_INGREDIENTS) {
          select += " AND " + getWhereClause(recipeFilter)
       } else if (recipeFilter != null) {
          select =
-            "SELECT * FROM recipes INNER JOIN ingredients ON recipes.id = ingredients.recipeId" +
+            "SELECT ${DbRecipePreview.DbFields} FROM recipes INNER JOIN ingredients ON recipes.id = ingredients.recipeId" +
             " WHERE recipeCategory = '' AND " + getWhereClause(recipeFilter)
       }
 
@@ -78,9 +79,9 @@ class DbRecipeRepository private constructor(application: Application) {
       return mRecipeDao.filterRecipes(query)
    }
 
-   fun filterAll(sort: SortValue, recipeFilter: RecipeFilter): LiveData<List<DbRecipe>> {
+   fun filterAll(sort: SortValue, recipeFilter: RecipeFilter): LiveData<List<DbRecipePreview>> {
       var select = when (recipeFilter.type) {
-         RecipeFilter.QueryType.QUERY_KEYWORD -> "SELECT * FROM recipes r" +
+         RecipeFilter.QueryType.QUERY_KEYWORD -> "SELECT ${DbRecipePreview.DbFields} FROM recipes r" +
                                                  " INNER JOIN recipeXKeywords x ON x.recipeId = r.id" +
                                                  " INNER JOIN keywords k ON k.id = x.keywordId" +
                                                  " WHERE " + getWhereClause(recipeFilter)
@@ -99,7 +100,7 @@ class DbRecipeRepository private constructor(application: Application) {
 
    fun getKeywords() = mRecipeDao.getAllKeywords()
 
-   fun sort(sort: SortValue): LiveData<List<DbRecipe>> {
+   fun sort(sort: SortValue): LiveData<List<DbRecipePreview>> {
       return when (sort) {
          SortValue.NAME_A_Z -> mRecipeDao.sortByName(true)
          SortValue.NAME_Z_A -> mRecipeDao.sortByName(false)

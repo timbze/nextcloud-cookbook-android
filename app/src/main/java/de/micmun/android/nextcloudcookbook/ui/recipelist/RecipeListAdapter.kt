@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 import de.micmun.android.nextcloudcookbook.databinding.RecipeListRowBinding
+import de.micmun.android.nextcloudcookbook.db.model.DbRecipePreview
 
 /**
  * RecyclerViewAdapter for the list of recipes.
@@ -20,15 +20,15 @@ import de.micmun.android.nextcloudcookbook.databinding.RecipeListRowBinding
  * @version 1.4, 26.07.20
  */
 class RecipeListAdapter(private val clickListener: RecipeListListener) :
-   ListAdapter<DbRecipe, RecipeListAdapter.RecipeViewHolder>(RECIPE_ITEM_CALLBACK) {
+   ListAdapter<DbRecipePreview, RecipeListAdapter.RecipeViewHolder>(RECIPE_ITEM_CALLBACK) {
 
    companion object {
-      private val RECIPE_ITEM_CALLBACK = object : DiffUtil.ItemCallback<DbRecipe>() {
-         override fun areItemsTheSame(oldItem: DbRecipe, newItem: DbRecipe): Boolean =
-            oldItem.recipeCore.id == newItem.recipeCore.id
+      private val RECIPE_ITEM_CALLBACK = object : DiffUtil.ItemCallback<DbRecipePreview>() {
+         override fun areItemsTheSame(oldItem: DbRecipePreview, newItem: DbRecipePreview): Boolean =
+            oldItem.id == newItem.id
 
-         override fun areContentsTheSame(oldItem: DbRecipe, newItem: DbRecipe): Boolean =
-            oldItem.recipeCore.name == newItem.recipeCore.name
+         override fun areContentsTheSame(oldItem: DbRecipePreview, newItem: DbRecipePreview): Boolean =
+            oldItem.name == newItem.name
       }
    }
 
@@ -52,7 +52,7 @@ class RecipeListAdapter(private val clickListener: RecipeListListener) :
        *
        * @param recipe Recipe data.
        */
-      fun bind(clickListener: RecipeListListener, recipe: DbRecipe) {
+      fun bind(clickListener: RecipeListListener, recipe: DbRecipePreview) {
          binding.recipe = recipe
          binding.clickListener = clickListener
          binding.executePendingBindings()
@@ -69,5 +69,5 @@ class RecipeListAdapter(private val clickListener: RecipeListListener) :
 }
 
 class RecipeListListener(val clickListener: (recipeName: String) -> Unit) {
-   fun onClick(recipe: DbRecipe) = clickListener(recipe.recipeCore.name)
+   fun onClick(recipe: DbRecipePreview) = clickListener(recipe.name)
 }

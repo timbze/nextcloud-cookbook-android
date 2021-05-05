@@ -6,14 +6,13 @@
 package de.micmun.android.nextcloudcookbook.ui.recipelist
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import de.micmun.android.nextcloudcookbook.json.JsonRecipeRepository
 import de.micmun.android.nextcloudcookbook.db.DbRecipeRepository
-import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 import de.micmun.android.nextcloudcookbook.json.model.Recipe
 import de.micmun.android.nextcloudcookbook.data.CategoryFilter
 import de.micmun.android.nextcloudcookbook.data.SortValue
+import de.micmun.android.nextcloudcookbook.db.model.DbRecipePreview
 import de.micmun.android.nextcloudcookbook.util.Recipe2DbRecipeConverter
 import kotlinx.coroutines.*
 import java.util.stream.Collectors
@@ -56,13 +55,13 @@ class RecipeListViewModel(private val app: Application) : AndroidViewModel(app) 
       _navigateToRecipe.value = null
    }
 
-   fun getRecipes(): LiveData<List<DbRecipe>> {
-      var recipes: LiveData<List<DbRecipe>>
+   fun getRecipes(): LiveData<List<DbRecipePreview>> {
+      var recipes: LiveData<List<DbRecipePreview>>
 
       runBlocking(Dispatchers.IO) {
          recipes =
             if (catFilter.type == CategoryFilter.CategoryFilterOption.ALL_CATEGORIES && sort == SortValue.NAME_A_Z) {
-               recipeRepository.getAllRecipes()
+               recipeRepository.getAllRecipePreviews()
             } else if (catFilter.type == CategoryFilter.CategoryFilterOption.ALL_CATEGORIES) {
                recipeRepository.sort(sort)
             } else if (catFilter.type == CategoryFilter.CategoryFilterOption.UNCATEGORIZED) {

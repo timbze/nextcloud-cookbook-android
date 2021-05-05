@@ -13,7 +13,7 @@ import de.micmun.android.nextcloudcookbook.data.CategoryFilter
 import de.micmun.android.nextcloudcookbook.data.RecipeFilter
 import de.micmun.android.nextcloudcookbook.data.SortValue
 import de.micmun.android.nextcloudcookbook.db.DbRecipeRepository
-import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
+import de.micmun.android.nextcloudcookbook.db.model.DbRecipePreview
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
@@ -34,8 +34,8 @@ class RecipeSearchViewModel(application: Application) :
    val filter: LiveData<RecipeFilter>
       get() = _filter
 
-   fun getRecipes(): LiveData<List<DbRecipe>> {
-      var recipes: LiveData<List<DbRecipe>>
+   fun getRecipes(): LiveData<List<DbRecipePreview>> {
+      var recipes: LiveData<List<DbRecipePreview>>
 
       runBlocking(Dispatchers.IO) {
          recipes =
