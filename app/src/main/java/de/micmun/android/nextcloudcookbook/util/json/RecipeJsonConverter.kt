@@ -38,6 +38,7 @@ class RecipeJsonConverter {
                         return getKlaxon().parseFromJsonObject<Recipe>(obj)
                     }
                 }
+                return null
             } catch (e: ClassCastException) {
             }
 
