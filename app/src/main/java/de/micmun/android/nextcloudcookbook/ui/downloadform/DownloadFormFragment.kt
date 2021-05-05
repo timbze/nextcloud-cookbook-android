@@ -22,6 +22,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.anggrayudi.storage.file.findFolder
 import com.anggrayudi.storage.file.openOutputStream
+import com.beust.klaxon.JsonObject
 import com.beust.klaxon.KlaxonException
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.databinding.FragmentDownloadFormBinding
@@ -88,8 +89,8 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
 
       isDownloading.postValue(true)
       uiScope.launch {
-         val recipe = fetchAndParse(url)
-         if (recipe != null) {
+         fetchAndParse(url)?.let{ pair ->
+            val recipe = pair.first
             if (recipe.name.isNotEmpty()) {
                val storage = StorageManager.getDocumentFromString(requireContext(), this@DownloadFormFragment.recipeDir ?: "")
                if (storage?.exists() == true) {
@@ -100,7 +101,8 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
                         recipeDir = storage.createDirectory(recipeDirName)
                      val recipeFile = recipeDir?.findOrCreateFile("application/json", "recipe.json")
                      val writer = recipeFile?.openOutputStream(requireContext(), false)?.bufferedWriter()
-                     writer?.write(RecipeJsonConverter.write(recipe))
+                     // we write the full json to also keep fields we do not process yet
+                     writer?.write(pair.second.toJsonString())
                      writer?.close()
 
                      if (recipe.image?.isNotBlank() == true) {
@@ -119,7 +121,7 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
                            saveAsJpeg(thumbnail16, recipeDir, "thumb16.jpg")
                         }
                      }
-                 } else { downloadError("Directory '${recipeDirName}' already exists") }
+                  } else { downloadError("Directory '${recipeDirName}' already exists") }
                } else { downloadError("No recipe directory found. Check the settings") }
             } else { downloadError("Parsed recipe has no name") }
          }
@@ -144,7 +146,7 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
       return url.toString()
    }
 
-   private suspend fun fetchAndParse(url: String): Recipe? {
+   private suspend fun fetchAndParse(url: String): Pair<Recipe, JsonObject>? {
       return withContext(Dispatchers.IO) {
          val document : Document
          try {
@@ -166,12 +168,13 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
             if (element.attr("type")?.equals("application/ld+json") == true) {
                val json = element.html()
                try {
-                  val recipe = RecipeJsonConverter.parseFromWeb(json)
-                  if (recipe != null) {
-                     if (recipe.url == null || recipe.url.isBlank()) {
-                        return@withContext recipe.copy(url = url)
+                  RecipeJsonConverter.parseFromWeb(json)?.let { jsonObj ->
+                     RecipeJsonConverter.parse(jsonObj)?.let { recipe ->
+                        if (recipe.url == null || recipe.url.isBlank()) {
+                           return@withContext Pair(recipe.copy(url = url), jsonObj)
+                        }
+                        return@withContext Pair(recipe, jsonObj)
                      }
-                     return@withContext recipe
                   }
                } catch (e: KlaxonException) {
                   Log.e("JSON", "Parsing error", e)

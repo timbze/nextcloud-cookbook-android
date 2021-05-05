@@ -28,14 +28,18 @@ class RecipeJsonConverter {
             return getKlaxon().parse<Recipe>(json)
         }
 
-        fun parseFromWeb(json: String): Recipe? {
+        fun parse(json: JsonObject): Recipe? {
+            return getKlaxon().parseFromJsonObject<Recipe>(json)
+        }
+
+        fun parseFromWeb(json: String): JsonObject? {
             // websites may provide multiple ld-json in one script tag as an array
             try {
                 val jsArray = Klaxon().parseJsonArray(StringReader(json))
                 for (obj in jsArray) {
                     // could also check js["@context"] == "http://schema.org"
                     if (obj is JsonObject && obj["@type"] == "Recipe") {
-                        return getKlaxon().parseFromJsonObject<Recipe>(obj)
+                        return obj
                     }
                 }
                 return null
@@ -44,7 +48,7 @@ class RecipeJsonConverter {
 
             val jsonObject = Klaxon().parseJsonObject(StringReader(json))
             if (jsonObject["@type"] == "Recipe") {
-                return getKlaxon().parseFromJsonObject<Recipe>(jsonObject)
+                return jsonObject
             }
             return null
         }
