@@ -32,11 +32,13 @@ data class Recipe @JvmOverloads constructor(
    @RecipeDate
    val datePublished: String? = null,
    val description: String? = null,
+   @RecipeImage
    var image: String? = null,
    @Json(ignored = true)
    var thumbImageUrl: String? = null,
    @Json(ignored = true)
    var fullImageUrl: String? = null,
+   @RecipeListString
    val keywords: String? = null,
    val name: String = "",
    @RecipeNutrition
