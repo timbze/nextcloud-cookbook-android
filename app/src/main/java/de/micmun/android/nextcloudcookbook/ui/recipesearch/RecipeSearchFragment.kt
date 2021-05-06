@@ -22,7 +22,7 @@ import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.RecipeFilter
 import de.micmun.android.nextcloudcookbook.data.SortValue
 import de.micmun.android.nextcloudcookbook.databinding.FragmentRecipesearchBinding
-import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
+import de.micmun.android.nextcloudcookbook.db.model.DbRecipePreview
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModel
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModelFactory
 import de.micmun.android.nextcloudcookbook.ui.MainActivity
@@ -151,9 +151,9 @@ class RecipeSearchFragment : Fragment() {
       }
    }
 
-   private fun removeDuplicates(recipes: List<DbRecipe>): List<DbRecipe> {
-      val hashSet = LinkedHashSet<DbRecipe>(recipes)
-      val arrayList = ArrayList<DbRecipe>(hashSet.size)
+   private fun removeDuplicates(recipes: List<DbRecipePreview>): List<DbRecipePreview> {
+      val hashSet = LinkedHashSet<DbRecipePreview>(recipes)
+      val arrayList = ArrayList<DbRecipePreview>(hashSet.size)
       arrayList.addAll(hashSet)
       return arrayList
    }
