@@ -16,17 +16,11 @@ import de.micmun.android.nextcloudcookbook.json.*
  */
 
 data class Recipe @JvmOverloads constructor(
-   @Json(ignored = true)
-   val id: Long = 0L,
    @Json(name = "@context")
-   val context: String? = null,
-   @Json(name = "@id")
-   val idUrl: String? = null,
-   @Json(name = "id")
-   @Recipe2String
-   var jsonId: String? = null,
+   val context: String = "http://schema.org",
    @Json(name = "@type")
-   val type: String? = null,
+   val type: String = "Recipe",
+
    val aggregateRating: AggregateRating? = null,
    @RecipeAuthor
    val author: Author? = null,
@@ -38,19 +32,18 @@ data class Recipe @JvmOverloads constructor(
    @RecipeDate
    val datePublished: String? = null,
    val description: String? = null,
+   @RecipeImage
    var image: String? = null,
-   var imageUrl: String? = null,
    @Json(ignored = true)
    var thumbImageUrl: String? = null,
    @Json(ignored = true)
    var fullImageUrl: String? = null,
+   @RecipeListString
    val keywords: String? = null,
    val name: String = "",
    @RecipeNutrition
    val nutrition: Nutrition? = null,
    val prepTime: String? = null,
-   @Recipe2String
-   val printImage: String? = null,
    @RecipeStringList
    var recipeCategory: List<String>? = null,
    @RecipeStringList
