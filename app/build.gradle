@@ -56,8 +56,8 @@ dependencies {
    implementation "androidx.appcompat:appcompat:$version_appcompat"
    implementation "androidx.constraintlayout:constraintlayout:$version_constraintlayout"
    implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
-   implementation "android.arch.navigation:navigation-fragment-ktx:$version_navigation"
-   implementation "android.arch.navigation:navigation-ui-ktx:$version_navigation"
+   implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
+   implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
    implementation("androidx.navigation:navigation-dynamic-features-fragment:$version_navigation") {
       exclude group: 'com.google.android.play', module: 'core'
    }
