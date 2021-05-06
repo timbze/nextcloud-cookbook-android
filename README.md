@@ -27,6 +27,30 @@ After that, the start view has a list of recipes and you select a recipe to view
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_detail_info.png" width="270" height="540" alt="Screenshot detail view with info tab"/>
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_detail_ingredients.png" width="270" height="540" alt="Screenshot detail view with ingredients tab"/>
 
+## Roadmap
+
+* Cooking timer
+* Create new recipes
+* Edit recipes
+* Direct server synchronisation
+* ...
+
+## Translations
+
+The project can be translated [here](https://weblate.bubu1.eu/projects/nextcloud-cookbook-android-app/).
+
+Thanks to translators:
+
+* [@mondstern](https://mastodon.technology/@mondstern)
+
+## Contributors
+
+Here I want to thank for contributions to the app.  
+Thanks to
+
+* [mrremo](https://codeberg.org/mrremo)
+* [leafar](https://codeberg.org/leafar)
+
 ## Dependencies
 
 This app needs Android &gt;= 6.0 (API &gt;= 23) and uses the libraries (see also app/build.gradle):
@@ -36,14 +60,6 @@ This app needs Android &gt;= 6.0 (API &gt;= 23) and uses the libraries (see also
 * [klaxon by cbeust](https://github.com/cbeust/klaxon) (json parser)
 * [Dexter by Karumi](https://github.com/Karumi/Dexter) (permission handling)
 * [SimpleStorage by anggrayudi](https://github.com/anggrayudi/SimpleStorage) (storage handling and choosing a directory)
-
-## Translations
-
-The project can be translated [here](https://weblate.bubu1.eu/projects/nextcloud-cookbook-android-app/).
-
-Thanks to translators:
-
-* [@mondstern](https://mastodon.technology/@mondstern)
 
 ## License
 
