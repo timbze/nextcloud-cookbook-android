@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="no_information">Ei Tietoa.</string>
+    <string name="no_information">Ei tietoa.</string>
     <string name="empty_list">Ei reseptejä.</string>
     <string name="recipe_list_image_desc">Kuva pikkukuva resepti</string>
     <string name="img_desc_logo">Reseptin Logo</string>
@@ -21,16 +21,16 @@
     <string name="nutrition_cholesterol_content">Kolesterolipitoisuus: %1$s</string>
     <string name="nutrition_fat_content">Rasvapitoisuus: %1$s</string>
     <string name="nutrition_fiberContent">Kuitupitoisuus: %1$s</string>
-    <string name="title_duration">Kestot ssa HH: MM</string>
+    <string name="title_duration">Kestot TT:MM</string>
     <string name="tab_info_title">Tiedot</string>
     <string name="nutrition_saturated_fat_content">Tyydyttynyt rasvapitoisuus: %1$s</string>
     <string name="nutrition_sodium_content">Natriumpitoisuus: %1$s</string>
     <string name="nutrition_sugar_content">Sokeripitoisuus: %1$s</string>
     <string name="nutrition_trans_fat_content">Transrasvapitoisuus: %1$s</string>
     <string name="nutrition_unsaturated_fat_content">Tyydyttymätön rasvapitoisuus: %1$s</string>
-    <string name="menu_search_title">Tarkennettu Haku</string>
-    <string name="menu_settings_title">Asetus</string>
-    <string name="menu_sort_title">Lajitella</string>
+    <string name="menu_search_title">Tarkennettu haku</string>
+    <string name="menu_settings_title">Asetukset</string>
+    <string name="menu_sort_title">Lajitele</string>
     <string name="menu_search_tooltip">Etsi resepti</string>
     <string name="search_hint">Etsi nimen mukaan</string>
     <string name="form_search_title">Tarkennettu Haku</string>
@@ -53,7 +53,7 @@
     <string name="preftitle_recipeDir">Resepti Hakemisto</string>
     <string name="title_dir_chooser">Valitse hakemisto…</string>
     <string name="preftitle_theme">Valitse Teema</string>
-    <string name="about_title">Jokseenkin</string>
+    <string name="about_title">Tietoja</string>
     <string name="about_version">Sovelluksen versio: %1$s</string>
     <string name="theme_name_light">Valo</string>
     <string name="theme_name_dark">Pimeä</string>
@@ -82,4 +82,9 @@
     <string name="permission_please_grant" tools:ignore="MissingTranslation">Myönnä tallennusoikeudet.</string>
     <string name="permission_ok_message" tools:ignore="MissingTranslation">Tallennusoikeus on myönnetty %1$s:lle.</string>
     <string name="dir_chooser_error_message">Virhe: kansionpoimijaa ei voi avata!</string>
+    <string name="menu_download_title">Lataa</string>
+    <string name="menu_download_tooltip">lataa resepti</string>
+    <string name="form_download_url_hint">Resepti-URL</string>
+    <string name="form_download_title">Lataa resepti</string>
+    <string name="form_download_commit">Lataa</string>
 </resources>
