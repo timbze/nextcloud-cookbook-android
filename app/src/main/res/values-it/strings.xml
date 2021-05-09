@@ -67,7 +67,7 @@
     <string name="title_dir_chooser">Scegliere un elenco…</string>
     <string name="preftitle_theme">Seleziona Tema</string>
     <string name="about_title">Informazioni</string>
-    <string name="about_version">Versione App: %1$s</string>
+    <string name="about_version">Versione dell\'app: %1$s</string>
     <string name="about_summary">© 2020-2021 di MicMun. Licenza sotto GPLv3.
 \n
 \nNextcloud Cookbook è un\'applicazione per ricettari su nextcloud per gestire le ricette.</string>
@@ -91,4 +91,12 @@
     <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">Non hai accesso in scrittura a questo archivio, quindi selezionare questa cartella è inutile.
 \nVuoi concedere l\'accesso a questa cartella\?.</string>
     <string name="dir_chooser_error_message">Errore: Impossibile aprire un raccoglitore di cartelle!</string>
+    <string name="menu_download_title">Scarica</string>
+    <string name="menu_download_tooltip">scarica la ricetta</string>
+    <string name="form_download_url_hint">URL della ricetta</string>
+    <string name="form_download_options">Opzioni</string>
+    <string name="form_download_override_existing">Sostituisci la cartella ricetta esistente</string>
+    <string name="form_download_commit">Scarica</string>
+    <string name="form_download_folder">Sovrascrivi la cartella di destinazione</string>
+    <string name="form_download_title">Scarica la ricetta</string>
 </resources>
