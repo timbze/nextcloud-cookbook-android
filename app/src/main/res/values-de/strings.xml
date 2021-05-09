@@ -13,7 +13,7 @@
     <string name="tooltip_cook_time">Kochen</string>
     <string name="tooltip_total_time">Gesamt</string>
     <!-- tab titles -->
-    <string name="tab_info_title">Info</string>
+    <string name="tab_info_title">Infos</string>
     <string name="tab_ingredients_title">Zutaten</string>
     <string name="tab_instructions_title">Ablauf</string>
     <string name="tab_nutritions_title">Nährwerte</string>
@@ -46,7 +46,7 @@
     <string name="menu_settings_title">Einstellungen</string>
     <string name="menu_sort_title">Sortieren</string>
     <string name="menu_refresh_tooltip">Rezepte neu laden</string>
-    <string name="menu_search_tooltip">Suche Rezept</string>
+    <string name="menu_search_tooltip">Rezept suchen</string>
     <string name="search_hint">Suche nach Name</string>
     <!-- search formular -->
     <string name="form_search_title">Erweiterte Suche</string>
@@ -70,7 +70,7 @@
     <string name="dir_chooser_error_message">Fehler: Kann keinen Verzeichnis-Auswahldialog öffnen!</string>
     <string name="preftitle_theme">Wähle ein Theme</string>
     <string name="about_title">Über</string>
-    <string name="about_version">App-Version: %1$s</string>
+    <string name="about_version">Anwendungsversion: %1$s</string>
     <string name="about_summary">© 2020-2021 by MicMun. Lizenziert unter GPLv3.\n\nNextcloud Cookbook ist eine App für Cookbook auf Nextcloud (ein Kochbuch für Nextcloud), um Rezepte zu verwalten.</string>
     <string name="theme_name_light">Hell</string>
     <string name="theme_name_dark">Dunkel</string>
