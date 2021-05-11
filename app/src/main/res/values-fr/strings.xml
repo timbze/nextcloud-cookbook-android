@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_logo_desc">Icône du lanceur de l\'application affichant un symbole de livre de cuisine</string>
     <string name="permissions_error_message">Accès refusé ! L\'application a besoin d\'un accès au stockage, veuillez l\'activer dans les paramètres.</string>
-    <string name="no_information">Pas d\'information.</string>
+    <string name="no_information">Aucune information.</string>
     <!-- recipe list -->
     <string name="empty_list">Aucune recette.</string>
     <string name="recipe_list_image_desc">Image miniature de la recette</string>
