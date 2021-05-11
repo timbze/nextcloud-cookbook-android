@@ -87,4 +87,7 @@
     <string name="form_download_url_hint">Resepti-URL</string>
     <string name="form_download_title">Lataa resepti</string>
     <string name="form_download_commit">Lataa</string>
+    <string name="form_download_options">Optiot</string>
+    <string name="form_download_override_existing">Korvaa nykyinen reseptikansio</string>
+    <string name="form_download_folder">Ohita kohdekansio</string>
 </resources>
