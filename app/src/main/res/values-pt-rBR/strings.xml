@@ -91,4 +91,12 @@
 \nVocê gostaria de conceder acesso a esta pasta\?.</string>
     <string name="permission_canceled" tools:ignore="MissingTranslation">Cancelado pelo usuário</string>
     <string name="dir_chooser_error_message">Erro: Não é possível abrir um catador de pastas!</string>
+    <string name="form_download_folder">Substituir a pasta de destino</string>
+    <string name="form_download_override_existing">Substituir a pasta de receitas existente</string>
+    <string name="form_download_options">Opções</string>
+    <string name="form_download_url_hint">URL da receita</string>
+    <string name="form_download_title">Baixar Receita</string>
+    <string name="form_download_commit">Baixar</string>
+    <string name="menu_download_tooltip">receita de download</string>
+    <string name="menu_download_title">Baixar</string>
 </resources>
