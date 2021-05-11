@@ -91,4 +91,12 @@
     <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">K tomuto úložišti nemáte přístup pro zápis, a proto je výběr této složky zbytečný.
 \nChcete povolit přístup k této složce\?.</string>
     <string name="dir_chooser_error_message">Chyba: Nelze otevřít nástroj pro výběr složek!</string>
+    <string name="form_download_folder">Přepsání cílové složky</string>
+    <string name="form_download_override_existing">Nahrazení stávající složky s recepty</string>
+    <string name="menu_download_tooltip">stáhnout recept</string>
+    <string name="menu_download_title">Stáhnout</string>
+    <string name="form_download_commit">Stáhnout</string>
+    <string name="form_download_options">Možnosti</string>
+    <string name="form_download_url_hint">Adresa URL receptů</string>
+    <string name="form_download_title">Stáhnout recept</string>
 </resources>
