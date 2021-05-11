@@ -82,4 +82,12 @@
 \nВы хотите предоставить доступ к этой папке\?.</string>
     <string name="folder_pick_success" tools:ignore="MissingTranslation">Папка %1$s выбрана.</string>
     <string name="dir_chooser_error_message">Ошибка: Не удается открыть средство выбора папок!</string>
+    <string name="form_download_folder">Отмена целевой папки</string>
+    <string name="form_download_title">Скачать Рецепт</string>
+    <string name="form_download_commit">Скачать</string>
+    <string name="menu_download_title">Скачать</string>
+    <string name="menu_download_tooltip">скачать рецепт</string>
+    <string name="form_download_override_existing">Замените существующую папку с рецептами</string>
+    <string name="form_download_url_hint">Рецепт URL</string>
+    <string name="form_download_options">Опции</string>
 </resources>
