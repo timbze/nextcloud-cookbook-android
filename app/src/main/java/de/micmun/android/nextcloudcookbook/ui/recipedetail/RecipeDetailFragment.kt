@@ -43,7 +43,7 @@ class RecipeDetailFragment : Fragment() {
       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
 
       val args = RecipeDetailFragmentArgs.fromBundle(requireArguments())
-      val viewModelFactory = RecipeViewModelFactory(args.recipeName, requireActivity().application)
+      val viewModelFactory = RecipeViewModelFactory(args.recipeId, requireActivity().application)
       viewModel = ViewModelProvider(this, viewModelFactory).get(RecipeViewModel::class.java)
       binding.lifecycleOwner = this
 

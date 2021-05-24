@@ -43,12 +43,12 @@ class RecipeListViewModel(private val app: Application) : AndroidViewModel(app) 
    private var catFilter: CategoryFilter = CategoryFilter(CategoryFilter.CategoryFilterOption.ALL_CATEGORIES)
 
    // navigate to recipe
-   private val _navigateToRecipe = MutableLiveData<String>()
+   private val _navigateToRecipe = MutableLiveData<Long>()
    val navigateToRecipe
       get() = _navigateToRecipe
 
-   fun onRecipeClicked(name: String) {
-      _navigateToRecipe.value = name
+   fun onRecipeClicked(id: Long) {
+      _navigateToRecipe.value = id
    }
 
    fun onRecipeNavigated() {

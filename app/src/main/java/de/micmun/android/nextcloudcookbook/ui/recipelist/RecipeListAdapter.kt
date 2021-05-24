@@ -68,6 +68,6 @@ class RecipeListAdapter(private val clickListener: RecipeListListener) :
    }
 }
 
-class RecipeListListener(val clickListener: (recipeName: String) -> Unit) {
-   fun onClick(recipe: DbRecipePreview) = clickListener(recipe.name)
+class RecipeListListener(val clickListener: (recipeId: Long) -> Unit) {
+   fun onClick(recipe: DbRecipePreview) = clickListener(recipe.id)
 }
