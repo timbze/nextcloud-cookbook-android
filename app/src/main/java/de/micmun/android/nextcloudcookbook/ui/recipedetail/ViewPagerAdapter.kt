@@ -109,7 +109,7 @@ class ViewPagerAdapter(private val recipe: DbRecipe, private val orientation: In
        * @param recipe Recipe data.
        */
       fun bind(recipe: DbRecipe) {
-         binding.incredientsView.adapter = RecipeIngredientsAdapter(recipe.recipeIngredient ?: emptyList())
+         binding.ingredientsView.adapter = RecipeIngredientsAdapter(recipe.recipeIngredient ?: emptyList())
          binding.executePendingBindings()
       }
 
@@ -198,7 +198,7 @@ class ViewPagerAdapter(private val recipe: DbRecipe, private val orientation: In
       RecyclerView.ViewHolder(binding.root) {
       fun bind(recipe: DbRecipe) {
          // ingredients
-         binding.incredientsView.adapter = RecipeIngredientsAdapter(recipe.recipeIngredient ?: emptyList())
+         binding.ingredientsView.adapter = RecipeIngredientsAdapter(recipe.recipeIngredient ?: emptyList())
 
          // instructions
          binding.instructionsView.adapter = RecipeInstructionsAdapter(recipe.recipeInstructions ?: emptyList())
