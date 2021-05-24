@@ -26,6 +26,7 @@ import de.micmun.android.nextcloudcookbook.databinding.FragmentRecipelistBinding
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModel
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModelFactory
 import de.micmun.android.nextcloudcookbook.ui.MainActivity
+import java.net.URL
 
 /**
  * Fragment for list of recipes.

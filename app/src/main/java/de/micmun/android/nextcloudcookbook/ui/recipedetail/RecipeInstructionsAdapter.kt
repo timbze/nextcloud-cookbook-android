@@ -5,7 +5,9 @@
  */
 package de.micmun.android.nextcloudcookbook.ui.recipedetail
 
+import android.graphics.Paint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import de.micmun.android.nextcloudcookbook.R
@@ -43,14 +45,21 @@ class RecipeInstructionsAdapter(private val instructions: List<DbInstruction>) :
          binding.instruction = instruction
          binding.counter = counter.toString()
          //listener to mark as done or undone
-         binding.instructionListPosition.setOnClickListener {
-            if (R.id.instructionDoneSymbol == binding.instructionsListSwitcher.nextView.id)
+         val onClick = { _: View ->
+            if (R.id.instructionDoneSymbol == binding.instructionsListSwitcher.nextView.id) {
                binding.instructionsListSwitcher.showNext()
-         }
-         binding.instructionDoneSymbol.setOnClickListener {
-            if (R.id.instructionListPosition == binding.instructionsListSwitcher.nextView.id)
+               binding.instructionsItemText.paintFlags =
+                       binding.instructionsItemText.paintFlags.or(Paint.STRIKE_THRU_TEXT_FLAG)
+            }
+            else if (R.id.instructionListPosition == binding.instructionsListSwitcher.nextView.id) {
                binding.instructionsListSwitcher.showNext()
+               binding.instructionsItemText.paintFlags =
+                       binding.instructionsItemText.paintFlags.and(Paint.STRIKE_THRU_TEXT_FLAG.inv())
+            }
          }
+         binding.instructionListPosition.setOnClickListener(onClick)
+         binding.instructionDoneSymbol.setOnClickListener(onClick)
+         binding.instructionsItemText.setOnClickListener(onClick)
          binding.executePendingBindings()
       }
 

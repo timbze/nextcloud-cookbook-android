@@ -30,9 +30,14 @@ class ListConverter : Converter {
       val array = jv.array ?: jv.string ?: ""
 
       if (array is JsonArray<*>) {
-         return array.toList().stream().map { it.toString() }.collect(Collectors.toList()).toList()
+         return array.toList().stream().map {
+               if(it is JsonObject && it.containsKey("text"))
+                  it["text"]
+               else
+                  it.toString()
+            }.collect(Collectors.toList()).toList()
       } else if (array is String && array.isNotEmpty()) {
-         return listOf(array)
+         return arrayListOf(array)
       } else if (array is String && array.isEmpty()) {
          return emptyList<String>()
       } else {

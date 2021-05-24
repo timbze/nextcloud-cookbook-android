@@ -91,4 +91,12 @@
 \nSzeretne hozzáférést biztosítani ehhez a mappához \?.</string>
     <string name="permission_ok_message" tools:ignore="MissingTranslation">A tárhely-hozzáférés megadva %1$s számára.</string>
     <string name="dir_chooser_error_message">Hiba: Nem lehet megnyitni a mappaválasztót!</string>
+    <string name="form_download_folder">Célmappa felülírása</string>
+    <string name="form_download_commit">Letöltés</string>
+    <string name="form_download_override_existing">Meglévő recept mappa cseréje</string>
+    <string name="form_download_options">Opciók</string>
+    <string name="form_download_url_hint">Recept URL</string>
+    <string name="form_download_title">Recept letöltése</string>
+    <string name="menu_download_tooltip">recept letöltése</string>
+    <string name="menu_download_title">Letöltés</string>
 </resources>

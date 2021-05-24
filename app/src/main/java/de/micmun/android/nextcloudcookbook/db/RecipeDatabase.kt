@@ -21,7 +21,7 @@ import java.util.concurrent.Executors
 @Database(
    entities = [DbRecipeCore::class, DbInstruction::class, DbIngredient::class,
       DbTool::class, DbKeyword::class, DbRecipeKeywordRelation::class, DbReview::class],
-   version = 2, exportSchema = false
+   version = 3, exportSchema = false
 )
 abstract class RecipeDatabase : RoomDatabase() {
    abstract fun recipeDataDao(): RecipeDataDao

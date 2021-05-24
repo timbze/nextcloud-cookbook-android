@@ -2,9 +2,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_logo_desc">Icône du lanceur de l\'application affichant un symbole de livre de cuisine</string>
     <string name="permissions_error_message">Accès refusé ! L\'application a besoin d\'un accès au stockage, veuillez l\'activer dans les paramètres.</string>
-    <string name="no_information">Pas d\'information.</string>
+    <string name="no_information">Aucune information.</string>
     <!-- recipe list -->
-    <string name="empty_list">Pas de recettes.</string>
+    <string name="empty_list">Aucune recette.</string>
     <string name="recipe_list_image_desc">Image miniature de la recette</string>
     <!-- recipe detail -->
     <string name="img_desc_logo">Logo de la recette</string>
@@ -13,22 +13,22 @@
     <string name="tooltip_cook_time">Cuisine</string>
     <string name="tooltip_total_time">Total</string>
     <!-- tab titles -->
-    <string name="tab_info_title">Informations</string>
+    <string name="tab_info_title">Infos</string>
     <string name="tab_ingredients_title">Ingrédients</string>
-    <string name="tab_instructions_title">Indications</string>
-    <string name="tab_nutritions_title">Nourriture</string>
+    <string name="tab_instructions_title">Instructions</string>
+    <string name="tab_nutritions_title">Nutrition</string>
     <!-- tab infos -->
     <string name="text_uncategorized">Non classé</string>
-    <string name="text_categories"><strong>Catégorie:</strong><br/> %1$s</string>
-    <string name="text_yield"><strong>Rendement:</strong> %1$s</string>
+    <string name="text_categories"><strong>Catégorie :</strong><br/> %1$s</string>
+    <string name="text_yield"><strong>Rendement :</strong> %1$s</string>
     <string name="text_author">Auteur : %1$s</string>
     <string name="text_url">Source : %1$s</string>
-    <string name="text_no_keywords">Aucun mot clé.</string>
-    <string name="text_keywords"><strong>Mots clés:</strong><br/> %1$s</string>
+    <string name="text_no_keywords">Aucun mot-clé.</string>
+    <string name="text_keywords"><strong>Mots-clés :</strong><br/> %1$s</string>
     <string name="text_date_published">Date de publication : %1$s</string>
     <!-- Nutritions -->
     <string name="nutrition_calories">Calories : %1$s</string>
-    <string name="nutrition_carbohydrate_content">Contenu en glucides : %1$s</string>
+    <string name="nutrition_carbohydrate_content">Teneur en glucides : %1$s</string>
     <string name="nutrition_cholesterol_content">Taux de cholestérol : %1$s</string>
     <string name="nutrition_fat_content">Teneur en graisse : %1$s</string>
     <string name="nutrition_fiberContent">Teneur en fibres : %1$s</string>
@@ -56,7 +56,7 @@
     <string name="form_type_ingredients">Recherche par ingrédient</string>
     <string name="form_type_yield">Recherche par rendement</string>
     <string name="form_search_options">Options de recherche</string>
-    <string name="form_search_commit">Recherchez</string>
+    <string name="form_search_commit">Rechercher</string>
     <!-- navdrawer_menu -->
     <string name="menu_all_categories">Toutes les catégories</string>
     <string name="menu_uncategorized">Non classé</string>
@@ -66,29 +66,37 @@
     <string name="preftitle_recipeDir">Répertoire des recettes</string>
     <string name="title_dir_chooser">Choisissez un répertoire…</string>
     <string name="preftitle_theme">Sélectionnez un thème</string>
-    <string name="about_title">A propos de</string>
+    <string name="about_title">À propos</string>
     <string name="about_version">Version de l\'application : %1$s</string>
     <string name="about_summary">2020-2021 par MicMun. Licence sous GPLv3.
 \n
 \nNextcloud Cookbook est une application de livre de cuisine sur nextcloud pour gérer les recettes.</string>
-    <string name="theme_name_light">Lumineux</string>
+    <string name="theme_name_light">Clair</string>
     <string name="theme_name_dark">Sombre</string>
     <string name="theme_name_system">Système</string>
     <string name="sort_value_alpha_asc">Nom A-Z</string>
     <string name="sort_value_alpha_desc">Nom Z-A</string>
-    <string name="sort_value_date_asc">Date de publication ascendante</string>
-    <string name="sort_value_date_desc">Date de publication Décroissante</string>
+    <string name="sort_value_date_asc">Date de publication croissante</string>
+    <string name="sort_value_date_desc">Date de publication décroissante</string>
     <string name="sort_value_time_asc">Temps total croissant</string>
     <string name="sort_value_time_desc">Temps total descendant</string>
     <string name="permission_canceled" tools:ignore="MissingTranslation">Annulé par l\'utilisateur</string>
-    <string name="text_tools"><strong>Outils requis:</strong><br/> %1$s</string>
+    <string name="text_tools"><strong>Ustensiles nécessaires :</strong><br/> %1$s</string>
     <string name="permission_select_root" tools:ignore="MissingTranslation">Veuillez choisir %1$s.</string>
     <string name="header_image_desc">Image d\'en-tête de la recette</string>
     <string name="permission_please_grant" tools:ignore="MissingTranslation">Veuillez accorder des autorisations de stockage.</string>
     <string name="folder_pick_success" tools:ignore="MissingTranslation">Dossier %1$s sélectionné.</string>
     <string name="folder_pick_cancel" tools:ignore="MissingTranslation">Le sélecteur de dossiers a été annulé par l\'utilisateur.</string>
     <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">Vous n\'avez pas d\'accès en écriture à ce stockage, la sélection de ce dossier est donc inutile.
-\nVoulez-vous accorder l\'accès à ce dossier \?.</string>
+\nVoulez-vous accorder l\'accès à ce dossier \?</string>
     <string name="permission_ok_message" tools:ignore="MissingTranslation">L\'accès au stockage a été accordé pour %1$s.</string>
     <string name="dir_chooser_error_message">Erreur : Impossible d\'ouvrir un sélecteur de dossiers !</string>
+    <string name="menu_download_tooltip">télécharger la recette</string>
+    <string name="form_download_url_hint">URL de la recette</string>
+    <string name="form_download_options">Options</string>
+    <string name="form_download_override_existing">Remplacer le dossier de recette existant</string>
+    <string name="form_download_commit">Télécharger</string>
+    <string name="form_download_folder">Écraser le dossier cible</string>
+    <string name="menu_download_title">Télécharger</string>
+    <string name="form_download_title">Télécharger la recette</string>
 </resources>

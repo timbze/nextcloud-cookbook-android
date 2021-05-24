@@ -6,6 +6,7 @@
 package de.micmun.android.nextcloudcookbook.json
 
 import com.beust.klaxon.Converter
+import com.beust.klaxon.JsonObject
 import com.beust.klaxon.JsonValue
 import de.micmun.android.nextcloudcookbook.json.model.Author
 
@@ -23,8 +24,9 @@ class AuthorConverter : Converter {
    }
 
    override fun fromJson(jv: JsonValue): Any {
-      return if (jv.obj != null) {
-         Author(jv.obj!!["@type"].toString(), jv.obj!!["name"].toString())
+      val obj = jv.obj ?: if (jv.array?.size ?: 0 > 0) jv.array?.get(0) as JsonObject else null
+      return if (obj != null) {
+         Author(obj["@type"].toString(), obj["name"].toString())
       } else {
          Author(name = jv.string)
       }

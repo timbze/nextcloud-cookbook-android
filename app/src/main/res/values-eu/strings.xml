@@ -82,4 +82,12 @@
 \nNahi duzu sarbidea emateko karpeta hau\?.</string>
     <string name="text_tools"><strong>Beharrezko tresnak:</strong><br/> %1$s</string>
     <string name="dir_chooser_error_message">Errorea: Ezin ireki karpeta-hautatzailearen!</string>
+    <string name="menu_download_title">Deskargatu</string>
+    <string name="menu_download_tooltip">deskargatu errezeta</string>
+    <string name="form_download_title">Deskargatu Errezeta</string>
+    <string name="form_download_url_hint">Errezeta URL</string>
+    <string name="form_download_options">Aukera</string>
+    <string name="form_download_override_existing">Ordezkatu dagoen errezeta karpeta</string>
+    <string name="form_download_commit">Deskargatu</string>
+    <string name="form_download_folder">Override helburu karpeta</string>
 </resources>
