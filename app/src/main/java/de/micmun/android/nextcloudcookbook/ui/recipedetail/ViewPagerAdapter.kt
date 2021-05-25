@@ -198,7 +198,7 @@ class ViewPagerAdapter(private val recipe: DbRecipe, private val orientation: In
       RecyclerView.ViewHolder(binding.root) {
       fun bind(recipe: DbRecipe) {
          // ingredients
-         binding.ingredientsView.adapter = RecipeIngredientsAdapter(recipe.recipeIngredient ?: emptyList())
+         binding.ingredientsInclude.ingredientsView.adapter = RecipeIngredientsAdapter(recipe.recipeIngredient ?: emptyList())
 
          // instructions
          binding.instructionsView.adapter = RecipeInstructionsAdapter(recipe.recipeInstructions ?: emptyList())
