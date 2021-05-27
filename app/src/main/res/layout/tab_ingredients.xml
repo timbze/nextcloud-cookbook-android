@@ -30,7 +30,7 @@
              android:layout_height="wrap_content"
              android:layout_marginEnd="4dp"
              android:layout_weight="0"
-             android:text="@string/ingredients_servings_size"
+             android:text="@string/ingredients_yield"
              android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
          <com.google.android.material.textfield.TextInputLayout
@@ -44,7 +44,7 @@
              app:hintEnabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/servingsInput"
+                android:id="@+id/yieldInput"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -58,7 +58,7 @@
          </com.google.android.material.textfield.TextInputLayout>
 
          <Button
-             android:id="@+id/servingsMinus"
+             android:id="@+id/yieldMinus"
              android:layout_width="wrap_content"
              android:layout_height="match_parent"
              android:layout_marginEnd="4dp"
@@ -67,7 +67,7 @@
              android:text="-" />
 
          <Button
-             android:id="@+id/servingsPlus"
+             android:id="@+id/yieldPlus"
              android:layout_width="wrap_content"
              android:layout_height="match_parent"
              android:layout_marginEnd="4dp"

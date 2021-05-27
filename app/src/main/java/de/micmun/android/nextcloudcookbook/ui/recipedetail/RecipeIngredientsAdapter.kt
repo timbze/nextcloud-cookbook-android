@@ -28,10 +28,10 @@ class RecipeIngredientsAdapter(
    RecyclerView.Adapter<RecipeIngredientsAdapter.IngredientsViewHolder>() {
 
    init {
-      setServingsInput(baseYield)
-      tabBinding.servingsInput.textChanged { notifyDataSetChanged() }
-      tabBinding.servingsMinus.setOnClickListener { setServingsInput((getServingsInput() - 1).coerceAtLeast(1f)) }
-      tabBinding.servingsPlus.setOnClickListener { setServingsInput(getServingsInput() + 1) }
+      setYieldInput(baseYield)
+      tabBinding.yieldInput.textChanged { notifyDataSetChanged() }
+      tabBinding.yieldMinus.setOnClickListener { setYieldInput((getYieldInput() - 1).coerceAtLeast(1f)) }
+      tabBinding.yieldPlus.setOnClickListener { setYieldInput(getYieldInput() + 1) }
    }
 
    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientsViewHolder {
@@ -42,7 +42,7 @@ class RecipeIngredientsAdapter(
 
    override fun onBindViewHolder(holder: IngredientsViewHolder, position: Int) {
       var ingredient = ingredients[position].ingredient.trim()
-      val factor = getServingsInput() / baseYield
+      val factor = getYieldInput() / baseYield
       if (factor != 1f) {
          // Replaces the first decimal found with a scaled value. This is usually the amount,
          // but there may be exceptions. We highlight it in bold print to make the user aware.
@@ -82,16 +82,16 @@ class RecipeIngredientsAdapter(
       }
    }
 
-   private fun getServingsInput(): Float {
+   private fun getYieldInput(): Float {
       return try {
-         tabBinding.servingsInput.text.toString().toFloat()
+         tabBinding.yieldInput.text.toString().toFloat()
       } catch (e: NumberFormatException) {
          baseYield
       }
    }
 
-   private fun setServingsInput(servings: Float) {
-      tabBinding.servingsInput.setText(prettyString(servings))
+   private fun setYieldInput(yieldAmount: Float) {
+      tabBinding.yieldInput.setText(prettyString(yieldAmount))
    }
 
    private fun prettyString(f: Float) : String {
