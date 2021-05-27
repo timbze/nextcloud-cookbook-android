@@ -31,6 +31,10 @@ class ViewPagerAdapter(private val recipe: DbRecipe, private val orientation: In
       const val TYPE_INGREDIENTS = 2
       const val TYPE_INSTRUCTIONS = 3
       const val TYPE_INGRED_AND_INSTRUCT = 4
+
+      private fun getYield(recipe: DbRecipe): Float {
+         return ("\\d+".toRegex().find(recipe.recipeCore.recipeYield)?.value ?: "1").toFloat().coerceAtLeast(1f)
+      }
    }
 
    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -109,7 +113,7 @@ class ViewPagerAdapter(private val recipe: DbRecipe, private val orientation: In
        * @param recipe Recipe data.
        */
       fun bind(recipe: DbRecipe) {
-         binding.ingredientsView.adapter = RecipeIngredientsAdapter(recipe.recipeIngredient ?: emptyList())
+         binding.ingredientsView.adapter = RecipeIngredientsAdapter(binding, getYield(recipe),recipe.recipeIngredient ?: emptyList())
          binding.executePendingBindings()
       }
 
@@ -198,7 +202,7 @@ class ViewPagerAdapter(private val recipe: DbRecipe, private val orientation: In
       RecyclerView.ViewHolder(binding.root) {
       fun bind(recipe: DbRecipe) {
          // ingredients
-         binding.ingredientsInclude.ingredientsView.adapter = RecipeIngredientsAdapter(recipe.recipeIngredient ?: emptyList())
+         binding.ingredientsInclude.ingredientsView.adapter = RecipeIngredientsAdapter(binding.ingredientsInclude, getYield(recipe),recipe.recipeIngredient ?: emptyList())
 
          // instructions
          binding.instructionsView.adapter = RecipeInstructionsAdapter(recipe.recipeInstructions ?: emptyList())
