@@ -19,7 +19,7 @@ import de.micmun.android.nextcloudcookbook.db.model.DbIngredient
  * Adapter for recipe ingredients.
  *
  * @author MicMun
- * @version 1.1, 28.02.21
+ * @version 1.2, 31.05.21
  */
 class RecipeIngredientsAdapter(
    private val tabBinding: TabIngredientsBinding,
@@ -50,6 +50,11 @@ class RecipeIngredientsAdapter(
             val newValue = (it.value.toFloat() * factor)
             ingredient = ingredient.replaceRange(it.range, "<b>${prettyString(newValue)}</b>")
          }
+         // Replace the decimal after a '-' with a scaled value, if there is a range of amounts.
+         "-\\d+([.,]\\d+)?".toRegex().find(ingredient)?.let {
+            val newValue = (it.value.toFloat() * factor)
+            ingredient = ingredient.replaceRange(it.range, "<b>${prettyString(newValue)}</b>")
+         }
       }
       holder.bind(ingredient)
    }
@@ -65,7 +70,7 @@ class RecipeIngredientsAdapter(
          binding.ingredientsItemText.text = Html.fromHtml(ingredient)
          binding.ingredientsItemText.setOnClickListener {
             binding.ingredientsItemText.paintFlags =
-                    binding.ingredientsItemText.paintFlags.xor(Paint.STRIKE_THRU_TEXT_FLAG)
+               binding.ingredientsItemText.paintFlags.xor(Paint.STRIKE_THRU_TEXT_FLAG)
          }
          // we must reset the flag, it seems the TextView can be reused for a different item
          binding.ingredientsItemText.paintFlags =
@@ -94,8 +99,9 @@ class RecipeIngredientsAdapter(
       tabBinding.yieldInput.setText(prettyString(yieldAmount))
    }
 
-   private fun prettyString(f: Float) : String {
-      // 1f.toString() -> "1.0", but just "1" looks better in the ingredient list
-      return if (f.toInt().toFloat() == f) f.toInt().toString() else f.toString()
+   private fun prettyString(f: Float): String {
+      // 1f.toString() -> "1.0", but just "1" looks better in the ingredient list and rounded to two decimals, too
+      val tmp = "%.2f".format(f).replace(',', '.').toFloat()
+      return if (tmp.toInt().toFloat() == tmp) tmp.toInt().toString() else tmp.toString()
    }
 }

@@ -135,5 +135,5 @@
    <string name="permission_warning_nowrite">You have no write access to this storage, thus selecting this folder is useless.\nWould you like to grant access to this folder?.</string>
    <string name="folder_pick_cancel">Folder picker cancelled by user.</string>
    <string name="folder_pick_success">Folder %1$s selected.</string>
-    <string name="ingredients_yield">Yield</string>
+   <string name="ingredients_yield">Yield</string>
 </resources>
