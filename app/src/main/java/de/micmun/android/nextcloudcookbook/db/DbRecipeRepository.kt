@@ -43,7 +43,7 @@ class DbRecipeRepository private constructor(application: Application) {
 
    fun getAllRecipePreviews() = mRecipeDao.getAllRecipePreviews()
 
-   fun getRecipe(name: String) = mRecipeDao.getByName(name)
+   fun getRecipe(id: Long) = mRecipeDao.getById(id)
 
    fun filterCategory(sort: SortValue, category: String, recipeFilter: RecipeFilter? = null): LiveData<List<DbRecipePreview>> {
       var select = "SELECT * FROM recipes WHERE recipeCategory = '${category}' "

@@ -41,8 +41,8 @@ interface RecipeDataDao {
    fun sortByTotalTime(isAsc: Boolean): LiveData<List<DbRecipePreview>>
 
    @Transaction
-   @Query("SELECT * FROM recipes WHERE name = :n")
-   fun getByName(n: String): LiveData<DbRecipe?>
+   @Query("SELECT * FROM recipes WHERE id = :id")
+   fun getById(id: Long): LiveData<DbRecipe?>
 
    @Transaction
    @Query("SELECT * FROM recipes WHERE name = :n")

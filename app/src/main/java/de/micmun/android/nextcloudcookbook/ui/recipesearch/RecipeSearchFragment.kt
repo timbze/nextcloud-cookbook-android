@@ -94,7 +94,7 @@ class RecipeSearchFragment : Fragment() {
 
       // data adapter
       val adapter =
-         RecipeListAdapter(RecipeListListener { recipeName -> recipeSearchViewModel.onRecipeClicked(recipeName) })
+         RecipeListAdapter(RecipeListListener { recipeId -> recipeSearchViewModel.onRecipeClicked(recipeId) })
       binding.recipeResultList.adapter = adapter
       adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 

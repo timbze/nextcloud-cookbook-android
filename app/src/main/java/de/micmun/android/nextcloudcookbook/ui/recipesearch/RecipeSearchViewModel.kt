@@ -69,12 +69,12 @@ class RecipeSearchViewModel(application: Application) :
       applyFilter = filter
    }
 
-   private val _navigateToRecipe = MutableLiveData<String>()
+   private val _navigateToRecipe = MutableLiveData<Long>()
    val navigateToRecipe
       get() = _navigateToRecipe
 
-   fun onRecipeClicked(name: String) {
-      _navigateToRecipe.value = name
+   fun onRecipeClicked(id: Long) {
+      _navigateToRecipe.value = id
    }
 
    fun onRecipeNavigated() {

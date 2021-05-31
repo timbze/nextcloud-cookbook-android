@@ -17,8 +17,8 @@ import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
  * @author MicMun
  * @version 1.1, 07.04.21
  */
-class RecipeViewModel(name: String, application: Application) :
+class RecipeViewModel(id: Long, application: Application) :
    AndroidViewModel(application) {
    private val repository = DbRecipeRepository.getInstance(application)
-   val recipe: LiveData<DbRecipe?> = repository.getRecipe(name)
+   val recipe: LiveData<DbRecipe?> = repository.getRecipe(id)
 }
