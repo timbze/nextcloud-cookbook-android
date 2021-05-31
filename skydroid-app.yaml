@@ -22,10 +22,12 @@ localized:
       Therefore it is better to use the above mentioned path on the SD card (see First steps).
     summary: View the recipes from your Nextcloud Cookbook
     whatsNew: |-
-      + Bugfix: little fixes in json parsing
-      + New: Numbered instructions can be marked as done
-      + New: In landscape mode it shows ingredients and instructions side by side
-      + Update translations
+      + New: Ingredients are markable as done (thanks to leafar)
+      + New: Download feature with a url like the server app (thanks to leafar)
+      + New: Scale ingredients (thanks to leafar)
+      + Show done instructions improvements: Strike-through and text clickable (thanks to leafar)
+      + Some Optimations in search and recipe handling
+      + Translations integrated (thanks to mondstern, Quang Trung and J. Lavoie)
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -48,10 +50,12 @@ localized:
       Deshalb bitte besser den oben genannten Pfad auf der SD-Karte nutzen (siehe Erste Schritte).
     summary: Zeige die Rezepte aus Deinem Nextcloud Kochbuch an
     whatsNew: |-
-      + Fehlerbehebung: Kleinere Korrekturen beim JSON-Parsing
-      + Neu: Nummerierte Anweisungen, die als erledigt markiert werden können
-      + Neu: Im Landscape-Modus werden Zutaten und Anweisungen nebeneinander angezeigt
-      + Übersetzungen aktualisiert
+      + Neu: Zutaten sind als erledigt markierbar (Danke an leafar)
+      + Neu: Download mit einer URL wie in der Server-Anwendung (Danke an leafar)
+      + Neu: Zutaten an Portionen anpassen (Danke an leafar)
+      + Verbesserungen der Erledigt-Anzeige: Durchgestrichen und ein Tipp auf dem Text markiert ebenfalls (Danke an leafar)
+      + Optimierungen der Suche und des Rezept-Handling
+      + Übersetzungen integriert (Danke an mondstern, Quang Trung und J. Lavoie)
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/de/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -62,6 +66,10 @@ localized:
       - screenshot_settings.png
 
 builds:
+  - versionName: 2.3.0
+    versionCode: 230
+    sha256: d661ced60fb4cb20d599096630aeb911b7200b146902dd4f1a28aaa15e932345
+    apkLink: sia://_B0YM2gD-XmI-sF2pJw83VZftO9wrIokmyZLw1MQrXl6cQ
   - versionName: 2.2.0
     versionCode: 220
     sha256: aac6a935ebea0beeb539a06289540a06c4dbb0d70920d6de65ca70938e5fc835
@@ -79,8 +87,8 @@ builds:
     sha256: ab98ebfffc1cbbd15f1d7cb48644ae68733ca4669d39ebaf9817679bfc989912
     apkLink: sia://_Bka9tS-fiGpHIjylx-yjr1caGY_w7p-2vhm5rU9gqhG-w
 
-currentVersionName: 2.2.0
-currentVersionCode: 220
+currentVersionName: 2.3.0
+currentVersionCode: 230
 
 added: 1618153205273
-lastUpdated: 1619890248431
+lastUpdated: 1622490041408
