@@ -98,4 +98,5 @@
     <string name="menu_download_tooltip">lade Rezept herunter</string>
     <string name="menu_download_title">Herunterladen</string>
     <string name="form_download_title">Rezept herunterladen</string>
+    <string name="ingredients_yield">Ertrag</string>
 </resources>
