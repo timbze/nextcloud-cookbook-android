@@ -99,4 +99,5 @@
     <string name="form_download_url_hint">Recepten URL</string>
     <string name="form_download_commit">Downloaden</string>
     <string name="form_download_title">Downloaden Recept</string>
+    <string name="ingredients_yield">Opbrengst</string>
 </resources>
