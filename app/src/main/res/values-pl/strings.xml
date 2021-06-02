@@ -99,4 +99,5 @@
     <string name="form_download_override_existing">Zastąp istniejący folder z przepisami</string>
     <string name="form_download_options">Opcje</string>
     <string name="form_download_url_hint">Przepis URL</string>
+    <string name="ingredients_yield">Uzysk</string>
 </resources>
