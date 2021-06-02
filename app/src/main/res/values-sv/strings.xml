@@ -90,4 +90,5 @@
     <string name="menu_download_tooltip">hämta receptet</string>
     <string name="form_download_title">Hämta Receptet</string>
     <string name="menu_download_title">hämta</string>
+    <string name="ingredients_yield">Utbyte</string>
 </resources>
