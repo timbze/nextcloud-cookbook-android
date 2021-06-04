@@ -99,4 +99,5 @@
     <string name="form_download_options">Možnosti</string>
     <string name="form_download_url_hint">Adresa URL receptů</string>
     <string name="form_download_title">Stáhnout recept</string>
+    <string name="ingredients_yield">Výtěžnost</string>
 </resources>

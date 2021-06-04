@@ -39,7 +39,7 @@
     <string name="form_search_hint">Søkespørring</string>
     <string name="form_ignore_case">Ikke gjør forskjell på liten og stor bokstav\?</string>
     <string name="form_exact_search">Nøyaktig treff\?</string>
-    <string name="form_types">Skrif for å søke …</string>
+    <string name="form_types">Skrif for å søke</string>
     <string name="form_type_keyword">Søk etter nøkkelord</string>
     <string name="form_type_ingredients">Søk etter ingrediens</string>
     <string name="form_search_options">Søkealternativer</string>
@@ -63,7 +63,7 @@
     <string name="theme_name_system">System</string>
     <string name="sort_value_alpha_asc">Navn A-Å</string>
     <string name="sort_value_alpha_desc">Navn Å-A</string>
-    <string name="dir_chooser_error_message">Feil: Kan ikke åpne en mappevelger.</string>
+    <string name="dir_chooser_error_message">Feil: Kan ikke åpne en mappevelger!</string>
     <string name="sort_value_date_asc">Dato publisert, stigende</string>
     <string name="sort_value_date_desc">Dato publisert, synkende</string>
     <string name="sort_value_time_asc">Total tid, stigende</string>
@@ -75,7 +75,7 @@
     <string name="folder_pick_cancel">Mappevelger avbrutt av bruker.</string>
     <string name="folder_pick_success">Mappen %1$s er valgt.</string>
     <string name="permission_warning_nowrite">Du har ikke tilgang til lagring her, så du kan ikke velge denne mappen.
-\nØnsker du å innvilge tilgang til denne mappen\?</string>
+\nØnsker du å innvilge tilgang til denne mappen\?.</string>
     <string name="permissions_error_message">Tilgang nektet. Innvilg programmet lagringstilgang i innstillingene.</string>
     <string name="app_logo_desc">Oppstarter-ikon for programmet som viser et kokeboksymbol</string>
     <string name="title_duration">Varighet i TT:MM</string>

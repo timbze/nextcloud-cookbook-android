@@ -99,4 +99,5 @@
     <string name="form_download_options">Opciones</string>
     <string name="form_download_url_hint">URL de la receta</string>
     <string name="form_download_title">Descargar receta</string>
+    <string name="ingredients_yield">Rendimiento</string>
 </resources>

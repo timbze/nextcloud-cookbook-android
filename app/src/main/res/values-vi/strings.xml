@@ -90,4 +90,5 @@
     <string name="form_download_override_existing">Thay thế thư mục công thức đã tồn tại</string>
     <string name="form_download_commit">Tải xuống</string>
     <string name="form_download_folder">Ghi đè lên thư mục mục tiêu</string>
+    <string name="ingredients_yield">Khẩu phần</string>
 </resources>
