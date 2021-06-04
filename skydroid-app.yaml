@@ -22,12 +22,7 @@ localized:
       Therefore it is better to use the above mentioned path on the SD card (see First steps).
     summary: View the recipes from your Nextcloud Cookbook
     whatsNew: |-
-      + New: Ingredients are markable as done (thanks to leafar)
-      + New: Download feature with a url like the server app (thanks to leafar)
-      + New: Scale ingredients (thanks to leafar)
-      + Show done instructions improvements: Strike-through and text clickable (thanks to leafar)
-      + Some Optimations in search and recipe handling
-      + Translations integrated (thanks to mondstern, Quang Trung and J. Lavoie)
+      + Translations are up to date again (thanks to mondstern)
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -50,12 +45,7 @@ localized:
       Deshalb bitte besser den oben genannten Pfad auf der SD-Karte nutzen (siehe Erste Schritte).
     summary: Zeige die Rezepte aus Deinem Nextcloud Kochbuch an
     whatsNew: |-
-      + Neu: Zutaten sind als erledigt markierbar (Danke an leafar)
-      + Neu: Download mit einer URL wie in der Server-Anwendung (Danke an leafar)
-      + Neu: Zutaten an Portionen anpassen (Danke an leafar)
-      + Verbesserungen der Erledigt-Anzeige: Durchgestrichen und ein Tipp auf dem Text markiert ebenfalls (Danke an leafar)
-      + Optimierungen der Suche und des Rezept-Handling
-      + Übersetzungen integriert (Danke an mondstern, Quang Trung und J. Lavoie)
+      + Die Übersetzungen sind wieder aktuell (Danke an mondstern)
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/de/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -66,6 +56,10 @@ localized:
       - screenshot_settings.png
 
 builds:
+  - versionName: 2.3.1
+    versionCode: 231
+    sha256: b34c56a17326d31423566da1c34dc5dcd29402dc2a4a68fab2ae560cc458908e
+    apkLink: sia://_B0SAjvbj7-qGnOSiJ2eUj94IuPNict7ZQfbqxD9vKjDbg
   - versionName: 2.3.0
     versionCode: 230
     sha256: d661ced60fb4cb20d599096630aeb911b7200b146902dd4f1a28aaa15e932345
@@ -87,8 +81,8 @@ builds:
     sha256: ab98ebfffc1cbbd15f1d7cb48644ae68733ca4669d39ebaf9817679bfc989912
     apkLink: sia://_Bka9tS-fiGpHIjylx-yjr1caGY_w7p-2vhm5rU9gqhG-w
 
-currentVersionName: 2.3.0
-currentVersionCode: 230
+currentVersionName: 2.3.1
+currentVersionCode: 231
 
 added: 1618153205273
-lastUpdated: 1622490041408
+lastUpdated: 1622820835532
