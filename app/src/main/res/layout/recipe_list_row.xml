@@ -11,12 +11,16 @@
       <variable
             name="clickListener"
             type="de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListListener" />
+
+      <variable
+            name="starListener"
+            type="de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeStarListener" />
    </data>
 
    <androidx.constraintlayout.widget.ConstraintLayout
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:layout_margin="8dp"
+         android:layout_margin="0dp"
          android:onClick="@{() -> clickListener.onClick(recipe)}">
 
       <ImageView
@@ -43,7 +47,7 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textSize="@dimen/text_normal"
             app:layout_constraintBottom_toTopOf="@+id/recipeOverviewDescription"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/recipeOverviewStar"
             app:layout_constraintStart_toEndOf="@+id/recipeOverviewImage"
             app:layout_constraintTop_toTopOf="parent"
             app:recipeName="@{recipe}" />
@@ -63,9 +67,21 @@
             android:textSize="@dimen/text_small"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/recipeOverviewStar"
             app:layout_constraintStart_toEndOf="@+id/recipeOverviewImage"
             app:layout_constraintTop_toBottomOf="@+id/recipeOverviewName"
             app:recipeDescription="@{recipe}" />
+
+      <ImageView
+            android:id="@+id/recipeOverviewStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/list_recipe_star_desc"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/star_off"
+            app:recipeStar="@{recipe}"
+            android:onClick="@{() -> starListener.onClick(recipe)}" />
    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

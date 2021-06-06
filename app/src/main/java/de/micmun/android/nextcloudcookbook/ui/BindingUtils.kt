@@ -55,6 +55,12 @@ fun TextView.setRecipeDesc(item: DbRecipePreview?) {
    item?.let { text = it.description }
 }
 
+@BindingAdapter("recipeStar")
+fun ImageView.setRecipeStar(item: DbRecipePreview?) {
+   item?.let { this.setImageResource(
+      if (item.starred) android.R.drawable.star_on else android.R.drawable.star_off) }
+}
+
 // Detail view
 @BindingAdapter("recipeHeaderImage")
 fun ImageView.setRecipeHeaderImage(item: DbRecipe?) {
