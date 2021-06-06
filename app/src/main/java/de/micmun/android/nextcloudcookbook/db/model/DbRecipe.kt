@@ -67,7 +67,8 @@ data class DbRecipeCore(
    val totalTime: String = "",
    val url: String = "",
    val yield: String = "",
-   val estimatedCost: String = ""
+   val estimatedCost: String = "",
+   val starred: Boolean = false,
 )
 
 data class DbAggregateRating(
