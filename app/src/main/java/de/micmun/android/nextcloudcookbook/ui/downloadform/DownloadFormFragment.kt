@@ -169,10 +169,10 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
                val json = element.html()
                try {
                   RecipeJsonConverter.parseFromWeb(json)?.let { jsonObj ->
+                     // we may need to patch the source url into the json data
+                     if (!jsonObj.containsKey("url"))
+                        jsonObj["url"] = url
                      RecipeJsonConverter.parse(jsonObj)?.let { recipe ->
-                        if (recipe.url == null || recipe.url.isBlank()) {
-                           return@withContext Pair(recipe.copy(url = url), jsonObj)
-                        }
                         return@withContext Pair(recipe, jsonObj)
                      }
                   }
