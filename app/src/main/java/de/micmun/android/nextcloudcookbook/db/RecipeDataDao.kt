@@ -89,6 +89,9 @@ interface RecipeDataDao {
    @Update
    fun update(recipe: DbRecipeCore)
 
+   @Update(entity = DbRecipeCore::class)
+   fun updateStar(recipe: DbRecipeStar)
+
    @Update
    fun updateTools(tool: List<DbTool>)
 

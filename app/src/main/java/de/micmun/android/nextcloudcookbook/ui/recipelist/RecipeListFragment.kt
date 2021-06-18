@@ -23,10 +23,10 @@ import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.CategoryFilter
 import de.micmun.android.nextcloudcookbook.data.SortValue
 import de.micmun.android.nextcloudcookbook.databinding.FragmentRecipelistBinding
+import de.micmun.android.nextcloudcookbook.db.DbRecipeRepository
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModel
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModelFactory
 import de.micmun.android.nextcloudcookbook.ui.MainActivity
-import java.net.URL
 
 /**
  * Fragment for list of recipes.
@@ -127,7 +127,8 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
       binding.recipeList.addItemDecoration(dividerDecoration)
 
       // data adapter
-      adapter = RecipeListAdapter(RecipeListListener { recipeName -> recipesViewModel.onRecipeClicked(recipeName) })
+      adapter = RecipeListAdapter(RecipeListListener { recipeName -> recipesViewModel.onRecipeClicked(recipeName) },
+            DbRecipeRepository.getInstance(requireActivity().application))
       binding.recipeList.adapter = adapter
 
       // settings

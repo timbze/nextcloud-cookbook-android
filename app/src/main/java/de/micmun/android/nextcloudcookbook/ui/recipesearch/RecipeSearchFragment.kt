@@ -22,6 +22,7 @@ import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.RecipeFilter
 import de.micmun.android.nextcloudcookbook.data.SortValue
 import de.micmun.android.nextcloudcookbook.databinding.FragmentRecipesearchBinding
+import de.micmun.android.nextcloudcookbook.db.DbRecipeRepository
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipePreview
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModel
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModelFactory
@@ -94,7 +95,8 @@ class RecipeSearchFragment : Fragment() {
 
       // data adapter
       val adapter =
-         RecipeListAdapter(RecipeListListener { recipeId -> recipeSearchViewModel.onRecipeClicked(recipeId) })
+         RecipeListAdapter(RecipeListListener { recipeId -> recipeSearchViewModel.onRecipeClicked(recipeId) },
+            DbRecipeRepository.getInstance(requireActivity().application))
       binding.recipeResultList.adapter = adapter
       adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 

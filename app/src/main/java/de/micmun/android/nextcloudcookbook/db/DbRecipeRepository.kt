@@ -13,6 +13,7 @@ import de.micmun.android.nextcloudcookbook.data.SortValue
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipeKeywordRelation
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipePreview
+import de.micmun.android.nextcloudcookbook.db.model.DbRecipeStar
 
 /**
  * Repository for recipes.
@@ -133,6 +134,7 @@ class DbRecipeRepository private constructor(application: Application) {
                setIdInLists(recipe, id)
 
                mRecipeDao.update(recipe.recipeCore)
+               updateStar(recipe.recipeCore.id, r.recipeCore.starred)
                recipe.tool?.let { mRecipeDao.updateTools(it) }
                recipe.review?.let { mRecipeDao.updateReviews(it) }
                recipe.recipeInstructions?.let { mRecipeDao.updateInstructions(it) }
@@ -162,6 +164,12 @@ class DbRecipeRepository private constructor(application: Application) {
          recipe.review?.let { mRecipeDao.updateReviews(it) }
          recipe.recipeInstructions?.let { mRecipeDao.updateInstructions(it) }
          recipe.recipeIngredient?.let { mRecipeDao.updateIngredients(it) }
+      }
+   }
+
+   fun updateStar(recipeId: Long, starred: Boolean) {
+      RecipeDatabase.databaseWriteExecutor.execute {
+         mRecipeDao.updateStar(DbRecipeStar(recipeId, starred))
       }
    }
 
