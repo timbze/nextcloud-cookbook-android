@@ -204,7 +204,7 @@ class DbRecipeRepository private constructor(application: Application) {
    }
 
    private fun getOrderBy(sort: SortValue): String {
-      return when (sort) {
+      return "starred DESC, " + when (sort) {
          SortValue.NAME_A_Z -> "name asc"
          SortValue.NAME_Z_A -> "name desc"
          SortValue.DATE_ASC -> "publishedDate asc"
