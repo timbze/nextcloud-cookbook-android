@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.databinding.RecipeListRowBinding
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipePreview
 
@@ -55,6 +56,13 @@ class RecipeListAdapter(private val clickListener: RecipeListListener) :
       fun bind(clickListener: RecipeListListener, recipe: DbRecipePreview) {
          binding.recipe = recipe
          binding.clickListener = clickListener
+         val starSwitcher = binding.recipeOverviewStar
+         if (recipe.starred && starSwitcher.currentView.id == R.id.recipeOverviewStarOff) {
+            starSwitcher.showNext()
+         }
+         starSwitcher.setOnClickListener { _ ->
+            starSwitcher.showNext()
+         }
          binding.executePendingBindings()
       }
 

@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-   <data>
-
-      <variable
+    <data>
+        <variable
             name="recipe"
             type="de.micmun.android.nextcloudcookbook.db.model.DbRecipePreview" />
-
-      <variable
+        <variable
             name="clickListener"
             type="de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListListener" />
+    </data>
 
-      <variable
-            name="starListener"
-            type="de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeStarListener" />
-   </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:onClick="@{() -> clickListener.onClick(recipe)}">
 
-   <androidx.constraintlayout.widget.ConstraintLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_margin="0dp"
-         android:onClick="@{() -> clickListener.onClick(recipe)}">
-
-      <ImageView
+        <ImageView
             android:id="@+id/recipeOverviewImage"
             android:layout_width="72dp"
             android:layout_height="72dp"
@@ -36,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:recipeImage="@{recipe}" />
 
-      <TextView
+        <TextView
             android:id="@+id/recipeOverviewName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -52,7 +46,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:recipeName="@{recipe}" />
 
-      <TextView
+        <TextView
             android:id="@+id/recipeOverviewDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -72,16 +66,34 @@
             app:layout_constraintTop_toBottomOf="@+id/recipeOverviewName"
             app:recipeDescription="@{recipe}" />
 
-      <ImageView
+        <ViewSwitcher
             android:id="@+id/recipeOverviewStar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/list_recipe_star_desc"
+            android:layout_height="0dp"
+            android:gravity="center|center_horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/star_off"
-            app:recipeStar="@{recipe}"
-            android:onClick="@{() -> starListener.onClick(recipe)}" />
-   </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/recipeOverviewStarOff"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/list_recipe_star_desc"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/star_off" />
+
+            <ImageView
+                android:id="@+id/recipeOverviewStarOn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/list_recipe_star_desc"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/star_on" />
+        </ViewSwitcher>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
