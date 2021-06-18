@@ -22,7 +22,8 @@ localized:
       Therefore it is better to use the above mentioned path on the SD card (see First steps).
     summary: View the recipes from your Nextcloud Cookbook
     whatsNew: |-
-      + Translations are up to date again (thanks to mondstern)
+      + Bugfix: fixes for search and download
+      + Ingredients portion input centered
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -45,7 +46,8 @@ localized:
       Deshalb bitte besser den oben genannten Pfad auf der SD-Karte nutzen (siehe Erste Schritte).
     summary: Zeige die Rezepte aus Deinem Nextcloud Kochbuch an
     whatsNew: |-
-      + Die Übersetzungen sind wieder aktuell (Danke an mondstern)
+      + Bugfix: Korrekturen für Suche und Download
+      + Zutaten Portionen-Eingabe zentriert
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/de/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -56,6 +58,10 @@ localized:
       - screenshot_settings.png
 
 builds:
+  - versionName: 2.3.2
+    versionCode: 232
+    sha256: e9bddfa7ea7e437e172745dacc4bf45727636802e0f0ae153adaf49b618623df
+    apkLink: sia://_B0CnD6EtGEewSRdgvoSur316ZmBT3FUx-iWbZcx6pfSXw
   - versionName: 2.3.1
     versionCode: 231
     sha256: b34c56a17326d31423566da1c34dc5dcd29402dc2a4a68fab2ae560cc458908e
@@ -81,8 +87,8 @@ builds:
     sha256: ab98ebfffc1cbbd15f1d7cb48644ae68733ca4669d39ebaf9817679bfc989912
     apkLink: sia://_Bka9tS-fiGpHIjylx-yjr1caGY_w7p-2vhm5rU9gqhG-w
 
-currentVersionName: 2.3.1
-currentVersionCode: 231
+currentVersionName: 2.3.2
+currentVersionCode: 232
 
 added: 1618153205273
-lastUpdated: 1622820835532
+lastUpdated: 1623496952460

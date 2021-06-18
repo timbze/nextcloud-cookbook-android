@@ -23,6 +23,8 @@ import de.micmun.android.nextcloudcookbook.db.model.DbRecipeStar
  */
 class DbRecipeRepository private constructor(application: Application) {
    private var mRecipeDao: RecipeDataDao = RecipeDatabase.getDatabase(application).recipeDataDao()
+   // we prepend 'recipes.' to resolve name ambiguities (e.g. column 'id')
+   private val dbPreviewFields = DbRecipePreview.DbFields.split(", ").joinToString(", ") { "recipes.$it" }
 
    companion object {
       @Volatile
@@ -47,12 +49,12 @@ class DbRecipeRepository private constructor(application: Application) {
    fun getRecipe(id: Long) = mRecipeDao.getById(id)
 
    fun filterCategory(sort: SortValue, category: String, recipeFilter: RecipeFilter? = null): LiveData<List<DbRecipePreview>> {
-      var select = "SELECT * FROM recipes WHERE recipeCategory = '${category}' "
+      var select = "SELECT $dbPreviewFields FROM recipes WHERE recipeCategory = '${category}' "
       if (recipeFilter != null && recipeFilter.type != RecipeFilter.QueryType.QUERY_INGREDIENTS) {
          select += " AND " + getWhereClause(recipeFilter)
       } else if (recipeFilter != null) {
          select =
-            "SELECT * FROM recipes INNER JOIN ingredients ON recipes.id = ingredients.recipeId" +
+            "SELECT $dbPreviewFields FROM recipes INNER JOIN ingredients ON recipes.id = ingredients.recipeId" +
             " WHERE recipeCategory REGEXP '(^|,)\\s*${category} AND " + getWhereClause(recipeFilter)
       }
       select += " ORDER BY " + getOrderBy(sort)
@@ -63,12 +65,12 @@ class DbRecipeRepository private constructor(application: Application) {
    }
 
    fun filterUncategorized(sort: SortValue, recipeFilter: RecipeFilter? = null): LiveData<List<DbRecipePreview>> {
-      var select = "SELECT ${DbRecipePreview.DbFields} FROM recipes WHERE recipeCategory = ''"
+      var select = "SELECT $dbPreviewFields FROM recipes WHERE recipeCategory = ''"
       if (recipeFilter != null && recipeFilter.type != RecipeFilter.QueryType.QUERY_INGREDIENTS) {
          select += " AND " + getWhereClause(recipeFilter)
       } else if (recipeFilter != null) {
          select =
-            "SELECT ${DbRecipePreview.DbFields} FROM recipes INNER JOIN ingredients ON recipes.id = ingredients.recipeId" +
+            "SELECT $dbPreviewFields FROM recipes INNER JOIN ingredients ON recipes.id = ingredients.recipeId" +
             " WHERE recipeCategory = '' AND " + getWhereClause(recipeFilter)
       }
 
@@ -82,13 +84,13 @@ class DbRecipeRepository private constructor(application: Application) {
 
    fun filterAll(sort: SortValue, recipeFilter: RecipeFilter): LiveData<List<DbRecipePreview>> {
       var select = when (recipeFilter.type) {
-         RecipeFilter.QueryType.QUERY_KEYWORD -> "SELECT ${DbRecipePreview.DbFields} FROM recipes r" +
-                                                 " INNER JOIN recipeXKeywords x ON x.recipeId = r.id" +
-                                                 " INNER JOIN keywords k ON k.id = x.keywordId" +
-                                                 " WHERE " + getWhereClause(recipeFilter)
-         RecipeFilter.QueryType.QUERY_INGREDIENTS -> "SELECT * FROM recipes INNER JOIN ingredients ON recipes.id = ingredients.recipeId" +
+         RecipeFilter.QueryType.QUERY_KEYWORD -> "SELECT $dbPreviewFields FROM recipes" +
+                                        " INNER JOIN recipeXKeywords x ON x.recipeId = recipes.id" +
+                                        " INNER JOIN keywords k ON k.id = x.keywordId" +
+                                        " WHERE " + getWhereClause(recipeFilter)
+         RecipeFilter.QueryType.QUERY_INGREDIENTS -> "SELECT $dbPreviewFields FROM recipes INNER JOIN ingredients ON recipes.id = ingredients.recipeId" +
                                                      " WHERE " + getWhereClause(recipeFilter)
-         else -> "SELECT * FROM recipes WHERE " + getWhereClause(recipeFilter)
+         else -> "SELECT $dbPreviewFields FROM recipes WHERE " + getWhereClause(recipeFilter)
       }
 
       select += " ORDER BY " + getOrderBy(sort)
@@ -207,8 +209,8 @@ class DbRecipeRepository private constructor(application: Application) {
       return "starred DESC, " + when (sort) {
          SortValue.NAME_A_Z -> "name asc"
          SortValue.NAME_Z_A -> "name desc"
-         SortValue.DATE_ASC -> "publishedDate asc"
-         SortValue.DATE_DESC -> "publishedDate desc"
+         SortValue.DATE_ASC -> "datePublished asc"
+         SortValue.DATE_DESC -> "datePublished desc"
          SortValue.TOTAL_TIME_ASC -> "totalTime asc"
          SortValue.TOTAL_TIME_DESC -> "totalTime desc"
       }
