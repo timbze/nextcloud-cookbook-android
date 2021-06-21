@@ -21,7 +21,7 @@ import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
  * Fragment for detail of a recipe.
  *
  * @author MicMun
- * @version 1.7, 01.05.21
+ * @version 1.8, 21.06.21
  */
 class RecipeDetailFragment : Fragment() {
    private lateinit var binding: FragmentDetailBinding
@@ -145,6 +145,7 @@ class RecipeDetailFragment : Fragment() {
       }
    }
 
+   @Suppress("DEPRECATION")
    override fun onActivityCreated(savedInstanceState: Bundle?) {
       super.onActivityCreated(savedInstanceState)
       val title = viewModel.recipe.value?.recipeCore?.name

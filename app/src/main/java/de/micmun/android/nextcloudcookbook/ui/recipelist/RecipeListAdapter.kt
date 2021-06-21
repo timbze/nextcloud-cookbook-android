@@ -19,7 +19,7 @@ import de.micmun.android.nextcloudcookbook.db.model.DbRecipePreview
  * RecyclerViewAdapter for the list of recipes.
  *
  * @author MicMun
- * @version 1.4, 26.07.20
+ * @version 1.5, 21.06.21
  */
 class RecipeListAdapter(private val clickListener: RecipeListListener, private val repository: DbRecipeRepository) :
    ListAdapter<DbRecipePreview, RecipeListAdapter.RecipeViewHolder>(RECIPE_ITEM_CALLBACK) {
@@ -59,6 +59,8 @@ class RecipeListAdapter(private val clickListener: RecipeListListener, private v
          binding.clickListener = clickListener
          val starSwitcher = binding.recipeOverviewStar
          if (recipe.starred && starSwitcher.currentView.id == R.id.recipeOverviewStarOff) {
+            starSwitcher.showNext()
+         } else if (!recipe.starred && starSwitcher.currentView.id == R.id.recipeOverviewStarOn) {
             starSwitcher.showNext()
          }
          starSwitcher.setOnClickListener { _ ->
