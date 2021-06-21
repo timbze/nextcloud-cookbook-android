@@ -10,7 +10,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.databinding.RecipeListRowBinding
+import de.micmun.android.nextcloudcookbook.db.DbRecipeRepository
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipePreview
 
 /**
@@ -19,7 +21,7 @@ import de.micmun.android.nextcloudcookbook.db.model.DbRecipePreview
  * @author MicMun
  * @version 1.4, 26.07.20
  */
-class RecipeListAdapter(private val clickListener: RecipeListListener) :
+class RecipeListAdapter(private val clickListener: RecipeListListener, private val repository: DbRecipeRepository) :
    ListAdapter<DbRecipePreview, RecipeListAdapter.RecipeViewHolder>(RECIPE_ITEM_CALLBACK) {
 
    companion object {
@@ -38,7 +40,7 @@ class RecipeListAdapter(private val clickListener: RecipeListListener) :
 
    override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
       val recipe = currentList[position]
-      holder.bind(clickListener, recipe)
+      holder.bind(clickListener, repository, recipe)
    }
 
    override fun getItemCount(): Int {
@@ -52,9 +54,17 @@ class RecipeListAdapter(private val clickListener: RecipeListListener) :
        *
        * @param recipe Recipe data.
        */
-      fun bind(clickListener: RecipeListListener, recipe: DbRecipePreview) {
+      fun bind(clickListener: RecipeListListener, repository: DbRecipeRepository, recipe: DbRecipePreview) {
          binding.recipe = recipe
          binding.clickListener = clickListener
+         val starSwitcher = binding.recipeOverviewStar
+         if (recipe.starred && starSwitcher.currentView.id == R.id.recipeOverviewStarOff) {
+            starSwitcher.showNext()
+         }
+         starSwitcher.setOnClickListener { _ ->
+            starSwitcher.showNext()
+            repository.updateStar(recipe.id, starSwitcher.currentView.id == R.id.recipeOverviewStarOn)
+         }
          binding.executePendingBindings()
       }
 

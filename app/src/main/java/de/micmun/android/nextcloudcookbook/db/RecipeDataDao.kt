@@ -19,23 +19,23 @@ import de.micmun.android.nextcloudcookbook.db.model.*
 @Dao
 interface RecipeDataDao {
    @Transaction
-   @Query("SELECT ${DbRecipePreview.DbFields} FROM recipes ORDER BY name ASC")
+   @Query("SELECT ${DbRecipePreview.DbFields} FROM recipes ORDER BY starred DESC, name ASC")
    fun getAllRecipePreviews(): LiveData<List<DbRecipePreview>>
 
    @Transaction
-   @Query("SELECT ${DbRecipePreview.DbFields} FROM recipes ORDER BY " +
+   @Query("SELECT ${DbRecipePreview.DbFields} FROM recipes ORDER BY starred DESC, " +
           "CASE WHEN :isAsc = 1 THEN name END ASC," +
           "CASE WHEN :isAsc = 0 THEN name END DESC")
    fun sortByName(isAsc: Boolean): LiveData<List<DbRecipePreview>>
 
    @Transaction
-   @Query("SELECT ${DbRecipePreview.DbFields} FROM recipes ORDER BY " +
+   @Query("SELECT ${DbRecipePreview.DbFields} FROM recipes ORDER BY starred DESC, " +
           "CASE WHEN :isAsc = 1 THEN datePublished END ASC," +
           "CASE WHEN :isAsc = 0 THEN datePublished END DESC")
    fun sortByDate(isAsc: Boolean): LiveData<List<DbRecipePreview>>
 
    @Transaction
-   @Query("SELECT ${DbRecipePreview.DbFields} FROM recipes ORDER BY " +
+   @Query("SELECT ${DbRecipePreview.DbFields} FROM recipes ORDER BY starred DESC, " +
           "CASE WHEN :isAsc = 1 THEN totalTime END ASC," +
           "CASE WHEN :isAsc = 0 THEN totalTime END DESC")
    fun sortByTotalTime(isAsc: Boolean): LiveData<List<DbRecipePreview>>
@@ -88,6 +88,9 @@ interface RecipeDataDao {
 
    @Update
    fun update(recipe: DbRecipeCore)
+
+   @Update(entity = DbRecipeCore::class)
+   fun updateStar(recipe: DbRecipeStar)
 
    @Update
    fun updateTools(tool: List<DbTool>)
