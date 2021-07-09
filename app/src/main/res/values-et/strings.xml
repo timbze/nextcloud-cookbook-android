@@ -90,4 +90,5 @@
     <string name="form_download_override_existing">Asenda olemasolev retseptikaust</string>
     <string name="form_download_options">Valikud</string>
     <string name="form_download_url_hint">Retsepti URL</string>
+    <string name="ingredients_yield">Saak</string>
 </resources>

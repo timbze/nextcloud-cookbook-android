@@ -6,12 +6,88 @@
          android:layout_width="match_parent"
          android:layout_height="match_parent">
 
-      <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/incredientsView"
+      <LinearLayout
+            android:id="@+id/servingsLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/ingredientsView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+         <Space
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_weight="1" />
+
+         <TextView
+               android:id="@+id/textView"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginEnd="4dp"
+               android:layout_weight="0"
+               android:text="@string/ingredients_yield"
+               android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+         <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/servingsInputLayout"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginEnd="4dp"
+               android:layout_weight="1"
+               app:expandedHintEnabled="false"
+               app:hintAnimationEnabled="false"
+               app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                  android:id="@+id/yieldInput"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:inputType="number|numberDecimal"
+                  android:paddingStart="8dp"
+                  android:paddingTop="8dp"
+                  android:paddingEnd="8dp"
+                  android:paddingBottom="8dp"
+                  android:selectAllOnFocus="true"
+                  android:singleLine="true"
+                  android:textAlignment="center" />
+         </com.google.android.material.textfield.TextInputLayout>
+
+         <Button
+               android:id="@+id/yieldMinus"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:layout_marginEnd="4dp"
+               android:layout_weight="0"
+               android:minWidth="0dip"
+               android:text="-" />
+
+         <Button
+               android:id="@+id/yieldPlus"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:layout_marginEnd="4dp"
+               android:layout_weight="0"
+               android:minWidth="0dip"
+               android:text="+" />
+
+         <Space
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_weight="1" />
+
+      </LinearLayout>
+
+      <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ingredientsView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:orientation="vertical"
@@ -20,6 +96,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/servingsLayout" />
    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

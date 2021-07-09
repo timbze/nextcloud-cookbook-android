@@ -5,9 +5,10 @@ data class DbRecipePreview (
     val name: String,
     val description: String = "",
     val thumbImageUrl: String = "",
+    val starred: Boolean,
 ) {
     companion object{
-        const val DbFields = "id, name, description, thumbImageUrl"
+        const val DbFields = "id, name, description, thumbImageUrl, starred"
     }
 
     override fun equals(other: Any?): Boolean {

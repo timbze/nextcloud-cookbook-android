@@ -25,9 +25,8 @@
          android:name="de.micmun.android.nextcloudcookbook.ui.recipedetail.RecipeDetailFragment"
          android:label="fragment_detail">
       <argument
-            android:name="recipeName"
-            android:defaultValue="-"
-            app:argType="string" />
+            android:name="recipeId"
+            app:argType="long" />
    </fragment>
    <fragment
          android:id="@+id/recipeSearchFragment"

@@ -90,4 +90,5 @@
     <string name="menu_download_tooltip">hent opskrift</string>
     <string name="form_download_override_existing">Udskift eksisterende opskriftsmappe</string>
     <string name="form_download_url_hint">Opskrift URL</string>
+    <string name="ingredients_yield">Udbytte</string>
 </resources>

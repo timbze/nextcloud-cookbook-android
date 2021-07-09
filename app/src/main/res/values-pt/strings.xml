@@ -90,4 +90,5 @@
     <string name="form_download_url_hint">URL da receita</string>
     <string name="form_download_options">Opções</string>
     <string name="form_download_folder">Substituir pasta de alvo</string>
+    <string name="ingredients_yield">Jield</string>
 </resources>

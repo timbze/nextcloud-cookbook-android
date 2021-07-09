@@ -90,4 +90,5 @@
     <string name="form_download_options">Optiot</string>
     <string name="form_download_override_existing">Korvaa nykyinen reseptikansio</string>
     <string name="form_download_folder">Ohita kohdekansio</string>
+    <string name="ingredients_yield">Tuotto</string>
 </resources>

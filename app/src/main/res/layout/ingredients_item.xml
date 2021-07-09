@@ -3,13 +3,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
-   <data>
-
-      <variable
-            name="ingredient"
-            type="String" />
-   </data>
-
    <androidx.constraintlayout.widget.ConstraintLayout
          android:layout_width="match_parent"
          android:layout_height="wrap_content">
@@ -34,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginStart="8dp"
-            android:text="@{ingredient}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textSize="@dimen/tab_instructions_text_size"
             app:layout_constraintBottom_toBottomOf="parent"

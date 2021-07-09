@@ -99,4 +99,5 @@
     <string name="form_download_commit">Scarica</string>
     <string name="form_download_folder">Sovrascrivi la cartella di destinazione</string>
     <string name="form_download_title">Scarica la ricetta</string>
+    <string name="ingredients_yield">Resa</string>
 </resources>
