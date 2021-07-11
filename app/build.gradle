@@ -1,7 +1,17 @@
+buildscript {
+   ext.kotlin_version = '1.5.20'
+   repositories { mavenCentral() }
+
+   dependencies {
+      classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+   }
+}
+
 apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: "kotlin-kapt"
+apply plugin: 'kotlinx-serialization'
 
 android {
    compileSdkVersion 30
@@ -54,7 +64,7 @@ dependencies {
 
    implementation group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
 
-   implementation "androidx.core:core-ktx:1.5.0"
+   implementation "androidx.core:core-ktx:1.6.0"
    implementation "androidx.legacy:legacy-support-v4:1.0.0"
    implementation "androidx.appcompat:appcompat:$version_appcompat"
    implementation "androidx.constraintlayout:constraintlayout:$version_constraintlayout"
@@ -81,7 +91,8 @@ dependencies {
    implementation "androidx.room:room-ktx:$version_room"
 
    // Json parser
-   implementation 'com.beust:klaxon:5.4'
+   implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$version_serialization"
+
    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
    // permissions dexter

@@ -23,17 +23,6 @@
 -keep class kotlin.** { *; }
 -keep class org.jetbrains.** { *; }
 
--keepattributes *Annotation*,EnclosingMethod,Signature
--keepnames class com.fasterxml.jackson.** { *; }
--dontwarn com.fasterxml.jackson.databind.**
--keep class org.codehaus.** { *; }
--keepclassmembers public final enum org.codehaus.jackson.annotate.JsonAutoDetect$Visibility {
-    public static final org.codehaus.jackson.annotate.JsonAutoDetect$Visibility *; }
--keep public class your.class.** {
-    public void set*(***);
-    public *** get*();
-}
-
 # General
 -keepattributes SourceFile,LineNumberTable,*Annotation*,EnclosingMethod,Signature,Exceptions,InnerClasses
 -keep class de.micmun.android.nextcloudcookbook.** { *; }
@@ -42,3 +31,22 @@
 # Navigation
 -keep class androidx.navigation.** { *; }
 -keep class androidx.fragment.** { *; }
+
+-dontnote kotlinx.serialization.AnnotationsKt # core serialization annotations
+
+# kotlinx-serialization-json specific. Add this if you have java.lang.NoClassDefFoundError kotlinx.serialization.json.JsonObjectSerializer
+-keepclassmembers class kotlinx.serialization.json.** {
+    *** Companion;
+}
+-keepclasseswithmembers class kotlinx.serialization.json.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+# Change here com.yourcompany.yourpackage
+-keep,includedescriptorclasses class de.micmun.android.nextcloudcookbook.**$$serializer { *; } # <-- change package name to your app's
+-keepclassmembers class de.micmun.android.nextcloudcookbook.** { # <-- change package name to your app's
+    *** Companion;
+}
+-keepclasseswithmembers class de.micmun.android.nextcloudcookbook.** { # <-- change package name to your app's
+    kotlinx.serialization.KSerializer serializer(...);
+}
