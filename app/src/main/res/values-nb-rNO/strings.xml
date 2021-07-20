@@ -91,4 +91,5 @@
 \n
 \nNextcloud Cookbook er et Nextcloud-kokebokprogram for håndtering av oppskrifter.</string>
     <string name="ingredients_yield">Gi</string>
+    <string name="list_recipe_star_desc">Stjerneikon indikerer favorittstatus for oppskrift</string>
 </resources>
