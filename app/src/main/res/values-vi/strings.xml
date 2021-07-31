@@ -89,7 +89,16 @@
     <string name="form_download_options">Tuỳ chọn</string>
     <string name="form_download_override_existing">Thay thế thư mục công thức đã tồn tại</string>
     <string name="form_download_commit">Tải xuống</string>
-    <string name="form_download_folder">Ghi đè lên thư mục mục tiêu</string>
+    <string name="form_download_folder">Đè thư mục đích</string>
     <string name="ingredients_yield">Khẩu phần</string>
     <string name="list_recipe_star_desc">Biểu tượng sao chỉ ra trạng thái yêu thích của công thức</string>
+    <string name="cooktime_start_btn">Bắt đầu đếm thời gian</string>
+    <string name="notification_text">Thời gian còn lại: %1$s</string>
+    <string name="channel_name">Giờ kênh</string>
+    <string name="channel_description">Kênh cho hẹn giờ thông báo</string>
+    <string name="cooktime_tooltip">Bắt đầu một giờ nấu ăn</string>
+    <string name="cooktime_title">Giờ nấu ăn</string>
+    <string name="cooktime_reset_btn">Dừng lại và reset bộ đếm thời gian</string>
+    <string name="cooktime_pause_btn">Dừng lại hẹn giờ</string>
+    <string name="notification_title">Nextcloud Cookbook Giờ</string>
 </resources>
