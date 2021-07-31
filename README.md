@@ -61,9 +61,10 @@ This app needs Android &gt;= 6.0 (API &gt;= 23) and uses the libraries (see also
 
 - androidx dependencies
 - kotlinx coroutines
-- [klaxon by cbeust](https://github.com/cbeust/klaxon) (json parser)
+- kotlinx-serialization-json (json parser)
 - [Dexter by Karumi](https://github.com/Karumi/Dexter) (permission handling)
 - [SimpleStorage by anggrayudi](https://github.com/anggrayudi/SimpleStorage) (storage handling and choosing a directory)
+- [CircularProgressView by GuilhE](https://github.com/GuilhE/CircularProgressView) (circular progress view)
 
 ## License
 
