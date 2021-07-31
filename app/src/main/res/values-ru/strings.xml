@@ -91,4 +91,5 @@
     <string name="form_download_url_hint">Рецепт URL</string>
     <string name="form_download_options">Опции</string>
     <string name="ingredients_yield">Урожай</string>
+    <string name="list_recipe_star_desc">Значок звезды, указывающий на статус любимого рецепта</string>
 </resources>
