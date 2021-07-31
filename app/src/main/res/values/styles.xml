@@ -6,6 +6,7 @@
    <attr name="tab_ingredients_icon" format="reference" />
    <attr name="tab_instructions_icon" format="reference" />
    <attr name="tab_nutritions_icon" format="reference" />
+   <attr name="cooktimeBackground" format="color" />
 
    <!-- Light application theme. -->
    <style name="AppTheme.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -19,6 +20,7 @@
       <item name="tab_ingredients_icon">@drawable/ic_ingredients</item>
       <item name="tab_instructions_icon">@drawable/ic_instructions</item>
       <item name="tab_nutritions_icon">@drawable/ic_nutritions</item>
+      <item name="cooktimeBackground">@color/lightCooktimeBackground</item>
    </style>
 
    <!-- Dark application theme. -->
@@ -33,5 +35,6 @@
       <item name="tab_ingredients_icon">@drawable/ic_ingredients</item>
       <item name="tab_instructions_icon">@drawable/ic_instructions</item>
       <item name="tab_nutritions_icon">@drawable/ic_nutritions</item>
+      <item name="cooktimeBackground">@color/darkCooktimeBackground</item>
    </style>
 </resources>

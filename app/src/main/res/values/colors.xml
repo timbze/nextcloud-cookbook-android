@@ -6,4 +6,6 @@
     <color name="colorBackground">#FAFAFA</color>
     <color name="lightTextColor">#2E2E2E</color>
     <color name="darkTextColor">#FBEFF2</color>
+    <color name="lightCooktimeBackground">#F2F2F2</color>
+    <color name="darkCooktimeBackground">#6E6E6E</color>
 </resources>

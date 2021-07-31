@@ -16,7 +16,7 @@ import java.util.*
  * Utilities for the duration format.
  *
  * @author MicMun
- * @version 1.3, 17.01.21
+ * @version 1.4, 24.07.21
  */
 class DurationUtils {
    companion object {
@@ -52,6 +52,32 @@ class DurationUtils {
 
       fun formatDate(context: Context, publishedDate: Date): String {
          return DateFormat.getDateFormat(context).format(publishedDate)
+      }
+
+      /**
+       * Returns the number of seconds from display duration.
+       *
+       * @param isoString Duration in display format.
+       * @return Number of seconds.
+       */
+      fun durationInSeconds(isoString: String): Long {
+         val duration = Duration.parse(isoString) ?: Duration.ZERO
+         return duration.seconds
+      }
+
+      /**
+       * Returns the formatted duration for display in the timer.
+       *
+       * @param time Number of seconds.
+       * @return formatted duration in format HH:MI:SS.
+       */
+      fun formatDurationSeconds(time: Long): String {
+         val hours = time / 3600
+         var minutes = time % 3600
+         val second = minutes % 60
+         minutes /= 60
+
+         return String.format("%02d:%02d:%02d", hours, minutes, second)
       }
 
       /**

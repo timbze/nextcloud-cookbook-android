@@ -5,11 +5,14 @@
  */
 package de.micmun.android.nextcloudcookbook.ui
 
+import android.content.res.TypedArray
 import android.os.Build
 import android.text.Html
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.BindingAdapter
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
@@ -22,7 +25,7 @@ import java.util.stream.Collectors
  * Utilities for binding data to view.
  *
  * @author MicMun
- * @version 2.2, 24.04.21
+ * @version 2.3, 24.07.21
  */
 
 // Overview list
@@ -90,8 +93,23 @@ fun TextView.setPrepTime(item: DbRecipe?) {
 @BindingAdapter("recipeCookTime")
 fun TextView.setCookTime(item: DbRecipe?) {
    item?.let {
-      text = if (it.recipeCore.cookTime.isEmpty()) "" else DurationUtils.formatStringToDuration(
-         it.recipeCore.cookTime)
+      if (it.recipeCore.cookTime.isEmpty())
+         text = ""
+      else {
+         text = DurationUtils.formatStringToDuration(it.recipeCore.cookTime)
+         // timer icon
+         setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_timer, 0, 0, 0)
+         // tooltip
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            tooltipText = context.getString(R.string.cooktime_tooltip)
+         }
+         // themed background for cook time
+         val a: TypedArray = context.theme.obtainStyledAttributes(intArrayOf(R.attr.cooktimeBackground))
+         val attributeResourceId = a.getResourceId(0, 0)
+         val drawable = AppCompatResources.getDrawable(context, attributeResourceId)
+         background = drawable
+         a.recycle()
+      }
    }
 }
 
@@ -190,5 +208,19 @@ fun TextView.setTools(item: DbRecipe?) {
          else
             Html.fromHtml(resources.getString(R.string.text_tools, tools))
       }
+   }
+}
+
+// cooking timer
+/**
+ * Sets the top text for cooktimer text.
+ *
+ * @param item Recipe data.
+ */
+@BindingAdapter("topTextTimer")
+fun TextView.setTopText(item: DbRecipe?) {
+   item?.let {
+      text = context.getString(R.string.cooktime_top_text, it.recipeCore.name,
+                               DurationUtils.formatStringToDuration(it.recipeCore.cookTime))
    }
 }

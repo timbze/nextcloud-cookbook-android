@@ -23,7 +23,7 @@ buildscript {
       mavenCentral()
    }
    dependencies {
-      classpath 'com.android.tools.build:gradle:4.2.2'
+      classpath 'com.android.tools.build:gradle:7.0.0'
       classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
       classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$version_navigation"
    }
@@ -46,7 +46,7 @@ allprojects {
 }
 
 wrapper {
-   gradleVersion = "6.8"
+   gradleVersion = "7.1.1"
 }
 
 task clean(type: Delete) {

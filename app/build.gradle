@@ -49,8 +49,8 @@ android {
       useIR = true
    }
    buildFeatures {
-      viewBinding = true
-      dataBinding = true
+      viewBinding true
+      dataBinding true
    }
    lintOptions{
       disable 'MissingTranslation'
@@ -98,4 +98,7 @@ dependencies {
    implementation 'com.karumi:dexter:6.2.2'
    // simple storage
    implementation "com.anggrayudi:storage:0.5.2"
+
+   // timer view
+   implementation 'com.github.guilhe:circular-progress-view:2.0.0'
 }

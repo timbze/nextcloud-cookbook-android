@@ -27,6 +27,13 @@
       <argument
             android:name="recipeId"
             app:argType="long" />
+      <argument
+            android:name="remains"
+            android:defaultValue="-1L"
+            app:argType="long" />
+      <action
+            android:id="@+id/action_recipeDetailFragment_to_cooktimerFragment"
+            app:destination="@id/cooktimerFragment" />
    </fragment>
    <fragment
          android:id="@+id/recipeSearchFragment"
@@ -50,8 +57,19 @@
             app:destination="@id/recipeSearchFragment" />
    </fragment>
    <fragment
-       android:id="@+id/downloadFormFragment"
-       android:name="de.micmun.android.nextcloudcookbook.ui.downloadform.DownloadFormFragment"
-       android:label="DownloadFormFragment">
+         android:id="@+id/downloadFormFragment"
+         android:name="de.micmun.android.nextcloudcookbook.ui.downloadform.DownloadFormFragment"
+         android:label="DownloadFormFragment" />
+   <fragment
+         android:id="@+id/cooktimerFragment"
+         android:name="de.micmun.android.nextcloudcookbook.ui.cooktimer.CooktimerFragment"
+         android:label="CooktimerFragment">
+      <argument
+            android:name="recipeId"
+            app:argType="long" />
+      <argument
+            android:name="remains"
+            android:defaultValue="-1L"
+            app:argType="long" />
    </fragment>
 </navigation>
