@@ -5,83 +5,87 @@
  */
 package de.micmun.android.nextcloudcookbook.json.model
 
-import com.beust.klaxon.Json
 import de.micmun.android.nextcloudcookbook.json.*
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Generated recipe data classes..
  *
  * @author MicMun
- * @version 1.0, 19.02.21
+ * @version 1.1, 11.07.21
  */
-
-data class Recipe @JvmOverloads constructor(
-   @Json(name = "@context")
+@Serializable
+data class Recipe(
+   @SerialName("@context")
    val context: String = "http://schema.org",
-   @Json(name = "@type")
+   @SerialName("@type")
    val type: String = "Recipe",
-
    val aggregateRating: AggregateRating? = null,
-   @RecipeAuthor
+   @Serializable(with = AuthorSerializer::class)
    val author: Author? = null,
    val cookTime: String? = null,
-   @RecipeDate
+   @Serializable(with = DateSerializer::class)
    val dateCreated: String? = null,
-   @RecipeDate
+   @Serializable(with = DateSerializer::class)
    val dateModified: String? = null,
-   @RecipeDate
+   @Serializable(with = DateSerializer::class)
    val datePublished: String? = null,
    val description: String? = null,
-   @RecipeImage
-   var image: String? = null,
-   @Json(ignored = true)
+   @Serializable(with = ImageSerializier::class)
+   var image: String? = "",
+   @Transient
    var thumbImageUrl: String? = null,
-   @Json(ignored = true)
+   @Transient
    var fullImageUrl: String? = null,
-   @RecipeListString
-   val keywords: String? = null,
+   @Serializable(with = KeywordsSerializer::class)
+   val keywords: List<String>? = null,
    val name: String = "",
-   @RecipeNutrition
+   @Serializable(with = NutritionSerializer::class)
    val nutrition: Nutrition? = null,
    val prepTime: String? = null,
-   @RecipeStringList
+   @Serializable(with = StringListSerializer::class)
    var recipeCategory: List<String>? = null,
-   @RecipeStringList
+   @Serializable(with = StringListSerializer::class)
    val recipeIngredient: List<String>? = null,
-   @RecipeStringList
+   @Serializable(with = StringListSerializer::class)
    val recipeInstructions: List<String>? = null,
-   @Recipe2String
+   @Serializable(with = ListStringSerializer::class)
    val recipeYield: String? = null,
-   @Json(ignored = true)
+   @Transient
    val review: List<Review>? = null,
-   @RecipeStringList
+   @Serializable(with = StringListSerializer::class)
    val tool: List<String>? = null,
    val totalTime: String? = null,
    val url: String? = null,
-   @Recipe2String
+   @Serializable(with = ListStringSerializer::class)
    val yield: String? = null,
    val estimatedCost: String? = null
 )
 
+@Serializable
 data class AggregateRating(
-   @Json(name = "@type")
+   @SerialName("@type")
    val type: String? = null,
-   @Recipe2String
+   @Serializable(with = ListStringSerializer::class)
    val ratingCount: String? = null,
-   @Recipe2String
+   @Serializable(with = ListStringSerializer::class)
    val ratingValue: String? = null,
-   @Recipe2String
+   @Serializable(with = ListStringSerializer::class)
    val reviewCount: String? = null
 )
 
+@Serializable
 data class Author(
-   @Json(name = "@type")
+   @SerialName("@type")
    val type: String? = "Person",
    val name: String? = null
 )
 
+@Serializable
 data class Nutrition(
-   @Json(name = "@type")
+   @SerialName("@type")
    val type: String? = null,
    val calories: String? = null,
    val carbohydrateContent: String? = null,
@@ -92,8 +96,9 @@ data class Nutrition(
    val sodiumContent: String? = null
 )
 
+@Serializable
 data class Review(
-   @Json(name = "@type")
+   @SerialName("@type")
    val type: String? = null,
    val author: Author? = null,
    val dateCreated: String? = null,
@@ -101,8 +106,9 @@ data class Review(
    val itemReviewed: ItemReviewed? = null
 )
 
+@Serializable
 data class ItemReviewed(
-   @Json(name = "@type")
+   @SerialName("@type")
    val type: String? = null,
    val name: String? = null
 )

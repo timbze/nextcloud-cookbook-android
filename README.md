@@ -31,13 +31,17 @@ After that, the start view has a list of recipes and you select a recipe to view
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_detail_info.png" width="270" height="540" alt="Screenshot detail view with info tab"/>
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_detail_ingredients.png" width="270" height="540" alt="Screenshot detail view with ingredients tab"/>
 
+## Funding
+
+[<img src="liberapay_logo.png" alt="Liberapay logo" height="60">](https://liberapay.com/MicMun/donate) |
+[<img src="https://www.paypalobjects.com/webstatic/de_DE/i/de-pp-logo-200px.png" alt="PayPal Logo" height="60"/>](https://paypal.me/MicMun85)
+
 ## Roadmap
 
-* Cooking timer
-* Create new recipes
-* Edit recipes
-* Direct server synchronisation
-* ...
+- Create new recipes
+- Edit recipes
+- Direct server synchronisation
+- ...
 
 ## Translations
 
@@ -45,25 +49,26 @@ The project can be translated [here](https://weblate.bubu1.eu/projects/nextcloud
 
 Thanks to translators:
 
-* [@mondstern](https://mastodon.technology/@mondstern)
+- [@mondstern](https://mastodon.technology/@mondstern)
 
 ## Contributors
 
 Here I want to thank for contributions to the app.  
 Thanks to
 
-* [mrremo](https://codeberg.org/mrremo)
-* [leafar](https://codeberg.org/leafar)
+- [mrremo](https://codeberg.org/mrremo)
+- [leafar](https://codeberg.org/leafar)
 
 ## Dependencies
 
 This app needs Android &gt;= 6.0 (API &gt;= 23) and uses the libraries (see also app/build.gradle):
 
-* androidx dependencies
-* kotlinx coroutines
-* [klaxon by cbeust](https://github.com/cbeust/klaxon) (json parser)
-* [Dexter by Karumi](https://github.com/Karumi/Dexter) (permission handling)
-* [SimpleStorage by anggrayudi](https://github.com/anggrayudi/SimpleStorage) (storage handling and choosing a directory)
+- androidx dependencies
+- kotlinx coroutines
+- kotlinx-serialization-json (json parser)
+- [Dexter by Karumi](https://github.com/Karumi/Dexter) (permission handling)
+- [SimpleStorage by anggrayudi](https://github.com/anggrayudi/SimpleStorage) (storage handling and choosing a directory)
+- [CircularProgressView by GuilhE](https://github.com/GuilhE/CircularProgressView) (circular progress view)
 
 ## License
 

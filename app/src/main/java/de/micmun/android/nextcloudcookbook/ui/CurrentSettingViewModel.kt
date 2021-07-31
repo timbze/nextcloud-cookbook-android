@@ -17,7 +17,7 @@ import de.micmun.android.nextcloudcookbook.settings.SharedPreferenceLiveData
  * LiveData of the settings.
  *
  * @author MicMun
- * @version 1.2, 17.04.21
+ * @version 1.3, 31.07.21
  */
 class CurrentSettingViewModel(application: Application) : AndroidViewModel(application) {
    private val prefDao = PreferenceDao.getInstance(application)
@@ -35,6 +35,11 @@ class CurrentSettingViewModel(application: Application) : AndroidViewModel(appli
    val categoryChanged: LiveData<Boolean>
       get() = _categoryChanged
 
+   // remaining time from timer
+   private val _remains = MutableLiveData<Long>()
+   val remains: LiveData<Long>
+      get() = _remains
+
    fun setSorting(sort: Int) {
       prefDao.setSort(sort)
    }
@@ -47,5 +52,9 @@ class CurrentSettingViewModel(application: Application) : AndroidViewModel(appli
 
    fun resetCategoryChanged() {
       _categoryChanged.value = false
+   }
+
+   fun setRemains(remains: Long?) {
+      this._remains.value = remains
    }
 }

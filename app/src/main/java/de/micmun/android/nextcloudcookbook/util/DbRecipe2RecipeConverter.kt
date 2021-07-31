@@ -13,7 +13,7 @@ import java.util.stream.Collectors
  * Converter for database recipe pojo to recipe.
  *
  * @author MicMun
- * @version 1.0, 07.04.21
+ * @version 1.1, 11.07.21
  */
 class DbRecipe2RecipeConverter(private val recipe: DbRecipe) {
    fun convert(): Recipe {
@@ -29,8 +29,9 @@ class DbRecipe2RecipeConverter(private val recipe: DbRecipe) {
          image = recipe.recipeCore.image,
          thumbImageUrl = recipe.recipeCore.thumbImageUrl,
          fullImageUrl = recipe.recipeCore.fullImageUrl,
-         keywords = recipe.keywords?.joinToString(separator = ",",
-                                                  transform = {kw -> kw.keyword}) ?: "",
+//         keywords = recipe.keywords?.joinToString(separator = ",",
+//                                                  transform = {kw -> kw.keyword}) ?: "",
+         keywords = getKeywords(recipe.keywords),
          recipeCategory = recipe.recipeCore.recipeCategory.split(",").toList(),
          url = recipe.recipeCore.url,
          recipeYield = recipe.recipeCore.recipeYield,
@@ -176,18 +177,19 @@ class DbRecipe2RecipeConverter(private val recipe: DbRecipe) {
       var value: List<String>? = null
 
       if (instructions != null) {
-         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            value = instructions.stream()
-               .map { it.instruction }
-               .collect(Collectors.toList())
-         } else {
-            value = mutableListOf()
-            instructions.forEach { t ->
-               value.add(t.instruction)
-            }
-         }
+         value = instructions.stream()
+            .map { it.instruction }
+            .collect(Collectors.toList())
       }
 
       return value
+   }
+
+   private fun getKeywords(keywords: List<DbKeyword>?): List<String> {
+      return keywords?.stream()
+                ?.map {
+                   it.keyword
+                }
+                ?.collect(Collectors.toList()) ?: emptyList()
    }
 }

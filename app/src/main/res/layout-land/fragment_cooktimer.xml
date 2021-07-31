@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools">
+
+   <data>
+
+      <variable
+            name="recipe"
+            type="de.micmun.android.nextcloudcookbook.db.model.DbRecipe" />
+   </data>
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+
+      <TextView
+            android:id="@+id/topText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/timerView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:topTextTimer="@{recipe}" />
+
+      <com.github.guilhe.views.CircularProgressView
+            android:id="@+id/timerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:max="1"
+            app:progress="60"
+            app:progressBackgroundAlphaEnabled="true"
+            app:progressBarColor="@color/colorAccent"
+            app:progressBarThickness="8dp"
+            app:progressThumb="true"
+            app:reverse="true"
+            app:shadow="false" />
+
+      <TextView
+            android:id="@+id/textRemainTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/timerView"
+            app:layout_constraintEnd_toEndOf="@id/timerView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+      <ImageButton
+            android:id="@+id/startTimerBtn"
+            style="@style/TextAppearance.MaterialComponents.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/cooktime_start_btn"
+            android:src="@drawable/ic_start"
+            app:layout_constraintBottom_toTopOf="@id/resetTimerBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/timerView"
+            app:layout_constraintTop_toBottomOf="@+id/topText" />
+
+      <ImageButton
+            android:id="@+id/resetTimerBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/cooktime_reset_btn"
+            android:src="@drawable/ic_stop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/timerView"
+            app:layout_constraintTop_toBottomOf="@+id/startTimerBtn" />
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -32,7 +32,7 @@ import de.micmun.android.nextcloudcookbook.ui.MainActivity
  * Fragment for list of recipes.
  *
  * @author MicMun
- * @version 2.3, 17.04.21
+ * @version 2.4, 31.07.21
  */
 class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
    private lateinit var binding: FragmentRecipelistBinding
@@ -57,6 +57,7 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
       val factory = CurrentSettingViewModelFactory(MainActivity.mainApplication)
       settingViewModel =
          ViewModelProvider(MainActivity.mainApplication, factory).get(CurrentSettingViewModel::class.java)
+      binding.lifecycleOwner = viewLifecycleOwner
 
       recipesViewModel.isUpdating.observe(viewLifecycleOwner, { isUpdating ->
          isUpdating?.let {
@@ -83,6 +84,7 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
    }
 
    override fun onActivityCreated(savedInstanceState: Bundle?) {
+      @Suppress("DEPRECATION")
       super.onActivityCreated(savedInstanceState)
       (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
    }
@@ -120,7 +122,7 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
    private fun initializeRecipeList() {
       binding.recipeListViewModel = recipesViewModel
-      binding.lifecycleOwner = this
+      binding.lifecycleOwner = viewLifecycleOwner
 
       // divider for recyclerview
       val dividerDecoration = DividerItemDecoration(binding.recipeList.context, LinearLayoutManager.VERTICAL)
@@ -128,7 +130,7 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
       // data adapter
       adapter = RecipeListAdapter(RecipeListListener { recipeName -> recipesViewModel.onRecipeClicked(recipeName) },
-            DbRecipeRepository.getInstance(requireActivity().application))
+                                  DbRecipeRepository.getInstance(requireActivity().application))
       binding.recipeList.adapter = adapter
 
       // settings
@@ -156,8 +158,8 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             loadData()
 
             settingViewModel.categoryChanged.observe(viewLifecycleOwner, { changed ->
-               changed?.let {
-                  if (it) {
+               changed?.let { c ->
+                  if (c) {
                      binding.recipeList.postDelayed(250) {
                         binding.recipeList.smoothScrollToPosition(0)
                      }
