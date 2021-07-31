@@ -15,7 +15,7 @@
     <!-- tab titles -->
     <string name="tab_info_title">Infos</string>
     <string name="tab_ingredients_title">Ingrédients</string>
-    <string name="tab_instructions_title">Instructions</string>
+    <string name="tab_instructions_title">Consignes</string>
     <string name="tab_nutritions_title">Nutrition</string>
     <!-- tab infos -->
     <string name="text_uncategorized">Non classé</string>
@@ -88,7 +88,7 @@
     <string name="folder_pick_success" tools:ignore="MissingTranslation">Dossier %1$s sélectionné.</string>
     <string name="folder_pick_cancel" tools:ignore="MissingTranslation">Le sélecteur de dossiers a été annulé par l\'utilisateur.</string>
     <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">Vous n\'avez pas d\'accès en écriture à ce stockage, la sélection de ce dossier est donc inutile.
-\nVoulez-vous accorder l\'accès à ce dossier \?</string>
+\nVoulez-vous accorder l\'accès à ce dossier \?.</string>
     <string name="permission_ok_message" tools:ignore="MissingTranslation">L\'accès au stockage a été accordé pour %1$s.</string>
     <string name="dir_chooser_error_message">Erreur : Impossible d\'ouvrir un sélecteur de dossiers !</string>
     <string name="menu_download_tooltip">télécharger la recette</string>
@@ -100,4 +100,14 @@
     <string name="menu_download_title">Télécharger</string>
     <string name="form_download_title">Télécharger la recette</string>
     <string name="ingredients_yield">Rendu</string>
+    <string name="cooktime_title">Timer de cuisson</string>
+    <string name="cooktime_reset_btn">Arrêt et remise à zéro de la minuterie</string>
+    <string name="cooktime_pause_btn">Met en pause la minuterie</string>
+    <string name="cooktime_start_btn">Démarre la minuterie</string>
+    <string name="notification_text">Temps restant : %1$s</string>
+    <string name="channel_name">Canal de minuterie</string>
+    <string name="cooktime_tooltip">Lancer un minuteur de cuisson</string>
+    <string name="notification_title">Nextcloud Cookbook Minuteur</string>
+    <string name="channel_description">Canal pour les notifications de la minuterie</string>
+    <string name="list_recipe_star_desc">Icône étoile indiquant le statut de favori de la recette</string>
 </resources>
