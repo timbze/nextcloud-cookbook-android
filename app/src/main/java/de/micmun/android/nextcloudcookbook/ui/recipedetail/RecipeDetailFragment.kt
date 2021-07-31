@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.res.TypedArray
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +32,7 @@ import de.micmun.android.nextcloudcookbook.ui.MainActivity
  * Fragment for detail of a recipe.
  *
  * @author MicMun
- * @version 1.9, 31.07.21
+ * @version 2.0, 31.07.21
  */
 class RecipeDetailFragment : Fragment(), CookTimeClickListener {
    private lateinit var binding: FragmentDetailBinding
@@ -58,11 +57,18 @@ class RecipeDetailFragment : Fragment(), CookTimeClickListener {
 
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
-
       val args = RecipeDetailFragmentArgs.fromBundle(requireArguments())
-      recipeId = args.recipeId
-      remains = args.remains
-      serviceStarted = remains != -1L
+
+      if (savedInstanceState != null) {
+         currentPage = savedInstanceState[KEY_CURRENT_PAGE] as Int
+         serviceStarted = false
+         recipeId = args.recipeId
+         remains = -1L
+      } else {
+         recipeId = args.recipeId
+         remains = args.remains
+         serviceStarted = remains != -1L
+      }
    }
 
    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -105,10 +111,6 @@ class RecipeDetailFragment : Fragment(), CookTimeClickListener {
             setTitle(it.recipeCore.name)
          }
       })
-
-      if (savedInstanceState != null) {
-         currentPage = savedInstanceState[KEY_CURRENT_PAGE] as Int
-      }
 
       return binding.root
    }
