@@ -13,7 +13,7 @@ import java.util.stream.Collectors
  * Converter for recipe into database recipe pojo.
  *
  * @author MicMun
- * @version 1.2, 24.04.21
+ * @version 1.3, 11.07.21
  */
 class Recipe2DbRecipeConverter(private val recipe: Recipe) {
    fun convert(): DbRecipe {
@@ -45,8 +45,7 @@ class Recipe2DbRecipeConverter(private val recipe: Recipe) {
          review = getReview(recipe.review),
          recipeIngredient = getIngredients(recipe.recipeIngredient),
          recipeInstructions = getInstructions(recipe.recipeInstructions),
-         keywords = recipe.keywords?.splitToSequence(",")?.filter { str -> str.isNotEmpty() }
-            ?.map { str -> DbKeyword(keyword = str) }?.toList()
+         keywords = getKeywords(recipe.keywords)
       )
    }
 
@@ -132,17 +131,9 @@ class Recipe2DbRecipeConverter(private val recipe: Recipe) {
       var value: List<DbTool>? = null
 
       if (tools != null) {
-         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            value = tools.stream()
-               .map { DbTool(tool = it) }
-               .collect(Collectors.toList())
-         } else {
-            value = mutableListOf()
-            tools.forEach { t ->
-               val dbTool = DbTool(tool = t)
-               value.add(dbTool)
-            }
-         }
+         value = tools.stream()
+            .map { DbTool(tool = it) }
+            .collect(Collectors.toList())
       }
 
       return value
@@ -152,17 +143,9 @@ class Recipe2DbRecipeConverter(private val recipe: Recipe) {
       var value: List<DbIngredient>? = null
 
       if (ingredients != null) {
-         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            value = ingredients.stream()
-               .map { DbIngredient(ingredient = it) }
-               .collect(Collectors.toList())
-         } else {
-            value = mutableListOf()
-            ingredients.forEach { t ->
-               val dbIng = DbIngredient(ingredient = t)
-               value.add(dbIng)
-            }
-         }
+         value = ingredients.stream()
+            .map { DbIngredient(ingredient = it) }
+            .collect(Collectors.toList())
       }
 
       return value
@@ -172,17 +155,21 @@ class Recipe2DbRecipeConverter(private val recipe: Recipe) {
       var value: List<DbInstruction>? = null
 
       if (instructions != null) {
-         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            value = instructions.stream()
-               .map { DbInstruction(instruction = it) }
-               .collect(Collectors.toList())
-         } else {
-            value = mutableListOf()
-            instructions.forEach { t ->
-               val dbIns = DbInstruction(instruction = t)
-               value.add(dbIns)
-            }
-         }
+         value = instructions.stream()
+            .map { DbInstruction(instruction = it) }
+            .collect(Collectors.toList())
+      }
+
+      return value
+   }
+
+   private fun getKeywords(keywords: List<String>?): List<DbKeyword> {
+      var value: List<DbKeyword> = emptyList()
+
+      if (keywords != null) {
+         value = keywords.stream()
+            .map { DbKeyword(keyword = it) }
+            .collect(Collectors.toList())
       }
 
       return value

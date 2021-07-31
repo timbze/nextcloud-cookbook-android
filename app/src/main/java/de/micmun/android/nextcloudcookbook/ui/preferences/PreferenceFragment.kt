@@ -11,7 +11,9 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.documentfile.provider.DocumentFile
@@ -23,7 +25,6 @@ import com.anggrayudi.storage.callback.FolderPickerCallback
 import com.anggrayudi.storage.callback.StorageAccessCallback
 import com.anggrayudi.storage.file.StorageType
 import com.anggrayudi.storage.file.absolutePath
-import com.anggrayudi.storage.file.fullName
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -36,7 +37,7 @@ import de.micmun.android.nextcloudcookbook.util.StorageManager
  * Fragment for settings.
  *
  * @author MicMun
- * @version 1.6, 24.04.21
+ * @version 1.7, 31.07.21
  */
 class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener,
                            Preference.OnPreferenceClickListener {
@@ -73,21 +74,28 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
       // click listener
       dirPreference.onPreferenceClickListener = this
 
+      // setup storage
+      setupSimpleStorage()
+
+      // about version
+      val version = requireContext().packageManager.getPackageInfo(requireActivity().packageName, 0).versionName ?: ""
+      aboutPreference.title = getString(R.string.about_version, version)
+   }
+
+   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
       // observe values
-      viewModel.recipeDirectory.observe(this, {
+      viewModel.recipeDirectory.observe(viewLifecycleOwner, {
          val summary =
             if (it.isEmpty()) "" else StorageManager.getDocumentFromString(requireContext(), it)?.absolutePath ?: ""
-         Log.d("PreferenceFragment", "summary = $summary")
          dirPreference.summary = summary
       })
 
-      viewModel.theme.observe(this, {
+      viewModel.theme.observe(viewLifecycleOwner, {
          themePreference.value = it.toString()
          themePreference.summary = themePreference.entry
       })
 
-      setupSimpleStorage()
-      viewModel.storageAccesssed.observe(this, { isAccess ->
+      viewModel.storageAccesssed.observe(viewLifecycleOwner, { isAccess ->
          if (!isAccess) {
             Dexter.withContext(requireContext())
                .withPermissions(permission.WRITE_EXTERNAL_STORAGE, permission.READ_EXTERNAL_STORAGE)
@@ -106,9 +114,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
          }
       })
 
-      // about version
-      val version = requireContext().packageManager.getPackageInfo(requireActivity().packageName, 0).versionName ?: ""
-      aboutPreference.title = getString(R.string.about_version, version)
+      return super.onCreateView(inflater, container, savedInstanceState)
    }
 
    override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
@@ -145,7 +151,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
       try {
          storageManager.storage?.openFolderPicker(REQUEST_CODE_PICK_FOLDER)
       } catch (e: ActivityNotFoundException) {
-         Snackbar.make(requireView(), R.string.dir_chooser_error_message, Snackbar.LENGTH_LONG)
+         Snackbar.make(requireView(), R.string.dir_chooser_error_message, Snackbar.LENGTH_LONG).show()
       }
    }
 

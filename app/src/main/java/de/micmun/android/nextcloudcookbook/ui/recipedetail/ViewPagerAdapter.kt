@@ -21,9 +21,10 @@ import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
  * Adapter for the ViewPager2 to present tabs.
  *
  * @author MicMun
- * @version 1.7, 01.05.21
+ * @version 1.8, 24.07.21
  */
-class ViewPagerAdapter(private val recipe: DbRecipe, private val orientation: Int) :
+class ViewPagerAdapter(private val recipe: DbRecipe, private val orientation: Int,
+                       private val cookTimeClickListener: CookTimeClickListener) :
    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
    companion object {
       const val TYPE_INFO = 0
@@ -56,7 +57,7 @@ class ViewPagerAdapter(private val recipe: DbRecipe, private val orientation: In
       when (getItemViewType(position)) {
          TYPE_INFO -> {
             val viewHolder = holder as InfoViewHolder
-            viewHolder.bind(recipe)
+            viewHolder.bind(recipe, cookTimeClickListener)
          }
          TYPE_NUTRITIONS -> {
             val viewHolder = holder as NutritionsViewHolder
@@ -91,8 +92,9 @@ class ViewPagerAdapter(private val recipe: DbRecipe, private val orientation: In
        *
        * @param recipe Recipe with its data.
        */
-      fun bind(recipe: DbRecipe) {
+      fun bind(recipe: DbRecipe, cookTimeClickListener: CookTimeClickListener) {
          binding.recipe = recipe
+         binding.clickListener = cookTimeClickListener
          binding.executePendingBindings()
       }
 
@@ -113,7 +115,8 @@ class ViewPagerAdapter(private val recipe: DbRecipe, private val orientation: In
        * @param recipe Recipe data.
        */
       fun bind(recipe: DbRecipe) {
-         binding.ingredientsView.adapter = RecipeIngredientsAdapter(binding, getYield(recipe),recipe.recipeIngredient ?: emptyList())
+         binding.ingredientsView.adapter =
+            RecipeIngredientsAdapter(binding, getYield(recipe), recipe.recipeIngredient ?: emptyList())
          binding.executePendingBindings()
       }
 
@@ -202,7 +205,9 @@ class ViewPagerAdapter(private val recipe: DbRecipe, private val orientation: In
       RecyclerView.ViewHolder(binding.root) {
       fun bind(recipe: DbRecipe) {
          // ingredients
-         binding.ingredientsInclude.ingredientsView.adapter = RecipeIngredientsAdapter(binding.ingredientsInclude, getYield(recipe),recipe.recipeIngredient ?: emptyList())
+         binding.ingredientsInclude.ingredientsView.adapter =
+            RecipeIngredientsAdapter(binding.ingredientsInclude, getYield(recipe),
+                                     recipe.recipeIngredient ?: emptyList())
 
          // instructions
          binding.instructionsView.adapter = RecipeInstructionsAdapter(recipe.recipeInstructions ?: emptyList())

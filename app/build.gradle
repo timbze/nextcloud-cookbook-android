@@ -1,7 +1,16 @@
+buildscript {
+   repositories { mavenCentral() }
+
+   dependencies {
+      classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+   }
+}
+
 apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: "kotlin-kapt"
+apply plugin: 'kotlinx-serialization'
 
 android {
    compileSdkVersion 30
@@ -11,8 +20,8 @@ android {
       applicationId "de.micmun.android.nextcloudcookbook"
       minSdkVersion 23
       targetSdkVersion 30
-      versionCode 232
-      versionName "2.3.2"
+      versionCode 240
+      versionName "2.4.0"
 
       testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
       vectorDrawables.useSupportLibrary = true
@@ -40,8 +49,8 @@ android {
       useIR = true
    }
    buildFeatures {
-      viewBinding = true
-      dataBinding = true
+      viewBinding true
+      dataBinding true
    }
    lintOptions{
       disable 'MissingTranslation'
@@ -54,7 +63,7 @@ dependencies {
 
    implementation group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
 
-   implementation "androidx.core:core-ktx:1.5.0"
+   implementation "androidx.core:core-ktx:1.6.0"
    implementation "androidx.legacy:legacy-support-v4:1.0.0"
    implementation "androidx.appcompat:appcompat:$version_appcompat"
    implementation "androidx.constraintlayout:constraintlayout:$version_constraintlayout"
@@ -81,11 +90,15 @@ dependencies {
    implementation "androidx.room:room-ktx:$version_room"
 
    // Json parser
-   implementation 'com.beust:klaxon:5.4'
+   implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$version_serialization"
+
    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
    // permissions dexter
    implementation 'com.karumi:dexter:6.2.2'
    // simple storage
    implementation "com.anggrayudi:storage:0.5.2"
+
+   // timer view
+   implementation 'com.github.guilhe:circular-progress-view:2.0.0'
 }
