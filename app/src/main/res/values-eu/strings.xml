@@ -91,4 +91,14 @@
     <string name="form_download_commit">Deskargatu</string>
     <string name="form_download_folder">Override helburu karpeta</string>
     <string name="ingredients_yield">Etekin</string>
+    <string name="cooktime_reset_btn">Gelditzen eta berrezartzen tenporizadorea</string>
+    <string name="cooktime_pause_btn">Etenaldiak tenporizadorea</string>
+    <string name="cooktime_start_btn">Hasten tenporizadorea</string>
+    <string name="notification_title">Nextcloud Cookbook Tenporizadorea</string>
+    <string name="notification_text">Denbora geratzen da: %1$s</string>
+    <string name="channel_name">Tenporizadorea channel</string>
+    <string name="channel_description">Kanal tenporizadorea jakinarazpenak</string>
+    <string name="cooktime_tooltip">Hasteko sukaldaritza tenporizadorea</string>
+    <string name="cooktime_title">Sukaldaritza tenporizadorea</string>
+    <string name="list_recipe_star_desc">Izar ikonoa adieraziz gogoko egoera errezeta</string>
 </resources>
