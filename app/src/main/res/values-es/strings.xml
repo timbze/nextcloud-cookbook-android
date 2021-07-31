@@ -100,4 +100,14 @@
     <string name="form_download_url_hint">URL de la receta</string>
     <string name="form_download_title">Descargar receta</string>
     <string name="ingredients_yield">Rendimiento</string>
+    <string name="channel_description">Canal para las notificaciones del temporizador</string>
+    <string name="cooktime_tooltip">Iniciar un temporizador de cocción</string>
+    <string name="cooktime_start_btn">Inicia el temporizador</string>
+    <string name="notification_text">Tiempo restante: %1$s</string>
+    <string name="cooktime_title">Temporizador para cocinar</string>
+    <string name="cooktime_reset_btn">Detiene y reinicia el temporizador</string>
+    <string name="cooktime_pause_btn">Pausa el temporizador</string>
+    <string name="notification_title">Nextcloud Cookbook Temporizador</string>
+    <string name="channel_name">Canal del temporizador</string>
+    <string name="list_recipe_star_desc">Icono de estrella que indica el estado de favorito de la receta</string>
 </resources>
