@@ -91,4 +91,14 @@
     <string name="form_download_options">Valikud</string>
     <string name="form_download_url_hint">Retsepti URL</string>
     <string name="ingredients_yield">Saak</string>
+    <string name="cooktime_start_btn">Taimeri käivitamine</string>
+    <string name="notification_title">Nextcloud Cookbook Taimer</string>
+    <string name="notification_text">Aega jääb: %1$s</string>
+    <string name="channel_name">Taimer kanal</string>
+    <string name="cooktime_tooltip">Käivitage toiduvalmistamise taimer</string>
+    <string name="cooktime_title">Toiduvalmistamise taimer</string>
+    <string name="cooktime_reset_btn">Peatab ja lähtestab taimeri</string>
+    <string name="cooktime_pause_btn">Taimeri peatamine</string>
+    <string name="channel_description">Taimeri märguannete kanal</string>
+    <string name="list_recipe_star_desc">Tärniikoon, mis näitab retsepti lemmiku olekut</string>
 </resources>

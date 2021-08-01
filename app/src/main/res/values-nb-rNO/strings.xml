@@ -61,13 +61,13 @@
     <string name="theme_name_light">Lys</string>
     <string name="theme_name_dark">Mørk</string>
     <string name="theme_name_system">System</string>
-    <string name="sort_value_alpha_asc">Navn A-Å</string>
-    <string name="sort_value_alpha_desc">Navn Å-A</string>
+    <string name="sort_value_alpha_asc">Navn A-Z</string>
+    <string name="sort_value_alpha_desc">Navn Z-A</string>
     <string name="dir_chooser_error_message">Feil: Kan ikke åpne en mappevelger!</string>
     <string name="sort_value_date_asc">Dato publisert, stigende</string>
     <string name="sort_value_date_desc">Dato publisert, synkende</string>
     <string name="sort_value_time_asc">Total tid, stigende</string>
-    <string name="sort_value_time_desc">Total tid, synkende</string>
+    <string name="sort_value_time_desc">Total tid synkende</string>
     <string name="permission_canceled">Avbrutt av bruker</string>
     <string name="permission_select_root">Velg %1$s.</string>
     <string name="permission_ok_message">Lagringstilgang har blitt innvilget for %1$s.</string>
@@ -76,7 +76,7 @@
     <string name="folder_pick_success">Mappen %1$s er valgt.</string>
     <string name="permission_warning_nowrite">Du har ikke tilgang til lagring her, så du kan ikke velge denne mappen.
 \nØnsker du å innvilge tilgang til denne mappen\?.</string>
-    <string name="permissions_error_message">Tilgang nektet. Innvilg programmet lagringstilgang i innstillingene.</string>
+    <string name="permissions_error_message">Ingen tilgang! Appen trenger lagring tilgang, kan du aktivere innstillingene.</string>
     <string name="app_logo_desc">Oppstarter-ikon for programmet som viser et kokeboksymbol</string>
     <string name="title_duration">Varighet i TT:MM</string>
     <string name="text_author">Forfatter: %1$s</string>
@@ -92,4 +92,13 @@
 \nNextcloud Cookbook er et Nextcloud-kokebokprogram for håndtering av oppskrifter.</string>
     <string name="ingredients_yield">Gi</string>
     <string name="list_recipe_star_desc">Stjerneikon indikerer favorittstatus for oppskrift</string>
+    <string name="cooktime_reset_btn">Stopper og tilbakestilles tidtakeren</string>
+    <string name="cooktime_pause_btn">Pauser timer</string>
+    <string name="cooktime_start_btn">Starter tidtakeren</string>
+    <string name="notification_text">Tid som gjenstår: %1$s</string>
+    <string name="channel_name">Timer kanal</string>
+    <string name="channel_description">Kanal for timer meldinger</string>
+    <string name="cooktime_tooltip">Starte en cooking timer</string>
+    <string name="cooktime_title">Timer for matlaging</string>
+    <string name="notification_title">Nextcloud Cookbook Selvutløser</string>
 </resources>

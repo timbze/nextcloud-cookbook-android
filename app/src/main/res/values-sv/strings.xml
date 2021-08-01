@@ -91,4 +91,14 @@
     <string name="form_download_title">Hämta Receptet</string>
     <string name="menu_download_title">hämta</string>
     <string name="ingredients_yield">Utbyte</string>
+    <string name="notification_text">Tid kvar: %1$s</string>
+    <string name="channel_name">Timerkanal</string>
+    <string name="channel_description">Kanal för timermeddelanden</string>
+    <string name="cooktime_reset_btn">Stannar och återställer timern</string>
+    <string name="cooktime_pause_btn">Pausar timern</string>
+    <string name="cooktime_start_btn">Startar timern</string>
+    <string name="cooktime_title">Timer för tillagning</string>
+    <string name="notification_title">Nextcloud Cookbook Klocka</string>
+    <string name="cooktime_tooltip">Starta en matlagningstimer</string>
+    <string name="list_recipe_star_desc">Stjärnikonen som anger receptets favoritstatus</string>
 </resources>
