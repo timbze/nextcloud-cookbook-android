@@ -92,6 +92,10 @@ dependencies {
    // Json parser
    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$version_serialization"
 
+   // Api
+   implementation "com.squareup.retrofit2:retrofit:2.9.0"
+   implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+
    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
    // permissions dexter

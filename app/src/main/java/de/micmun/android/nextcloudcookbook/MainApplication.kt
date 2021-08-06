@@ -27,11 +27,13 @@ class MainApplication : Application(), ViewModelStoreOwner {
    override fun onCreate() {
       super.onCreate()
       Log.i(TAG, "Starting app")
+      AppContext = this
 
       Crypto.generateSecretKey()
    }
 
    companion object {
       private const val TAG = "MainApplication"
+      lateinit var AppContext: MainApplication
    }
 }
