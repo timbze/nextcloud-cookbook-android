@@ -22,9 +22,8 @@ localized:
       Therefore it is better to use the above mentioned path on the SD card (see First steps).
     summary: View the recipes from your Nextcloud Cookbook
     whatsNew: |-
-      + Switch from Klaxon to kotlinx.serialization for json parsing
-      + New feature: Mark recipes with a star (favorit) -> recipes will list on top (thanks to leafar)
-      + New feature: Cooking timer can be started with touch on cook time in recipe
+      + Switch Java-Version to 11 in build file
+      + Update libraries
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -47,9 +46,8 @@ localized:
       Deshalb bitte besser den oben genannten Pfad auf der SD-Karte nutzen (siehe Erste Schritte).
     summary: Zeige die Rezepte aus Deinem Nextcloud Kochbuch an
     whatsNew: |-
-      + Wechsel von Klaxon zu kotlinx.serialization für JSON-Parsing (technisch)
-      + Neues Feature: Markiere Rezepte mit einem Stern (Favorit) -> Rezepte werden an den Beginn der Liste gesetzt (Danke an leafar)
-      + Neues Feature: Kochtimer kann mit einem Touch auf die Kochzeit im Rezept gestartet werden
+      + Wechsel auf Java 11 im Buildskript
+      + Aktualisierung der Libraries
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/de/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -60,6 +58,10 @@ localized:
       - screenshot_settings.png
 
 builds:
+  - versionName: 2.4.1
+    versionCode: 241
+    sha256: 0dd3eb883429cde381e567a7da7b9281f58317574a1ace8a1b2bfde0e7ac1371
+    apkLink: sia://_BHgPh9EG4xEsdU6mYqPmglHSm0qBM5YqODrOL0HjaSRsA
   - versionName: 2.4.0
     versionCode: 240
     sha256: 54351ce2e0cf184dc6369eb73410ef48eb8be12d54c2a09b37f325d4bcef7419
@@ -93,8 +95,8 @@ builds:
     sha256: ab98ebfffc1cbbd15f1d7cb48644ae68733ca4669d39ebaf9817679bfc989912
     apkLink: sia://_Bka9tS-fiGpHIjylx-yjr1caGY_w7p-2vhm5rU9gqhG-w
 
-currentVersionName: 2.4.0
-currentVersionCode: 240
+currentVersionName: 2.4.1
+currentVersionCode: 241
 
 added: 1618153205273
-lastUpdated: 1627826520807
+lastUpdated: 1628252535054
