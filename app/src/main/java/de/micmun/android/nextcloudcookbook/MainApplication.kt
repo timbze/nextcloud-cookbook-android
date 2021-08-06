@@ -6,8 +6,10 @@
 package de.micmun.android.nextcloudcookbook
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
+import de.micmun.android.nextcloudcookbook.security.Crypto
 
 /**
  * Application of the app.
@@ -21,4 +23,15 @@ class MainApplication : Application(), ViewModelStoreOwner {
    }
 
    override fun getViewModelStore(): ViewModelStore = appViewModelStore
+
+   override fun onCreate() {
+      super.onCreate()
+      Log.i(TAG, "Starting app")
+
+      Crypto.generateSecretKey()
+   }
+
+   companion object {
+      private const val TAG = "MainApplication"
+   }
 }
