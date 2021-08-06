@@ -20,8 +20,8 @@ android {
       applicationId "de.micmun.android.nextcloudcookbook"
       minSdkVersion 23
       targetSdkVersion 30
-      versionCode 240
-      versionName "2.4.0"
+      versionCode 241
+      versionName "2.4.1"
 
       testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
       vectorDrawables.useSupportLibrary = true
@@ -41,18 +41,18 @@ android {
    }
    compileOptions {
       coreLibraryDesugaringEnabled true
-      sourceCompatibility = 1.8
-      targetCompatibility = 1.8
+      sourceCompatibility = JavaVersion.VERSION_11
+      targetCompatibility = JavaVersion.VERSION_11
    }
    kotlinOptions {
-      jvmTarget = JavaVersion.VERSION_1_8.toString()
+      jvmTarget = JavaVersion.VERSION_11.toString()
       useIR = true
    }
    buildFeatures {
       viewBinding true
       dataBinding true
    }
-   lintOptions{
+   lintOptions {
       disable 'MissingTranslation'
    }
 }
