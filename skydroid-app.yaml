@@ -22,8 +22,8 @@ localized:
       Therefore it is better to use the above mentioned path on the SD card (see First steps).
     summary: View the recipes from your Nextcloud Cookbook
     whatsNew: |-
-      + Bugfix: fixes for search and download
-      + Ingredients portion input centered
+      + Switch Java-Version to 11 in build file
+      + Update libraries
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -46,8 +46,8 @@ localized:
       Deshalb bitte besser den oben genannten Pfad auf der SD-Karte nutzen (siehe Erste Schritte).
     summary: Zeige die Rezepte aus Deinem Nextcloud Kochbuch an
     whatsNew: |-
-      + Bugfix: Korrekturen für Suche und Download
-      + Zutaten Portionen-Eingabe zentriert
+      + Wechsel auf Java 11 im Buildskript
+      + Aktualisierung der Libraries
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/de/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -58,6 +58,14 @@ localized:
       - screenshot_settings.png
 
 builds:
+  - versionName: 2.4.1
+    versionCode: 241
+    sha256: 0dd3eb883429cde381e567a7da7b9281f58317574a1ace8a1b2bfde0e7ac1371
+    apkLink: sia://_BHgPh9EG4xEsdU6mYqPmglHSm0qBM5YqODrOL0HjaSRsA
+  - versionName: 2.4.0
+    versionCode: 240
+    sha256: 54351ce2e0cf184dc6369eb73410ef48eb8be12d54c2a09b37f325d4bcef7419
+    apkLink: sia://_BGAVFRg1Er0ef-SSENFSaSyyLrL6-BzknElNUfM3WA5LQ
   - versionName: 2.3.2
     versionCode: 232
     sha256: e9bddfa7ea7e437e172745dacc4bf45727636802e0f0ae153adaf49b618623df
@@ -87,8 +95,8 @@ builds:
     sha256: ab98ebfffc1cbbd15f1d7cb48644ae68733ca4669d39ebaf9817679bfc989912
     apkLink: sia://_Bka9tS-fiGpHIjylx-yjr1caGY_w7p-2vhm5rU9gqhG-w
 
-currentVersionName: 2.3.2
-currentVersionCode: 232
+currentVersionName: 2.4.1
+currentVersionCode: 241
 
 added: 1618153205273
-lastUpdated: 1623496952460
+lastUpdated: 1628252535054

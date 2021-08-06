@@ -100,4 +100,14 @@
     <string name="menu_download_tooltip">recept letöltése</string>
     <string name="menu_download_title">Letöltés</string>
     <string name="ingredients_yield">Hozam</string>
+    <string name="channel_description">Csatorna az időzítő értesítésekhez</string>
+    <string name="cooktime_tooltip">Főzési időzítő indítása</string>
+    <string name="cooktime_title">Főzési időzítő</string>
+    <string name="cooktime_pause_btn">Megállítja az időzítőt</string>
+    <string name="cooktime_start_btn">Elindítja az időzítőt</string>
+    <string name="notification_title">Nextcloud Cookbook Időzítő</string>
+    <string name="notification_text">Maradék idő: %1$s</string>
+    <string name="cooktime_reset_btn">Megállítja és visszaállítja az időzítőt</string>
+    <string name="channel_name">Időzítő csatorna</string>
+    <string name="list_recipe_star_desc">Csillag ikon, amely a recept kedvenc státuszát jelzi</string>
 </resources>

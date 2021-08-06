@@ -92,4 +92,13 @@
     <string name="form_download_options">Опции</string>
     <string name="ingredients_yield">Урожай</string>
     <string name="list_recipe_star_desc">Значок звезды, указывающий на статус любимого рецепта</string>
+    <string name="cooktime_reset_btn">Останов и сброс таймера</string>
+    <string name="cooktime_pause_btn">Останавливает таймер</string>
+    <string name="cooktime_start_btn">Запускает таймер</string>
+    <string name="notification_title">Nextcloud Cookbook Таймер</string>
+    <string name="notification_text">Осталось времени: %1$s</string>
+    <string name="channel_name">Канал таймера</string>
+    <string name="channel_description">Канал для уведомлений таймера</string>
+    <string name="cooktime_title">Таймер готовки</string>
+    <string name="cooktime_tooltip">Запустить таймер приготовления</string>
 </resources>
