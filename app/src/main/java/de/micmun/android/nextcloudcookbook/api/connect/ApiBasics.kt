@@ -15,9 +15,9 @@ class ApiBasics {
 
         @OptIn(ExperimentalSerializationApi::class)
         fun retrofit(): Retrofit? {
-            var server = serverAddress() ?: return null
+            val server = serverAddress() ?: return null
             return retrofit ?: Retrofit.Builder()
-                .baseUrl("https://${serverAddress()}/")
+                .baseUrl("https://${server}/")
                 .addConverterFactory(json.asConverterFactory(MediaType.get("application/json")))
                 .build()
         }
@@ -29,9 +29,7 @@ class ApiBasics {
             }
             var addressSanitized = address.trim()
             addressSanitized = addressSanitized.replace("https://","").replace("http://", "")
-
-            if (addressSanitized.endsWith("/"))
-                addressSanitized = addressSanitized.trimEnd('/')
+            addressSanitized = addressSanitized.trimEnd('/')
 
             prefs.edit {
                 putString(SettingKey.SERVER_ADDRESS, addressSanitized)

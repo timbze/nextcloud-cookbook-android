@@ -37,4 +37,10 @@
       <item name="tab_nutritions_icon">@drawable/ic_nutritions</item>
       <item name="cooktimeBackground">@color/darkCooktimeBackground</item>
    </style>
+
+   <style name="HeaderText" parent="AppTheme">
+      <item name="android:textSize">24sp</item>
+      <item name="android:textStyle">bold</item>
+   </style>
+
 </resources>

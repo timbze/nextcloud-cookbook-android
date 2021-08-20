@@ -31,4 +31,8 @@
          android:id="@+id/preferenceFragment"
          android:title="@string/menu_settings_title"
          app:showAsAction="never" />
+   <item
+         android:id="@+id/connectFragment"
+         android:title="@string/connect_nextcloud"
+         app:showAsAction="never" />
 </menu>

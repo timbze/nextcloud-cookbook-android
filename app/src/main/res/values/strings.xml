@@ -149,4 +149,10 @@
    <string name="cooktime_reset_btn">Stops and resets the timer</string>
    <string name="cooktime_top_text" translatable="false">%1$s: %2$s</string>
    <string name="cooktime_title">Cooking timer</string>
+    <string name="password">Password</string>
+   <string name="username_or_email">Username or email</string>
+   <string name="connect_to_nextcloud">Connect to Nextcloud</string>
+   <string name="login">Login</string>
+    <string name="nextcloud_address">Nextcloud address</string>
+    <string name="connect_nextcloud">Connect Nextcloud</string>
 </resources>

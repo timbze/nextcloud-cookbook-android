@@ -21,6 +21,10 @@
          android:name="de.micmun.android.nextcloudcookbook.ui.preferences.PreferenceFragment"
          android:label="PreferenceFragment" />
    <fragment
+         android:id="@+id/connectFragment"
+         android:name="de.micmun.android.nextcloudcookbook.ui.connectapi.ConnectApi"
+         android:label="Connect Nextcloud" />
+   <fragment
          android:id="@+id/recipeDetailFragment"
          android:name="de.micmun.android.nextcloudcookbook.ui.recipedetail.RecipeDetailFragment"
          android:label="fragment_detail">
