@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import de.micmun.android.nextcloudcookbook.MainApplication
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.CategoryFilter
 import de.micmun.android.nextcloudcookbook.data.SortValue
@@ -54,9 +55,9 @@ class RecipeListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
       binding.swipeContainer.setOnRefreshListener(this)
       val recipeListViewModelFactory = RecipeListViewModelFactory(requireActivity().application)
       recipesViewModel = ViewModelProvider(this, recipeListViewModelFactory).get(RecipeListViewModel::class.java)
-      val factory = CurrentSettingViewModelFactory(MainActivity.mainApplication)
+      val factory = CurrentSettingViewModelFactory(MainApplication.AppContext)
       settingViewModel =
-         ViewModelProvider(MainActivity.mainApplication, factory).get(CurrentSettingViewModel::class.java)
+         ViewModelProvider(MainApplication.AppContext, factory).get(CurrentSettingViewModel::class.java)
       binding.lifecycleOwner = viewLifecycleOwner
 
       recipesViewModel.isUpdating.observe(viewLifecycleOwner, { isUpdating ->
