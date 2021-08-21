@@ -44,7 +44,7 @@ class CooktimerService : LifecycleService() {
    override fun onCreate() {
       super.onCreate()
       val factory = CooktimerServiceViewModelFactory(application)
-      viewModel = ViewModelProvider(MainApplication(), factory).get(CooktimerServiceViewModel::class.java)
+      viewModel = ViewModelProvider(MainApplication.AppContext, factory).get(CooktimerServiceViewModel::class.java)
    }
 
    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

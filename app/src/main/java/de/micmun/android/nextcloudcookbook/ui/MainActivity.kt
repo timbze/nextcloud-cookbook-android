@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity() {
    private lateinit var storageManager: StorageManager
 
    companion object {
-      val mainApplication = MainApplication()
       const val REQUEST_CODE_STORAGE_ACCESS = 1
    }
 
@@ -91,8 +90,8 @@ class MainActivity : AppCompatActivity() {
       }
 
       // settings
-      val factory = CurrentSettingViewModelFactory(mainApplication)
-      currentSettingViewModel = ViewModelProvider(mainApplication, factory).get(CurrentSettingViewModel::class.java)
+      val factory = CurrentSettingViewModelFactory(MainApplication.AppContext)
+      currentSettingViewModel = ViewModelProvider(MainApplication.AppContext, factory).get(CurrentSettingViewModel::class.java)
       binding.navView.setNavigationItemSelectedListener { item ->
          val currentCat = when (item.itemId) {
             R.id.menu_all_categories -> CategoryFilter(CategoryFilter.CategoryFilterOption.ALL_CATEGORIES)
