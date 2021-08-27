@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import de.micmun.android.nextcloudcookbook.MainApplication
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.RecipeFilter
 import de.micmun.android.nextcloudcookbook.data.SortValue
@@ -60,9 +61,9 @@ class RecipeSearchFragment : Fragment() {
       binding.recipeSearchViewModel = recipeSearchViewModel
       binding.lifecycleOwner = this
 
-      val factory = CurrentSettingViewModelFactory(MainActivity.mainApplication)
+      val factory = CurrentSettingViewModelFactory(MainApplication.AppContext)
       settingViewModel =
-         ViewModelProvider(MainActivity.mainApplication, factory).get(CurrentSettingViewModel::class.java)
+         ViewModelProvider(MainApplication.AppContext, factory).get(CurrentSettingViewModel::class.java)
 
       settingViewModel.category.observe(viewLifecycleOwner, { category ->
          category?.let {

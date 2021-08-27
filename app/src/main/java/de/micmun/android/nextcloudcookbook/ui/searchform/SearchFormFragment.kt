@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import de.micmun.android.nextcloudcookbook.MainApplication
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.CategoryFilter
 import de.micmun.android.nextcloudcookbook.data.RecipeFilter
@@ -43,9 +44,9 @@ class SearchFormFragment : Fragment(), SearchClickListener {
       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_form, container, false)
       binding.clickListener = this
 
-      val factory = CurrentSettingViewModelFactory(MainActivity.mainApplication)
+      val factory = CurrentSettingViewModelFactory(MainApplication.AppContext)
       settingViewModel =
-         ViewModelProvider(MainActivity.mainApplication, factory).get(CurrentSettingViewModel::class.java)
+         ViewModelProvider(MainApplication.AppContext, factory).get(CurrentSettingViewModel::class.java)
 
       settingViewModel.category.observe(viewLifecycleOwner, {
          category = it ?: CategoryFilter(CategoryFilter.CategoryFilterOption.ALL_CATEGORIES)

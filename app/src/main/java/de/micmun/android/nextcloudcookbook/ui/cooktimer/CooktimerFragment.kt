@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import de.micmun.android.nextcloudcookbook.MainApplication
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.databinding.FragmentCooktimerBinding
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
@@ -56,9 +57,9 @@ class CooktimerFragment : Fragment() {
       val factory = CooktimeViewModelFactory(recipeId, requireActivity().application)
       viewModel = ViewModelProvider(this, factory).get(CooktimeViewModel::class.java)
       binding.lifecycleOwner = viewLifecycleOwner
-      val settingFactory = CurrentSettingViewModelFactory(MainActivity.mainApplication)
+      val settingFactory = CurrentSettingViewModelFactory(MainApplication.AppContext)
       settingViewModel =
-         ViewModelProvider(MainActivity.mainApplication, settingFactory).get(CurrentSettingViewModel::class.java)
+         ViewModelProvider(MainApplication.AppContext, settingFactory).get(CurrentSettingViewModel::class.java)
 
       // initialize alarm and vibration
       alarmPlayer = ManagedAlarmPlayer(requireContext())

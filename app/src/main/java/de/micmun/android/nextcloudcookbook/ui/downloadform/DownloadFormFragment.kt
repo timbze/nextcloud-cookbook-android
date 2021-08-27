@@ -21,6 +21,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.anggrayudi.storage.file.findFolder
 import com.anggrayudi.storage.file.openOutputStream
+import de.micmun.android.nextcloudcookbook.MainApplication
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.databinding.FragmentDownloadFormBinding
 import de.micmun.android.nextcloudcookbook.json.model.Recipe
@@ -60,8 +61,8 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_download_form, container, false)
       binding.clickListener = this
 
-      val factory = CurrentSettingViewModelFactory(MainActivity.mainApplication)
-      settingViewModel = ViewModelProvider(MainActivity.mainApplication, factory)
+      val factory = CurrentSettingViewModelFactory(MainApplication.AppContext)
+      settingViewModel = ViewModelProvider(MainApplication.AppContext, factory)
          .get(CurrentSettingViewModel::class.java)
 
       settingViewModel.recipeDirectory.observe(viewLifecycleOwner, {

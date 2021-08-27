@@ -20,6 +20,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener
+import de.micmun.android.nextcloudcookbook.MainApplication
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.databinding.FragmentDetailBinding
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
@@ -75,9 +76,9 @@ class RecipeDetailFragment : Fragment(), CookTimeClickListener {
       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
 
       // Settings view model
-      val factory = CurrentSettingViewModelFactory(MainActivity.mainApplication)
+      val factory = CurrentSettingViewModelFactory(MainApplication.AppContext)
       settingViewModel =
-         ViewModelProvider(MainActivity.mainApplication, factory).get(CurrentSettingViewModel::class.java)
+         ViewModelProvider(MainApplication.AppContext, factory).get(CurrentSettingViewModel::class.java)
 
       // if the service calls this fragment, navigate to CooktimerFragment with remaining time
       if (serviceStarted) {
