@@ -5,6 +5,7 @@
  */
 package de.micmun.android.nextcloudcookbook.ui.recipedetail
 
+import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.text.Html
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ import de.micmun.android.nextcloudcookbook.db.model.DbIngredient
  * @author MicMun
  * @version 1.2, 31.05.21
  */
+@SuppressLint("NotifyDataSetChanged")
 class RecipeIngredientsAdapter(
    private val tabBinding: TabIngredientsBinding,
    private val baseYield: Float,
@@ -47,12 +49,12 @@ class RecipeIngredientsAdapter(
          // Replaces the first decimal found with a scaled value. This is usually the amount,
          // but there may be exceptions. We highlight it in bold print to make the user aware.
          "\\d+([.,]\\d+)?".toRegex().find(ingredient)?.let {
-            val newValue = (it.value.toFloat() * factor)
+            val newValue = (it.value.replace(',', '.').toFloat() * factor)
             ingredient = ingredient.replaceRange(it.range, "<b>${prettyString(newValue)}</b>")
          }
          // Replace the decimal after a '-' with a scaled value, if there is a range of amounts.
          "-\\d+([.,]\\d+)?".toRegex().find(ingredient)?.let {
-            val newValue = (it.value.toFloat() * factor)
+            val newValue = (it.value.replace(',', '.').toFloat() * factor)
             ingredient = ingredient.replaceRange(it.range, "<b>${prettyString(newValue)}</b>")
          }
       }

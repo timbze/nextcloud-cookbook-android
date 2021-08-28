@@ -5,22 +5,22 @@
     <string name="no_information">Žádné informace.</string>
     <!-- recipe list -->
     <string name="empty_list">Žádné recepty.</string>
-    <string name="recipe_list_image_desc">Náhled obrázku receptu</string>
+    <string name="recipe_list_image_desc">Náhledový obrázek receptu</string>
     <!-- recipe detail -->
-    <string name="img_desc_logo">Žádné informace</string>
+    <string name="img_desc_logo">Logo receptu</string>
     <string name="title_duration">Trvání v HH: MM</string>
     <string name="tooltip_prep_time">Příprava</string>
     <string name="tooltip_cook_time">Vaření</string>
     <string name="tooltip_total_time">Celkový</string>
     <!-- tab titles -->
     <string name="tab_info_title">Informace</string>
-    <string name="tab_ingredients_title">Složení</string>
-    <string name="tab_instructions_title">Instrukce</string>
-    <string name="tab_nutritions_title">Výživa</string>
+    <string name="tab_ingredients_title">Přísady</string>
+    <string name="tab_instructions_title">Pokyny</string>
+    <string name="tab_nutritions_title">Výživové hodnoty</string>
     <!-- tab infos -->
     <string name="text_uncategorized">Nezařazeno</string>
     <string name="text_categories"><strong> Kategorie: </strong> <br/> %1$s</string>
-    <string name="text_yield"><strong>Výnos:</strong> %1$s</string>
+    <string name="text_yield"><strong>Výtěžnost:</strong> %1$s</string>
     <string name="text_author">Autor: %1$s</string>
     <string name="text_url">Zdroj: %1$s</string>
     <string name="text_no_keywords">Žádná klíčová slova.</string>
@@ -31,7 +31,7 @@
     <string name="nutrition_carbohydrate_content">Obsah sacharidů: %1$s</string>
     <string name="nutrition_cholesterol_content">Obsah cholesterolu: %1$s</string>
     <string name="nutrition_fat_content">Obsah tuku: %1$s</string>
-    <string name="nutrition_fiberContent">Obsah vláken: %1$s</string>
+    <string name="nutrition_fiberContent">Obsah vlákniny: %1$s</string>
     <string name="nutrition_protein_content">Obsah bílkovin: %1$s</string>
     <string name="nutrition_saturated_fat_content">Obsah nasycených tuků: %1$s</string>
     <string name="nutrition_serving_size">Velikost porce: %1$s</string>
@@ -40,43 +40,43 @@
     <string name="nutrition_trans_fat_content">Obsah trans-tuků: %1$s</string>
     <string name="nutrition_unsaturated_fat_content">Obsah nenasycených tuků: %1$s</string>
     <!-- menu -->
-    <string name="menu_search_title">Pokročilé Vyhledávání</string>
+    <string name="menu_search_title">Pokročilé vyhledávání</string>
     <string name="menu_settings_title">Nastavení</string>
-    <string name="menu_sort_title">Třídit</string>
-    <string name="menu_refresh_tooltip">Obnovte recepty</string>
+    <string name="menu_sort_title">Seřadit</string>
+    <string name="menu_refresh_tooltip">Načíst recepty znovu</string>
     <string name="menu_search_tooltip">Hledat recept</string>
-    <string name="search_hint">Hledání podle jména</string>
+    <string name="search_hint">Hledání podle názvu</string>
     <!-- search formular -->
-    <string name="form_search_title">Pokročilé Vyhledávání</string>
+    <string name="form_search_title">Pokročilé vyhledávání</string>
     <string name="form_search_hint">Vyhledávací dotaz</string>
-    <string name="form_ignore_case">Ignorovat případ\?</string>
-    <string name="form_exact_search">Přesné vyhledávání\?</string>
-    <string name="form_types">Zadejte vyhledávání</string>
-    <string name="form_type_keyword">Hledání podle klíčového slova</string>
-    <string name="form_type_ingredients">Hledání podle přísady</string>
-    <string name="form_type_yield">Hledání podle výnosu</string>
+    <string name="form_ignore_case">Ignorovat velká/MALÁ písmena\?</string>
+    <string name="form_exact_search">Vyhledat přesně tak, jak zadáno\?</string>
+    <string name="form_types">Vyhledávejte psaním</string>
+    <string name="form_type_keyword">Hledat podle klíčového slova</string>
+    <string name="form_type_ingredients">Hledat podle přísady</string>
+    <string name="form_type_yield">Hledat podle výtěžnosti</string>
     <string name="form_search_options">Možnosti hledání</string>
-    <string name="form_search_commit">Vyhledávání</string>
+    <string name="form_search_commit">Hledat</string>
     <!-- navdrawer_menu -->
     <string name="menu_all_categories">Zobrazit všechny kategorie</string>
     <string name="menu_uncategorized">Nezařazeno</string>
     <!-- preferences -->
-    <string name="pref_category_function">Funkčnost</string>
-    <string name="pref_category_design">Kresba</string>
-    <string name="preftitle_recipeDir">Adresář receptů</string>
-    <string name="title_dir_chooser">Vyberte adresář…</string>
-    <string name="preftitle_theme">Vyberte téma</string>
-    <string name="about_title">O</string>
+    <string name="pref_category_function">Funkce</string>
+    <string name="pref_category_design">Návrh</string>
+    <string name="preftitle_recipeDir">Složka s recepty</string>
+    <string name="title_dir_chooser">Vyberte složku…</string>
+    <string name="preftitle_theme">Vyberte motiv vzhledu</string>
+    <string name="about_title">O aplikaci</string>
     <string name="about_version">Verze aplikace: %1$s</string>
     <string name="about_summary">© 2020-2021 by MicMun. Licence podle GPLv3.
 \n
-\nNextcloud Cookbook je aplikace pro kuchařku na nextcloud pro správu receptů.</string>
-    <string name="theme_name_light">Světlo</string>
-    <string name="theme_name_dark">Tma</string>
-    <string name="theme_name_system">Systém</string>
+\nNextcloud Cookbook je klient pro aplikaci, sloužící ke správě receptů na Nextcloud serveru.</string>
+    <string name="theme_name_light">Světlý</string>
+    <string name="theme_name_dark">Tmavý</string>
+    <string name="theme_name_system">Dle systému</string>
     <string name="sort_value_alpha_asc">Název A-Z</string>
     <string name="sort_value_alpha_desc">Název Z-A</string>
-    <string name="sort_value_date_asc">Datum zveřejněno vzestupně</string>
+    <string name="sort_value_date_asc">Datum zveřejnění vzestupně</string>
     <string name="sort_value_date_desc">Datum zveřejnění sestupně</string>
     <string name="sort_value_time_asc">Celkový čas vzestupně</string>
     <string name="sort_value_time_desc">Celkový čas sestupně</string>
@@ -90,14 +90,14 @@
     <string name="permission_select_root" tools:ignore="MissingTranslation">Vyberte prosím %1$s.</string>
     <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">K tomuto úložišti nemáte přístup pro zápis, a proto je výběr této složky zbytečný.
 \nChcete povolit přístup k této složce\?.</string>
-    <string name="dir_chooser_error_message">Chyba: Nelze otevřít nástroj pro výběr složek!</string>
-    <string name="form_download_folder">Přepsání cílové složky</string>
-    <string name="form_download_override_existing">Nahrazení stávající složky s recepty</string>
+    <string name="dir_chooser_error_message">Chyba: Nedaří se otevřít nástroj pro výběr složek!</string>
+    <string name="form_download_folder">Přepsat cílovou složku</string>
+    <string name="form_download_override_existing">Nahradit stávající složku s recepty</string>
     <string name="menu_download_tooltip">stáhnout recept</string>
     <string name="menu_download_title">Stáhnout</string>
     <string name="form_download_commit">Stáhnout</string>
     <string name="form_download_options">Možnosti</string>
-    <string name="form_download_url_hint">Adresa URL receptů</string>
+    <string name="form_download_url_hint">URL adresa receptu</string>
     <string name="form_download_title">Stáhnout recept</string>
     <string name="ingredients_yield">Výtěžnost</string>
     <string name="cooktime_title">Časovač vaření</string>
