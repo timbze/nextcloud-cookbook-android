@@ -26,7 +26,7 @@ import de.micmun.android.nextcloudcookbook.util.DurationUtils
  * Service for timer.
  *
  * @author MicMun
- * @version 1.0, 30.07.21
+ * @version 1.1, 28.08.21
  */
 class CooktimerService : LifecycleService() {
    private lateinit var viewModel: CooktimerServiceViewModel
@@ -148,8 +148,8 @@ class CooktimerService : LifecycleService() {
     */
    private fun buildPendingIntent(): PendingIntent {
       val bundle = Bundle()
-      bundle.putLong("remains", remains)
       bundle.putLong("recipeId", recipeId)
+      bundle.putBoolean("isServiceStarted", true)
 
       return NavDeepLinkBuilder(this)
          .setGraph(R.navigation.navigation)

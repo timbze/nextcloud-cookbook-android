@@ -28,9 +28,9 @@
             android:name="recipeId"
             app:argType="long" />
       <argument
-            android:name="remains"
-            android:defaultValue="-1L"
-            app:argType="long" />
+            android:name="isServiceStarted"
+            app:argType="boolean"
+            android:defaultValue="false"/>
       <action
             android:id="@+id/action_recipeDetailFragment_to_cooktimerFragment"
             app:destination="@id/cooktimerFragment" />
@@ -66,10 +66,6 @@
          android:label="CooktimerFragment">
       <argument
             android:name="recipeId"
-            app:argType="long" />
-      <argument
-            android:name="remains"
-            android:defaultValue="-1L"
             app:argType="long" />
    </fragment>
 </navigation>
