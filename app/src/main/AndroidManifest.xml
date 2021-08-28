@@ -38,5 +38,10 @@
                android:resource="@xml/searchable" />
       </activity>
       <service android:name=".services.CooktimerService" />
+      <receiver android:name=".services.RemainReceiver" android:exported="false">
+         <intent-filter>
+            <action android:name="de.micmun.android.nextcloudcookbook.services.RemainReceiver.REMAIN_ACTION" />
+         </intent-filter>
+      </receiver>
    </application>
 </manifest>

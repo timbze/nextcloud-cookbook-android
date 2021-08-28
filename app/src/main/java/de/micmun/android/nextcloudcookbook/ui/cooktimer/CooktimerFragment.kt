@@ -7,6 +7,7 @@ package de.micmun.android.nextcloudcookbook.ui.cooktimer
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,6 @@ import de.micmun.android.nextcloudcookbook.databinding.FragmentCooktimerBinding
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModel
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModelFactory
-import de.micmun.android.nextcloudcookbook.ui.MainActivity
 import de.micmun.android.nextcloudcookbook.ui.widget.BlinkAnimation
 import de.micmun.android.nextcloudcookbook.util.DurationUtils
 import de.micmun.android.nextcloudcookbook.util.ManagedAlarmPlayer
@@ -90,6 +90,7 @@ class CooktimerFragment : Fragment() {
             setTitle()
 
             if (args.remains != -1L) {
+               Log.d("CooktimerFragment", "remains = ${args.remains}")
                viewModel.setCurrentMillis(viewModel.total!! - args.remains)
                viewModel.startTimer()
             }

@@ -16,6 +16,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.ViewModelProvider
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavDeepLinkBuilder
 import de.micmun.android.nextcloudcookbook.MainApplication
 import de.micmun.android.nextcloudcookbook.R
@@ -91,6 +92,8 @@ class CooktimerService : LifecycleService() {
                notificationBuilder.setContentText(
                   getString(R.string.notification_text, DurationUtils.formatDurationSeconds(remains / 1000)))
             }
+            LocalBroadcastManager.getInstance(applicationContext).sendBroadcast(buildIntent(remains))
+
             pendingIntent = buildPendingIntent()
             notificationBuilder.setContentIntent(pendingIntent)
             notification = notificationBuilder.build()
@@ -153,5 +156,12 @@ class CooktimerService : LifecycleService() {
          .setDestination(R.id.recipeDetailFragment)
          .setArguments(bundle)
          .createPendingIntent()
+   }
+
+   private fun buildIntent(remains: Long): Intent {
+      val intent = Intent()
+      intent.action = RemainReceiver.REMAIN_ACTION
+      intent.putExtra(RemainReceiver.KEY_REMAINS, remains)
+      return intent
    }
 }

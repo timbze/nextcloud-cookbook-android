@@ -2,6 +2,7 @@ package de.micmun.android.nextcloudcookbook.ui.recipedetail
 
 import android.Manifest
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.res.TypedArray
 import android.os.Build
 import android.os.Bundle
@@ -14,6 +15,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -25,9 +27,9 @@ import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.databinding.FragmentDetailBinding
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipe
 import de.micmun.android.nextcloudcookbook.services.CooktimerService
+import de.micmun.android.nextcloudcookbook.services.RemainReceiver
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModel
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModelFactory
-import de.micmun.android.nextcloudcookbook.ui.MainActivity
 
 /**
  * Fragment for detail of a recipe.
@@ -207,12 +209,24 @@ class RecipeDetailFragment : Fragment(), CookTimeClickListener {
    }
 
    override fun onClick(recipe: DbRecipe) {
-      findNavController()
-         .navigate(RecipeDetailFragmentDirections.actionRecipeDetailFragmentToCooktimerFragment(recipe.recipeCore.id))
+      if (MainApplication.AppContext.receiver != null) {
+         remains = MainApplication.AppContext.receiver!!.remains ?: -1L
+         stopService()
+         findNavController()
+            .navigate(RecipeDetailFragmentDirections.actionRecipeDetailFragmentToCooktimerFragment(recipe.recipeCore.id,
+                                                                                                   remains))
+      } else {
+         findNavController()
+            .navigate(
+               RecipeDetailFragmentDirections.actionRecipeDetailFragmentToCooktimerFragment(recipe.recipeCore.id))
+      }
    }
 
    private fun startService(remains: Long) {
       if (checkServicePermission()) {
+         MainApplication.AppContext.receiver = RemainReceiver()
+         LocalBroadcastManager.getInstance(requireContext())
+            .registerReceiver(MainApplication.AppContext.receiver!!, IntentFilter(RemainReceiver.REMAIN_ACTION))
          val intent = cooktimeService()
          intent.putExtra("RECIPE_ID", recipeId)
          intent.putExtra("COOK_TIME", remains)
@@ -222,6 +236,10 @@ class RecipeDetailFragment : Fragment(), CookTimeClickListener {
 
    private fun stopService() {
       requireActivity().stopService(cooktimeService())
+      MainApplication.AppContext.receiver?.let {
+         LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(it)
+         MainApplication.AppContext.receiver = null
+      }
    }
 
    /**
