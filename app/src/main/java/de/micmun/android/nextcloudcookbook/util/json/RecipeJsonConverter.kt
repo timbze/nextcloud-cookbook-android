@@ -26,10 +26,11 @@ class RecipeJsonConverter {
          return try {
             getParser().decodeFromString(Recipe.serializer(), json)
          } catch (e: SerializationException) {
-            Log.e("RecipeJsonConverter", "ERROR: ${e.message} for json = {$json}")
+            Log.e("RecipeJsonConverter", "SerializationException: ${e.message} for json = {$json}")
             null
          } catch (e: Exception) {
-            Log.e("RecipeJsonConverter", "ERROR: ${e.message} for json = {$json}")
+            Log.e("RecipeJsonConverter", "Exception: ${e.message} for json = {$json}")
+            e.printStackTrace()
             null
          }
       }
