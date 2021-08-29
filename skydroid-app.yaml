@@ -22,8 +22,7 @@ localized:
       Therefore it is better to use the above mentioned path on the SD card (see First steps).
     summary: View the recipes from your Nextcloud Cookbook
     whatsNew: |-
-      + Switch Java-Version to 11 in build file
-      + Update libraries
+      + Bugfixes (App crashes, optimize app context)
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -46,8 +45,7 @@ localized:
       Deshalb bitte besser den oben genannten Pfad auf der SD-Karte nutzen (siehe Erste Schritte).
     summary: Zeige die Rezepte aus Deinem Nextcloud Kochbuch an
     whatsNew: |-
-      + Wechsel auf Java 11 im Buildskript
-      + Aktualisierung der Libraries
+      + Fehlerbehebungen (Abstürze, optimierter App-Kontext)
     phoneScreenshotsBaseUrl: https://codeberg.org/MicMun/nextcloud-cookbook/raw/branch/master/fastlane/metadata/android/de/images/phoneScreenshots/
     phoneScreenshots:
       - screenshot_start.png
@@ -58,6 +56,10 @@ localized:
       - screenshot_settings.png
 
 builds:
+  - versionName: 2.4.2
+    versionCode: 242
+    sha256: 26d1aef44d64045f4baf0cdb484a988a878d0dac9c91221cca485ab5b56a5e23
+    apkLink: sia://_BHGIUY1-vabvABGCHQyhEURCaqwLTyx8kPNqzKrtlbQ6Q
   - versionName: 2.4.1
     versionCode: 241
     sha256: 0dd3eb883429cde381e567a7da7b9281f58317574a1ace8a1b2bfde0e7ac1371
@@ -95,8 +97,8 @@ builds:
     sha256: ab98ebfffc1cbbd15f1d7cb48644ae68733ca4669d39ebaf9817679bfc989912
     apkLink: sia://_Bka9tS-fiGpHIjylx-yjr1caGY_w7p-2vhm5rU9gqhG-w
 
-currentVersionName: 2.4.1
-currentVersionCode: 241
+currentVersionName: 2.4.2
+currentVersionCode: 242
 
 added: 1618153205273
-lastUpdated: 1628252535054
+lastUpdated: 1630255930525
