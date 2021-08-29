@@ -81,8 +81,7 @@
 \nKas soovite sellele kaustale juurdepääsu anda\?.</string>
     <string name="permission_canceled" tools:ignore="MissingTranslation">Tühistatud kasutaja poolt</string>
     <string name="text_tools"><strong>Vajalikud tööriistad:</strong><br/> %1$s</string>
-    <string name="dir_chooser_error_message">Viga: kaustavalijat ei saa avada!</string>
-    <string name="form_download_folder">Alista sihtkaust</string>
+   <string name="form_download_folder">Alista sihtkaust</string>
     <string name="menu_download_tooltip">lae retsept alla</string>
     <string name="menu_download_title">Lae alla</string>
     <string name="form_download_title">Laadige alla retsept</string>

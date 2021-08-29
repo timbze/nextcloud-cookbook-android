@@ -8,7 +8,6 @@ package de.micmun.android.nextcloudcookbook.util
 import android.content.Context
 import android.net.Uri
 import androidx.documentfile.provider.DocumentFile
-import com.anggrayudi.storage.SimpleStorage
 import com.anggrayudi.storage.file.DocumentFileCompat
 import com.anggrayudi.storage.file.DocumentFileType
 
@@ -16,27 +15,10 @@ import com.anggrayudi.storage.file.DocumentFileType
  * Manages the storage access.
  *
  * @author MicMun
- * @version 1.2, 17.04.21
+ * @version 1.3, 29.08.21
  */
-class StorageManager private constructor() {
-   var storage: SimpleStorage? = null
-
+class StorageManager {
    companion object {
-      @Volatile
-      private var INSTANCE: StorageManager? = null
-
-      fun getInstance(): StorageManager {
-         synchronized(StorageManager::class) {
-            var instance = INSTANCE
-
-            if (instance == null) {
-               instance = StorageManager()
-               INSTANCE = instance
-            }
-            return instance
-         }
-      }
-
       fun getDocumentFromString(context: Context, path: String): DocumentFile? {
          return getDocumentFile(context, path, DocumentFileType.FOLDER)
       }

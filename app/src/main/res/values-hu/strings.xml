@@ -90,8 +90,7 @@
     <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">Nincs írási hozzáférése ehhez a tárhelyhez, így hiába választja ki ezt a mappát.
 \nSzeretne hozzáférést biztosítani ehhez a mappához \?.</string>
     <string name="permission_ok_message" tools:ignore="MissingTranslation">A tárhely-hozzáférés megadva %1$s számára.</string>
-    <string name="dir_chooser_error_message">Hiba: Nem lehet megnyitni a mappaválasztót!</string>
-    <string name="form_download_folder">Célmappa felülírása</string>
+   <string name="form_download_folder">Célmappa felülírása</string>
     <string name="form_download_commit">Letöltés</string>
     <string name="form_download_override_existing">Meglévő recept mappa cseréje</string>
     <string name="form_download_options">Opciók</string>

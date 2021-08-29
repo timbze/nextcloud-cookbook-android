@@ -81,7 +81,6 @@
     <string name="text_tools"><strong>Nødvendigt værktøj:</strong><br/> %1$s</string>
     <string name="folder_pick_success" tools:ignore="MissingTranslation">Mappe %1$s valgt.</string>
     <string name="folder_pick_cancel" tools:ignore="MissingTranslation">Mappevælgeren er annulleret af brugeren.</string>
-    <string name="dir_chooser_error_message">Fejl: Kan ikke åbne en mappevælger!</string>
     <string name="form_download_title">Hent opskrift</string>
     <string name="form_download_folder">Overskrive målmappe</string>
     <string name="form_download_options">Indstillinger</string>

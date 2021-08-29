@@ -90,8 +90,7 @@
     <string name="text_tools"><strong>Nodig gereedschap:</strong><br/> %1$s</string>
     <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">U heeft geen schrijftoegang tot deze opslag, dus het selecteren van deze map is zinloos.
 \nWilt u toegang verlenen tot deze map\?.</string>
-    <string name="dir_chooser_error_message">Fout: Kan geen mapkiezer openen!</string>
-    <string name="form_download_folder">Doelmap opheffen</string>
+   <string name="form_download_folder">Doelmap opheffen</string>
     <string name="menu_download_title">Downloaden</string>
     <string name="menu_download_tooltip">downloaden recept</string>
     <string name="form_download_override_existing">Bestaande receptmap vervangen</string>

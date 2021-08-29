@@ -90,8 +90,7 @@
 \nCzy chcesz przyznać dostęp do tego folderu\?.</string>
     <string name="header_image_desc">Zdjęcie nagłówka przepisu</string>
     <string name="text_tools"><strong>Potrzebne narzędzia:</strong><br/> %1$s</string>
-    <string name="dir_chooser_error_message">Błąd: Nie można otworzyć selektora folderów!</string>
-    <string name="form_download_folder">Zastąp folder docelowy</string>
+   <string name="form_download_folder">Zastąp folder docelowy</string>
     <string name="form_download_commit">Pobierz</string>
     <string name="menu_download_title">Pobierz</string>
     <string name="menu_download_tooltip">pobierz przepis</string>
