@@ -18,7 +18,6 @@ import kotlinx.coroutines.launch
 
 class ConnectApi : Fragment() {
     private lateinit var binding: ConnectApiBinding
-    private lateinit var viewModel: ConnectApiViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = ConnectApiBinding.inflate(inflater, container, false)
