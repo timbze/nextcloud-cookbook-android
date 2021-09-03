@@ -14,7 +14,7 @@ import de.micmun.android.nextcloudcookbook.db.model.*
  * Interface for database operations.
  *
  * @author MicMun
- * @version 1.1, 24.04.21
+ * @version 1.2, 28.08.21
  */
 @Dao
 interface RecipeDataDao {
@@ -51,6 +51,10 @@ interface RecipeDataDao {
    @Transaction
    @Query("SELECT * FROM keywords WHERE keyword IN(:n)")
    fun findKeywords(n: List<String>): List<DbKeyword>?
+
+   @Transaction
+   @Query("SELECT * FROM recipeXKeywords WHERE recipeId = :recipeId")
+   fun findKeywordRefsByRecipeId(recipeId: Long): List<DbRecipeKeywordRelation>?
 
    @Transaction
    @Query("SELECT * FROM keywords ORDER BY keyword")
@@ -118,4 +122,13 @@ interface RecipeDataDao {
 
    @Delete
    fun deleteIngredients(ingredient: List<DbIngredient>)
+
+   @Delete
+   fun deleteKeywordRelations(keywords: List<DbRecipeKeywordRelation>)
+
+   @Query("DELETE FROM keywords")
+   fun deleteAllKeywords()
+
+   @Query("DELETE FROM recipeXKeywords")
+   fun deleteAllKeywordRelations()
 }

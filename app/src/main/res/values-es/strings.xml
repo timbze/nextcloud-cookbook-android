@@ -90,7 +90,6 @@
     <string name="permission_ok_message" tools:ignore="MissingTranslation">Se ha concedido acceso al almacenamiento para %1$s.</string>
     <string name="header_image_desc">Imagen de cabecera de la receta</string>
     <string name="text_tools"><strong>Herramientas necesarias:</strong><br/> %1$s</string>
-    <string name="dir_chooser_error_message">Error: No se puede abrir el selector de carpetas!</string>
     <string name="menu_download_title">Descargar</string>
     <string name="menu_download_tooltip">descargar receta</string>
     <string name="form_download_folder">Anular carpeta de destino</string>

@@ -5,17 +5,14 @@
  */
 package de.micmun.android.nextcloudcookbook.ui
 
-import android.Manifest
 import android.app.SearchManager
 import android.content.Intent
 import android.content.res.Configuration
-import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.documentfile.provider.DocumentFile
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -24,38 +21,28 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.afollestad.materialdialogs.MaterialDialog
-import com.anggrayudi.storage.SimpleStorage
-import com.anggrayudi.storage.callback.StorageAccessCallback
-import com.anggrayudi.storage.file.StorageType
-import com.anggrayudi.storage.file.absolutePath
+import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener
 import de.micmun.android.nextcloudcookbook.MainApplication
 import de.micmun.android.nextcloudcookbook.R
+import de.micmun.android.nextcloudcookbook.data.CategoryFilter
 import de.micmun.android.nextcloudcookbook.data.RecipeFilter
 import de.micmun.android.nextcloudcookbook.databinding.ActivityMainBinding
 import de.micmun.android.nextcloudcookbook.settings.PreferenceDao
-import de.micmun.android.nextcloudcookbook.data.CategoryFilter
 import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListFragmentDirections
-import de.micmun.android.nextcloudcookbook.util.StorageManager
 
 /**
  * Main Activity of the app.
  *
  * @author MicMun
- * @version 1.5, 07.04.21
+ * @version 1.6, 29.08.21
  */
 class MainActivity : AppCompatActivity() {
    private lateinit var binding: ActivityMainBinding
    private lateinit var drawerLayout: DrawerLayout
    private lateinit var currentSettingViewModel: CurrentSettingViewModel
-   private lateinit var storageManager: StorageManager
-
-   companion object {
-      const val REQUEST_CODE_STORAGE_ACCESS = 1
-   }
 
    override fun onCreate(savedInstanceState: Bundle?) {
       // apply theme
@@ -91,7 +78,8 @@ class MainActivity : AppCompatActivity() {
 
       // settings
       val factory = CurrentSettingViewModelFactory(MainApplication.AppContext)
-      currentSettingViewModel = ViewModelProvider(MainApplication.AppContext, factory).get(CurrentSettingViewModel::class.java)
+      currentSettingViewModel =
+         ViewModelProvider(MainApplication.AppContext, factory).get(CurrentSettingViewModel::class.java)
       binding.navView.setNavigationItemSelectedListener { item ->
          val currentCat = when (item.itemId) {
             R.id.menu_all_categories -> CategoryFilter(CategoryFilter.CategoryFilterOption.ALL_CATEGORIES)
@@ -103,85 +91,16 @@ class MainActivity : AppCompatActivity() {
          true
       }
 
-      setupSimpleStorage(savedInstanceState)
-      val preferences = PreferenceDao.getInstance(application)
-      preferences.isStorageAccessed().observe(this, { isAccess ->
-         if (!isAccess) {
-            Dexter.withContext(this)
-               .withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
-               .withListener(object : BaseMultiplePermissionsListener() {
-                  override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-                     val grantStatus = if (report.areAllPermissionsGranted()) "granted" else "denied"
-
-                     if (grantStatus == "granted") {
-                        preferences.setStorageAccess(true)
-                     } else {
-                        preferences.setStorageAccess(false)
-                     }
-                  }
-               }).check()
+      // permission for storage
+      currentSettingViewModel.storageAccessed.observe(this, {
+         it?.let { access ->
+            if (!access) {
+               storagePermissions()
+            }
          }
       })
 
       handleIntent(intent)
-   }
-
-   private fun setupSimpleStorage(savedInstanceState: Bundle?) {
-      storageManager = StorageManager.getInstance()
-      storageManager.storage = SimpleStorage(this, savedInstanceState)
-
-      storageManager.storage?.storageAccessCallback = object : StorageAccessCallback {
-         override fun onRootPathNotSelected(
-            requestCode: Int,
-            rootPath: String,
-            rootStorageType: StorageType,
-            uri: Uri
-         ) {
-            MaterialDialog(this@MainActivity)
-               .message(text = "Please select $rootPath")
-               .negativeButton(android.R.string.cancel)
-               .positiveButton {
-                  storageManager.storage?.requestStorageAccess(REQUEST_CODE_STORAGE_ACCESS, rootStorageType)
-               }.show()
-         }
-
-         override fun onCancelledByUser(requestCode: Int) {
-            Toast.makeText(baseContext, "Cancelled by user", Toast.LENGTH_SHORT).show()
-         }
-
-         override fun onStoragePermissionDenied(requestCode: Int) {
-            requestStoragePermission()
-         }
-
-         override fun onRootPathPermissionGranted(requestCode: Int, root: DocumentFile) {
-            Toast.makeText(
-               baseContext,
-               "Storage access has been granted for ${root.absolutePath}",
-               Toast.LENGTH_SHORT
-            ).show()
-         }
-      }
-   }
-
-   private fun requestStoragePermission() {
-      Dexter.withContext(this)
-         .withPermissions(
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-         )
-         .withListener(object : BaseMultiplePermissionsListener() {
-            override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-               if (report.areAllPermissionsGranted()) {
-                  storageManager.storage?.requestStorageAccess(REQUEST_CODE_STORAGE_ACCESS)
-               } else {
-                  Toast.makeText(
-                     baseContext,
-                     "Please grant storage permissions",
-                     Toast.LENGTH_SHORT
-                  ).show()
-               }
-            }
-         }).check()
    }
 
    override fun onNewIntent(intent: Intent?) {
@@ -205,6 +124,11 @@ class MainActivity : AppCompatActivity() {
       }
    }
 
+   /**
+    * Handle intent for search.
+    *
+    * @param intent incoming intent.
+    */
    private fun handleIntent(intent: Intent?) {
       if (Intent.ACTION_SEARCH == intent?.action) {
          val query = intent.getStringExtra(SearchManager.QUERY)
@@ -217,18 +141,30 @@ class MainActivity : AppCompatActivity() {
       }
    }
 
-   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-      super.onActivityResult(requestCode, resultCode, data)
-      storageManager.storage?.onActivityResult(requestCode, resultCode, data)
-   }
+   /**
+    * Handles the default storage permissions.
+    */
+   private fun storagePermissions() {
+      val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+         listOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+      } else {
+         listOf(android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+      }
+      val preference = PreferenceDao.getInstance(MainApplication.AppContext)
 
-   override fun onSaveInstanceState(outState: Bundle) {
-      storageManager.storage?.onSaveInstanceState(outState)
-      super.onSaveInstanceState(outState)
-   }
-
-   override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-      super.onRestoreInstanceState(savedInstanceState)
-      storageManager.storage?.onRestoreInstanceState(savedInstanceState)
+      Dexter.withContext(this)
+         .withPermissions(permissions)
+         .withListener(object : BaseMultiplePermissionsListener() {
+            override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+               if (report?.areAllPermissionsGranted() == true) {
+                  preference.setStorageAccess(true)
+               } else {
+                  preference.setStorageAccess(false)
+                  Snackbar.make(binding.root, "No storage access!", Snackbar.LENGTH_LONG).show()
+               }
+            }
+         })
+         .check()
    }
 }

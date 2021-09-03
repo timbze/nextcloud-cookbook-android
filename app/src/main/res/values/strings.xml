@@ -89,7 +89,7 @@
    <string name="preftitle_recipeDir">Recipe Directory</string>
    <string name="prefkey_recipeDir" translatable="false">recipe_directory</string>
    <string name="title_dir_chooser">Choose a directory…</string>
-   <string name="dir_chooser_error_message">Error: Cannot open a folder picker!</string>
+   <string name="dir_chooser_error">Error: Root folder is not allowed!</string>
    <string name="prefkey_theme" translatable="false">theme_setting</string>
    <string name="preftitle_theme">Select Theme</string>
 

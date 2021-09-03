@@ -14,18 +14,22 @@ import java.util.stream.Collectors
  * Serializer for Keywords.
  *
  * @author MicMun
- * @version 1.0, 09.07.21
+ * @version 1.1, 28.08.21
  */
 object KeywordsSerializer : JsonTransformingSerializer<List<String>>(ListSerializer(String.serializer())) {
    override fun transformDeserialize(element: JsonElement): JsonElement {
-      return if (element is JsonArray)
-         element
-      else {
-         val content = element.jsonPrimitive.content
-         val splits = content.split(",")
-         JsonArray(splits.stream()
-                      .map { k -> JsonPrimitive(k.trim()) }
-                      .collect(Collectors.toList()))
+      return when (element) {
+         is JsonArray -> JsonArray(element.filter { it.jsonPrimitive.content.isNotEmpty() })
+         is JsonObject -> JsonArray(emptyList())
+         else -> {
+            val content = element.jsonPrimitive.content
+            val splits: List<String> = content.split(",")
+            JsonArray(splits.stream()
+                         .map(String::trim)
+                         .filter(String::isNotEmpty)
+                         .map { k -> JsonPrimitive(k) }
+                         .collect(Collectors.toList()))
+         }
       }
    }
 }

@@ -90,8 +90,7 @@
     <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">Vous n\'avez pas d\'accès en écriture à ce stockage, la sélection de ce dossier est donc inutile.
 \nVoulez-vous accorder l\'accès à ce dossier \?.</string>
     <string name="permission_ok_message" tools:ignore="MissingTranslation">L\'accès au stockage a été accordé pour %1$s.</string>
-    <string name="dir_chooser_error_message">Erreur : Impossible d\'ouvrir un sélecteur de dossiers !</string>
-    <string name="menu_download_tooltip">télécharger la recette</string>
+   <string name="menu_download_tooltip">télécharger la recette</string>
     <string name="form_download_url_hint">URL de la recette</string>
     <string name="form_download_options">Options</string>
     <string name="form_download_override_existing">Remplacer le dossier de recette existant</string>

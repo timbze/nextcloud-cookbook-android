@@ -5,30 +5,20 @@
  */
 package de.micmun.android.nextcloudcookbook.ui.preferences
 
-import android.Manifest.permission
 import android.app.TaskStackBuilder
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import com.afollestad.materialdialogs.MaterialDialog
-import com.anggrayudi.storage.callback.FolderPickerCallback
-import com.anggrayudi.storage.callback.StorageAccessCallback
-import com.anggrayudi.storage.file.StorageType
-import com.anggrayudi.storage.file.absolutePath
+import com.anggrayudi.storage.file.getAbsolutePath
 import com.google.android.material.snackbar.Snackbar
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.ui.MainActivity
 import de.micmun.android.nextcloudcookbook.util.StorageManager
@@ -37,7 +27,7 @@ import de.micmun.android.nextcloudcookbook.util.StorageManager
  * Fragment for settings.
  *
  * @author MicMun
- * @version 1.7, 31.07.21
+ * @version 1.8, 29.08.21
  */
 class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener,
                            Preference.OnPreferenceClickListener {
@@ -46,14 +36,21 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
    private lateinit var dirPreference: Preference
    private lateinit var themePreference: IntListPreference
 
-   private val storageManager = StorageManager.getInstance()
-
-   companion object {
-      const val REQUEST_CODE_STORAGE_ACCESS = 1
-      const val REQUEST_CODE_PICK_FOLDER = 2
+   private val getContent = registerForActivityResult(ActivityResultContracts.OpenDocumentTree()) {
+      it?.let { uri ->
+         if (Uri.decode(uri.toString()).endsWith(":")) {
+            Snackbar.make(requireView(), "Cannot use root folder!", Snackbar.LENGTH_SHORT).show()
+         } else {
+            val takeFlags: Int = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+            requireContext().contentResolver.takePersistableUriPermission(uri, takeFlags)
+            viewModel.setRecipeDirectory(uri.toString())
+         }
+      }
    }
+   private var currentDirectory: String = ""
 
    override fun onActivityCreated(savedInstanceState: Bundle?) {
+      @Suppress("DEPRECATION")
       super.onActivityCreated(savedInstanceState)
       (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.menu_settings_title)
    }
@@ -74,9 +71,6 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
       // click listener
       dirPreference.onPreferenceClickListener = this
 
-      // setup storage
-      setupSimpleStorage()
-
       // about version
       val version = requireContext().packageManager.getPackageInfo(requireActivity().packageName, 0).versionName ?: ""
       aboutPreference.title = getString(R.string.about_version, version)
@@ -85,9 +79,12 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
       // observe values
       viewModel.recipeDirectory.observe(viewLifecycleOwner, {
-         val summary =
-            if (it.isEmpty()) "" else StorageManager.getDocumentFromString(requireContext(), it)?.absolutePath ?: ""
-         dirPreference.summary = summary
+         it?.let { dir ->
+            val summary = if (dir.isEmpty()) "" else StorageManager.getDocumentFromString(requireContext(), dir)
+                                                        ?.getAbsolutePath(requireContext()) ?: ""
+            dirPreference.summary = summary
+            currentDirectory = dir
+         }
       })
 
       viewModel.theme.observe(viewLifecycleOwner, {
@@ -97,20 +94,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
 
       viewModel.storageAccesssed.observe(viewLifecycleOwner, { isAccess ->
          if (!isAccess) {
-            Dexter.withContext(requireContext())
-               .withPermissions(permission.WRITE_EXTERNAL_STORAGE, permission.READ_EXTERNAL_STORAGE)
-               .withListener(object : BaseMultiplePermissionsListener() {
-                  override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-                     val grantStatus = if (report.areAllPermissionsGranted()) getString(R.string.permission_granted)
-                     else getString(R.string.permission_denied)
-
-                     if (grantStatus == getString(R.string.permission_granted)) {
-                        viewModel.setStorageAccessed(true)
-                     } else {
-                        viewModel.setStorageAccessed(false)
-                     }
-                  }
-               }).check()
+            //askPermission()
          }
       })
 
@@ -147,89 +131,39 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
     * Choose dialog for picking a folder.
     */
    private fun chooseFolder() {
-      setupFolderPickerCallback()
-      try {
-         storageManager.storage?.openFolderPicker(REQUEST_CODE_PICK_FOLDER)
-      } catch (e: ActivityNotFoundException) {
-         Snackbar.make(requireView(), R.string.dir_chooser_error_message, Snackbar.LENGTH_LONG).show()
-      }
+      askPermission()
+
+//      when {
+//         currentDirectory == "" -> {
+//            askPermission()
+//         }
+//         arePermissionsGranted(currentDirectory) -> {
+//            val folder = StorageManager.getDocumentFromString(requireContext(), currentDirectory)
+//            Snackbar.make(requireView(),
+//                          getString(R.string.folder_pick_success, folder?.getAbsolutePath(requireContext()) ?: ""),
+//                          Snackbar.LENGTH_SHORT).show()
+//            viewModel.setRecipeDirectory(folder?.uri?.toString() ?: "")
+//         }
+//         else -> {
+//            askPermission()
+//         }
+//      }
    }
 
-   private fun requestStoragePermission() {
-      Dexter.withContext(context)
-         .withPermissions(
-            permission.WRITE_EXTERNAL_STORAGE,
-            permission.READ_EXTERNAL_STORAGE
-         )
-         .withListener(object : BaseMultiplePermissionsListener() {
-            override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-               if (report.areAllPermissionsGranted()) {
-                  storageManager.storage?.requestStorageAccess(REQUEST_CODE_STORAGE_ACCESS)
-               } else {
-                  Toast.makeText(
-                     context,
-                     getString(R.string.permission_please_grant),
-                     Toast.LENGTH_SHORT
-                  ).show()
-               }
-            }
-         }).check()
+   private fun askPermission() {
+      val folder = StorageManager.getDocumentFromString(requireContext(), currentDirectory)
+      getContent.launch(folder?.uri ?: Uri.EMPTY)
    }
 
-   private fun setupSimpleStorage() {
-      storageManager.storage?.storageAccessCallback = object : StorageAccessCallback {
-         override fun onRootPathNotSelected(requestCode: Int, rootPath: String, rootStorageType: StorageType,
-                                            uri: Uri) = MaterialDialog(requireActivity())
-            .message(text = getString(R.string.permission_select_root, rootPath))
-            .negativeButton(android.R.string.cancel)
-            .positiveButton {
-               storageManager.storage?.requestStorageAccess(MainActivity.REQUEST_CODE_STORAGE_ACCESS, rootStorageType)
-            }.show()
-
-         override fun onCancelledByUser(requestCode: Int) {
-            Toast.makeText(requireContext(), getString(R.string.permission_canceled), Toast.LENGTH_SHORT).show()
-         }
-
-         override fun onStoragePermissionDenied(requestCode: Int) {
-            requestStoragePermission()
-         }
-
-         override fun onRootPathPermissionGranted(requestCode: Int, root: DocumentFile) {
-            Toast.makeText(requireContext(), getString(R.string.permission_ok_message, root.absolutePath),
-                           Toast.LENGTH_SHORT).show()
+   private fun arePermissionsGranted(uriString: String): Boolean {
+      // list of all persisted permissions for our app
+      val list = requireContext().contentResolver.persistedUriPermissions
+      for (i in list.indices) {
+         val persistedUriString = list[i].uri.toString()
+         if (persistedUriString == uriString && list[i].isWritePermission && list[i].isReadPermission) {
+            return true
          }
       }
-   }
-
-   private fun setupFolderPickerCallback() {
-      storageManager.storage?.folderPickerCallback = object : FolderPickerCallback {
-         override fun onStoragePermissionDenied(requestCode: Int) {
-            requestStoragePermission()
-         }
-
-         override fun onStorageAccessDenied(requestCode: Int, folder: DocumentFile?, storageType: StorageType?) {
-            if (storageType == null) {
-               requestStoragePermission()
-               return
-            }
-
-            MaterialDialog(requireActivity())
-               .message(text = getString(R.string.permission_warning_nowrite))
-               .negativeButton(android.R.string.cancel)
-               .positiveButton {
-                  storageManager.storage?.requestStorageAccess(REQUEST_CODE_STORAGE_ACCESS, storageType)
-               }.show()
-         }
-
-         override fun onFolderSelected(requestCode: Int, folder: DocumentFile) {
-            Toast.makeText(requireActivity(), getString(R.string.folder_pick_success, folder.absolutePath),
-                           Toast.LENGTH_SHORT).show()
-            viewModel.setRecipeDirectory(folder.uri.toString())
-         }
-
-         override fun onCancelledByUser(requestCode: Int) {
-            Toast.makeText(context, getString(R.string.folder_pick_cancel), Toast.LENGTH_SHORT).show()
-         }
-      }
+      return false
    }
 }

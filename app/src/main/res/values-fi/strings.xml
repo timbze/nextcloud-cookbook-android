@@ -81,8 +81,7 @@
     <string name="permission_select_root" tools:ignore="MissingTranslation">Valitse %1$s.</string>
     <string name="permission_please_grant" tools:ignore="MissingTranslation">Myönnä tallennusoikeudet.</string>
     <string name="permission_ok_message" tools:ignore="MissingTranslation">Tallennusoikeus on myönnetty %1$s:lle.</string>
-    <string name="dir_chooser_error_message">Virhe: kansionpoimijaa ei voi avata!</string>
-    <string name="menu_download_title">Lataa</string>
+   <string name="menu_download_title">Lataa</string>
     <string name="menu_download_tooltip">lataa resepti</string>
     <string name="form_download_url_hint">Resepti-URL</string>
     <string name="form_download_title">Lataa resepti</string>

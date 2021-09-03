@@ -45,7 +45,7 @@ import java.net.URL
  * Fragment for recipe download form.
  *
  * @author Leafar
- * @version 1.1, 11.07.21
+ * @version 1.2, 29.08.21
  */
 class DownloadFormFragment : Fragment(), DownloadClickListener {
    private lateinit var binding: FragmentDownloadFormBinding
@@ -77,6 +77,7 @@ class DownloadFormFragment : Fragment(), DownloadClickListener {
    }
 
    override fun onActivityCreated(savedInstanceState: Bundle?) {
+      @Suppress("DEPRECATION")
       super.onActivityCreated(savedInstanceState)
       (requireActivity() as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.form_download_title)
    }

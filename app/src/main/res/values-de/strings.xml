@@ -69,7 +69,7 @@
    <string name="pref_category_design">Aussehen</string>
    <string name="preftitle_recipeDir">Rezept-Verzeichnis</string>
    <string name="title_dir_chooser">Wähle ein Verzeichnis…</string>
-   <string name="dir_chooser_error_message">Fehler: Kann keinen Verzeichnis-Auswahldialog öffnen!</string>
+   <string name="dir_chooser_error">Fehler: Das Wurzelverzeichnis ist nicht erlaubt!</string>
    <string name="preftitle_theme">Wähle ein Theme</string>
    <string name="about_title">Über</string>
    <string name="about_version">Anwendungsversion: %1$s</string>

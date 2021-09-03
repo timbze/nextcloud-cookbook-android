@@ -81,8 +81,7 @@
     <string name="permission_warning_nowrite" tools:ignore="MissingTranslation">Ez duzu idatzi honetan sartzeko, biltegiratze, beraz, hautatu karpeta hau da alferrikakoa.
 \nNahi duzu sarbidea emateko karpeta hau\?.</string>
     <string name="text_tools"><strong>Beharrezko tresnak:</strong><br/> %1$s</string>
-    <string name="dir_chooser_error_message">Errorea: Ezin ireki karpeta-hautatzailearen!</string>
-    <string name="menu_download_title">Deskargatu</string>
+   <string name="menu_download_title">Deskargatu</string>
     <string name="menu_download_tooltip">deskargatu errezeta</string>
     <string name="form_download_title">Deskargatu Errezeta</string>
     <string name="form_download_url_hint">Errezeta URL</string>

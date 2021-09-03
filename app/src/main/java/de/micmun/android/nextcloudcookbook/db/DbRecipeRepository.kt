@@ -19,7 +19,7 @@ import de.micmun.android.nextcloudcookbook.db.model.DbRecipeStar
  * Repository for recipes.
  *
  * @author MicMun
- * @version 1.4, 28.08.21
+ * @version 1.5, 28.08.21
  */
 class DbRecipeRepository private constructor(application: Application) {
    private var mRecipeDao: RecipeDataDao = RecipeDatabase.getDatabase(application).recipeDataDao()
@@ -120,6 +120,10 @@ class DbRecipeRepository private constructor(application: Application) {
 
    fun insertAll(recipes: List<DbRecipe>) {
       RecipeDatabase.databaseWriteExecutor.execute {
+         if (recipes.isNotEmpty()) {
+            mRecipeDao.deleteAllKeywordRelations()
+            mRecipeDao.deleteAllKeywords()
+         }
          recipes.forEach { recipe ->
             val r = mRecipeDao.findByName(recipe.recipeCore.name)
 

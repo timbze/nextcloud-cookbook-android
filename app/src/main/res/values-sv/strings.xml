@@ -81,8 +81,7 @@
     <string name="permission_select_root" tools:ignore="MissingTranslation">Välj %1$s.</string>
     <string name="text_tools"><strong>Nödvändiga verktyg:</strong><br/> %1$s</string>
     <string name="folder_pick_success" tools:ignore="MissingTranslation">Mapp %1$s vald.</string>
-    <string name="dir_chooser_error_message">Fel: Det går inte att öppna en mappvalsknapp!</string>
-    <string name="form_download_folder">Övergå målmapp</string>
+   <string name="form_download_folder">Övergå målmapp</string>
     <string name="form_download_commit">Hämta</string>
     <string name="form_download_override_existing">Ersätt befintlig receptmapp</string>
     <string name="form_download_options">Alternativ</string>

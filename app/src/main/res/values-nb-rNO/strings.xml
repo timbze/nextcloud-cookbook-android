@@ -63,8 +63,7 @@
     <string name="theme_name_system">System</string>
     <string name="sort_value_alpha_asc">Navn A-Z</string>
     <string name="sort_value_alpha_desc">Navn Z-A</string>
-    <string name="dir_chooser_error_message">Feil: Kan ikke åpne en mappevelger!</string>
-    <string name="sort_value_date_asc">Dato publisert, stigende</string>
+   <string name="sort_value_date_asc">Dato publisert, stigende</string>
     <string name="sort_value_date_desc">Dato publisert, synkende</string>
     <string name="sort_value_time_asc">Total tid, stigende</string>
     <string name="sort_value_time_desc">Total tid synkende</string>
