@@ -27,21 +27,20 @@ abstract class RecipeDatabase : RoomDatabase() {
    abstract fun recipeDataDao(): RecipeDataDao
 
    companion object {
-      @Volatile
-      private var INSTANCE: RecipeDatabase? = null
+      var instance: RecipeDatabase? = null
       private val NUMBER_OF_THREADS = 4
       val databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS)
 
       fun getDatabase(context: Context): RecipeDatabase {
          synchronized(this) {
-            var instance = INSTANCE
+            var instance = instance
 
             if (instance == null) {
                instance = Room
                   .databaseBuilder(context.applicationContext, RecipeDatabase::class.java, "recipe-db")
                   .fallbackToDestructiveMigration()
                   .build()
-               INSTANCE = instance
+               this.instance = instance
             }
             return instance
          }

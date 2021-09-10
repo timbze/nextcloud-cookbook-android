@@ -11,6 +11,10 @@ import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 import de.micmun.android.nextcloudcookbook.security.Crypto
 import de.micmun.android.nextcloudcookbook.services.RemainReceiver
+import de.micmun.android.nextcloudcookbook.util.di.AppComponent
+import de.micmun.android.nextcloudcookbook.util.di.AppModule
+import de.micmun.android.nextcloudcookbook.util.di.DaggerAppComponent
+import de.micmun.android.nextcloudcookbook.util.di.DatabaseModule
 
 /**
  * Application of the app.
@@ -31,6 +35,15 @@ class MainApplication : Application(), ViewModelStoreOwner {
       AppContext = this
 
       Crypto.generateSecretKey()
+   }
+
+   private fun initAppComponent() {
+      if (!AppComponent.isInitialized) {
+         AppComponent.instance = DaggerAppComponent.builder()
+            .appModule(AppModule(this))
+            .databaseModule(DatabaseModule(this))
+            .build()
+      }
    }
 
    companion object {
