@@ -9,6 +9,8 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 import de.micmun.android.nextcloudcookbook.security.Crypto
 import de.micmun.android.nextcloudcookbook.services.RemainReceiver
 import de.micmun.android.nextcloudcookbook.util.di.AppComponent
@@ -22,12 +24,9 @@ import de.micmun.android.nextcloudcookbook.util.di.DatabaseModule
  * @author MicMun
  * @version 1.1, 28.02.21
  */
-class MainApplication : Application(), ViewModelStoreOwner {
-   private val appViewModelStore: ViewModelStore by lazy {
-      ViewModelStore()
-   }
-
-   override fun getViewModelStore(): ViewModelStore = appViewModelStore
+class MainApplication : DaggerApplication() {
+   override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
+      DaggerAppComponent.factory().create(applicationContext)
 
    override fun onCreate() {
       super.onCreate()
@@ -35,15 +34,6 @@ class MainApplication : Application(), ViewModelStoreOwner {
       AppContext = this
 
       Crypto.generateSecretKey()
-   }
-
-   private fun initAppComponent() {
-      if (!AppComponent.isInitialized) {
-         AppComponent.instance = DaggerAppComponent.builder()
-            .appModule(AppModule(this))
-            .databaseModule(DatabaseModule(this))
-            .build()
-      }
    }
 
    companion object {

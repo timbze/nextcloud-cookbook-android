@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import de.micmun.android.nextcloudcookbook.data.CategoryFilter
 import de.micmun.android.nextcloudcookbook.settings.PreferenceDao
 import de.micmun.android.nextcloudcookbook.settings.SharedPreferenceLiveData
+import javax.inject.Inject
 
 /**
  * LiveData of the settings.
@@ -19,7 +20,9 @@ import de.micmun.android.nextcloudcookbook.settings.SharedPreferenceLiveData
  * @author MicMun
  * @version 1.4, 28.08.21
  */
-class CurrentSettingViewModel(application: Application) : AndroidViewModel(application) {
+class CurrentSettingViewModel @Inject constructor(
+   application: Application
+) : AndroidViewModel(application) {
    private val prefDao = PreferenceDao.getInstance(application)
    val recipeDirectory: SharedPreferenceLiveData<String> = prefDao.getRecipeDirectory()
    val sorting: SharedPreferenceLiveData<Int> = prefDao.getSort()

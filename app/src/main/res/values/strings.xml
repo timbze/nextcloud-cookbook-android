@@ -155,4 +155,5 @@
    <string name="login">Login</string>
     <string name="nextcloud_address">Nextcloud address</string>
     <string name="connect_nextcloud">Connect Nextcloud</string>
+    <string name="address_saved">Address is saved</string>
 </resources>

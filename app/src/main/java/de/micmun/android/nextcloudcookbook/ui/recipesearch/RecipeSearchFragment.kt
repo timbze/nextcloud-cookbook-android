@@ -12,12 +12,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.android.support.DaggerFragment
 import de.micmun.android.nextcloudcookbook.MainApplication
 import de.micmun.android.nextcloudcookbook.R
 import de.micmun.android.nextcloudcookbook.data.RecipeFilter
@@ -27,9 +28,9 @@ import de.micmun.android.nextcloudcookbook.db.DbRecipeRepository
 import de.micmun.android.nextcloudcookbook.db.model.DbRecipePreview
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModel
 import de.micmun.android.nextcloudcookbook.ui.CurrentSettingViewModelFactory
-import de.micmun.android.nextcloudcookbook.ui.MainActivity
 import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListAdapter
 import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListListener
+import javax.inject.Inject
 
 /**
  * Fragment for search result.
@@ -37,11 +38,13 @@ import de.micmun.android.nextcloudcookbook.ui.recipelist.RecipeListListener
  * @author MicMun
  * @version 1.6, 24.04.21
  */
-class RecipeSearchFragment : Fragment() {
+class RecipeSearchFragment : DaggerFragment() {
    private lateinit var binding: FragmentRecipesearchBinding
-   private lateinit var recipeSearchViewModel: RecipeSearchViewModel
    private lateinit var filter: RecipeFilter
-   private lateinit var settingViewModel: CurrentSettingViewModel
+
+   @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+   private val recipeSearchViewModel: RecipeSearchViewModel
+   private val settingsViewModel by viewModels<CurrentSettingViewModel> { viewModelFactory }
 
    private var listState: Parcelable? = null
 
@@ -62,16 +65,16 @@ class RecipeSearchFragment : Fragment() {
       binding.lifecycleOwner = this
 
       val factory = CurrentSettingViewModelFactory(MainApplication.AppContext)
-      settingViewModel =
+      settingsViewModel =
          ViewModelProvider(MainApplication.AppContext, factory).get(CurrentSettingViewModel::class.java)
 
-      settingViewModel.category.observe(viewLifecycleOwner, { category ->
+      settingsViewModel.category.observe(viewLifecycleOwner, { category ->
          category?.let {
             recipeSearchViewModel.setCategory(it)
          }
       })
 
-      settingViewModel.sorting.observe(viewLifecycleOwner, { sorting ->
+      settingsViewModel.sorting.observe(viewLifecycleOwner, { sorting ->
          sorting?.let {
             recipeSearchViewModel.setSort(SortValue.getByValue(it))
          }
